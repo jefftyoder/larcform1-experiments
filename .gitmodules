@@ -9,3 +9,4 @@
 [submodule "ClimaCoupler.jl"]
 	path = ClimaCoupler.jl
 	url = https://github.com/CliMA/ClimaCoupler.jl
+	branch = jy/slabocean

@@ -116,7 +116,8 @@ def convert(nc_dir: Path, model_name: str, out_path: Path) -> None:
 
         # cl is stored as % in ClimaAtmos; Pithan2016 convention is 0–1
         if clima_name == "cl":
-            arr = arr / 100.0
+            arr = (arr / 100.0).assign_attrs(da.attrs)
+            arr.attrs["units"] = "1"  # Changed from "%" to dimensionless
 
         vars_3d[pithan_name] = arr
         print(f"  3D    {clima_name} → {pithan_name}  shape={arr.shape}")
@@ -145,7 +146,7 @@ def convert(nc_dir: Path, model_name: str, out_path: Path) -> None:
         if da is None:
             print(f"  SKIP  {clima_name} (not found)")
             continue
-        arr = to_surface(da) * sign
+        arr = (to_surface(da) * sign).assign_attrs(da.attrs)
         vars_1d[pithan_name] = arr
         sign_str = "" if sign == 1 else " (sign-flipped)"
         print(f"  1D    {clima_name} → {pithan_name}{sign_str}  shape={arr.shape}")
@@ -160,6 +161,11 @@ def convert(nc_dir: Path, model_name: str, out_path: Path) -> None:
         precr = (-to_surface(da_pr)) - (-to_surface(da_prsn))
         precr = precr.clip(min=0)   # numerical noise guard
         vars_1d["precr"] = precr
+        vars_1d["precr"].attrs = {
+            "units": "kg m-2 s-1",
+            "long_name": "Precipitation rate (rain, from pr − prsn)",
+            "comments": "Rain component = total precip − snow"
+        }
         print(f"  1D    pr - prsn → precr (sign-flipped)  shape={precr.shape}")
 
     # ------------------------------------------------------------------
@@ -174,6 +180,11 @@ def convert(nc_dir: Path, model_name: str, out_path: Path) -> None:
         dz   = np.gradient(z)             # Δz at each level (m)
         prw  = (rhoa * hus * xr.DataArray(dz, dims="lev")).sum(dim="lev")
         vars_1d["prw"] = prw
+        vars_1d["prw"].attrs = {
+            "units": "kg m-2",
+            "long_name": "Precipitable water (column-integrated)",
+            "comments": "Σ(ρ_air × q × Δz) over model levels"
+        }
         print(f"  1D    rhoa·hus·dz → prw  shape={prw.shape}")
 
     # ------------------------------------------------------------------
@@ -184,6 +195,11 @@ def convert(nc_dir: Path, model_name: str, out_path: Path) -> None:
         cl = vars_3d["cl"]   # (time, lev), fraction 0–1
         clt = 1.0 - (1.0 - cl).prod(dim="lev")
         vars_1d["clt"] = clt
+        vars_1d["clt"].attrs = {
+            "units": "1",
+            "long_name": "Total cloud cover (max-random overlap)",
+            "comments": "Cloud fraction 0–1; combines all vertical levels"
+        }
         print(f"  1D    cl → clt (max-random overlap)  shape={clt.shape}")
 
     # ------------------------------------------------------------------

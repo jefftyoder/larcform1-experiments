@@ -57,5 +57,5 @@ end
 @info "Beginning postprocessing"
 atmospath = joinpath(@__DIR__, "..", "ClimaAtmos.jl")
 atmos_output_dir = cs.dir_paths.atmos_output_dir
-postprocess_script = joinpath(@__DIR__, "postprocess.jl")
+postprocess_script = joinpath(@__DIR__, "..", "postprocessing", "postprocess.jl")
 run(`julia --project=$(joinpath(atmospath, ".buildkite")) $postprocess_script $atmos_output_dir`)

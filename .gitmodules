@@ -5,7 +5,7 @@
 [submodule "AtmosphericProfilesLibrary.jl"]
 	path = AtmosphericProfilesLibrary.jl
 	url = https://github.com/CliMA/AtmosphericProfilesLibrary.jl.git
-	branch = jy/Larcform1
+	branch = jy/larcform1
 [submodule "ClimaCoupler.jl"]
 	path = ClimaCoupler.jl
 	url = https://github.com/CliMA/ClimaCoupler.jl

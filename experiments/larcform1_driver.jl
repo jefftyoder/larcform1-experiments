@@ -1,7 +1,7 @@
 # Larcform1 Coupled SCM Driver 
 #
 # Run from the repo root:
-#   julia -t auto --project experiments/larcform1/larcform1_driver.jl
+#   julia -t auto --project experiments/larcform1_driver.jl
 #
 # Or interactively:
 #   julia -t auto --project
@@ -25,6 +25,7 @@ import ClimaAtmos  # triggers ClimaCouplerClimaAtmosExt; ClimaAtmos itself impor
 # Resolve config file: command-line arg or default to our Larcform1 slabocean config
 const DEFAULT_CONFIG = joinpath(@__DIR__, "..", "configs", "larcform1_full_slabocean.yml")
 
+# Run with default config unless one is profided from the command line
 config_file = if "--config_file" in ARGS
     ARGS[findfirst(==("--config_file"), ARGS) + 1]
 else
@@ -49,30 +50,12 @@ end
 
 # Postprocessing
 # --------------------------------------------------------------------------------------------
-@info "Beginning postprocessing"
-@info "Activating buildkite environment"
-atmospath = joinpath(@__DIR__, "..", "ClimaAtmos.jl")
-import Pkg; Pkg.activate(joinpath(atmospath, ".buildkite"))
-
-@info "Loading ci_plots.jl"
-include(joinpath(atmospath, "post_processing", "ci_plots.jl"))
-
-# copy call to make_plots pattern from ./buildkite/ci_driver.jl
-# Try making plots over only first 10 days?
-@info "Making plots"
-make_plots(Val(:larcform1), [cs.dir_paths.atmos_output_dir])
-
-# Convert to Pithan2016-compatible NetCDF
-@info "Converting output to Pithan2016 format"
-pithan_script = joinpath(@__DIR__, "..", "scripts", "convert_to_pithan.py")
-try
-    run(`python3 $pithan_script
-        --nc-dir $(cs.dir_paths.atmos_output_dir)
-        --suffix 1h_average
-        --model-name ClimaLarcform1`)
-catch e
-    @warn "convert_to_pithan.py failed — skipping Pithan conversion" exception=e
-end
 
 @info "run using: $config_file complete."
 @info "Output at: $(cs.dir_paths.atmos_output_dir)" 
+
+@info "Beginning postprocessing"
+atmospath = joinpath(@__DIR__, "..", "ClimaAtmos.jl")
+atmos_output_dir = cs.dir_paths.atmos_output_dir
+postprocess_script = joinpath(@__DIR__, "postprocess.jl")
+run(`julia --project=$(joinpath(atmospath, ".buildkite")) $postprocess_script $atmos_output_dir`)

@@ -25,10 +25,23 @@ from pathlib import Path
 import numpy as np
 import xarray as xr
 
-
 # ---------------------------------------------------------------------------
 # Output directory discovery (mirrors Julia find_latest_nc_dir in make_plots.jl)
 # ---------------------------------------------------------------------------
+
+
+def extract_run_id(nc_dir: Path) -> tuple[str | None, str | None]:
+    """Extract (job_id, output_number) from a path like
+    output/lf1_slab_coupled/output_0000/clima_atmos/.
+    Returns (None, None) if the pattern isn't found."""
+    for i, part in enumerate(nc_dir.parts):
+        m = re.match(r"output_(\d+)$", part)
+        if m:
+            output_num = m.group(1)
+            job_id = nc_dir.parts[i - 1] if i > 0 else None
+            return job_id, output_num
+    return None, None
+
 
 def find_latest_nc_dir(output_root: Path) -> Path:
     """Return the highest-numbered output_NNNN/clima_atmos/ directory that
@@ -36,11 +49,14 @@ def find_latest_nc_dir(output_root: Path) -> Path:
     candidates = []
     for dirpath, _dirs, files in os.walk(output_root):
         p = Path(dirpath)
-        if (re.search(r"output_\d+[/\\]?clima_atmos$", str(p)) and
-                any(f.endswith(".nc") for f in files)):
+        if re.search(r"output_\d+[/\\]?clima_atmos$", str(p)) and any(
+            f.endswith(".nc") for f in files
+        ):
             candidates.append(p)
     if not candidates:
-        sys.exit(f"ERROR: No clima_atmos directories with .nc files found under {output_root}")
+        sys.exit(
+            f"ERROR: No clima_atmos directories with .nc files found under {output_root}"
+        )
     return sorted(candidates)[-1]
 
 
@@ -48,7 +64,7 @@ def find_latest_nc_dir(output_root: Path) -> Path:
 # Variable loading helpers
 # ---------------------------------------------------------------------------
 
-REPO_ROOT = Path(__file__).resolve().parents[1]   # ClimaLarcform1Experiments/
+REPO_ROOT = Path(__file__).resolve().parents[1]  # ClimaLarcform1Experiments/
 
 
 _SUFFIX = "3h_average"
@@ -59,17 +75,18 @@ def load_var(nc_dir: Path, short_name: str) -> xr.DataArray | None:
     path = nc_dir / f"{short_name}_{_SUFFIX}.nc"
     if not path.exists():
         return None
-    ds = xr.open_dataset(path, decode_times=False)
+    ds = xr.open_dataset(path, decode_times=False, engine="netcdf4")
     da = ds[short_name]
     return da
 
 
 def to_profile(da: xr.DataArray) -> xr.DataArray:
     """Squeeze (z, y=1, x=1, time) → (time, lev) and rename z → lev."""
-    return (da
-            .squeeze(["x", "y"])          # drop singleton horizontal dims
-            .transpose("time", "z")       # → (time, z)
-            .rename({"z": "lev"}))
+    return (
+        da.squeeze(["x", "y"])  # drop singleton horizontal dims
+        .transpose("time", "z")  # → (time, z)
+        .rename({"z": "lev"})
+    )
 
 
 def to_surface(da: xr.DataArray) -> xr.DataArray:
@@ -87,25 +104,26 @@ def time_in_seconds(da: xr.DataArray) -> np.ndarray:
 # Main conversion
 # ---------------------------------------------------------------------------
 
+
 def convert(nc_dir: Path, model_name: str, out_path: Path) -> None:
     print(f"Reading from: {nc_dir}")
 
-    vars_3d = {}   # (time, lev) arrays
-    vars_1d = {}   # (time,) arrays
+    vars_3d = {}  # (time, lev) arrays
+    vars_1d = {}  # (time,) arrays
 
     # ------------------------------------------------------------------
     # 3D profile variables
     # ------------------------------------------------------------------
     profile_map = {
-        "ta":    "t",
+        "ta": "t",
         "pfull": "p",
-        "hus":   "q",
-        "hur":   "rh",
-        "ua":    "u",
-        "va":    "v",
-        "clw":   "clw",
-        "cli":   "cli",
-        "cl":    "cl",
+        "hus": "q",
+        "hur": "rh",
+        "ua": "u",
+        "va": "v",
+        "clw": "clw",
+        "cli": "cli",
+        "cl": "cl",
     }
     for clima_name, pithan_name in profile_map.items():
         da = load_var(nc_dir, clima_name)
@@ -131,15 +149,15 @@ def convert(nc_dir: Path, model_name: str, out_path: Path) -> None:
     #               CliMA stores downward as negative, so negate to match
     #   prsn, pr:   CliMA downward-negative → Pithan positive (negate)
     surface_map = {
-        "ts":    ("ts",    1),
-        "rlds":  ("rlds",  1),
-        "rlus":  ("rlus", -1),
-        "rlut":  ("rlut", -1),
-        "hfls":  ("hl",   -1),
-        "hfss":  ("hs",   -1),
+        "ts": ("ts", 1),
+        "rlds": ("rlds", 1),
+        "rlus": ("rlus", -1),
+        "rlut": ("rlut", -1),
+        "hfls": ("hl", -1),
+        "hfss": ("hs", -1),
         "clivi": ("clivi", 1),
-        "lwp":   ("clwvi", 1),
-        "prsn":  ("precs",-1),
+        "lwp": ("clwvi", 1),
+        "prsn": ("precs", -1),
     }
     for clima_name, (pithan_name, sign) in surface_map.items():
         da = load_var(nc_dir, clima_name)
@@ -154,17 +172,17 @@ def convert(nc_dir: Path, model_name: str, out_path: Path) -> None:
     # ------------------------------------------------------------------
     # Derived: precr = pr - prsn
     # ------------------------------------------------------------------
-    da_pr   = load_var(nc_dir, "pr")
+    da_pr = load_var(nc_dir, "pr")
     da_prsn = load_var(nc_dir, "prsn")
     if da_pr is not None and da_prsn is not None:
         # Both pr and prsn are downward-negative in CliMA; negate to Pithan positive
         precr = (-to_surface(da_pr)) - (-to_surface(da_prsn))
-        precr = precr.clip(min=0)   # numerical noise guard
+        precr = precr.clip(min=0)  # numerical noise guard
         vars_1d["precr"] = precr
         vars_1d["precr"].attrs = {
             "units": "kg m-2 s-1",
             "long_name": "Precipitation rate (rain, from pr − prsn)",
-            "comments": "Rain component = total precip − snow"
+            "comments": "Rain component = total precip − snow",
         }
         print(f"  1D    pr - prsn → precr (sign-flipped)  shape={precr.shape}")
 
@@ -172,18 +190,18 @@ def convert(nc_dir: Path, model_name: str, out_path: Path) -> None:
     # Derived: prw = precipitable water = Σ(rhoa · hus · Δz)
     # ------------------------------------------------------------------
     da_rhoa = load_var(nc_dir, "rhoa")
-    da_hus  = load_var(nc_dir, "hus")
+    da_hus = load_var(nc_dir, "hus")
     if da_rhoa is not None and da_hus is not None:
-        rhoa = to_profile(da_rhoa)   # (time, lev)
-        hus  = to_profile(da_hus)    # (time, lev)
-        z    = rhoa.coords["lev"].values  # height in metres
-        dz   = np.gradient(z)             # Δz at each level (m)
-        prw  = (rhoa * hus * xr.DataArray(dz, dims="lev")).sum(dim="lev")
+        rhoa = to_profile(da_rhoa)  # (time, lev)
+        hus = to_profile(da_hus)  # (time, lev)
+        z = rhoa.coords["lev"].values  # height in metres
+        dz = np.gradient(z)  # Δz at each level (m)
+        prw = (rhoa * hus * xr.DataArray(dz, dims="lev")).sum(dim="lev")
         vars_1d["prw"] = prw
         vars_1d["prw"].attrs = {
             "units": "kg m-2",
             "long_name": "Precipitable water (column-integrated)",
-            "comments": "Σ(ρ_air × q × Δz) over model levels"
+            "comments": "Σ(ρ_air × q × Δz) over model levels",
         }
         print(f"  1D    rhoa·hus·dz → prw  shape={prw.shape}")
 
@@ -192,13 +210,13 @@ def convert(nc_dir: Path, model_name: str, out_path: Path) -> None:
     #   C_tot = 1 - Π(1 - cl_i)
     # ------------------------------------------------------------------
     if "cl" in vars_3d:
-        cl = vars_3d["cl"]   # (time, lev), fraction 0–1
+        cl = vars_3d["cl"]  # (time, lev), fraction 0–1
         clt = 1.0 - (1.0 - cl).prod(dim="lev")
         vars_1d["clt"] = clt
         vars_1d["clt"].attrs = {
             "units": "1",
             "long_name": "Total cloud cover (max-random overlap)",
-            "comments": "Cloud fraction 0–1; combines all vertical levels"
+            "comments": "Cloud fraction 0–1; combines all vertical levels",
         }
         print(f"  1D    cl → clt (max-random overlap)  shape={clt.shape}")
 
@@ -260,9 +278,9 @@ def convert(nc_dir: Path, model_name: str, out_path: Path) -> None:
     )
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    ds_out.to_netcdf(out_path)
+    ds_out.to_netcdf(out_path, engine="netcdf4")
     n_time = len(time_secs)
-    n_lev  = len(lev_coord)
+    n_lev = len(lev_coord)
     print(f"\nWrote {out_path}  ({n_time} timesteps, {n_lev} levels)")
 
 
@@ -270,27 +288,44 @@ def convert(nc_dir: Path, model_name: str, out_path: Path) -> None:
 # CLI
 # ---------------------------------------------------------------------------
 
+
 def main():
     global _SUFFIX
 
     default_out = REPO_ROOT.parent / "Pithan2016_Data" / "my_analysis" / "data"
 
-    parser = argparse.ArgumentParser(description=__doc__,
-                                     formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--job-id",     default="larcform1_full",
-                        help="Experiment name under output/ (default: larcform1_full). "
-                             "Ignored when --nc-dir is set.")
-    parser.add_argument("--nc-dir",     default=None,
-                        help="Path to the directory containing per-variable .nc files. "
-                             "When set, skips the output_NNNN/clima_atmos/ discovery walk.")
-    parser.add_argument("--suffix",     default=None,
-                        help="Filename suffix for per-variable files, e.g. '6h_average' or "
-                             "'3h_average' (default: 3h_average).")
-    parser.add_argument("--model-name", default="ClimaLarcform1",
-                        help="Model name used for the output filename (default: ClimaLarcform1)")
-    parser.add_argument("--out",        default=None,
-                        help="Output path for the NetCDF file.  "
-                             "Default: ../Pithan2016_Data/my_analysis/data/{model_name}.nc")
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument(
+        "--job-id",
+        default="larcform1_full",
+        help="Experiment name under output/ (default: larcform1_full). "
+        "Ignored when --nc-dir is set.",
+    )
+    parser.add_argument(
+        "--nc-dir",
+        default=None,
+        help="Path to the directory containing per-variable .nc files. "
+        "When set, skips the output_NNNN/clima_atmos/ discovery walk.",
+    )
+    parser.add_argument(
+        "--suffix",
+        default=None,
+        help="Filename suffix for per-variable files, e.g. '6h_average' or "
+        "'3h_average' (default: 3h_average).",
+    )
+    parser.add_argument(
+        "--model-name",
+        default="ClimaLarcform1",
+        help="Model name used for the output filename (default: ClimaLarcform1)",
+    )
+    parser.add_argument(
+        "--out",
+        default=None,
+        help="Output path for the NetCDF file.  "
+        "Default: ../Pithan2016_Data/my_analysis/data/{model_name}.nc",
+    )
     args = parser.parse_args()
 
     if args.suffix is not None:
@@ -311,7 +346,13 @@ def main():
     if args.out is not None:
         out_path = Path(args.out)
     else:
-        out_path = default_out / f"{args.model_name}.nc"
+        job_id, output_num = extract_run_id(nc_dir)
+        parts = [args.model_name]
+        if job_id:
+            parts.append(job_id)
+        if output_num:
+            parts.append(output_num)
+        out_path = default_out / f"{'_'.join(parts)}.nc"
 
     convert(nc_dir, args.model_name, out_path)
 

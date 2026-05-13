@@ -23,7 +23,7 @@ using ClimaCoupler               # brings in CoupledSimulation, run!, postproces
 # Trigger ClimaCouplerClimaAtmosExt (required — provides AtmosSimulation)
 import ClimaAtmos  # triggers ClimaCouplerClimaAtmosExt; ClimaAtmos itself imports AtmosphericProfilesLibrary
 # Resolve config file: command-line arg or default to our Larcform1 slabocean config
-const DEFAULT_CONFIG = joinpath(@__DIR__, "..", "configs", "larcform1_full_slabocean.yml")
+const DEFAULT_CONFIG = joinpath(@__DIR__, "..", "coupled_configs", "larcform1_slabocean_coupled.yml")
 
 # Run with default config unless one is profided from the command line
 config_file = if "--config_file" in ARGS

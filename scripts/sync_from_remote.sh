@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 # Pull output/ from remote workstation (stratus) to local machine.
+# Also syncs ClimaAtmos.jl/output/ for standalone runs.
 # Requires a 'stratus' Host entry in ~/.ssh/config.
 set -e
 
-REMOTE="stratus:~/clima/larcform1-experiments/output/"
-LOCAL="/Users/jeff/clima/larcform1-experiments/output/"
+REPO="stratus:~/clima/larcform1-experiments"
+LOCAL="/Users/jeff/clima/larcform1-experiments"
 
-echo "Syncing from remote: $REMOTE"
-rsync -avz --progress \
-  "$REMOTE" "$LOCAL"
+rsync_opts="-avz --progress --links"
+
+echo "Syncing coupled output..."
+rsync $rsync_opts "$REPO/output/" "$LOCAL/output/"
+
+echo "Syncing standalone ClimaAtmos output..."
+rsync $rsync_opts "$REPO/ClimaAtmos.jl/output/" "$LOCAL/output/"
+
 echo "Done."

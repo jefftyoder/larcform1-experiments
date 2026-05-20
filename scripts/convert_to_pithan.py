@@ -14,6 +14,13 @@ Usage (from repo root):
     python experiments/larcform1_coupler/convert_to_pithan.py \\
         --nc-dir output/larcform1_1M_edonly_edmfx/output_0004 \\
         --suffix 6h_average
+
+flags:
+    --nc-dir
+    --suffix
+    --model-name
+    --out
+
 """
 
 import argparse
@@ -292,8 +299,6 @@ def convert(nc_dir: Path, model_name: str, out_path: Path) -> None:
 def main():
     global _SUFFIX
 
-    default_out = REPO_ROOT.parent / "Pithan2016_Data" / "my_analysis" / "data"
-
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
@@ -324,7 +329,7 @@ def main():
         "--out",
         default=None,
         help="Output path for the NetCDF file.  "
-        "Default: ../Pithan2016_Data/my_analysis/data/{model_name}.nc",
+        "Default: <nc-dir>/{model_name}.nc",
     )
     args = parser.parse_args()
 
@@ -352,7 +357,7 @@ def main():
             parts.append(job_id)
         if output_num:
             parts.append(output_num)
-        out_path = default_out / f"{'_'.join(parts)}.nc"
+        out_path = nc_dir / f"{'_'.join(parts)}.nc"
 
     convert(nc_dir, args.model_name, out_path)
 

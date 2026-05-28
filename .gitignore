@@ -2,3 +2,6 @@
 .claude/
 CLAUDE.md
 output/*
+.vscode/
+*__pycache__
+figures/

@@ -1,5 +1,3 @@
-# TODO move this to a postprocessing specific folder
-
 # read in ARGS
 atmos_output_dir = ARGS[1]
 

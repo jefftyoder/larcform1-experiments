@@ -1,8 +1,5 @@
 # Larcform1 coupled slab-ocean run, paired with
 # ClimaAtmos.jl/config/model_configs/larcform1_slabocean_standalone.yml.
-# Physics settings are identical to the standalone config — only coupler-specific
-# wiring (domain_type, mode_name, ocean_model, surface_setup=PrescribedSurface,
-# dt_cpl, output paths) differs.
 
 # job setup
 job_id: lf1_slab_cpl_progedmfx_course
@@ -16,7 +13,7 @@ mode_name: "slabplanet_aqua"          # } invoke SCM slab ocean
 ocean_model: "slab"                   # }
 land_model: "nothing"
 surface_setup: "PrescribedSurface"    # DefaultMoninObukhov would recompute fluxes; PrescribedSurface lets the coupler own them
-dt_cpl: "60secs"
+dt_cpl: "1hours"
 coupler_output_dir: "output"
 
 # --- Atmosphere (must match standalone) ---
@@ -26,23 +23,23 @@ disable_surface_flux_tendency: false
 
 # Temporal
 start_date: "20010101"                # polar winter; HadISST at 80°N Jan = full ice cover
-t_end: "6days"
-dt: "30secs"
-dt_rad: "60secs"
+t_end: "20days"                        # partial run for testing
+dt: "10secs"
+dt_rad: "1hours"
 checkpoint_dt: "90days"
 
 # Spatial
 z_max: 9000.0
-z_elem: 30
+z_elem: 90                            # I dropped this down for testing. Bump back up later.
 z_stretch: true
 dz_bottom: 20.0
 x_elem: 1
 y_elem: 1
-h_elem: 6 # This is for the cubed sphere and shouldn't impact SCM
+h_elem: 6                             # This is for the cubed sphere and shouldn't impact SCM
 
 # Solver
 approximate_linear_solve_iters: 2
-ode_algo: "ARS343"
+ode_algo: "ARS222"                   # ARS222 is needed for prognostic EDMFx stability. ARS343 crash is known issue.
 implicit_microphysics: true
 
 # Parameters
@@ -52,11 +49,16 @@ coupler_toml: [ClimaAtmos.jl/toml/prognostic_edmfx.toml, ClimaAtmos.jl/toml/larc
 rad: "allskywithclear"
 insolation: "larcform1"               # zero TOA flux (polar winter)
 
-# Turbulence and EDMF (edonly)
+# Turbulence and EDMFx
 turbconv: prognostic_edmfx
 prognostic_tke: true                # enabled for prognostic_edmfx testing
 implicit_diffusion: true            # enabled for prognostic_edmfx testing 
 implicit_sgs_advection: true        # enabled for prognostic_edmfx testing 
+implicit_sgs_entr_detr: true
+implicit_sgs_nh_pressure: true
+implicit_sgs_vertdiff: true
+implicit_sgs_mass_flux: true
+hyperdiff: ~
 edmfx_entr_model: "Generalized"
 edmfx_sgs_mass_flux: true
 edmfx_sgs_diffusive_flux: true

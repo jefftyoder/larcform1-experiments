@@ -1,14 +1,14 @@
 # Larcform1 Coupled SCM Driver 
 #
 # Run from the repo root:
-#   julia -t auto --project experiments/larcform1_driver.jl
+#   julia --project experiments/larcform1_driver.jl
 #
 # Or interactively:
-#   julia -t auto --project
+#   julia --project
 #   julia> include("experiments/larcform1_driver.jl")
 #
 # To use a different config:
-#   julia -t auto --project experiments/larcform1_driver.jl \
+#   julia --project experiments/larcform1_driver.jl \
 #     --config_file path/to/other_config.yml
 
 
@@ -27,7 +27,7 @@ const DEFAULT_CONFIG = joinpath(@__DIR__, "..", "coupled_configs", "larcform1_sl
 
 # Run with default config unless one is profided from the command line
 config_file = if "--config_file" in ARGS
-    ARGS[findfirst(==("--config_file"), ARGS) + 1]
+    ARGS[findfirst(==("--config_file"), ARGS)+1]
 else
     DEFAULT_CONFIG
 end
@@ -44,7 +44,7 @@ try
     @info "Beginning simulation run"
     @time run!(cs)
 catch e
-    @error "Simulation run failed with error" exception=e
+    @error "Simulation run failed with error" exception = e
     rethrow(e)
 end
 
@@ -52,7 +52,7 @@ end
 # --------------------------------------------------------------------------------------------
 
 @info "run using: $config_file complete."
-@info "Output at: $(cs.dir_paths.atmos_output_dir)" 
+@info "Output at: $(cs.dir_paths.atmos_output_dir)"
 
 @info "Beginning postprocessing"
 atmospath = joinpath(@__DIR__, "..", "ClimaAtmos.jl")

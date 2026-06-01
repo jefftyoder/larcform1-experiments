@@ -15,5 +15,6 @@ rsync -avz --progress \
   --exclude='output/' \
   --exclude='*.nc' \
   --exclude='*.log' \
+  --exclude='*Manifest.toml' \
   "$LOCAL" "$REMOTE"
 echo "Done."

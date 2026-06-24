@@ -87,18 +87,27 @@ def load_var(nc_dir: Path, short_name: str) -> xr.DataArray | None:
     return da
 
 
+def _drop_horizontal(da: xr.DataArray) -> xr.DataArray:
+    """Drop singleton x/y horizontal dims if present.
+
+    Older ClimaAtmos single-column output stored columns as 2x2 boxes with
+    (x, y) dims; current output is a true single column with no x/y dims."""
+    present = [d for d in ("x", "y") if d in da.dims]
+    return da.squeeze(present) if present else da
+
+
 def to_profile(da: xr.DataArray) -> xr.DataArray:
-    """Squeeze (z, y=1, x=1, time) → (time, lev) and rename z → lev."""
+    """Squeeze (z, [y=1, x=1], time) → (time, lev) and rename z → lev."""
     return (
-        da.squeeze(["x", "y"])  # drop singleton horizontal dims
+        _drop_horizontal(da)
         .transpose("time", "z")  # → (time, z)
         .rename({"z": "lev"})
     )
 
 
 def to_surface(da: xr.DataArray) -> xr.DataArray:
-    """Squeeze (y=1, x=1, time) → (time,)."""
-    return da.squeeze(["x", "y"])
+    """Squeeze ([y=1, x=1], time) → (time,)."""
+    return _drop_horizontal(da)
 
 
 def time_in_seconds(da: xr.DataArray) -> np.ndarray:

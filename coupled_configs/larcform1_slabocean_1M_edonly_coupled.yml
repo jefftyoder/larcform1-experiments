@@ -2,7 +2,7 @@
 # ClimaAtmos.jl/config/model_configs/larcform1_slabocean_standalone.yml.
 
 # job setup
-job_id: lf1_slab_cpl_progedmfx_course
+job_id: lf1_slab_cpl_1M_edonly
 FLOAT_TYPE: "Float32"     # this doesn't seem to do anything. Does the Coupler use a different yml field than Atmos?
 
 # --- Coupler-specific wiring ---
@@ -24,7 +24,7 @@ disable_surface_flux_tendency: false
 # Temporal
 start_date: "20010101"                # polar winter; HadISST at 80°N Jan = full ice cover
 t_end: "20days"                        # partial run for testing
-dt: "10secs"
+dt: "30secs"
 dt_rad: "1hours"
 checkpoint_dt: "90days"
 
@@ -39,11 +39,11 @@ h_elem: 6                             # This is for the cubed sphere and shouldn
 
 # Solver
 approximate_linear_solve_iters: 2
-ode_algo: "ARS222"                   # ARS222 is needed for prognostic EDMFx stability. ARS343 crash is known issue.
+ode_algo: "ARS343"                   # ARS222 is needed for prognostic EDMFx stability. ARS343 crash is known issue.
 implicit_microphysics: true
 
 # Parameters
-coupler_toml: [ClimaAtmos.jl/toml/prognostic_edmfx.toml, ClimaAtmos.jl/toml/larcform1_1M_prognostic_edmfx.toml]
+coupler_toml: [ClimaAtmos.jl/toml/larcform1_1M_edonly_edmfx.toml]
 
 # Radiation
 rad: "allskywithclear"

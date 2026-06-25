@@ -2,3 +2,7 @@
 .claude/
 CLAUDE.md
 output/*
+.vscode/
+figures/
+larcform1-experiments.code-workspace
+scripts/__pycache__/

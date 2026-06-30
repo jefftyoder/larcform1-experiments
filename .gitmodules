@@ -2,11 +2,3 @@
 	path = ClimaAtmos.jl
 	url = https://github.com/CliMA/ClimaAtmos.jl.git
 	branch = main
-[submodule "AtmosphericProfilesLibrary.jl"]
-	path = AtmosphericProfilesLibrary.jl
-	url = https://github.com/CliMA/AtmosphericProfilesLibrary.jl.git
-	branch = main
-[submodule "ClimaCoupler.jl"]
-	path = ClimaCoupler.jl
-	url = https://github.com/CliMA/ClimaCoupler.jl
-	branch = main

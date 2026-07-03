@@ -1,0 +1,48 @@
+# clw sensitivity test #1 — variation 2: 0M microphysics
+#
+# 0M has no separate rain/snow tracers and no 1M process-rate tendencies, so several
+# diagnostics in the base config's list crash it (confirmed: `husra` errors with
+# "Cannot compute husra with model = ClimaAtmos.EquilibriumMicrophysics0M",
+# core_diagnostics.jl:583 has no EquilibriumMicrophysics0M dispatch, only the generic
+# error fallback). `diagnostics:` is not a scalar key — merging replaces the whole list, so
+# it must be fully restated here, not just the changed entries.
+#
+# This list is the base list minus: husra, hussn, husraup, hussnup, husraen, hussnen, prsn
+# (all rain/snow-tracer-specific, no 0M dispatch), the 3 mp1m*/mp1mup*/mp1men* tendency
+# blocks (1M-only by definition), and clivi -> iwp (0M's ice-water-path diagnostic has an
+# explicit EquilibriumMicrophysics0M dispatch at core_diagnostics.jl:731; clivi does not).
+# Cross-checked against ClimaAtmos.jl/config/model_configs/prognostic_edmfx_diurnal_scm_imp.yml,
+# an existing 0M + PrognosticEDMFX config whose diagnostics list already excludes exactly
+# these variables. NOTE for postprocessing: compare this variation's `iwp` against
+# EC-Earth's/other variations' `clivi` — same physical quantity, different name for 0M.
+job_id: lf1e_clw1_v2_0M
+output_dir: "experiments/clw sensitivity experiments/output/lf1e-clw-1/v2_0M"
+microphysics_model: 0M
+diagnostics:
+  - short_name: [ta, thetaa, pfull, rhoa, hus, hur, ts, tas]
+    period: 1hours
+    reduction_time: average
+  - short_name: [ua, va, wa]
+    period: 1hours
+    reduction_time: average
+  - short_name: [cl, clw, cli, lwp, iwp]
+    period: 1hours
+    reduction_time: average
+  - short_name: [rlu, rld, rlut, rlus, rlds, rsdt, rlutcs, rldscs]
+    period: 1hours
+    reduction_time: average
+  - short_name: [pr, evspsbl]
+    period: 1hours
+    reduction_time: average
+  - short_name: [hfss, hfls]
+    period: 1hours
+    reduction_time: average
+  - short_name: [arup, waup, taup, thetaaup, haup, husup, hurup, clwup, cliup]
+    period: 10mins
+    reduction_time: average
+  - short_name: [waen, taen, thetaaen, haen, husen, huren, clwen, clien, tke]
+    period: 10mins
+    reduction_time: average
+  - short_name: [entr, detr, lmix, bgrad, strain, edt, evu]
+    period: 10mins
+    reduction_time: average

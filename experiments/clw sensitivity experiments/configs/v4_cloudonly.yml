@@ -1,0 +1,30 @@
+# clw sensitivity test #1 — variation 4: all 1M microphysics processes disabled except
+# cloud (liquid + ice) formation. `~` (null) disables a process — see
+# model_getters.jl:35 / get_microphysics_1m_options.
+#
+# Confirmed by smoke test: `cloud_liquid_snow_accretion` and `rain_snow_accretion` cannot be
+# nulled — CloudMicrophysics.jl's BulkMicrophysicsTendencies.jl:171-186 destructures their
+# return value as `(; S_accr, S_melt) = CM1.accretion(...)`, but the disabled/no-op path
+# returns a bare `Float32` zero, not a matching NamedTuple, so it crashes with
+# `type Float32 has no field S_accr`. All other processes use plain single-value assignment
+# and null out cleanly. So this variation is "all *nullable* processes disabled" rather than
+# literally all — the two multi-term accretion processes are left at their defaults.
+job_id: lf1e_clw1_v4_cloudonly
+output_dir: "experiments/clw sensitivity experiments/output/lf1e-clw-1/v4_cloudonly"
+
+# kept (not nullable — see note above):
+# cloud_liquid_formation: CloudLiquidFormation
+# cloud_ice_formation: ConstantTimescale
+# cloud_liquid_snow_accretion: CloudLiquidSnowAccretion
+# rain_snow_accretion: RainSnowAccretion
+
+# disabled:
+cloud_ice_melt: ~
+rain_autoconversion: ~
+snow_autoconversion: ~
+rain_condensation_evaporation: ~
+snow_deposition_sublimation: ~
+snow_melt: ~
+cloud_liquid_rain_accretion: ~
+cloud_ice_rain_accretion: ~
+cloud_ice_snow_accretion: ~

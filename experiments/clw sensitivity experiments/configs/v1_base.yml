@@ -1,0 +1,5 @@
+# clw sensitivity test #1 — variation 1: Base
+# See lf1e-clw-sensitivity-experiment-1.md. Runs larcform1_1M_prognostic_edmfx.yml unchanged
+# except for job_id/output_dir bookkeeping.
+job_id: lf1e_clw1_v1_base
+output_dir: "experiments/clw sensitivity experiments/output/lf1e-clw-1/v1_base"

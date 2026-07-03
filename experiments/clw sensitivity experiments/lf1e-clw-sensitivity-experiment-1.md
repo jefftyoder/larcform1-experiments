@@ -100,11 +100,140 @@ so reruns don't clobber earlier results and postprocessing can glob
 `lf1e-clw-1/v*/output_active/` to pick up the latest run of every variation.
 
 ### Batch execution
-With 9 variations, script the loop (`run_variations.sh` or a small Julia driver) rather than
-invoking each by hand, to avoid a typo changing two settings instead of one. Redirect each
-run's stdout to a per-variation log (e.g. `output/.../v3_2M/run.log`) — useful for the
-Validation step, and especially for variation 3 (2M), which is expected to be unstable and
-may need its failure mode documented rather than silently rerun.
+With 9 variations, script the loop rather than invoking each by hand, to avoid a typo
+changing two settings instead of one. Use `experiments/clw sensitivity experiments/run_batch.jl`
+instead of `ci_driver.jl` directly — it builds `AtmosConfig` itself rather than going through
+`CA.commandline_kwargs()`, which sidesteps a real bug: `ci_driver.jl`'s `--job_id` always has
+a non-`nothing` ArgParse default ([cli_options.jl:12-15](ClimaAtmos.jl/src/config/cli_options.jl#L12)),
+so `@something(job_id, yaml_job_id, ...)` silently ignores each overlay's `job_id:` key and
+every run gets labeled `"default_config"`. `run_batch.jl` also loops over multiple variation
+configs in one persistent Julia process, redirects each run's stdout to a per-variation log,
+and keeps going after a crash (`solve_atmos!` already catches crashes internally rather than
+throwing) — useful for variation 3 (2M), which is expected to be unstable and should have its
+failure mode documented rather than silently rerun.
+
+### Local sequential execution (current plan — Stratus offline as of 2026-07-02)
+
+Stratus is unreachable, so all 9 variations run on this 16 GB laptop instead. Per the local
+findings below, this machine cannot safely run more than **one ClimaAtmos process at a
+time** — so "batch" here means sequential, not parallel. The lever that's still available
+locally is compile-cost amortization: run all 9 variations through one `run_batch.jl`
+invocation so the ~9–10 min fixed package-load/JIT cost is paid once for the whole set, not
+once per variation, with additional (smaller) recompiles only when the `AtmosModel` type
+actually changes (variations 2, 3, 4).
+
+```bash
+mkdir -p "output/lf1e-clw-1"
+julia -t 1 --project=ClimaAtmos.jl/.buildkite \
+  "experiments/clw sensitivity experiments/run_batch.jl" \
+  "experiments/clw sensitivity experiments/configs/v1_base.yml" \
+  "experiments/clw sensitivity experiments/configs/v2_0M.yml" \
+  "experiments/clw sensitivity experiments/configs/v3_2M.yml" \
+  "experiments/clw sensitivity experiments/configs/v4_cloudonly.yml" \
+  "experiments/clw sensitivity experiments/configs/v5_subltime10.yml" \
+  "experiments/clw sensitivity experiments/configs/v6_subltime400.yml" \
+  "experiments/clw sensitivity experiments/configs/v7_subltime1000.yml" \
+  "experiments/clw sensitivity experiments/configs/v8_subltime10000.yml" \
+  "experiments/clw sensitivity experiments/configs/v9_condtime10.yml" \
+  2>&1 | tee "output/lf1e-clw-1/local_run_$(date +%Y%m%d_%H%M%S).log"
+```
+
+Order doesn't affect correctness — Julia's method cache is reused across all 9 regardless of
+sequence — but keeping 1/5/6/7/8/9 together is still worth doing for readability, since they
+share compiled code and 2/3/4 don't.
+
+**Rough time budget** (extrapolated from the 10-simulated-minute probes, not yet measured on
+a full 20-day run — treat as an estimate to revise once the first variation finishes): ~9–10
+min fixed cost, paid once, + ~24 min steady-state solve per variation × 9, + a smaller
+re-compile (untested, budget a few minutes) for each of variations 2/3/4 where the model type
+changes. Total plausibly **3.5–4.5 hours**, dominated by solve time, not compile. Variation 3
+(2M) may finish faster than this if it crashes early as expected.
+
+**Run this unattended, in the background** — this is multi-hour and single-threaded; don't
+block on it in a foreground shell. Close other memory-heavy applications first if possible
+(the VSCode Julia language server processes were already consuming noticeable RAM during
+testing, and this machine's swap filled to 13.8/14.3 GB under much lighter concurrent load
+than a single full run should need — better to have headroom than not).
+
+`run_batch.jl` prints `=== Batch summary ===` with a per-variation `ret_code` at the very
+end, and an `[ Info: Finished variation ...]` line after each one completes — grep the log
+for either to check progress without reading the full (very verbose) output.
+
+### Remote parallel execution (Stratus) — for when it's back
+
+**Why remote at all.** Measured locally (16 GB RAM): a single fresh `julia ... ci_driver.jl`
+process pays ~9–10 minutes of fixed package-load/JIT cost before the solve itself starts, and
+a *second* concurrent process pushed the machine into heavy swapping (12.1 of 13.3 GB swap in
+use), turning "parallel" into slower-than-serial. CPU threading doesn't help either — the devs
+confirm CPU parallelism isn't developed for SCM runs, so `-t 1` throughout. Net effect: this
+machine can safely run **one variation at a time**. Real parallelism needs a box with more
+headroom than this laptop — hence Stratus.
+
+**Step 1 — check Stratus's actual budget before assuming any concurrency.**
+```bash
+ssh stratus 'nproc; free -h'
+```
+Concurrency is memory-bound, not core-bound (per the local finding above) — don't schedule N
+concurrent workers without first confirming N × (peak RSS per run) fits with headroom to
+spare. Peak RSS for a 10-minute toy run was ~3–5 GB locally; a full 20-day run with the full
+diagnostics list will be higher — budget conservatively (e.g. treat 8–10 GB/process as the
+planning number) until a real 20-day run is measured on Stratus.
+
+**Step 2 — sync the repo, including the generated variation configs.**
+```bash
+bash scripts/sync_to_remote.sh
+```
+This must happen *after* the variation overlay YAML/TOML files (see above) are generated
+locally, so they land on Stratus in the same repo-relative layout.
+
+**Step 3 — group variations to amortize the compile cost, then launch one tmux session per
+group.** Compilation is retriggered whenever the concrete `AtmosModel` type changes, not just
+whenever a YAML value changes — variations that only change a TOML *value* share compiled
+code within one `run_batch.jl` process; variations that change `microphysics_model` or null
+out process fields (→ `Nothing` in the type) do not.
+
+| Worker | Variations | Why grouped |
+|---|---|---|
+| A | 1 (Base), 5, 6, 7, 8, 9 | same `AtmosModel` type — only timescale TOML values differ |
+| B | 2 (0M) | different `microphysics_model` type |
+| C | 3 (2M) | different type; isolate so the expected instability doesn't affect others |
+| D | 4 (processes nulled) | several fields flip `T → Nothing`, a different concrete type |
+
+```bash
+ssh stratus 'export PATH=/home/yoder/.juliaup/bin:$PATH && cd ~/clima/larcform1-experiments && \
+  tmux new-session -d -s lf1_worker_A \
+    "julia -t 1 --project=ClimaAtmos.jl/.buildkite \
+      \"experiments/clw sensitivity experiments/run_batch.jl\" \
+      \"experiments/clw sensitivity experiments/configs/v1_base.yml\" \
+      \"experiments/clw sensitivity experiments/configs/v5_subltime10.yml\" \
+      \"experiments/clw sensitivity experiments/configs/v6_subltime400.yml\" \
+      \"experiments/clw sensitivity experiments/configs/v7_subltime1000.yml\" \
+      \"experiments/clw sensitivity experiments/configs/v8_subltime10000.yml\" \
+      \"experiments/clw sensitivity experiments/configs/v9_condtime10.yml\" \
+      2>&1 | tee output/lf1e-clw-1/worker_A_$(date +%Y%m%d_%H%M%S).log"'
+```
+Repeat for workers B, C, D with their own tmux session names and config lists. If step 1
+shows enough headroom, launch all four `tmux new-session` calls back to back — they run
+concurrently since each is detached. If not, stagger: start worker A alone (it's the
+long pole, ~6 runs), then B/C/D together once A frees memory, or interleave based on what
+`free -h` shows mid-run.
+
+**Step 4 — monitor without an interactive TTY** (per project convention, `tmux attach`
+doesn't work from Claude Code):
+```bash
+ssh stratus 'tmux capture-pane -pt lf1_worker_A -S -50'
+```
+Check all four sessions periodically; `run_batch.jl` prints a `=== Batch summary ===` block
+with per-variation `ret_code` when a worker finishes, so a quick grep for that string (or for
+`FAILED`) across the worker logs tells you what's done without reading full output.
+
+**Step 5 — pull results back.**
+```bash
+bash scripts/sync_from_remote.sh
+```
+Run this after all four `tmux` sessions have exited (check `ssh stratus 'tmux ls'` — a
+finished session disappears from the list). Postprocessing then proceeds exactly as described
+below, against the local `output/lf1e-clw-1/v*/output_active/` directories.
 
 ## Postprocessing
 
@@ -146,20 +275,31 @@ unit `"1"` — confirm by magnitude that this is actually kg/kg matching ClimaAt
 other normalization, before trusting direct comparison.
 
 ### Build check tables
+
+This is a 2-day sensitivity screen, not the full 20-day Pithan 2016 run (see `t_end: 2days`
+in `larcform1_1M_prognostic_edmfx.yml:22`, unchanged by any of the 9 overlays) — an earlier
+draft of this section analyzed "the first 10 days," carried over from the full-protocol
+analysis window rather than this experiment's actual run length. The comparison window here
+is **the full 2-day run** (i.e. no truncation — all available ClimaAtmos output), matched
+against EC-Earth's own first 2 days (EC-Earth.nc covers the full 20-day protocol run, so it
+must be truncated to line up with our shorter window). If a variation looks promising here,
+extend it to the full 20-day run before treating it as a real result against the Pithan
+protocol.
+
 - **Threshold table** (Validation step 1): for each variation, load the converted file,
-  compute `max(clw)` over `(time, lev)` restricted to the first 10 days, flag
-  pass/fail against 1e-4 kg/kg (0.1 g/kg). Columns: variation, job_id, max_clw_kgkg,
-  passes_threshold, notes (e.g. document variation 3's instability/failure mode from
-  `run.log` here rather than silently excluding it).
+  compute `max(clw)` over `(time, lev)` across the full 2-day run, flag pass/fail against
+  1e-4 kg/kg (0.1 g/kg). Columns: variation, job_id, max_clw_kgkg, passes_threshold, notes
+  (e.g. document variation 3's instability/failure mode from `run.log` here rather than
+  silently excluding it).
 - **Extended comparison table** (Validation steps 2–8), only for variations that pass step
   1: mean bias / RMSE of `cli`, `q`, `rh` profiles and `clwvi`, `clivi`, `precr`, `precs`
-  time series against EC-Earth, computed on the pressure-regridded data, over the first 10
-  days.
+  time series against EC-Earth, computed on the pressure-regridded data, over the full 2-day
+  run vs. EC-Earth's first 2 days.
 
 ### Plotting
-- **Profiles** (time-mean over first 10 days, plotted against pressure `p`, inverted axis):
-  `t`, `q`, `rh`, `clw`, `cli` — one ClimaAtmos variation vs EC-Earth per panel.
-- **Time series** (first 10 days): `clwvi`, `clivi`, `precr`, `precs` — variation vs
+- **Profiles** (time-mean over the full 2-day run, plotted against pressure `p`, inverted
+  axis): `t`, `q`, `rh`, `clw`, `cli` — one ClimaAtmos variation vs EC-Earth per panel.
+- **Time series** (first 2 days): `clwvi`, `clivi`, `precr`, `precs` — variation vs
   EC-Earth, one plot per variable, variations overlaid or faceted.
 - Follow the `dataviz` skill for palette/styling once chart code is written.
 

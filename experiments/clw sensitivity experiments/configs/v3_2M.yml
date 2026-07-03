@@ -1,0 +1,5 @@
+# clw sensitivity test #1 — variation 3: 2M microphysics
+# Expected not to be stable — a crashed ret_code here is an anticipated result, not a bug.
+job_id: lf1e_clw1_v3_2M
+output_dir: "experiments/clw sensitivity experiments/output/lf1e-clw-1/v3_2M"
+microphysics_model: 2M

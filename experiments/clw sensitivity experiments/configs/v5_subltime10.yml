@@ -1,0 +1,12 @@
+# clw sensitivity test #1 — variation 5: sublimation_deposition_timescale = 10
+#
+# `toml:` is a list and config merging replaces it wholesale rather than appending, so this
+# can't just be [base.toml, override.toml] — CP.merge_toml_files (atmos_config.jl:141) is
+# called with `override=false` (hardcoded, no YAML-level way to change it) and throws
+# "Duplicate TOML entry" if the same table name appears in more than one file. Since
+# sublimation_deposition_timescale already exists in the base toml, listing both files
+# always crashes. Fix: use a full copy of the base toml with only this one value changed,
+# as the sole entry in the list.
+job_id: lf1e_clw1_v5_subltime10
+output_dir: "experiments/clw sensitivity experiments/output/lf1e-clw-1/v5_subltime10"
+toml: ["experiments/clw sensitivity experiments/toml/v5_subltime10_full.toml"]

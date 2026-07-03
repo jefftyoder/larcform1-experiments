@@ -1,0 +1,5 @@
+# clw sensitivity test #1 — variation 6: sublimation_deposition_timescale = 400
+# See v5_subltime10.yml for why this uses a single full-copy toml instead of [base, override].
+job_id: lf1e_clw1_v6_subltime400
+output_dir: "experiments/clw sensitivity experiments/output/lf1e-clw-1/v6_subltime400"
+toml: ["experiments/clw sensitivity experiments/toml/v6_subltime400_full.toml"]

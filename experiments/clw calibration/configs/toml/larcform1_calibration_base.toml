@@ -1,0 +1,61 @@
+# Copy of ClimaAtmos.jl/toml/larcform1_1M_prognostic_edmfx.toml for calibration,
+# WITH THE CALIBRATED PARAMETERS REMOVED (condensation_evaporation_timescale,
+# sublimation_deposition_timescale — both were 100 in the original).
+#
+# Why: the local ClimaAtmos calls CP.merge_toml_files without override, so a
+# parameter appearing in both this file and the per-member sampled toml raises
+# "Duplicate TOML entry". The sampled toml supplies the calibrated parameters
+# for every member, so they must not appear here.
+#
+# Keep this file in sync with the source toml for all NON-calibrated entries.
+
+[zd_rayleigh]
+value = 40000.0
+
+[zd_viscous]
+value = 40000.0
+
+[alpha_rayleigh_tracer]
+value = 0.001
+
+[EDMF_max_surface_area]
+value = 0.1
+
+[EDMF_min_area]
+value = 1.0e-5
+
+[EDMF_max_area]
+value = 0.7
+
+[turb_entr_param_vec]
+value = [0.0001, 50.0, 0.0]
+
+[entr_coeff]
+value = 0.1
+
+[min_area_limiter_scale]
+value = 0.0001
+
+[min_area_limiter_power]
+value = 1
+
+[detr_buoy_coeff]
+value = 1
+
+[detr_massflux_vertdiv_coeff]
+value = 1
+
+[max_area_limiter_scale]
+value = 0.001
+
+[max_area_limiter_power]
+value = 1
+
+[pressure_normalmode_drag_coeff]
+value = 8.0
+
+[mixing_length_eddy_viscosity_coefficient]
+value = 0.56
+
+[tracer_vertical_diffusion_factor]
+value = 0

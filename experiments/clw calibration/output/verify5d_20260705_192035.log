@@ -1,0 +1,870 @@
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mSimulation info
+[36m[1m│ [22m[39m  job_id = "lf1e_clw_cal_verify5d_calibrated"
+[36m[1m└ [22m[39m  output_dir = "/home/jeff/larcform1-experiments/experiments/clw calibration/output/verify5d/calibrated/output_0001"
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mRunning
+[36m[1m│ [22m[39m  job_id = "lf1e_clw_cal_verify5d_calibrated"
+[36m[1m│ [22m[39m  output_dir = "/home/jeff/larcform1-experiments/experiments/clw calibration/output/verify5d/calibrated/output_0001"
+[36m[1m└ [22m[39m  tspan = (0.0 seconds (2010-01-01T00:00:00) [counter = 0, period = 1 second, epoch = 2010-01-01T00:00:00], 432000.0 seconds (2010-01-06T00:00:00) [counter = 432000, period = 1 second, epoch = 2010-01-01T00:00:00])
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "30 seconds"
+[36m[1m│ [22m[39m  n_steps_completed = 1
+[36m[1m│ [22m[39m  wall_time_per_step = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_total = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "0 seconds"
+[36m[1m│ [22m[39m  percent_complete = "0.0%"
+[36m[1m│ [22m[39m  estimated_sypd = "Inf"
+[36m[1m│ [22m[39m  instantaneous_sypd = "0.0 (sdpd_estimate = 0.0)"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:28:32.755
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:28:32.754
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "1 minute"
+[36m[1m│ [22m[39m  n_steps_completed = 2
+[36m[1m│ [22m[39m  wall_time_per_step = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_total = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "0 seconds"
+[36m[1m│ [22m[39m  percent_complete = "0.0%"
+[36m[1m│ [22m[39m  estimated_sypd = "Inf"
+[36m[1m│ [22m[39m  instantaneous_sypd = "0.019"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:28:37.167
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:28:37.167
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "2 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 4
+[36m[1m│ [22m[39m  wall_time_per_step = "13 milliseconds, 260 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "3 minutes, 10 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "3 minutes, 10 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "53 milliseconds, 40 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "0.0%"
+[36m[1m│ [22m[39m  estimated_sypd = "6.194"
+[36m[1m│ [22m[39m  instantaneous_sypd = "6.194"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:28:37.242
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:48.242
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "4 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 8
+[36m[1m│ [22m[39m  wall_time_per_step = "16 milliseconds, 979 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "4 minutes, 4 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "4 minutes, 4 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "135 milliseconds, 838 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "0.1%"
+[36m[1m│ [22m[39m  estimated_sypd = "4.837"
+[36m[1m│ [22m[39m  instantaneous_sypd = "3.968"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:28:37.260
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:32:42.260
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "8 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 16
+[36m[1m│ [22m[39m  wall_time_per_step = "10 milliseconds, 394 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "2 minutes, 29 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "2 minutes, 29 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "166 milliseconds, 308 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "0.1%"
+[36m[1m│ [22m[39m  estimated_sypd = "7.902"
+[36m[1m│ [22m[39m  instantaneous_sypd = "21.565"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:28:37.291
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:07.291
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "16 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 32
+[36m[1m│ [22m[39m  wall_time_per_step = "7 milliseconds, 99 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 42 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "1 minute, 42 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "227 milliseconds, 195 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "0.2%"
+[36m[1m│ [22m[39m  estimated_sypd = "11.569"
+[36m[1m│ [22m[39m  instantaneous_sypd = "21.584"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:28:37.352
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:20.352
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "32 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 64
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 624 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 20 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "1 minute, 20 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "359 milliseconds, 972 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "0.4%"
+[36m[1m│ [22m[39m  estimated_sypd = "14.603"
+[36m[1m│ [22m[39m  instantaneous_sypd = "19.795"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:28:37.484
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:29:58.484
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "1 hour, 4 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 128
+[36m[1m│ [22m[39m  wall_time_per_step = "48 milliseconds, 436 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "11 minutes, 37 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "11 minutes, 31 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "6 seconds, 199 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "0.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "1.696"
+[36m[1m│ [22m[39m  instantaneous_sypd = "0.9"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:28:43.332
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:40:15.332
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "2 hours, 8 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 256
+[36m[1m│ [22m[39m  wall_time_per_step = "26 milliseconds, 993 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "6 minutes, 28 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "6 minutes, 21 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "6 seconds, 910 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "1.8%"
+[36m[1m│ [22m[39m  estimated_sypd = "3.043"
+[36m[1m│ [22m[39m  instantaneous_sypd = "14.797"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:28:44.035
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:35:06.035
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "4 hours, 16 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 512
+[36m[1m│ [22m[39m  wall_time_per_step = "15 milliseconds, 604 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "3 minutes, 44 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "3 minutes, 36 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "7 seconds, 989 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "3.6%"
+[36m[1m│ [22m[39m  estimated_sypd = "5.264"
+[36m[1m│ [22m[39m  instantaneous_sypd = "19.485"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:28:45.114
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:32:22.114
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "8 hours, 32 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 1024
+[36m[1m│ [22m[39m  wall_time_per_step = "10 milliseconds, 39 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "2 minutes, 24 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "2 minutes, 14 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "10 seconds, 280 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "7.1%"
+[36m[1m│ [22m[39m  estimated_sypd = "8.181"
+[36m[1m│ [22m[39m  instantaneous_sypd = "18.358"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:28:47.405
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:02.405
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "14 hours, 32 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 1745
+[36m[1m│ [22m[39m  wall_time_per_step = "7 milliseconds, 959 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 54 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "1 minute, 40 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "13 seconds, 889 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "12.1%"
+[36m[1m│ [22m[39m  estimated_sypd = "10.319"
+[36m[1m│ [22m[39m  instantaneous_sypd = "16.409"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:28:51.014
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:32.014
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "17 hours, 4 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 2048
+[36m[1m│ [22m[39m  wall_time_per_step = "7 milliseconds, 508 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 48 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "1 minute, 32 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "15 seconds, 376 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "14.2%"
+[36m[1m│ [22m[39m  estimated_sypd = "10.94"
+[36m[1m│ [22m[39m  instantaneous_sypd = "16.735"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:28:52.501
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:25.501
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "23 hours, 4 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 2769
+[36m[1m│ [22m[39m  wall_time_per_step = "6 milliseconds, 946 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 40 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "1 minute, 20 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "19 seconds, 235 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "19.2%"
+[36m[1m│ [22m[39m  estimated_sypd = "11.823"
+[36m[1m│ [22m[39m  instantaneous_sypd = "15.344"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:28:56.360
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:17.360
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "1 day, 5 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 3490
+[36m[1m│ [22m[39m  wall_time_per_step = "6 milliseconds, 670 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 36 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "1 minute, 12 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "23 seconds, 281 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "24.2%"
+[36m[1m│ [22m[39m  estimated_sypd = "12.313"
+[36m[1m│ [22m[39m  instantaneous_sypd = "14.639"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:00.424
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:13.424
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "1 day, 10 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 4096
+[36m[1m│ [22m[39m  wall_time_per_step = "6 milliseconds, 546 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 34 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "1 minute, 7 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "26 seconds, 814 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "28.4%"
+[36m[1m│ [22m[39m  estimated_sypd = "12.547"
+[36m[1m│ [22m[39m  instantaneous_sypd = "14.088"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:03.939
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:11.939
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "1 day, 16 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 4817
+[36m[1m│ [22m[39m  wall_time_per_step = "6 milliseconds, 502 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 33 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "1 minute, 2 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "31 seconds, 321 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "33.5%"
+[36m[1m│ [22m[39m  estimated_sypd = "12.632"
+[36m[1m│ [22m[39m  instantaneous_sypd = "13.138"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:08.446
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:11.446
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "1 day, 22 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 5538
+[36m[1m│ [22m[39m  wall_time_per_step = "6 milliseconds, 510 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 33 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "57 seconds, 695 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "36 seconds, 54 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "38.5%"
+[36m[1m│ [22m[39m  estimated_sypd = "12.616"
+[36m[1m│ [22m[39m  instantaneous_sypd = "12.513"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:13.179
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:11.179
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "2 days, 4 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 6259
+[36m[1m│ [22m[39m  wall_time_per_step = "6 milliseconds, 537 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 34 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "53 seconds, 219 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "40 seconds, 916 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "43.5%"
+[36m[1m│ [22m[39m  estimated_sypd = "12.564"
+[36m[1m│ [22m[39m  instantaneous_sypd = "12.18"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:18.041
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:12.041
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "2 days, 10 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 6980
+[36m[1m│ [22m[39m  wall_time_per_step = "6 milliseconds, 490 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 33 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "48 seconds, 158 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "45 seconds, 302 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "48.5%"
+[36m[1m│ [22m[39m  estimated_sypd = "12.655"
+[36m[1m│ [22m[39m  instantaneous_sypd = "13.502"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:22.427
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:11.427
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "2 days, 16 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 7701
+[36m[1m│ [22m[39m  wall_time_per_step = "6 milliseconds, 339 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 31 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "42 seconds, 469 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "48 seconds, 821 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "53.5%"
+[36m[1m│ [22m[39m  estimated_sypd = "12.956"
+[36m[1m│ [22m[39m  instantaneous_sypd = "16.827"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:25.946
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:08.946
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "2 days, 20 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 8192
+[36m[1m│ [22m[39m  wall_time_per_step = "6 milliseconds, 248 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 29 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "38 seconds, 792 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "51 seconds, 190 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "56.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "13.144"
+[36m[1m│ [22m[39m  instantaneous_sypd = "17.024"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:28.315
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:07.315
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "3 days, 2 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 8913
+[36m[1m│ [22m[39m  wall_time_per_step = "6 milliseconds, 141 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 28 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "33 seconds, 700 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "54 seconds, 742 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "61.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "13.373"
+[36m[1m│ [22m[39m  instantaneous_sypd = "16.674"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:31.867
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:05.867
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "3 days, 8 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 9634
+[36m[1m│ [22m[39m  wall_time_per_step = "6 milliseconds, 56 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 27 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "28 seconds, 864 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "58 seconds, 346 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "66.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "13.562"
+[36m[1m│ [22m[39m  instantaneous_sypd = "16.433"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:35.471
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:04.471
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "3 days, 14 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 10355
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 983 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 26 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "24 seconds, 203 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "1 minute, 1 second"
+[36m[1m│ [22m[39m  percent_complete = "71.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "13.727"
+[36m[1m│ [22m[39m  instantaneous_sypd = "16.389"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:39.084
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:04.084
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "3 days, 20 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 11076
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 925 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 25 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "19 seconds, 694 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "1 minute, 5 seconds"
+[36m[1m│ [22m[39m  percent_complete = "76.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "13.863"
+[36m[1m│ [22m[39m  instantaneous_sypd = "16.154"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:42.750
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:02.750
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "4 days, 2 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 11797
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 876 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 24 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "15 seconds, 296 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "1 minute, 9 seconds"
+[36m[1m│ [22m[39m  percent_complete = "81.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "13.977"
+[36m[1m│ [22m[39m  instantaneous_sypd = "16.009"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:46.449
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:02.449
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "4 days, 8 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 12518
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 831 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 23 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "10 seconds, 974 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "1 minute, 12 seconds"
+[36m[1m│ [22m[39m  percent_complete = "86.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "14.085"
+[36m[1m│ [22m[39m  instantaneous_sypd = "16.122"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:50.122
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:01.122
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "4 days, 14 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 13239
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 796 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 23 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "6 seconds, 730 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "1 minute, 16 seconds"
+[36m[1m│ [22m[39m  percent_complete = "91.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "14.169"
+[36m[1m│ [22m[39m  instantaneous_sypd = "15.806"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:53.869
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:00.869
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "4 days, 20 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 13960
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 766 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 23 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "2 seconds, 537 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "1 minute, 20 seconds"
+[36m[1m│ [22m[39m  percent_complete = "96.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "14.244"
+[36m[1m│ [22m[39m  instantaneous_sypd = "15.772"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:29:57.623
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:00.623
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39msolve! walltime = 82.838
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39msypd: 14.288
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mwall_time_per_timestep: 5 milliseconds, 752 microseconds
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mMemory currently used (after solve!) by the process (RSS): 9.44 GiB
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mRunning 5-day baseline
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mMaking AtmosConfig with config files: 
+[36m[1m└ [22m[39m   /home/jeff/larcform1-experiments/ClimaAtmos.jl/src/config/../../config/default_configs/default_config.yml
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mnumerics 
+[36m[1m│ [22m[39m       `energy_q_tot_upwinding`::`Val{:vanleer_limiter}`
+[36m[1m│ [22m[39m             `tracer_upwinding`::`Val{:vanleer_limiter}`
+[36m[1m│ [22m[39m    `edmfx_mse_q_tot_upwinding`::`Val{:first_order}`
+[36m[1m│ [22m[39m      `edmfx_sgsflux_upwinding`::`Val{:none}`
+[36m[1m│ [22m[39m       `edmfx_tracer_upwinding`::`Val{:first_order}`
+[36m[1m│ [22m[39m      `test_dycore_consistency`::`Nothing`
+[36m[1m│ [22m[39m         `reproducible_restart`::`Nothing`
+[36m[1m│ [22m[39m                      `limiter`::`Nothing`
+[36m[1m│ [22m[39m                    `diff_mode`::`ClimaAtmos.Implicit`
+[36m[1m└ [22m[39m                    `hyperdiff`::`Nothing`
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mAtmosModel: 
+[36m[1m│ [22m[39m
+[36m[1m│ [22m[39m                            `water`::`ClimaAtmos.AtmosWater{ClimaAtmos.NonEquilibriumMicrophysics1M, ClimaAtmos.QuadratureCloud, ClimaAtmos.Implicit, Nothing, ClimaAtmos.SGSQuadrature{3, StaticArraysCore.SVector{3, Float32}, StaticArraysCore.SVector{3, Float32}, ClimaAtmos.GaussianSGS, Float32}, ClimaAtmos.FixedTerminalVelocity{Float32}}`
+[36m[1m│ [22m[39m                        `scm_setup`::`ClimaAtmos.SCMSetup{Nothing, Nothing, Nothing, Bool, @NamedTuple{prof_ug::AtmosphericProfilesLibrary.ZProfile{AtmosphericProfilesLibrary.var"#Larcform1_geostrophic_u##0#Larcform1_geostrophic_u##1"{Float32}}, prof_vg::AtmosphericProfilesLibrary.ZProfile{Returns{Float32}}, coriolis_param::Float32}}`
+[36m[1m│ [22m[39m                        `radiation`::`ClimaAtmos.AtmosRadiation{ClimaAtmos.RRTMGPInterface.AllSkyRadiationWithClearSkyDiagnostics{ClimaAtmos.InteractiveCloudInRadiation}, ClimaAtmos.Larcform1Insolation}`
+[36m[1m│ [22m[39m                         `turbconv`::`ClimaAtmos.AtmosTurbconv{ClimaAtmos.EDMFXModel{ClimaAtmos.InvZEntrainment, ClimaAtmos.BuoyancyVelocityDetrainment, Val{true}, Val{true}, Val{true}, Val{true}, Val{true}, ClimaAtmos.SmoothMinimumBlending}, ClimaAtmos.PrognosticEDMFX{1, true, Float32}, Nothing, Nothing, Nothing}`
+[36m[1m│ [22m[39m                  `prescribed_flow`::`Nothing`
+[36m[1m│ [22m[39m                     `gravity_wave`::`ClimaAtmos.AtmosGravityWave{Nothing, Nothing}`
+[36m[1m│ [22m[39m               `vertical_diffusion`::`Nothing`
+[36m[1m│ [22m[39m                           `sponge`::`ClimaAtmos.AtmosSponge{Nothing, Nothing}`
+[36m[1m│ [22m[39m                          `surface`::`ClimaAtmos.AtmosSurface{ClimaAtmos.SurfaceConditions.MoninObukhov{Float32, Nothing, Nothing}, ClimaAtmos.SurfaceConditions.SlabOceanTemperature{Float32}, ClimaAtmos.SurfaceConditions.SurfaceBoundaryOverrides{Float32, Float32, Nothing, Nothing, Nothing, Nothing}, ClimaAtmos.ConstantAlbedo{Float32}}`
+[36m[1m│ [22m[39m                         `numerics`::`ClimaAtmos.AtmosNumerics{Val{:vanleer_limiter}, Val{:vanleer_limiter}, Val{:first_order}, Val{:none}, Val{:first_order}, Nothing, Nothing, Nothing, ClimaAtmos.Implicit, Nothing}`
+[36m[1m└ [22m[39m                        `chemistry`::`ClimaAtmos.AtmosChem{Nothing}`
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mMicrophysics settings: 
+[36m[1m│ [22m[39m                       `n_substeps`::`3`
+[36m[1m│ [22m[39m                  `n_substeps_quad`::`2`
+[36m[1m│ [22m[39m           `cloud_liquid_formation`::`CloudLiquidFormation`
+[36m[1m│ [22m[39m              `cloud_ice_formation`::`TemperatureDependent`
+[36m[1m│ [22m[39m                   `cloud_ice_melt`::`CloudIceMelt`
+[36m[1m│ [22m[39m              `rain_autoconversion`::`Kessler1M`
+[36m[1m│ [22m[39m              `snow_autoconversion`::`NoSupersaturation`
+[36m[1m│ [22m[39m    `rain_condensation_evaporation`::`RainEvaporation`
+[36m[1m│ [22m[39m      `snow_deposition_sublimation`::`DepositionAndSublimation`
+[36m[1m│ [22m[39m                        `snow_melt`::`SnowMelt`
+[36m[1m│ [22m[39m      `cloud_liquid_rain_accretion`::`CloudLiquidRainAccretion`
+[36m[1m│ [22m[39m      `cloud_liquid_snow_accretion`::`CloudLiquidSnowAccretion`
+[36m[1m│ [22m[39m         `cloud_ice_rain_accretion`::`CloudIceRainAccretion`
+[36m[1m│ [22m[39m         `cloud_ice_snow_accretion`::`CloudIceSnowAccretion`
+[36m[1m└ [22m[39m              `rain_snow_accretion`::`RainSnowAccretion`
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSingle-process ClimaAtmos run on CPUSingleThreaded
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mUsing ODE config: `ClimaTimeSteppers.ARS222`
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mInitialized state (18.971 μs, 7.76 KiB)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mBuilt cache (323.961 ms, 172.6 MiB)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mAssembled callbacks (139.854 μs, 17.42 KiB)
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mJacobian algorithm: ManualSparseJacobian(
+[36m[1m│ [22m[39m  approximate_solve_iters = 2,
+[36m[1m└ [22m[39m)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mJacobian derivative flags: topography_flag = IgnoreDerivative, diffusion_flag = UseDerivative
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mBuilt tendency function (6.018 ms, 207.31 KiB)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mInitialized integrator (8.233 ms, 169.03 KiB)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mAdded 7 user-provided YAML-style diagnostics
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSaving accumulated diagnostics to disk with frequency: 1 hour
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSet up diagnostics (527.874 μs, 105.05 KiB)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mInitialized 7 total diagnostics
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mSimulation info
+[36m[1m│ [22m[39m  job_id = "lf1e_clw_cal_verify5d_baseline"
+[36m[1m└ [22m[39m  output_dir = "/home/jeff/larcform1-experiments/experiments/clw calibration/output/verify5d/baseline/output_0001"
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mRunning
+[36m[1m│ [22m[39m  job_id = "lf1e_clw_cal_verify5d_baseline"
+[36m[1m│ [22m[39m  output_dir = "/home/jeff/larcform1-experiments/experiments/clw calibration/output/verify5d/baseline/output_0001"
+[36m[1m└ [22m[39m  tspan = (0.0 seconds (2010-01-01T00:00:00) [counter = 0, period = 1 second, epoch = 2010-01-01T00:00:00], 432000.0 seconds (2010-01-06T00:00:00) [counter = 432000, period = 1 second, epoch = 2010-01-01T00:00:00])
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "30 seconds"
+[36m[1m│ [22m[39m  n_steps_completed = 1
+[36m[1m│ [22m[39m  wall_time_per_step = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_total = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "0 seconds"
+[36m[1m│ [22m[39m  percent_complete = "0.0%"
+[36m[1m│ [22m[39m  estimated_sypd = "Inf"
+[36m[1m│ [22m[39m  instantaneous_sypd = "0.0 (sdpd_estimate = 0.0)"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:00.686
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:00.686
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "1 minute"
+[36m[1m│ [22m[39m  n_steps_completed = 2
+[36m[1m│ [22m[39m  wall_time_per_step = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_total = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "0 seconds"
+[36m[1m│ [22m[39m  percent_complete = "0.0%"
+[36m[1m│ [22m[39m  estimated_sypd = "Inf"
+[36m[1m│ [22m[39m  instantaneous_sypd = "0.032"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:03.273
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:03.273
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "2 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 4
+[36m[1m│ [22m[39m  wall_time_per_step = "4 milliseconds, 415 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 3 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "1 minute, 3 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "17 milliseconds, 662 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "0.0%"
+[36m[1m│ [22m[39m  estimated_sypd = "18.602"
+[36m[1m│ [22m[39m  instantaneous_sypd = "18.602"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:03.282
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:07.282
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mCalibrated final means
+[36m[1m│ [22m[39m  Dict(zip(PARAM_NAMES, phi)) =
+[36m[1m│ [22m[39m   Dict{String, Float64} with 6 entries:
+[36m[1m│ [22m[39m     "cloud_liquid_water_specific_humidity_autoconversion_thre… => 0.000377229
+[36m[1m│ [22m[39m     "Frostenberg2023_b_coefficient"                            => 1.19443
+[36m[1m│ [22m[39m     "snow_autoconversion_timescale"                            => 831.865
+[36m[1m│ [22m[39m     "Frostenberg2023_a_coefficient"                            => 0.253719
+[36m[1m│ [22m[39m     "condensation_evaporation_timescale"                       => 101.068
+[36m[1m└ [22m[39m     "sublimation_deposition_timescale"                         => 66.5906
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mRunning 5-day calibrated
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mMaking AtmosConfig with config files: 
+[36m[1m└ [22m[39m   /home/jeff/larcform1-experiments/ClimaAtmos.jl/src/config/../../config/default_configs/default_config.yml
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mnumerics 
+[36m[1m│ [22m[39m       `energy_q_tot_upwinding`::`Val{:vanleer_limiter}`
+[36m[1m│ [22m[39m             `tracer_upwinding`::`Val{:vanleer_limiter}`
+[36m[1m│ [22m[39m    `edmfx_mse_q_tot_upwinding`::`Val{:first_order}`
+[36m[1m│ [22m[39m      `edmfx_sgsflux_upwinding`::`Val{:none}`
+[36m[1m│ [22m[39m       `edmfx_tracer_upwinding`::`Val{:first_order}`
+[36m[1m│ [22m[39m      `test_dycore_consistency`::`Nothing`
+[36m[1m│ [22m[39m         `reproducible_restart`::`Nothing`
+[36m[1m│ [22m[39m                      `limiter`::`Nothing`
+[36m[1m│ [22m[39m                    `diff_mode`::`ClimaAtmos.Implicit`
+[36m[1m└ [22m[39m                    `hyperdiff`::`Nothing`
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mAtmosModel: 
+[36m[1m│ [22m[39m
+[36m[1m│ [22m[39m                            `water`::`ClimaAtmos.AtmosWater{ClimaAtmos.NonEquilibriumMicrophysics1M, ClimaAtmos.QuadratureCloud, ClimaAtmos.Implicit, Nothing, ClimaAtmos.SGSQuadrature{3, StaticArraysCore.SVector{3, Float32}, StaticArraysCore.SVector{3, Float32}, ClimaAtmos.GaussianSGS, Float32}, ClimaAtmos.FixedTerminalVelocity{Float32}}`
+[36m[1m│ [22m[39m                        `scm_setup`::`ClimaAtmos.SCMSetup{Nothing, Nothing, Nothing, Bool, @NamedTuple{prof_ug::AtmosphericProfilesLibrary.ZProfile{AtmosphericProfilesLibrary.var"#Larcform1_geostrophic_u##0#Larcform1_geostrophic_u##1"{Float32}}, prof_vg::AtmosphericProfilesLibrary.ZProfile{Returns{Float32}}, coriolis_param::Float32}}`
+[36m[1m│ [22m[39m                        `radiation`::`ClimaAtmos.AtmosRadiation{ClimaAtmos.RRTMGPInterface.AllSkyRadiationWithClearSkyDiagnostics{ClimaAtmos.InteractiveCloudInRadiation}, ClimaAtmos.Larcform1Insolation}`
+[36m[1m│ [22m[39m                         `turbconv`::`ClimaAtmos.AtmosTurbconv{ClimaAtmos.EDMFXModel{ClimaAtmos.InvZEntrainment, ClimaAtmos.BuoyancyVelocityDetrainment, Val{true}, Val{true}, Val{true}, Val{true}, Val{true}, ClimaAtmos.SmoothMinimumBlending}, ClimaAtmos.PrognosticEDMFX{1, true, Float32}, Nothing, Nothing, Nothing}`
+[36m[1m│ [22m[39m                  `prescribed_flow`::`Nothing`
+[36m[1m│ [22m[39m                     `gravity_wave`::`ClimaAtmos.AtmosGravityWave{Nothing, Nothing}`
+[36m[1m│ [22m[39m               `vertical_diffusion`::`Nothing`
+[36m[1m│ [22m[39m                           `sponge`::`ClimaAtmos.AtmosSponge{Nothing, Nothing}`
+[36m[1m│ [22m[39m                          `surface`::`ClimaAtmos.AtmosSurface{ClimaAtmos.SurfaceConditions.MoninObukhov{Float32, Nothing, Nothing}, ClimaAtmos.SurfaceConditions.SlabOceanTemperature{Float32}, ClimaAtmos.SurfaceConditions.SurfaceBoundaryOverrides{Float32, Float32, Nothing, Nothing, Nothing, Nothing}, ClimaAtmos.ConstantAlbedo{Float32}}`
+[36m[1m│ [22m[39m                         `numerics`::`ClimaAtmos.AtmosNumerics{Val{:vanleer_limiter}, Val{:vanleer_limiter}, Val{:first_order}, Val{:none}, Val{:first_order}, Nothing, Nothing, Nothing, ClimaAtmos.Implicit, Nothing}`
+[36m[1m└ [22m[39m                        `chemistry`::`ClimaAtmos.AtmosChem{Nothing}`
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mMicrophysics settings: 
+[36m[1m│ [22m[39m                       `n_substeps`::`3`
+[36m[1m│ [22m[39m                  `n_substeps_quad`::`2`
+[36m[1m│ [22m[39m           `cloud_liquid_formation`::`CloudLiquidFormation`
+[36m[1m│ [22m[39m              `cloud_ice_formation`::`TemperatureDependent`
+[36m[1m│ [22m[39m                   `cloud_ice_melt`::`CloudIceMelt`
+[36m[1m│ [22m[39m              `rain_autoconversion`::`Kessler1M`
+[36m[1m│ [22m[39m              `snow_autoconversion`::`NoSupersaturation`
+[36m[1m│ [22m[39m    `rain_condensation_evaporation`::`RainEvaporation`
+[36m[1m│ [22m[39m      `snow_deposition_sublimation`::`DepositionAndSublimation`
+[36m[1m│ [22m[39m                        `snow_melt`::`SnowMelt`
+[36m[1m│ [22m[39m      `cloud_liquid_rain_accretion`::`CloudLiquidRainAccretion`
+[36m[1m│ [22m[39m      `cloud_liquid_snow_accretion`::`CloudLiquidSnowAccretion`
+[36m[1m│ [22m[39m         `cloud_ice_rain_accretion`::`CloudIceRainAccretion`
+[36m[1m│ [22m[39m         `cloud_ice_snow_accretion`::`CloudIceSnowAccretion`
+[36m[1m└ [22m[39m              `rain_snow_accretion`::`RainSnowAccretion`
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSingle-process ClimaAtmos run on CPUSingleThreaded
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mUsing ODE config: `ClimaTimeSteppers.ARS222`
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mInitialized state (19.501 μs, 7.76 KiB)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mBuilt cache (27.985 s, 10.55 GiB)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mAssembled callbacks (175.714 ms, 32.07 MiB)
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mJacobian algorithm: ManualSparseJacobian(
+[36m[1m│ [22m[39m  approximate_solve_iters = 2,
+[36m[1m└ [22m[39m)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mJacobian derivative flags: topography_flag = IgnoreDerivative, diffusion_flag = UseDerivative
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mBuilt tendency function (1.478 s, 77.39 MiB)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mInitialized integrator (19.775 s, 5.16 GiB)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mAdded 7 user-provided YAML-style diagnostics
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSaving accumulated diagnostics to disk with frequency: 1 hour
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSet up diagnostics (5.376 s, 466.03 MiB)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mInitialized 7 total diagnostics
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "4 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 8
+[36m[1m│ [22m[39m  wall_time_per_step = "4 milliseconds, 164 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "59 seconds, 970 milliseconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "59 seconds, 937 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "33 milliseconds, 317 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "0.1%"
+[36m[1m│ [22m[39m  estimated_sypd = "19.722"
+[36m[1m│ [22m[39m  instantaneous_sypd = "20.986"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:03.297
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:03.297
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "8 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 16
+[36m[1m│ [22m[39m  wall_time_per_step = "3 milliseconds, 945 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "56 seconds, 817 milliseconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "56 seconds, 754 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "63 milliseconds, 131 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "0.1%"
+[36m[1m│ [22m[39m  estimated_sypd = "20.816"
+[36m[1m│ [22m[39m  instantaneous_sypd = "22.039"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:03.327
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:00.327
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "16 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 32
+[36m[1m│ [22m[39m  wall_time_per_step = "3 milliseconds, 840 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "55 seconds, 298 milliseconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "55 seconds, 175 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "122 milliseconds, 886 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "0.2%"
+[36m[1m│ [22m[39m  estimated_sypd = "21.388"
+[36m[1m│ [22m[39m  instantaneous_sypd = "21.993"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:03.387
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:30:59.387
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "32 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 64
+[36m[1m│ [22m[39m  wall_time_per_step = "3 milliseconds, 910 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "56 seconds, 305 milliseconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "56 seconds, 54 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "250 milliseconds, 245 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "0.4%"
+[36m[1m│ [22m[39m  estimated_sypd = "21.006"
+[36m[1m│ [22m[39m  instantaneous_sypd = "20.637"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:03.514
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:00.514
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "1 hour, 4 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 128
+[36m[1m│ [22m[39m  wall_time_per_step = "4 milliseconds, 16 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "57 seconds, 837 milliseconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "57 seconds, 323 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "514 milliseconds, 111 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "0.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "20.45"
+[36m[1m│ [22m[39m  instantaneous_sypd = "19.922"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:03.778
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:01.778
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "2 hours, 8 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 256
+[36m[1m│ [22m[39m  wall_time_per_step = "3 milliseconds, 985 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "57 seconds, 391 milliseconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "56 seconds, 370 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "1 second, 20 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "1.8%"
+[36m[1m│ [22m[39m  estimated_sypd = "20.609"
+[36m[1m│ [22m[39m  instantaneous_sypd = "20.77"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:04.284
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:01.284
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "4 hours, 16 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 512
+[36m[1m│ [22m[39m  wall_time_per_step = "3 milliseconds, 996 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "57 seconds, 553 milliseconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "55 seconds, 507 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "2 seconds, 46 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "3.6%"
+[36m[1m│ [22m[39m  estimated_sypd = "20.55"
+[36m[1m│ [22m[39m  instantaneous_sypd = "20.493"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:05.310
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:01.310
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "8 hours, 32 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 1024
+[36m[1m│ [22m[39m  wall_time_per_step = "4 milliseconds, 113 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "59 seconds, 237 milliseconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "55 seconds, 25 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "4 seconds, 212 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "7.1%"
+[36m[1m│ [22m[39m  estimated_sypd = "19.966"
+[36m[1m│ [22m[39m  instantaneous_sypd = "19.414"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:07.477
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:03.477
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "14 hours, 32 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 1745
+[36m[1m│ [22m[39m  wall_time_per_step = "4 milliseconds, 350 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 2 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "55 seconds, 49 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "7 seconds, 590 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "12.1%"
+[36m[1m│ [22m[39m  estimated_sypd = "18.882"
+[36m[1m│ [22m[39m  instantaneous_sypd = "17.529"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:10.855
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:06.855
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "17 hours, 4 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 2048
+[36m[1m│ [22m[39m  wall_time_per_step = "4 milliseconds, 461 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 4 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "55 seconds, 105 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "9 seconds, 136 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "14.2%"
+[36m[1m│ [22m[39m  estimated_sypd = "18.411"
+[36m[1m│ [22m[39m  instantaneous_sypd = "16.1"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:12.401
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:08.401
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "23 hours, 4 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 2769
+[36m[1m│ [22m[39m  wall_time_per_step = "4 milliseconds, 689 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 7 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "54 seconds, 546 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "12 seconds, 986 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "19.2%"
+[36m[1m│ [22m[39m  estimated_sypd = "17.514"
+[36m[1m│ [22m[39m  instantaneous_sypd = "15.384"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:16.250
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:11.250
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "1 day, 5 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 3490
+[36m[1m│ [22m[39m  wall_time_per_step = "4 milliseconds, 916 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 10 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "53 seconds, 644 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "17 seconds, 160 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "24.2%"
+[36m[1m│ [22m[39m  estimated_sypd = "16.705"
+[36m[1m│ [22m[39m  instantaneous_sypd = "14.187"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:20.424
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:14.424
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "1 day, 10 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 4096
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 52 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 12 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "52 seconds, 62 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "20 seconds, 695 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "28.4%"
+[36m[1m│ [22m[39m  estimated_sypd = "16.256"
+[36m[1m│ [22m[39m  instantaneous_sypd = "14.078"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:23.960
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:16.960
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "1 day, 16 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 4817
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 239 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 15 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "50 seconds, 205 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "25 seconds, 236 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "33.5%"
+[36m[1m│ [22m[39m  estimated_sypd = "15.678"
+[36m[1m│ [22m[39m  instantaneous_sypd = "13.042"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:28.501
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:19.501
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "1 day, 22 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 5538
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 438 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 18 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "48 seconds, 199 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "30 seconds, 120 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "38.5%"
+[36m[1m│ [22m[39m  estimated_sypd = "15.101"
+[36m[1m│ [22m[39m  instantaneous_sypd = "12.125"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:33.385
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:22.385
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "2 days, 4 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 6259
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 637 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 21 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "45 seconds, 891 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "35 seconds, 282 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "43.5%"
+[36m[1m│ [22m[39m  estimated_sypd = "14.571"
+[36m[1m│ [22m[39m  instantaneous_sypd = "11.473"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:38.546
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:24.546
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "2 days, 10 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 6980
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 806 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 23 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "43 seconds, 86 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "40 seconds, 531 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "48.5%"
+[36m[1m│ [22m[39m  estimated_sypd = "14.145"
+[36m[1m│ [22m[39m  instantaneous_sypd = "11.282"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:43.796
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:27.796
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "2 days, 16 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 7701
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 934 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 25 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "39 seconds, 752 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "45 seconds, 698 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "53.5%"
+[36m[1m│ [22m[39m  estimated_sypd = "13.841"
+[36m[1m│ [22m[39m  instantaneous_sypd = "11.461"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:48.963
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:28.963
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "2 days, 20 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 8192
+[36m[1m│ [22m[39m  wall_time_per_step = "6 milliseconds, 18 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 26 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "37 seconds, 364 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "49 seconds, 305 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "56.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "13.647"
+[36m[1m│ [22m[39m  instantaneous_sypd = "11.181"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:52.570
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:30.570
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "3 days, 2 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 8913
+[36m[1m│ [22m[39m  wall_time_per_step = "6 milliseconds, 124 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 28 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "33 seconds, 607 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "54 seconds, 592 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "61.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "13.41"
+[36m[1m│ [22m[39m  instantaneous_sypd = "11.202"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:30:57.856
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:31.856
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "3 days, 8 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 9634
+[36m[1m│ [22m[39m  wall_time_per_step = "6 milliseconds, 94 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 27 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "29 seconds, 45 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "58 seconds, 712 milliseconds"
+[36m[1m│ [22m[39m  percent_complete = "66.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "13.477"
+[36m[1m│ [22m[39m  instantaneous_sypd = "14.371"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:31:01.977
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:31.977
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "3 days, 14 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 10355
+[36m[1m│ [22m[39m  wall_time_per_step = "6 milliseconds, 11 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 26 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "24 seconds, 316 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "1 minute, 2 seconds"
+[36m[1m│ [22m[39m  percent_complete = "71.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "13.663"
+[36m[1m│ [22m[39m  instantaneous_sypd = "16.749"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:31:05.513
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:30.513
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "3 days, 20 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 11076
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 940 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 25 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "19 seconds, 747 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "1 minute, 5 seconds"
+[36m[1m│ [22m[39m  percent_complete = "76.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "13.825"
+[36m[1m│ [22m[39m  instantaneous_sypd = "16.67"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:31:09.065
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:29.065
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "4 days, 2 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 11797
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 883 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 24 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "15 seconds, 315 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "1 minute, 9 seconds"
+[36m[1m│ [22m[39m  percent_complete = "81.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "13.96"
+[36m[1m│ [22m[39m  instantaneous_sypd = "16.411"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:31:12.674
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:28.674
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "4 days, 8 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 12518
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 845 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 24 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "11 seconds, 2 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "1 minute, 13 seconds"
+[36m[1m│ [22m[39m  percent_complete = "86.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "14.05"
+[36m[1m│ [22m[39m  instantaneous_sypd = "15.708"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:31:16.444
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:28.444
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "4 days, 14 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 13239
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 804 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 23 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "6 seconds, 739 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "1 minute, 16 seconds"
+[36m[1m│ [22m[39m  percent_complete = "91.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "14.149"
+[36m[1m│ [22m[39m  instantaneous_sypd = "16.127"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:31:20.116
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:27.116
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "4 days, 20 hours"
+[36m[1m│ [22m[39m  n_steps_completed = 13960
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 773 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "1 minute, 23 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "2 seconds, 540 milliseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "1 minute, 20 seconds"
+[36m[1m│ [22m[39m  percent_complete = "96.9%"
+[36m[1m│ [22m[39m  estimated_sypd = "14.226"
+[36m[1m│ [22m[39m  instantaneous_sypd = "15.789"
+[36m[1m│ [22m[39m  date_now = 2026-07-05T19:31:23.867
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-05T19:31:26.867
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39msolve! walltime = 82.921
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39msypd: 14.273
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mwall_time_per_timestep: 5 milliseconds, 758 microseconds
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mMemory currently used (after solve!) by the process (RSS): 9.44 GiB
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mVerification pair complete
+[36m[1m└ [22m[39m  output = "/home/jeff/larcform1-experiments/experiments/clw calibration/output/verify5d"
+julia -t 1 --project=. scripts/run_verification_pair.jl  636.92s user 14.01s system 99% cpu 10:51.82 total

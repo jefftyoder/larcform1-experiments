@@ -1,0 +1,15 @@
+[cloud_liquid_water_specific_humidity_autoconversion_threshold]
+value = 0.0006396125114261264
+type = "float"
+
+[snow_autoconversion_timescale]
+value = 96.02216307113477
+type = "float"
+
+[condensation_evaporation_timescale]
+value = 73.19857591233269
+type = "float"
+
+[sublimation_deposition_timescale]
+value = 70.65091519409037
+type = "float"

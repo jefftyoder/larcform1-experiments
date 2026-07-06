@@ -1,0 +1,421 @@
+┌ Info: Simulation info
+│   job_id = lf1e_clw_cal_member
+└   output_dir = /home/jeff/larcform1-experiments/experiments/clw calibration/output/uki_1/iteration_001/member_005/output_0000
+┌ Info: Running
+│   job_id = lf1e_clw_cal_member
+│   output_dir = /home/jeff/larcform1-experiments/experiments/clw calibration/output/uki_1/iteration_001/member_005/output_0000
+└   tspan = (0.0 seconds (2010-01-01T00:00:00) [counter = 0, period = 1 second, epoch = 2010-01-01T00:00:00], 172800.0 seconds (2010-01-03T00:00:00) [counter = 172800, period = 1 second, epoch = 2010-01-01T00:00:00])
+┌ Info: Progress
+│   simulation_time = 30 seconds
+│   n_steps_completed = 1
+│   wall_time_per_step = 0 seconds
+│   wall_time_total = 0 seconds
+│   wall_time_remaining = 0 seconds
+│   wall_time_spent = 0 seconds
+│   percent_complete = 0.0%
+│   estimated_sypd = Inf
+│   instantaneous_sypd = 0.0 (sdpd_estimate = 0.0)
+│   date_now = 2026-07-05T16:16:29.867
+└   estimated_finish_date = 2026-07-05T16:16:29.867
+┌ Info: Progress
+│   simulation_time = 1 minute
+│   n_steps_completed = 2
+│   wall_time_per_step = 0 seconds
+│   wall_time_total = 0 seconds
+│   wall_time_remaining = 0 seconds
+│   wall_time_spent = 0 seconds
+│   percent_complete = 0.0%
+│   estimated_sypd = Inf
+│   instantaneous_sypd = 0.031
+│   date_now = 2026-07-05T16:16:32.553
+└   estimated_finish_date = 2026-07-05T16:16:32.553
+┌ Info: Progress
+│   simulation_time = 2 minutes
+│   n_steps_completed = 4
+│   wall_time_per_step = 4 milliseconds, 647 microseconds
+│   wall_time_total = 26 seconds, 769 milliseconds
+│   wall_time_remaining = 26 seconds, 750 milliseconds
+│   wall_time_spent = 18 milliseconds, 589 microseconds
+│   percent_complete = 0.1%
+│   estimated_sypd = 17.673
+│   instantaneous_sypd = 17.673
+│   date_now = 2026-07-05T16:16:32.562
+└   estimated_finish_date = 2026-07-05T16:16:59.562
+┌ Info: Progress
+│   simulation_time = 4 minutes
+│   n_steps_completed = 8
+│   wall_time_per_step = 4 milliseconds, 414 microseconds
+│   wall_time_total = 25 seconds, 426 milliseconds
+│   wall_time_remaining = 25 seconds, 390 milliseconds
+│   wall_time_spent = 35 milliseconds, 314 microseconds
+│   percent_complete = 0.1%
+│   estimated_sypd = 18.607
+│   instantaneous_sypd = 19.645
+│   date_now = 2026-07-05T16:16:32.579
+└   estimated_finish_date = 2026-07-05T16:16:58.579
+┌ Info: Progress
+│   simulation_time = 8 minutes
+│   n_steps_completed = 16
+│   wall_time_per_step = 4 milliseconds, 152 microseconds
+│   wall_time_total = 23 seconds, 919 milliseconds
+│   wall_time_remaining = 23 seconds, 852 milliseconds
+│   wall_time_spent = 66 milliseconds, 442 microseconds
+│   percent_complete = 0.3%
+│   estimated_sypd = 19.779
+│   instantaneous_sypd = 21.109
+│   date_now = 2026-07-05T16:16:32.610
+└   estimated_finish_date = 2026-07-05T16:16:56.610
+┌ Info: Progress
+│   simulation_time = 16 minutes
+│   n_steps_completed = 32
+│   wall_time_per_step = 3 milliseconds, 977 microseconds
+│   wall_time_total = 22 seconds, 908 milliseconds
+│   wall_time_remaining = 22 seconds, 780 milliseconds
+│   wall_time_spent = 127 milliseconds, 267 microseconds
+│   percent_complete = 0.6%
+│   estimated_sypd = 20.652
+│   instantaneous_sypd = 21.606
+│   date_now = 2026-07-05T16:16:32.671
+└   estimated_finish_date = 2026-07-05T16:16:55.671
+┌ Info: Progress
+│   simulation_time = 32 minutes
+│   n_steps_completed = 64
+│   wall_time_per_step = 4 milliseconds, 339 microseconds
+│   wall_time_total = 24 seconds, 996 milliseconds
+│   wall_time_remaining = 24 seconds, 718 milliseconds
+│   wall_time_spent = 277 milliseconds, 734 microseconds
+│   percent_complete = 1.1%
+│   estimated_sypd = 18.927
+│   instantaneous_sypd = 17.468
+│   date_now = 2026-07-05T16:16:32.821
+└   estimated_finish_date = 2026-07-05T16:16:57.821
+┌ Info: Progress
+│   simulation_time = 1 hour, 4 minutes
+│   n_steps_completed = 128
+│   wall_time_per_step = 4 milliseconds, 309 microseconds
+│   wall_time_total = 24 seconds, 821 milliseconds
+│   wall_time_remaining = 24 seconds, 269 milliseconds
+│   wall_time_spent = 551 milliseconds, 579 microseconds
+│   percent_complete = 2.2%
+│   estimated_sypd = 19.06
+│   instantaneous_sypd = 19.196
+│   date_now = 2026-07-05T16:16:33.095
+└   estimated_finish_date = 2026-07-05T16:16:58.095
+┌ Info: Progress
+│   simulation_time = 2 hours, 8 minutes
+│   n_steps_completed = 256
+│   wall_time_per_step = 4 milliseconds, 272 microseconds
+│   wall_time_total = 24 seconds, 611 milliseconds
+│   wall_time_remaining = 23 seconds, 517 milliseconds
+│   wall_time_spent = 1 second, 93 milliseconds
+│   percent_complete = 4.4%
+│   estimated_sypd = 19.223
+│   instantaneous_sypd = 19.388
+│   date_now = 2026-07-05T16:16:33.637
+└   estimated_finish_date = 2026-07-05T16:16:57.637
+┌ Info: Progress
+│   simulation_time = 4 hours, 16 minutes
+│   n_steps_completed = 512
+│   wall_time_per_step = 4 milliseconds, 213 microseconds
+│   wall_time_total = 24 seconds, 271 milliseconds
+│   wall_time_remaining = 22 seconds, 114 milliseconds
+│   wall_time_spent = 2 seconds, 157 milliseconds
+│   percent_complete = 8.9%
+│   estimated_sypd = 19.492
+│   instantaneous_sypd = 19.768
+│   date_now = 2026-07-05T16:16:34.701
+└   estimated_finish_date = 2026-07-05T16:16:57.701
+┌ Info: Progress
+│   simulation_time = 6 hours, 40 minutes
+│   n_steps_completed = 801
+│   wall_time_per_step = 4 milliseconds, 254 microseconds
+│   wall_time_total = 24 seconds, 506 milliseconds
+│   wall_time_remaining = 21 seconds, 98 milliseconds
+│   wall_time_spent = 3 seconds, 407 milliseconds
+│   percent_complete = 13.9%
+│   estimated_sypd = 19.305
+│   instantaneous_sypd = 18.983
+│   date_now = 2026-07-05T16:16:35.951
+└   estimated_finish_date = 2026-07-05T16:16:57.951
+┌ Info: Progress
+│   simulation_time = 8 hours, 32 minutes
+│   n_steps_completed = 1024
+│   wall_time_per_step = 4 milliseconds, 287 microseconds
+│   wall_time_total = 24 seconds, 698 milliseconds
+│   wall_time_remaining = 20 seconds, 307 milliseconds
+│   wall_time_spent = 4 seconds, 390 milliseconds
+│   percent_complete = 17.8%
+│   estimated_sypd = 19.155
+│   instantaneous_sypd = 18.635
+│   date_now = 2026-07-05T16:16:36.934
+└   estimated_finish_date = 2026-07-05T16:16:57.934
+┌ Info: Progress
+│   simulation_time = 10 hours, 56 minutes
+│   n_steps_completed = 1313
+│   wall_time_per_step = 4 milliseconds, 338 microseconds
+│   wall_time_total = 24 seconds, 991 milliseconds
+│   wall_time_remaining = 19 seconds, 294 milliseconds
+│   wall_time_spent = 5 seconds, 696 milliseconds
+│   percent_complete = 22.8%
+│   estimated_sypd = 18.93
+│   instantaneous_sypd = 18.174
+│   date_now = 2026-07-05T16:16:38.240
+└   estimated_finish_date = 2026-07-05T16:16:58.240
+┌ Info: Progress
+│   simulation_time = 13 hours, 21 minutes
+│   n_steps_completed = 1602
+│   wall_time_per_step = 4 milliseconds, 417 microseconds
+│   wall_time_total = 25 seconds, 445 milliseconds
+│   wall_time_remaining = 18 seconds, 368 milliseconds
+│   wall_time_spent = 7 seconds, 77 milliseconds
+│   percent_complete = 27.8%
+│   estimated_sypd = 18.593
+│   instantaneous_sypd = 17.199
+│   date_now = 2026-07-05T16:16:39.621
+└   estimated_finish_date = 2026-07-05T16:16:58.621
+┌ Info: Progress
+│   simulation_time = 15 hours, 45 minutes
+│   n_steps_completed = 1891
+│   wall_time_per_step = 4 milliseconds, 490 microseconds
+│   wall_time_total = 25 seconds, 867 milliseconds
+│   wall_time_remaining = 17 seconds, 375 milliseconds
+│   wall_time_spent = 8 seconds, 492 milliseconds
+│   percent_complete = 32.8%
+│   estimated_sypd = 18.289
+│   instantaneous_sypd = 16.774
+│   date_now = 2026-07-05T16:16:41.036
+└   estimated_finish_date = 2026-07-05T16:16:59.036
+┌ Info: Progress
+│   simulation_time = 17 hours, 4 minutes
+│   n_steps_completed = 2048
+│   wall_time_per_step = 4 milliseconds, 536 microseconds
+│   wall_time_total = 26 seconds, 128 milliseconds
+│   wall_time_remaining = 16 seconds, 838 milliseconds
+│   wall_time_spent = 9 seconds, 290 milliseconds
+│   percent_complete = 35.6%
+│   estimated_sypd = 18.106
+│   instantaneous_sypd = 16.158
+│   date_now = 2026-07-05T16:16:41.834
+└   estimated_finish_date = 2026-07-05T16:16:58.834
+┌ Info: Progress
+│   simulation_time = 19 hours, 28 minutes
+│   n_steps_completed = 2337
+│   wall_time_per_step = 4 milliseconds, 613 microseconds
+│   wall_time_total = 26 seconds, 575 milliseconds
+│   wall_time_remaining = 15 seconds, 792 milliseconds
+│   wall_time_spent = 10 seconds, 782 milliseconds
+│   percent_complete = 40.6%
+│   estimated_sypd = 17.802
+│   instantaneous_sypd = 15.909
+│   date_now = 2026-07-05T16:16:43.326
+└   estimated_finish_date = 2026-07-05T16:16:59.326
+┌ Info: Progress
+│   simulation_time = 21 hours, 53 minutes
+│   n_steps_completed = 2626
+│   wall_time_per_step = 4 milliseconds, 693 microseconds
+│   wall_time_total = 27 seconds, 32 milliseconds
+│   wall_time_remaining = 14 seconds, 708 milliseconds
+│   wall_time_spent = 12 seconds, 323 milliseconds
+│   percent_complete = 45.6%
+│   estimated_sypd = 17.501
+│   instantaneous_sypd = 15.397
+│   date_now = 2026-07-05T16:16:44.867
+└   estimated_finish_date = 2026-07-05T16:16:59.867
+┌ Info: Progress
+│   simulation_time = 1 day, 17 minutes
+│   n_steps_completed = 2915
+│   wall_time_per_step = 4 milliseconds, 822 microseconds
+│   wall_time_total = 27 seconds, 780 milliseconds
+│   wall_time_remaining = 13 seconds, 721 milliseconds
+│   wall_time_spent = 14 seconds, 58 milliseconds
+│   percent_complete = 50.6%
+│   estimated_sypd = 17.03
+│   instantaneous_sypd = 13.682
+│   date_now = 2026-07-05T16:16:46.602
+└   estimated_finish_date = 2026-07-05T16:17:00.602
+┌ Info: Progress
+│   simulation_time = 1 day, 2 hours
+│   n_steps_completed = 3204
+│   wall_time_per_step = 4 milliseconds, 888 microseconds
+│   wall_time_total = 28 seconds, 160 milliseconds
+│   wall_time_remaining = 12 seconds, 496 milliseconds
+│   wall_time_spent = 15 seconds, 664 milliseconds
+│   percent_complete = 55.6%
+│   estimated_sypd = 16.8
+│   instantaneous_sypd = 14.788
+│   date_now = 2026-07-05T16:16:48.208
+└   estimated_finish_date = 2026-07-05T16:17:01.207
+┌ Info: Progress
+│   simulation_time = 1 day, 5 hours
+│   n_steps_completed = 3493
+│   wall_time_per_step = 4 milliseconds, 957 microseconds
+│   wall_time_total = 28 seconds, 554 milliseconds
+│   wall_time_remaining = 11 seconds, 238 milliseconds
+│   wall_time_spent = 17 seconds, 315 milliseconds
+│   percent_complete = 60.6%
+│   estimated_sypd = 16.568
+│   instantaneous_sypd = 14.369
+│   date_now = 2026-07-05T16:16:49.859
+└   estimated_finish_date = 2026-07-05T16:17:01.859
+┌ Info: Progress
+│   simulation_time = 1 day, 7 hours
+│   n_steps_completed = 3782
+│   wall_time_per_step = 5 milliseconds, 26 microseconds
+│   wall_time_total = 28 seconds, 954 milliseconds
+│   wall_time_remaining = 9 seconds, 943 milliseconds
+│   wall_time_spent = 19 seconds, 11 milliseconds
+│   percent_complete = 65.7%
+│   estimated_sypd = 16.339
+│   instantaneous_sypd = 14.0
+│   date_now = 2026-07-05T16:16:51.555
+└   estimated_finish_date = 2026-07-05T16:17:01.555
+┌ Info: Progress
+│   simulation_time = 1 day, 9 hours
+│   n_steps_completed = 4071
+│   wall_time_per_step = 5 milliseconds, 112 microseconds
+│   wall_time_total = 29 seconds, 446 milliseconds
+│   wall_time_remaining = 8 seconds, 634 milliseconds
+│   wall_time_spent = 20 seconds, 812 milliseconds
+│   percent_complete = 70.7%
+│   estimated_sypd = 16.066
+│   instantaneous_sypd = 13.183
+│   date_now = 2026-07-05T16:16:53.356
+└   estimated_finish_date = 2026-07-05T16:17:02.356
+┌ Info: Progress
+│   simulation_time = 1 day, 10 hours
+│   n_steps_completed = 4096
+│   wall_time_per_step = 5 milliseconds, 121 microseconds
+│   wall_time_total = 29 seconds, 500 milliseconds
+│   wall_time_remaining = 8 seconds, 522 milliseconds
+│   wall_time_spent = 20 seconds, 977 milliseconds
+│   percent_complete = 71.1%
+│   estimated_sypd = 16.037
+│   instantaneous_sypd = 12.398
+│   date_now = 2026-07-05T16:16:53.521
+└   estimated_finish_date = 2026-07-05T16:17:02.521
+┌ Info: Progress
+│   simulation_time = 1 day, 12 hours
+│   n_steps_completed = 4385
+│   wall_time_per_step = 5 milliseconds, 200 microseconds
+│   wall_time_total = 29 seconds, 953 milliseconds
+│   wall_time_remaining = 7 seconds, 150 milliseconds
+│   wall_time_spent = 22 seconds, 803 milliseconds
+│   percent_complete = 76.1%
+│   estimated_sypd = 15.794
+│   instantaneous_sypd = 13.003
+│   date_now = 2026-07-05T16:16:55.347
+└   estimated_finish_date = 2026-07-05T16:17:03.347
+┌ Info: Progress
+│   simulation_time = 1 day, 14 hours
+│   n_steps_completed = 4674
+│   wall_time_per_step = 5 milliseconds, 278 microseconds
+│   wall_time_total = 30 seconds, 405 milliseconds
+│   wall_time_remaining = 5 seconds, 732 milliseconds
+│   wall_time_spent = 24 seconds, 672 milliseconds
+│   percent_complete = 81.1%
+│   estimated_sypd = 15.56
+│   instantaneous_sypd = 12.699
+│   date_now = 2026-07-05T16:16:57.216
+└   estimated_finish_date = 2026-07-05T16:17:03.216
+┌ Info: Progress
+│   simulation_time = 1 day, 17 hours
+│   n_steps_completed = 4963
+│   wall_time_per_step = 5 milliseconds, 354 microseconds
+│   wall_time_total = 30 seconds, 840 milliseconds
+│   wall_time_remaining = 4 seconds, 267 milliseconds
+│   wall_time_spent = 26 seconds, 573 milliseconds
+│   percent_complete = 86.2%
+│   estimated_sypd = 15.34
+│   instantaneous_sypd = 12.487
+│   date_now = 2026-07-05T16:16:59.117
+└   estimated_finish_date = 2026-07-05T16:17:04.117
+┌ Info: Progress
+│   simulation_time = 1 day, 19 hours
+│   n_steps_completed = 5252
+│   wall_time_per_step = 5 milliseconds, 439 microseconds
+│   wall_time_total = 31 seconds, 333 milliseconds
+│   wall_time_remaining = 2 seconds, 763 milliseconds
+│   wall_time_spent = 28 seconds, 569 milliseconds
+│   percent_complete = 91.2%
+│   estimated_sypd = 15.099
+│   instantaneous_sypd = 11.891
+│   date_now = 2026-07-05T16:17:01.113
+└   estimated_finish_date = 2026-07-05T16:17:04.113
+┌ Info: Progress
+│   simulation_time = 1 day, 22 hours
+│   n_steps_completed = 5541
+│   wall_time_per_step = 5 milliseconds, 518 microseconds
+│   wall_time_total = 31 seconds, 786 milliseconds
+│   wall_time_remaining = 1 second, 208 milliseconds
+│   wall_time_spent = 30 seconds, 577 milliseconds
+│   percent_complete = 96.2%
+│   estimated_sypd = 14.884
+│   instantaneous_sypd = 11.822
+│   date_now = 2026-07-05T16:17:03.121
+└   estimated_finish_date = 2026-07-05T16:17:05.121
+[ Info: solve! walltime = 32.113
+[ Info: sypd: 14.742
+[ Info: wall_time_per_timestep: 5 milliseconds, 575 microseconds
+[ Info: Memory currently used (after solve!) by the process (RSS): 8.68 GiB
+[ Info: Completed member 5
+┌ Info: Making AtmosConfig with config files: 
+│      /home/jeff/larcform1-experiments/ClimaAtmos.jl/src/config/../../config/default_configs/default_config.yml
+└   
+┌ Info: numerics 
+│          `energy_q_tot_upwinding`::`Val{:vanleer_limiter}`
+│                `tracer_upwinding`::`Val{:vanleer_limiter}`
+│       `edmfx_mse_q_tot_upwinding`::`Val{:first_order}`
+│         `edmfx_sgsflux_upwinding`::`Val{:none}`
+│          `edmfx_tracer_upwinding`::`Val{:first_order}`
+│         `test_dycore_consistency`::`Nothing`
+│            `reproducible_restart`::`Nothing`
+│                         `limiter`::`Nothing`
+│                       `diff_mode`::`ClimaAtmos.Implicit`
+│                       `hyperdiff`::`Nothing`
+└   
+┌ Info: AtmosModel: 
+│   
+│                               `water`::`ClimaAtmos.AtmosWater{ClimaAtmos.NonEquilibriumMicrophysics1M, ClimaAtmos.QuadratureCloud, ClimaAtmos.Implicit, Nothing, ClimaAtmos.SGSQuadrature{3, StaticArraysCore.SVector{3, Float32}, StaticArraysCore.SVector{3, Float32}, ClimaAtmos.GaussianSGS, Float32}, ClimaAtmos.FixedTerminalVelocity{Float32}}`
+│                           `scm_setup`::`ClimaAtmos.SCMSetup{Nothing, Nothing, Nothing, Bool, @NamedTuple{prof_ug::AtmosphericProfilesLibrary.ZProfile{AtmosphericProfilesLibrary.var"#Larcform1_geostrophic_u##0#Larcform1_geostrophic_u##1"{Float32}}, prof_vg::AtmosphericProfilesLibrary.ZProfile{Returns{Float32}}, coriolis_param::Float32}}`
+│                           `radiation`::`ClimaAtmos.AtmosRadiation{ClimaAtmos.RRTMGPInterface.AllSkyRadiationWithClearSkyDiagnostics{ClimaAtmos.InteractiveCloudInRadiation}, ClimaAtmos.Larcform1Insolation}`
+│                            `turbconv`::`ClimaAtmos.AtmosTurbconv{ClimaAtmos.EDMFXModel{ClimaAtmos.InvZEntrainment, ClimaAtmos.BuoyancyVelocityDetrainment, Val{true}, Val{true}, Val{true}, Val{true}, Val{true}, ClimaAtmos.SmoothMinimumBlending}, ClimaAtmos.PrognosticEDMFX{1, true, Float32}, Nothing, Nothing, Nothing}`
+│                     `prescribed_flow`::`Nothing`
+│                        `gravity_wave`::`ClimaAtmos.AtmosGravityWave{Nothing, Nothing}`
+│                  `vertical_diffusion`::`Nothing`
+│                              `sponge`::`ClimaAtmos.AtmosSponge{Nothing, Nothing}`
+│                             `surface`::`ClimaAtmos.AtmosSurface{ClimaAtmos.SurfaceConditions.MoninObukhov{Float32, Nothing, Nothing}, ClimaAtmos.SurfaceConditions.SlabOceanTemperature{Float32}, ClimaAtmos.SurfaceConditions.SurfaceBoundaryOverrides{Float32, Float32, Nothing, Nothing, Nothing, Nothing}, ClimaAtmos.ConstantAlbedo{Float32}}`
+│                            `numerics`::`ClimaAtmos.AtmosNumerics{Val{:vanleer_limiter}, Val{:vanleer_limiter}, Val{:first_order}, Val{:none}, Val{:first_order}, Nothing, Nothing, Nothing, ClimaAtmos.Implicit, Nothing}`
+│                           `chemistry`::`ClimaAtmos.AtmosChem{Nothing}`
+└   
+┌ Info: Microphysics settings: 
+│                          `n_substeps`::`3`
+│                     `n_substeps_quad`::`2`
+│              `cloud_liquid_formation`::`CloudLiquidFormation`
+│                 `cloud_ice_formation`::`TemperatureDependent`
+│                      `cloud_ice_melt`::`CloudIceMelt`
+│                 `rain_autoconversion`::`Kessler1M`
+│                 `snow_autoconversion`::`NoSupersaturation`
+│       `rain_condensation_evaporation`::`RainEvaporation`
+│         `snow_deposition_sublimation`::`DepositionAndSublimation`
+│                           `snow_melt`::`SnowMelt`
+│         `cloud_liquid_rain_accretion`::`CloudLiquidRainAccretion`
+│         `cloud_liquid_snow_accretion`::`CloudLiquidSnowAccretion`
+│            `cloud_ice_rain_accretion`::`CloudIceRainAccretion`
+│            `cloud_ice_snow_accretion`::`CloudIceSnowAccretion`
+│                 `rain_snow_accretion`::`RainSnowAccretion`
+└   
+[ Info: Single-process ClimaAtmos run on CPUSingleThreaded
+[ Info: Using ODE config: `ClimaTimeSteppers.ARS222`
+[ Info: Initialized state (15.05 μs, 7.76 KiB)
+[ Info: Built cache (245.61 ms, 172.6 MiB)
+[ Info: Assembled callbacks (131.973 μs, 17.42 KiB)
+┌ Info: Jacobian algorithm: ManualSparseJacobian(
+│     approximate_solve_iters = 2,
+└   )
+[ Info: Jacobian derivative flags: topography_flag = IgnoreDerivative, diffusion_flag = UseDerivative
+[ Info: Built tendency function (212.135 μs, 201.06 KiB)
+[ Info: Initialized integrator (8.837 ms, 169.03 KiB)
+[ Info: Added 7 user-provided YAML-style diagnostics
+[ Info: Saving accumulated diagnostics to disk with frequency: 1 hour
+[ Info: Set up diagnostics (515.334 μs, 103.66 KiB)
+[ Info: Initialized 7 total diagnostics

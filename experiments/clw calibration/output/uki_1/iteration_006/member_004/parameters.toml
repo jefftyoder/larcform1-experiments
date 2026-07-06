@@ -1,0 +1,23 @@
+[cloud_liquid_water_specific_humidity_autoconversion_threshold]
+value = 0.0014770535100043672
+type = "float"
+
+[Frostenberg2023_b_coefficient]
+value = 1.308466388215913
+type = "float"
+
+[snow_autoconversion_timescale]
+value = 464.1715663400557
+type = "float"
+
+[Frostenberg2023_a_coefficient]
+value = 0.20142677811143136
+type = "float"
+
+[condensation_evaporation_timescale]
+value = 100.68278204034749
+type = "float"
+
+[sublimation_deposition_timescale]
+value = 69.62166911566779
+type = "float"

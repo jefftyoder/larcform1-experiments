@@ -1,0 +1,14 @@
+# clw sensitivity test #1 — variation 12: sublimation_deposition_timescale = 1e9
+# See v5_subltime10.yml for why this uses a single full-copy toml instead of [base, override].
+#
+# Bridge test between the τ_subl sweep (v5-v8) and the mechanism fix (v10/v11): 1e9 s is
+# the initial INP-limited deposition timescale v10's TemperatureDependent scheme computes
+# at this cloud's temperature (~263 K, N_INP ≈ 0.9, r floored at 1 µm). If base
+# ConstantTimescale with τ matched to that value reproduces v10-like liquid, the *initial*
+# timescale is what matters; if ice/snow then evolve differently than v10, it isolates the
+# r-growth feedback (τ_dep shrinking as q_icl grows) that ConstantTimescale lacks.
+# Caveat: ConstantTimescale uses this τ for BOTH deposition and sublimation, so ice
+# sublimation is also effectively frozen (v10 keeps sublimation at 100 s).
+job_id: lf1e_clw1_v12_subltime1e9
+output_dir: "experiments/clw sensitivity experiments/output/lf1e-clw-1/v12_subltime1e9"
+toml: ["experiments/clw sensitivity experiments/toml/v12_subltime1e9_full.toml"]

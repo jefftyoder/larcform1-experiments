@@ -1,0 +1,13 @@
+# clw sensitivity test #1 — variation 10: temperature-dependent cloud ice formation
+#
+# Replaces the default `ConstantTimescale` vapor→cloud-ice deposition (which deposits
+# any ice supersaturation with τ = sublimation_deposition_timescale, unlimited by ice
+# number or INP availability) with `TemperatureDependent`: deposition timescale
+# τ_dep = 1/(4π·D_v·N_INP(T)·r) using the Frostenberg et al. 2023 INP climatology
+# (CloudMicrophysics.jl MicrophysicsNonEq.jl τ_relax). Hypothesis: INP-limited
+# deposition leaves vapor liquid-supersaturated, allowing supercooled clw to persist
+# instead of being WBF-scavenged to exactly zero as in v1/v5-v7/v9.
+# Sublimation still uses sublimation_deposition_timescale (100 s from base toml).
+job_id: lf1e_clw1_v10_tdepice
+output_dir: "experiments/clw sensitivity experiments/output/lf1e-clw-1/v10_tdepice"
+cloud_ice_formation: "TemperatureDependent"

@@ -1,0 +1,13 @@
+# clw sensitivity test #1 — variation 11: cloud ice formation disabled
+#
+# Nulls vapor→cloud-ice deposition entirely (conv_q_vap_to_q_icl(::Nothing) = 0,
+# MicrophysicsNonEq.jl:157) as a falsification test: if cloud-ice deposition is the
+# process killing clw, liquid should now persist for the full run — an upper bound on
+# liquid. If clw still dies, the snow-deposition vapor sink
+# (snow_deposition_sublimation) matters more than expected. Note v4_cloudonly's
+# comment lists cloud_ice_formation as "not nullable"; that grouping was about v4
+# keeping both cloud formation processes by design — the ::Nothing no-op method
+# exists, and the smoke test for this variation confirms it runs.
+job_id: lf1e_clw1_v11_noicedep
+output_dir: "experiments/clw sensitivity experiments/output/lf1e-clw-1/v11_noicedep"
+cloud_ice_formation: ~

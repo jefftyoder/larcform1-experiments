@@ -80,10 +80,16 @@ def load_var(nc_dir: Path, short_name: str) -> xr.DataArray | None:
     return da
 
 
+def _squeeze_xy(da: xr.DataArray) -> xr.DataArray:
+    """Drop singleton horizontal dims if present (column output may omit them)."""
+    dims = [d for d in ("x", "y") if d in da.dims]
+    return da.squeeze(dims) if dims else da
+
+
 def to_profile(da: xr.DataArray) -> xr.DataArray:
     """Squeeze (z, y=1, x=1, time) → (time, lev) and rename z → lev."""
     return (
-        da.squeeze(["x", "y"])  # drop singleton horizontal dims
+        _squeeze_xy(da)
         .transpose("time", "z")  # → (time, z)
         .rename({"z": "lev"})
     )
@@ -91,7 +97,7 @@ def to_profile(da: xr.DataArray) -> xr.DataArray:
 
 def to_surface(da: xr.DataArray) -> xr.DataArray:
     """Squeeze (y=1, x=1, time) → (time,)."""
-    return da.squeeze(["x", "y"])
+    return _squeeze_xy(da)
 
 
 def time_in_seconds(da: xr.DataArray) -> np.ndarray:
@@ -148,6 +154,10 @@ def convert(nc_dir: Path, model_name: str, out_path: Path) -> None:
     #   hfls, hfss: CliMA upward-positive → Pithan upward-positive, but
     #               CliMA stores downward as negative, so negate to match
     #   prsn, pr:   CliMA downward-negative → Pithan positive (negate)
+    # Keys may be a tuple of source-name candidates; the first one present wins.
+    #   clivi: 0M runs output the column ice integral as `iwp` (no `clivi`).
+    #          Caveat: 1M clivi includes snow (∫ρ(q_icl+q_sno)) while 0M iwp
+    #          is cloud ice only — recorded in the output attrs.
     surface_map = {
         "ts": ("ts", 1),
         "rlds": ("rlds", 1),
@@ -155,16 +165,28 @@ def convert(nc_dir: Path, model_name: str, out_path: Path) -> None:
         "rlut": ("rlut", -1),
         "hfls": ("hl", -1),
         "hfss": ("hs", -1),
-        "clivi": ("clivi", 1),
+        ("clivi", "iwp"): ("clivi", 1),
         "lwp": ("clwvi", 1),
         "prsn": ("precs", -1),
     }
-    for clima_name, (pithan_name, sign) in surface_map.items():
-        da = load_var(nc_dir, clima_name)
+    for clima_names, (pithan_name, sign) in surface_map.items():
+        candidates = (clima_names,) if isinstance(clima_names, str) else clima_names
+        da = clima_name = None
+        for name in candidates:
+            da = load_var(nc_dir, name)
+            if da is not None:
+                clima_name = name
+                break
         if da is None:
-            print(f"  SKIP  {clima_name} (not found)")
+            print(f"  SKIP  {'/'.join(candidates)} (not found)")
             continue
         arr = (to_surface(da) * sign).assign_attrs(da.attrs)
+        if pithan_name == "clivi":
+            arr.attrs["comments"] = (
+                f"From ClimaAtmos '{clima_name}'. "
+                "1M clivi includes snow (integral of rho*(q_icl+q_sno)); "
+                "0M iwp is cloud ice only."
+            )
         vars_1d[pithan_name] = arr
         sign_str = "" if sign == 1 else " (sign-flipped)"
         print(f"  1D    {clima_name} → {pithan_name}{sign_str}  shape={arr.shape}")

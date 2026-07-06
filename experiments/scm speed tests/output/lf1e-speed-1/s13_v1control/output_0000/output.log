@@ -1,0 +1,364 @@
+┌ Info: Simulation info
+│   job_id = lf1e_speed1_s13_v1control
+└   output_dir = experiments/scm speed tests/output/lf1e-speed-1/s13_v1control/output_0000
+┌ Info: Running
+│   job_id = lf1e_speed1_s13_v1control
+│   output_dir = experiments/scm speed tests/output/lf1e-speed-1/s13_v1control/output_0000
+└   tspan = (0.0 seconds (2010-01-01T00:00:00) [counter = 0, period = 1 second, epoch = 2010-01-01T00:00:00], 172800.0 seconds (2010-01-03T00:00:00) [counter = 172800, period = 1 second, epoch = 2010-01-01T00:00:00])
+┌ Info: Progress
+│   simulation_time = 30 seconds
+│   n_steps_completed = 1
+│   wall_time_per_step = 0 seconds
+│   wall_time_total = 0 seconds
+│   wall_time_remaining = 0 seconds
+│   wall_time_spent = 0 seconds
+│   percent_complete = 0.0%
+│   estimated_sypd = Inf
+│   instantaneous_sypd = 0.0 (sdpd_estimate = 0.0)
+│   date_now = 2026-07-04T23:16:36.225
+└   estimated_finish_date = 2026-07-04T23:16:36.225
+┌ Info: Progress
+│   simulation_time = 1 minute
+│   n_steps_completed = 2
+│   wall_time_per_step = 0 seconds
+│   wall_time_total = 0 seconds
+│   wall_time_remaining = 0 seconds
+│   wall_time_spent = 0 seconds
+│   percent_complete = 0.0%
+│   estimated_sypd = Inf
+│   instantaneous_sypd = 0.016
+│   date_now = 2026-07-04T23:16:41.238
+└   estimated_finish_date = 2026-07-04T23:16:41.238
+┌ Info: Progress
+│   simulation_time = 2 minutes
+│   n_steps_completed = 4
+│   wall_time_per_step = 4 milliseconds, 749 microseconds
+│   wall_time_total = 27 seconds, 354 milliseconds
+│   wall_time_remaining = 27 seconds, 335 milliseconds
+│   wall_time_spent = 18 milliseconds, 996 microseconds
+│   percent_complete = 0.1%
+│   estimated_sypd = 17.295
+│   instantaneous_sypd = 17.295
+│   date_now = 2026-07-04T23:16:41.248
+└   estimated_finish_date = 2026-07-04T23:17:09.248
+┌ Info: Progress
+│   simulation_time = 4 minutes
+│   n_steps_completed = 8
+│   wall_time_per_step = 4 milliseconds, 361 microseconds
+│   wall_time_total = 25 seconds, 123 milliseconds
+│   wall_time_remaining = 25 seconds, 88 milliseconds
+│   wall_time_spent = 34 milliseconds, 894 microseconds
+│   percent_complete = 0.1%
+│   estimated_sypd = 18.831
+│   instantaneous_sypd = 20.666
+│   date_now = 2026-07-04T23:16:41.264
+└   estimated_finish_date = 2026-07-04T23:17:07.264
+┌ Info: Progress
+│   simulation_time = 8 minutes
+│   n_steps_completed = 16
+│   wall_time_per_step = 4 milliseconds, 66 microseconds
+│   wall_time_total = 23 seconds, 421 milliseconds
+│   wall_time_remaining = 23 seconds, 356 milliseconds
+│   wall_time_spent = 65 milliseconds, 59 microseconds
+│   percent_complete = 0.3%
+│   estimated_sypd = 20.2
+│   instantaneous_sypd = 21.783
+│   date_now = 2026-07-04T23:16:41.294
+└   estimated_finish_date = 2026-07-04T23:17:05.294
+┌ Info: Progress
+│   simulation_time = 16 minutes
+│   n_steps_completed = 32
+│   wall_time_per_step = 3 milliseconds, 870 microseconds
+│   wall_time_total = 22 seconds, 291 milliseconds
+│   wall_time_remaining = 22 seconds, 167 milliseconds
+│   wall_time_spent = 123 milliseconds, 842 microseconds
+│   percent_complete = 0.6%
+│   estimated_sypd = 21.223
+│   instantaneous_sypd = 22.356
+│   date_now = 2026-07-04T23:16:41.353
+└   estimated_finish_date = 2026-07-04T23:17:04.353
+┌ Info: Progress
+│   simulation_time = 32 minutes
+│   n_steps_completed = 64
+│   wall_time_per_step = 3 milliseconds, 913 microseconds
+│   wall_time_total = 22 seconds, 544 milliseconds
+│   wall_time_remaining = 22 seconds, 293 milliseconds
+│   wall_time_spent = 250 milliseconds, 492 microseconds
+│   percent_complete = 1.1%
+│   estimated_sypd = 20.985
+│   instantaneous_sypd = 20.753
+│   date_now = 2026-07-04T23:16:41.479
+└   estimated_finish_date = 2026-07-04T23:17:04.479
+┌ Info: Progress
+│   simulation_time = 1 hour, 4 minutes
+│   n_steps_completed = 128
+│   wall_time_per_step = 19 milliseconds, 949 microseconds
+│   wall_time_total = 1 minute, 54 seconds
+│   wall_time_remaining = 1 minute, 52 seconds
+│   wall_time_spent = 2 seconds, 553 milliseconds
+│   percent_complete = 2.2%
+│   estimated_sypd = 4.117
+│   instantaneous_sypd = 2.282
+│   date_now = 2026-07-04T23:16:43.783
+└   estimated_finish_date = 2026-07-04T23:18:36.782
+┌ Info: Progress
+│   simulation_time = 2 hours, 8 minutes
+│   n_steps_completed = 256
+│   wall_time_per_step = 11 milliseconds, 931 microseconds
+│   wall_time_total = 1 minute, 8 seconds
+│   wall_time_remaining = 1 minute, 5 seconds
+│   wall_time_spent = 3 seconds, 54 milliseconds
+│   percent_complete = 4.4%
+│   estimated_sypd = 6.884
+│   instantaneous_sypd = 20.983
+│   date_now = 2026-07-04T23:16:44.284
+└   estimated_finish_date = 2026-07-04T23:17:50.284
+┌ Info: Progress
+│   simulation_time = 4 hours, 16 minutes
+│   n_steps_completed = 512
+│   wall_time_per_step = 7 milliseconds, 961 microseconds
+│   wall_time_total = 45 seconds, 860 milliseconds
+│   wall_time_remaining = 41 seconds, 783 milliseconds
+│   wall_time_spent = 4 seconds, 76 milliseconds
+│   percent_complete = 8.9%
+│   estimated_sypd = 10.316
+│   instantaneous_sypd = 20.577
+│   date_now = 2026-07-04T23:16:45.305
+└   estimated_finish_date = 2026-07-04T23:17:27.305
+┌ Info: Progress
+│   simulation_time = 6 hours, 40 minutes
+│   n_steps_completed = 801
+│   wall_time_per_step = 6 milliseconds, 537 microseconds
+│   wall_time_total = 37 seconds, 656 milliseconds
+│   wall_time_remaining = 32 seconds, 420 milliseconds
+│   wall_time_spent = 5 seconds, 236 milliseconds
+│   percent_complete = 13.9%
+│   estimated_sypd = 12.564
+│   instantaneous_sypd = 20.46
+│   date_now = 2026-07-04T23:16:46.466
+└   estimated_finish_date = 2026-07-04T23:17:19.466
+┌ Info: Progress
+│   simulation_time = 8 hours, 32 minutes
+│   n_steps_completed = 1024
+│   wall_time_per_step = 5 milliseconds, 993 microseconds
+│   wall_time_total = 34 seconds, 522 milliseconds
+│   wall_time_remaining = 28 seconds, 385 milliseconds
+│   wall_time_spent = 6 seconds, 137 milliseconds
+│   percent_complete = 17.8%
+│   estimated_sypd = 13.704
+│   instantaneous_sypd = 20.335
+│   date_now = 2026-07-04T23:16:47.366
+└   estimated_finish_date = 2026-07-04T23:17:16.366
+┌ Info: Progress
+│   simulation_time = 10 hours, 56 minutes
+│   n_steps_completed = 1313
+│   wall_time_per_step = 5 milliseconds, 566 microseconds
+│   wall_time_total = 32 seconds, 63 milliseconds
+│   wall_time_remaining = 24 seconds, 754 milliseconds
+│   wall_time_spent = 7 seconds, 308 milliseconds
+│   percent_complete = 22.8%
+│   estimated_sypd = 14.755
+│   instantaneous_sypd = 20.262
+│   date_now = 2026-07-04T23:16:48.538
+└   estimated_finish_date = 2026-07-04T23:17:13.538
+┌ Info: Progress
+│   simulation_time = 13 hours, 21 minutes
+│   n_steps_completed = 1602
+│   wall_time_per_step = 5 milliseconds, 307 microseconds
+│   wall_time_total = 30 seconds, 573 milliseconds
+│   wall_time_remaining = 22 seconds, 70 milliseconds
+│   wall_time_spent = 8 seconds, 503 milliseconds
+│   percent_complete = 27.8%
+│   estimated_sypd = 15.474
+│   instantaneous_sypd = 19.874
+│   date_now = 2026-07-04T23:16:49.732
+└   estimated_finish_date = 2026-07-04T23:17:12.732
+┌ Info: Progress
+│   simulation_time = 15 hours, 45 minutes
+│   n_steps_completed = 1891
+│   wall_time_per_step = 5 milliseconds, 129 microseconds
+│   wall_time_total = 29 seconds, 545 milliseconds
+│   wall_time_remaining = 19 seconds, 845 milliseconds
+│   wall_time_spent = 9 seconds, 699 milliseconds
+│   percent_complete = 32.8%
+│   estimated_sypd = 16.013
+│   instantaneous_sypd = 19.838
+│   date_now = 2026-07-04T23:16:50.929
+└   estimated_finish_date = 2026-07-04T23:17:10.929
+┌ Info: Progress
+│   simulation_time = 17 hours, 4 minutes
+│   n_steps_completed = 2048
+│   wall_time_per_step = 5 milliseconds, 134 microseconds
+│   wall_time_total = 29 seconds, 575 milliseconds
+│   wall_time_remaining = 19 seconds, 59 milliseconds
+│   wall_time_spent = 10 seconds, 515 milliseconds
+│   percent_complete = 35.6%
+│   estimated_sypd = 15.996
+│   instantaneous_sypd = 15.805
+│   date_now = 2026-07-04T23:16:51.745
+└   estimated_finish_date = 2026-07-04T23:17:11.745
+┌ Info: Progress
+│   simulation_time = 19 hours, 28 minutes
+│   n_steps_completed = 2337
+│   wall_time_per_step = 5 milliseconds, 8 microseconds
+│   wall_time_total = 28 seconds, 850 milliseconds
+│   wall_time_remaining = 17 seconds, 144 milliseconds
+│   wall_time_spent = 11 seconds, 705 milliseconds
+│   percent_complete = 40.6%
+│   estimated_sypd = 16.399
+│   instantaneous_sypd = 19.953
+│   date_now = 2026-07-04T23:16:52.934
+└   estimated_finish_date = 2026-07-04T23:17:10.934
+┌ Info: Progress
+│   simulation_time = 21 hours, 53 minutes
+│   n_steps_completed = 2626
+│   wall_time_per_step = 4 milliseconds, 921 microseconds
+│   wall_time_total = 28 seconds, 348 milliseconds
+│   wall_time_remaining = 15 seconds, 424 milliseconds
+│   wall_time_spent = 12 seconds, 923 milliseconds
+│   percent_complete = 45.6%
+│   estimated_sypd = 16.689
+│   instantaneous_sypd = 19.479
+│   date_now = 2026-07-04T23:16:54.153
+└   estimated_finish_date = 2026-07-04T23:17:10.153
+┌ Info: Progress
+│   simulation_time = 1 day, 17 minutes
+│   n_steps_completed = 2915
+│   wall_time_per_step = 4 milliseconds, 852 microseconds
+│   wall_time_total = 27 seconds, 948 milliseconds
+│   wall_time_remaining = 13 seconds, 804 milliseconds
+│   wall_time_spent = 14 seconds, 143 milliseconds
+│   percent_complete = 50.6%
+│   estimated_sypd = 16.928
+│   instantaneous_sypd = 19.458
+│   date_now = 2026-07-04T23:16:55.373
+└   estimated_finish_date = 2026-07-04T23:17:09.373
+┌ Info: Progress
+│   simulation_time = 1 day, 2 hours
+│   n_steps_completed = 3204
+│   wall_time_per_step = 4 milliseconds, 830 microseconds
+│   wall_time_total = 27 seconds, 821 milliseconds
+│   wall_time_remaining = 12 seconds, 345 milliseconds
+│   wall_time_spent = 15 seconds, 475 milliseconds
+│   percent_complete = 55.6%
+│   estimated_sypd = 17.005
+│   instantaneous_sypd = 17.826
+│   date_now = 2026-07-04T23:16:56.704
+└   estimated_finish_date = 2026-07-04T23:17:09.704
+┌ Info: Progress
+│   simulation_time = 1 day, 5 hours
+│   n_steps_completed = 3493
+│   wall_time_per_step = 4 milliseconds, 787 microseconds
+│   wall_time_total = 27 seconds, 576 milliseconds
+│   wall_time_remaining = 10 seconds, 853 milliseconds
+│   wall_time_spent = 16 seconds, 723 milliseconds
+│   percent_complete = 60.6%
+│   estimated_sypd = 17.156
+│   instantaneous_sypd = 19.027
+│   date_now = 2026-07-04T23:16:57.952
+└   estimated_finish_date = 2026-07-04T23:17:08.952
+┌ Info: Progress
+│   simulation_time = 1 day, 7 hours
+│   n_steps_completed = 3782
+│   wall_time_per_step = 4 milliseconds, 749 microseconds
+│   wall_time_total = 27 seconds, 357 milliseconds
+│   wall_time_remaining = 9 seconds, 394 milliseconds
+│   wall_time_spent = 17 seconds, 962 milliseconds
+│   percent_complete = 65.7%
+│   estimated_sypd = 17.293
+│   instantaneous_sypd = 19.146
+│   date_now = 2026-07-04T23:16:59.192
+└   estimated_finish_date = 2026-07-04T23:17:09.192
+┌ Info: Progress
+│   simulation_time = 1 day, 9 hours
+│   n_steps_completed = 4071
+│   wall_time_per_step = 4 milliseconds, 717 microseconds
+│   wall_time_total = 27 seconds, 174 milliseconds
+│   wall_time_remaining = 7 seconds, 968 milliseconds
+│   wall_time_spent = 19 seconds, 206 milliseconds
+│   percent_complete = 70.7%
+│   estimated_sypd = 17.41
+│   instantaneous_sypd = 19.094
+│   date_now = 2026-07-04T23:17:00.435
+└   estimated_finish_date = 2026-07-04T23:17:08.435
+┌ Info: Progress
+│   simulation_time = 1 day, 10 hours
+│   n_steps_completed = 4096
+│   wall_time_per_step = 4 milliseconds, 719 microseconds
+│   wall_time_total = 27 seconds, 183 milliseconds
+│   wall_time_remaining = 7 seconds, 853 milliseconds
+│   wall_time_spent = 19 seconds, 330 milliseconds
+│   percent_complete = 71.1%
+│   estimated_sypd = 17.404
+│   instantaneous_sypd = 16.453
+│   date_now = 2026-07-04T23:17:00.560
+└   estimated_finish_date = 2026-07-04T23:17:08.560
+┌ Info: Progress
+│   simulation_time = 1 day, 12 hours
+│   n_steps_completed = 4385
+│   wall_time_per_step = 4 milliseconds, 709 microseconds
+│   wall_time_total = 27 seconds, 126 milliseconds
+│   wall_time_remaining = 6 seconds, 475 milliseconds
+│   wall_time_spent = 20 seconds, 650 milliseconds
+│   percent_complete = 76.1%
+│   estimated_sypd = 17.441
+│   instantaneous_sypd = 17.984
+│   date_now = 2026-07-04T23:17:01.880
+└   estimated_finish_date = 2026-07-04T23:17:08.880
+┌ Info: Progress
+│   simulation_time = 1 day, 14 hours
+│   n_steps_completed = 4674
+│   wall_time_per_step = 4 milliseconds, 687 microseconds
+│   wall_time_total = 26 seconds, 999 milliseconds
+│   wall_time_remaining = 5 seconds, 90 milliseconds
+│   wall_time_spent = 21 seconds, 909 milliseconds
+│   percent_complete = 81.1%
+│   estimated_sypd = 17.522
+│   instantaneous_sypd = 18.86
+│   date_now = 2026-07-04T23:17:03.138
+└   estimated_finish_date = 2026-07-04T23:17:09.138
+┌ Info: Progress
+│   simulation_time = 1 day, 17 hours
+│   n_steps_completed = 4963
+│   wall_time_per_step = 4 milliseconds, 687 microseconds
+│   wall_time_total = 27 seconds, 835 microseconds
+│   wall_time_remaining = 3 seconds, 736 milliseconds
+│   wall_time_spent = 23 seconds, 264 milliseconds
+│   percent_complete = 86.2%
+│   estimated_sypd = 17.522
+│   instantaneous_sypd = 17.512
+│   date_now = 2026-07-04T23:17:04.494
+└   estimated_finish_date = 2026-07-04T23:17:08.494
+┌ Info: Progress
+│   simulation_time = 1 day, 19 hours
+│   n_steps_completed = 5252
+│   wall_time_per_step = 4 milliseconds, 677 microseconds
+│   wall_time_total = 26 seconds, 943 milliseconds
+│   wall_time_remaining = 2 seconds, 376 milliseconds
+│   wall_time_spent = 24 seconds, 566 milliseconds
+│   percent_complete = 91.2%
+│   estimated_sypd = 17.559
+│   instantaneous_sypd = 18.229
+│   date_now = 2026-07-04T23:17:05.796
+└   estimated_finish_date = 2026-07-04T23:17:08.796
+┌ Info: Progress
+│   simulation_time = 1 day, 22 hours
+│   n_steps_completed = 5541
+│   wall_time_per_step = 4 milliseconds, 686 microseconds
+│   wall_time_total = 26 seconds, 996 milliseconds
+│   wall_time_remaining = 1 second, 26 milliseconds
+│   wall_time_spent = 25 seconds, 969 milliseconds
+│   percent_complete = 96.2%
+│   estimated_sypd = 17.525
+│   instantaneous_sypd = 16.919
+│   date_now = 2026-07-04T23:17:07.199
+└   estimated_finish_date = 2026-07-04T23:17:09.199
+[ Info: solve! walltime = 26.974
+[ Info: sypd: 17.551
+[ Info: wall_time_per_timestep: 4 milliseconds, 682 microseconds
+[ Info: Memory currently used (after solve!) by the process (RSS): 9.39 GiB
+┌ Info: Finished variation [3/3]
+│   overlay = experiments/scm speed tests/configs/s13_v1control.yml
+│   job_id = lf1e_speed1_s13_v1control
+│   ret_code = success
+└   walltime = 2m26s

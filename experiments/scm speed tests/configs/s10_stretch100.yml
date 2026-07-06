@@ -1,0 +1,23 @@
+# scm speed test #1 — s10: high-resolution stretched grid
+#
+# s4's tanh stretch (dz_bottom = 10 m from base config) but with 100 levels
+# instead of 30, so the coarse-aloft region refines while the near-surface
+# resolution stays ~10 m. Tests whether s4 is converged within the stretched
+# family: s10 ≈ s4 means the stretched answer is resolution-stable; s10 moving
+# toward the uniform ladder's limit would indict s4's coarse upper grid.
+# Physics: v10 TemperatureDependent cloud-ice formation.
+job_id: lf1e_speed1_s10_stretch100
+output_dir: "experiments/scm speed tests/output/lf1e-speed-1/s10_stretch100"
+cloud_ice_formation: "TemperatureDependent"
+z_max: 5000.0
+z_elem: 100
+z_stretch: true
+
+# Minimal diagnostics (shared across all speed-test runs).
+diagnostics:
+  - short_name: [ta, pfull, rhoa, hus, hur, ua, va, cl, clw, cli, lwp, clivi]
+    period: 1hours
+    reduction_time: average
+  - short_name: [ts, rlds, rlus, rlut, pr, prsn, hfss, hfls]
+    period: 1hours
+    reduction_time: average

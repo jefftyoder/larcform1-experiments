@@ -1,0 +1,23 @@
+# scm speed test #1 — s3: coarse uniform vertical resolution
+#
+# z_max 5000 with z_elem 30 → uniform dz ≈ 167 m (vs 100 m base). Confounds
+# domain top + resolution, but s1 isolates the top effect, so s3−s1 gives the
+# resolution effect. This is the riskiest axis: the cloud is a thin mixed-phase
+# stratus at ~300 m, and the base config warns clw is sensitive to the grid.
+# Physics: v10 TemperatureDependent cloud-ice formation.
+job_id: lf1e_speed1_s3_dz167
+output_dir: "experiments/scm speed tests/output/lf1e-speed-1/s3_dz167"
+cloud_ice_formation: "TemperatureDependent"
+z_max: 5000.0
+z_elem: 30
+
+# Minimal diagnostics: exactly the variables convert_to_pithan.py consumes
+# (profiles + rhoa for derived prw; surface fluxes/radiation/precip). Replaces
+# the base list wholesale — drops the 10-min EDMF/microphysics-tendency groups.
+diagnostics:
+  - short_name: [ta, pfull, rhoa, hus, hur, ua, va, cl, clw, cli, lwp, clivi]
+    period: 1hours
+    reduction_time: average
+  - short_name: [ts, rlds, rlus, rlut, pr, prsn, hfss, hfls]
+    period: 1hours
+    reduction_time: average

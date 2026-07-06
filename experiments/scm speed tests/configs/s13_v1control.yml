@@ -1,0 +1,25 @@
+# scm speed test #1 — s13: v1-physics control on the calibration-candidate grid
+#
+# Same grid + dt_rad as s11, but NO cloud_ice_formation override → default
+# ConstantTimescale deposition (v1 physics, the unbounded-WBF configuration).
+# Two jobs: (1) calibration hygiene — the light grid must preserve the
+# liquid-kill discriminator; (2) falsification test of the clw-experiment
+# headline — if 10 m cloud-top resolution rescues liquid under ConstantTimescale,
+# resolution was part of the original story. Expected: clw ≡ 0 all 48 h
+# (vapor pinned at ice saturation shuts the liquid gate regardless of grid),
+# with clivi/precs alive as in v1.
+job_id: lf1e_speed1_s13_v1control
+output_dir: "experiments/scm speed tests/output/lf1e-speed-1/s13_v1control"
+z_max: 5000.0
+z_elem: 100
+z_stretch: true
+dt_rad: "30mins"
+
+# Minimal diagnostics (shared across all speed-test runs).
+diagnostics:
+  - short_name: [ta, pfull, rhoa, hus, hur, ua, va, cl, clw, cli, lwp, clivi]
+    period: 1hours
+    reduction_time: average
+  - short_name: [ts, rlds, rlus, rlut, pr, prsn, hfss, hfls]
+    period: 1hours
+    reduction_time: average

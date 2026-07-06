@@ -1,0 +1,24 @@
+# scm speed test #1 — s1: lower domain top only (dz preserved)
+#
+# z_max 9000→5000 with z_elem 90→50 keeps dz = 100 m exactly, isolating the
+# effect of truncating the column at 5 km. The main physics exposure is
+# radiation: RRTMGP caps the column with a single isothermal boundary layer to
+# p≈0 (RRTMGPInterface.jl `add_isothermal_boundary_layer`), so at a 5 km top
+# that layer stands in for the whole 5 km→TOA atmosphere. Watch rlds.
+# Physics: v10 TemperatureDependent cloud-ice formation (the reference "success").
+job_id: lf1e_speed1_s1_ztop5km
+output_dir: "experiments/scm speed tests/output/lf1e-speed-1/s1_ztop5km"
+cloud_ice_formation: "TemperatureDependent"
+z_max: 5000.0
+z_elem: 50
+
+# Minimal diagnostics: exactly the variables convert_to_pithan.py consumes
+# (profiles + rhoa for derived prw; surface fluxes/radiation/precip). Replaces
+# the base list wholesale — drops the 10-min EDMF/microphysics-tendency groups.
+diagnostics:
+  - short_name: [ta, pfull, rhoa, hus, hur, ua, va, cl, clw, cli, lwp, clivi]
+    period: 1hours
+    reduction_time: average
+  - short_name: [ts, rlds, rlus, rlut, pr, prsn, hfss, hfls]
+    period: 1hours
+    reduction_time: average

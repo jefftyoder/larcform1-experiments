@@ -1,0 +1,20 @@
+# scm speed test #1 — s9: uniform-grid convergence, dz = 10 m
+# See s7_dz50.yml for the convergence-ladder rationale. 500 levels — the
+# expensive anchor of the ladder, matching s4's near-surface resolution
+# everywhere. dt stays 30 s: s4 already ran 10 m bottom cells stably, but if
+# vertical CFL bites here the batch driver records the crash and moves on.
+# Physics: v10 TemperatureDependent cloud-ice formation.
+job_id: lf1e_speed1_s9_dz10
+output_dir: "experiments/scm speed tests/output/lf1e-speed-1/s9_dz10"
+cloud_ice_formation: "TemperatureDependent"
+z_max: 5000.0
+z_elem: 500
+
+# Minimal diagnostics (shared across all speed-test runs).
+diagnostics:
+  - short_name: [ta, pfull, rhoa, hus, hur, ua, va, cl, clw, cli, lwp, clivi]
+    period: 1hours
+    reduction_time: average
+  - short_name: [ts, rlds, rlus, rlut, pr, prsn, hfss, hfls]
+    period: 1hours
+    reduction_time: average

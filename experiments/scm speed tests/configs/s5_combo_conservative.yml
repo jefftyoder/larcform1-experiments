@@ -1,0 +1,22 @@
+# scm speed test #1 — s5: conservative combo
+#
+# Stacks the low-risk speed-ups: 5 km top at dz = 100 m (as s1) and dt_rad
+# 30mins (as s2). Diagnostics are the shared minimal set (all speed-test runs).
+# Physics: v10 TemperatureDependent cloud-ice formation.
+job_id: lf1e_speed1_s5_combo_conservative
+output_dir: "experiments/scm speed tests/output/lf1e-speed-1/s5_combo_conservative"
+cloud_ice_formation: "TemperatureDependent"
+z_max: 5000.0
+z_elem: 50
+dt_rad: "30mins"
+
+# Minimal diagnostics: exactly the variables convert_to_pithan.py consumes
+# (profiles + rhoa for derived prw; surface fluxes/radiation/precip). Replaces
+# the base list wholesale — drops the 10-min EDMF/microphysics-tendency groups.
+diagnostics:
+  - short_name: [ta, pfull, rhoa, hus, hur, ua, va, cl, clw, cli, lwp, clivi]
+    period: 1hours
+    reduction_time: average
+  - short_name: [ts, rlds, rlus, rlut, pr, prsn, hfss, hfls]
+    period: 1hours
+    reduction_time: average

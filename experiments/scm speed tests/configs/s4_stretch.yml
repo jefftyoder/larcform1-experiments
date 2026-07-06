@@ -1,0 +1,25 @@
+# scm speed test #1 — s4: stretched grid, few levels
+#
+# z_max 5000, z_elem 30, z_stretch true → HyperbolicTangentStretching(dz_bottom)
+# (ClimaAtmos grids.jl get_stretching) with dz_bottom = 10 m inherited from the
+# base config: ~10 m layers at the surface growing toward the top, i.e. finer
+# than base at cloud height (~300 m) despite 3× fewer levels. The base config
+# explicitly flags clw/z-banding sensitivity to z_stretch — this run tests that
+# warning directly under v10 physics.
+job_id: lf1e_speed1_s4_stretch
+output_dir: "experiments/scm speed tests/output/lf1e-speed-1/s4_stretch"
+cloud_ice_formation: "TemperatureDependent"
+z_max: 5000.0
+z_elem: 30
+z_stretch: true
+
+# Minimal diagnostics: exactly the variables convert_to_pithan.py consumes
+# (profiles + rhoa for derived prw; surface fluxes/radiation/precip). Replaces
+# the base list wholesale — drops the 10-min EDMF/microphysics-tendency groups.
+diagnostics:
+  - short_name: [ta, pfull, rhoa, hus, hur, ua, va, cl, clw, cli, lwp, clivi]
+    period: 1hours
+    reduction_time: average
+  - short_name: [ts, rlds, rlus, rlut, pr, prsn, hfss, hfls]
+    period: 1hours
+    reduction_time: average

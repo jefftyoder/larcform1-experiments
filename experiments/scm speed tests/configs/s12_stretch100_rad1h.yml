@@ -1,0 +1,22 @@
+# scm speed test #1 — s12: dt_rad 1hours on the converged grid
+#
+# Evidence run for the deferred base-config decision (dt_rad 1h was requested,
+# then held pending validation). Same grid as s10/s11; only dt_rad differs.
+# EC-Earth runs radiation hourly, so passing here would justify 1h in the base.
+# Physics: v10 TemperatureDependent cloud-ice formation.
+job_id: lf1e_speed1_s12_stretch100_rad1h
+output_dir: "experiments/scm speed tests/output/lf1e-speed-1/s12_stretch100_rad1h"
+cloud_ice_formation: "TemperatureDependent"
+z_max: 5000.0
+z_elem: 100
+z_stretch: true
+dt_rad: "1hours"
+
+# Minimal diagnostics (shared across all speed-test runs).
+diagnostics:
+  - short_name: [ta, pfull, rhoa, hus, hur, ua, va, cl, clw, cli, lwp, clivi]
+    period: 1hours
+    reduction_time: average
+  - short_name: [ts, rlds, rlus, rlut, pr, prsn, hfss, hfls]
+    period: 1hours
+    reduction_time: average

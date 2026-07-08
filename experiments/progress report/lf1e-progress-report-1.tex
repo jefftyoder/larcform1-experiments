@@ -1,0 +1,1094 @@
+\documentclass[11pt]{article}
+
+    \usepackage[breakable]{tcolorbox}
+    \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
+    
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % Keep aspect ratio if custom image width or height is specified
+    \setkeys{Gin}{keepaspectratio}
+    % Maintain compatibility with old templates. Remove in nbconvert 6.0
+    \let\Oldincludegraphics\includegraphics
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionFormat{nocaption}{}
+    \captionsetup{format=nocaption,aboveskip=0pt,belowskip=0pt}
+
+    \usepackage{float}
+    \floatplacement{figure}{H} % forces figures to be placed at the correct location
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+
+    \usepackage{iftex}
+    \ifPDFTeX
+        \usepackage[T1]{fontenc}
+        \IfFileExists{alphabeta.sty}{
+              \usepackage{alphabeta}
+          }{
+              \usepackage[mathletters]{ucs}
+              \usepackage[utf8x]{inputenc}
+          }
+    \else
+        \usepackage{fontspec}
+        \usepackage{unicode-math}
+        \setmainfont{DejaVu Serif}
+        \setsansfont{DejaVu Sans}
+        \setmonofont{DejaVu Sans Mono}
+    \fi
+
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics
+                         % to support a larger range
+    \makeatletter % fix for old versions of grffile with XeLaTeX
+    \@ifpackagelater{grffile}{2019/11/01}
+    {
+      % Do nothing on new versions
+    }
+    {
+      \def\Gread@@xetex#1{%
+        \IfFileExists{"\Gin@base".bb}%
+        {\Gread@eps{\Gin@base.bb}}%
+        {\Gread@@xetex@aux#1}%
+      }
+    }
+    \makeatother
+    \usepackage[Export]{adjustbox} % Used to constrain images to a maximum size
+    \adjustboxset{max size={0.9\linewidth}{0.9\paperheight}}
+
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    % The default LaTeX title has an obnoxious amount of whitespace. By default,
+    % titling removes some of it. It also provides customization options.
+    \usepackage{titling}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{array}     % table support for pandoc >= 2.11.3
+    \usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{soul}      % strikethrough (\st) support for pandoc >= 3.0.0
+    \usepackage{mathrsfs}
+    
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % common color for the border for error outputs.
+    \definecolor{outerrorbackground}{HTML}{FFDFDF}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \makeatletter
+    \newsavebox\pandoc@box
+    \newcommand*\pandocbounded[1]{%
+      \sbox\pandoc@box{#1}%
+      % scaling factors for width and height
+      \Gscale@div\@tempa\textheight{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+      \Gscale@div\@tempb\linewidth{\wd\pandoc@box}%
+      % select the smaller of both
+      \ifdim\@tempb\p@<\@tempa\p@
+        \let\@tempa\@tempb
+      \fi
+      % scaling accordingly (\@tempa < 1)
+      \ifdim\@tempa\p@<\p@
+        \scalebox{\@tempa}{\usebox\pandoc@box}%
+      % scaling not needed, use as it is
+      \else
+        \usebox{\pandoc@box}%
+      \fi
+    }
+    \makeatother
+
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{lf1e-progress-report-1}
+    
+    
+    
+    
+    
+    
+    
+% Pygments definitions
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\@namedef{PY@tok@w}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.61,0.40,0.00}{##1}}}
+\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kt}{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@ow}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@nc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@nn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.80,0.25,0.22}{##1}}}
+\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.46,0.46,0.00}{##1}}}
+\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.41,0.47,0.13}{##1}}}
+\@namedef{PY@tok@nt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sd}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.36,0.12}{##1}}}
+\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@gh}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PY@tok@gu}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\@namedef{PY@tok@gd}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.52,0.00}{##1}}}
+\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{0.89,0.00,0.00}{##1}}}
+\@namedef{PY@tok@ge}{\let\PY@it=\textit}
+\@namedef{PY@tok@gs}{\let\PY@bf=\textbf}
+\@namedef{PY@tok@ges}{\let\PY@bf=\textbf\let\PY@it=\textit}
+\@namedef{PY@tok@gp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+\@namedef{PY@tok@gt}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\@namedef{PY@tok@err}{\def\PY@bc##1{{\setlength{\fboxsep}{\string -\fboxrule}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}}
+\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb.
+    \makeatletter
+        \newbox\Wrappedcontinuationbox
+        \newbox\Wrappedvisiblespacebox
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}}
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}}
+        \newcommand*\Wrappedcontinuationindent {3ex }
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox}
+        % Take advantage of the already applied Pygments mark-up to insert
+        % potential linebreaks for TeX processing.
+        %        {, <, #, %, $, ' and ": go to next line.
+        %        _, }, ^, &, >, - and ~: stay at end of broken line.
+        % Use of \textquotesingle for straight quote.
+        \newcommand*\Wrappedbreaksatspecials {%
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}%
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}%
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}%
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}%
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}%
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}%
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}%
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}%
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}%
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}%
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}%
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}%
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}%
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}%
+        }
+        % Some characters . , ; ? ! / are not pygmentized.
+        % This macro makes them "active" and they will insert potential linebreaks
+        \newcommand*\Wrappedbreaksatpunct {%
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}%
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}%
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}%
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}%
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}%
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}%
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}%
+            \catcode`\.\active
+            \catcode`\,\active
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active
+            \lccode`\~`\~
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active
+        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+
+    % prompt
+    \makeatletter
+    \newcommand{\boxspacing}{\kern\kvtcb@left@rule\kern\kvtcb@boxsep}
+    \makeatother
+    \newcommand{\prompt}[4]{
+        {\ttfamily\llap{{\color{#2}[#3]:\hspace{3pt}#4}}\vspace{-\baselineskip}}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+\begin{document}
+    
+    \maketitle
+    
+    
+
+    
+    \section{larcform1 progress report --- supercooled Arctic liquid in the
+ClimaAtmos
+SCM}\label{larcform1-progress-report-supercooled-arctic-liquid-in-the-climaatmos-scm}
+
+\textbf{Date:} 2026-07-05 · \textbf{Case:} Larcform1 (Pithan et al.~2016
+Arctic winter single-column intercomparison) · \textbf{Model:}
+ClimaAtmos.jl 1M prognostic-EDMFx column, slab surface @ 250 K ·
+\textbf{Reference:} EC-Earth from the Pithan 2016 intercomparison
+dataset
+
+\subsection{Executive summary}\label{executive-summary}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Problem.} Our ClimaAtmos implementation of the Larcform1 case
+  produced \emph{identically zero} supercooled cloud liquid
+  (\texttt{clw}), where the reference model (EC-Earth) sustains a
+  mixed-phase cloud for its first two days.
+\item
+  \textbf{Root cause found and confirmed} (clw sensitivity experiment,
+  12 variations): the default \texttt{ConstantTimescale} vapor→cloud-ice
+  deposition is an \emph{unbounded} Wegener--Bergeron--Findeisen (WBF)
+  sink --- with a 100 s timescale and no dependence on ice mass or
+  ice-nucleating-particle (INP) availability, it pins vapor at ice
+  saturation so the liquid-condensation gate never opens. Switching to
+  \texttt{cloud\_ice\_formation:\ "TemperatureDependent"} (Frostenberg
+  2023 INP-limited deposition, variation v10) restores the cloud at the
+  right height, temperature, and onset time.
+\item
+  \textbf{A 16--40× faster forward model was validated} (SCM speed
+  tests, s1--s13): the dominant cost of the original config was
+  10-minute-cadence debugging diagnostics (\textasciitilde90\% of
+  runtime), not physics; a convergence ladder showed the 100-level
+  stretched grid (10 m at the surface, 5 km top) is the \emph{converged}
+  answer; the adopted calibration config (s11) solves 2 simulated days
+  in \textasciitilde42 s and preserves the v1-physics discriminator (clw
+  still exactly zero --- the WBF failure is physics, not resolution).
+\item
+  \textbf{Six microphysics parameters were calibrated} with unscented
+  Kalman inversion (UKI, 6 iterations × 13 members, 54 min total)
+  against EC-Earth day-2 clw/cli profiles. This required un-deadening
+  the Frostenberg 2023 \texttt{a}/\texttt{b} INP-curve coefficients,
+  which ClimaParams defines but CloudMicrophysics (v0.36 \emph{and}
+  upstream main) never reads --- fixed via a one-function vendored
+  patch. Day-2 misfit fell from χ²/dim 12.8 to \textbf{1.73}.
+\item
+  \textbf{Out-of-sample verification passed.} In 5-day runs, the
+  calibrated model reproduces EC-Earth's \emph{entire cloud life cycle}
+  --- including glaciation at hour 54 (EC-Earth: 51) that was never part
+  of the training objective; the uncalibrated baseline holds 5× too much
+  liquid and glaciates a day late.
+\item
+  \textbf{Data discovery en route:} the EC-Earth reference record is 20
+  days (481 hourly steps), not 2 as all pre-2026-07-05 analyses assumed
+  --- and EC-Earth's own cloud glaciates on day 3. The day-2 calibration
+  window targets the transient mixed-phase phase; neither model
+  reproduces the multi-day persistence of \emph{observed} Arctic clouds,
+  which is now a documented physics question separate from tuning.
+\end{enumerate}
+
+\textbf{Where things stand:} calibration validated, final parameter
+means adopted, all work committed
+(\texttt{experiments/clw\ calibration}, vendored
+\texttt{CloudMicrophysics.jl} patch, experiment write-ups); the
+ClimaAtmos fork branch \texttt{jy/coldslab} is pushed.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{9}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{pathlib}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{Path}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{numpy}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{np}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{pandas}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{pd}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{xarray}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{xr}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{plt}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{tomllib}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{warnings}
+\PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ignore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+
+\PY{n}{ROOT} \PY{o}{=} \PY{n}{Path}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/home/jeff/larcform1\PYZhy{}experiments}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{EC\PYZus{}PATH} \PY{o}{=} \PY{n}{ROOT} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pithan 2016 Intercomparison Data}\PY{l+s+s2}{\PYZdq{}} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth.nc}\PY{l+s+s2}{\PYZdq{}}
+\PY{n}{SENS} \PY{o}{=} \PY{n}{ROOT} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{experiments/clw sensitivity experiments/output/pithan\PYZus{}format}\PY{l+s+s2}{\PYZdq{}}
+\PY{n}{CAL} \PY{o}{=} \PY{n}{ROOT} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{experiments/clw calibration}\PY{l+s+s2}{\PYZdq{}}
+\PY{n}{V5D} \PY{o}{=} \PY{n}{CAL} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{output/verify5d}\PY{l+s+s2}{\PYZdq{}}
+\PY{n}{FIGDIR} \PY{o}{=} \PY{n}{ROOT} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{experiments/progress report/figures}\PY{l+s+s2}{\PYZdq{}}
+\PY{n}{FIGDIR}\PY{o}{.}\PY{n}{mkdir}\PY{p}{(}\PY{n}{exist\PYZus{}ok}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+
+\PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{p}{\PYZob{}}
+    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{figure.dpi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{110}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{axes.grid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{k+kc}{True}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grid.alpha}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mf}{0.25}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{axes.spines.top}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{k+kc}{False}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{axes.spines.right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{k+kc}{False}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{font.size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{figure.constrained\PYZus{}layout.use}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{k+kc}{True}\PY{p}{,}
+\PY{p}{\PYZcb{}}\PY{p}{)}
+\PY{n}{C} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}222222}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{calibrated}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}d95f02}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{baseline}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}7570b3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v10}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}1b9e77}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{other}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}999999}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}
+
+\PY{n}{ec} \PY{o}{=} \PY{n}{xr}\PY{o}{.}\PY{n}{load\PYZus{}dataset}\PY{p}{(}\PY{n}{EC\PYZus{}PATH}\PY{p}{,} \PY{n}{decode\PYZus{}times}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{p}{)}
+\PY{n}{ec\PYZus{}lev} \PY{o}{=} \PY{p}{[}\PY{n}{d} \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{ec}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dims} \PY{k}{if} \PY{n}{d} \PY{o}{!=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\PY{n}{ec\PYZus{}h} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{ec}\PY{o}{.}\PY{n}{sizes}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}          \PY{c+c1}{\PYZsh{} hourly steps}
+
+\PY{k}{def}\PY{+w}{ }\PY{n+nf}{load\PYZus{}pithan}\PY{p}{(}\PY{n}{name}\PY{p}{)}\PY{p}{:}
+\PY{+w}{    }\PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Converted (EC\PYZhy{}Earth\PYZhy{}vocabulary) sensitivity\PYZhy{}run file.\PYZdq{}\PYZdq{}\PYZdq{}}
+    \PY{k}{return} \PY{n}{xr}\PY{o}{.}\PY{n}{load\PYZus{}dataset}\PY{p}{(}\PY{n}{SENS} \PY{o}{/} \PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{name}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{.nc}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{p}{)}
+
+\PY{k}{def}\PY{+w}{ }\PY{n+nf}{load\PYZus{}raw}\PY{p}{(}\PY{n}{run\PYZus{}dir}\PY{p}{)}\PY{p}{:}
+\PY{+w}{    }\PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Raw ClimaAtmos 1h\PYZhy{}average diagnostics (calibration/verification runs).\PYZdq{}\PYZdq{}\PYZdq{}}
+    \PY{n}{d} \PY{o}{=} \PY{n}{Path}\PY{p}{(}\PY{n}{run\PYZus{}dir}\PY{p}{)} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{output\PYZus{}active}\PY{l+s+s2}{\PYZdq{}}
+    \PY{k}{return} \PY{p}{\PYZob{}}\PY{n}{v}\PY{p}{:} \PY{n}{xr}\PY{o}{.}\PY{n}{load\PYZus{}dataset}\PY{p}{(}\PY{n}{d} \PY{o}{/} \PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{v}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZus{}1h\PYZus{}average.nc}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{n}{v}\PY{p}{]}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{p}{)}
+            \PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cli}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pfull}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lwp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clivi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth record: }\PY{l+s+si}{\PYZob{}}\PY{n}{ec}\PY{o}{.}\PY{n}{sizes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{ hourly steps = }\PY{l+s+si}{\PYZob{}}\PY{n}{ec}\PY{o}{.}\PY{n}{sizes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{24}\PY{l+s+si}{:}\PY{l+s+s2}{.1f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{ days}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+EC-Earth record: 481 hourly steps = 20.0 days
+    \end{Verbatim}
+
+    \subsection{1. The target: EC-Earth's Larcform1 cloud --- and what its
+full record
+shows}\label{the-target-ec-earths-larcform1-cloud-and-what-its-full-record-shows}
+
+The Larcform1 case is a polar-night, single-column Arctic experiment: a
+250 K atmosphere over a freezing surface, no sun, physics left to build
+a cloud. Among the Pithan 2016 intercomparison models, EC-Earth is the
+closest match to our setup (it, too, runs ``no snow, fixed ice'' ---
+Table 3) and the one whose modest liquid water path (day-2 mean clwvi ≈
+0.038 kg/m², matching Table 5's 0.037) sits at the \emph{low},
+observation-adjacent end of the intercomparison spread (ECHAM-HAM: 0.39;
+the paper notes model LWPs generally run high vs SHEBA observations).
+That makes it a good calibration target.
+
+A caveat discovered only on 2026-07-05: \texttt{EC-Earth.nc} spans
+\textbf{20 days}, not 2 --- every earlier analysis sliced the first 48
+h. The full record (below) shows the mixed-phase cloud is
+\emph{transient in EC-Earth too}: liquid collapses on day 3 (WBF
+glaciation), ice peaks on day 4 and slowly sediments away. The day-2
+calibration window therefore targets the transient mixed-phase phase,
+and ``persistence'' comparisons only apply within days 1--2.
+
+\textbf{Scope note on the surface:} we use a slab ocean (heat capacity,
+no ice/snow conduction), standing in for the protocol's interactive 1 m
+ice + 0.1 m snow. The paper's clear-state result (surface-based
+inversions, which hinge on snow insulation) is out of scope for this
+surface; only the cloudy state --- our target --- is meaningfully
+comparable, and EC-Earth shares that limitation.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{10}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{9.5}\PY{p}{,} \PY{l+m+mf}{3.6}\PY{p}{)}\PY{p}{)}
+\PY{n}{d} \PY{o}{=} \PY{n}{ec\PYZus{}h} \PY{o}{/} \PY{l+m+mi}{24}
+\PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{d}\PY{p}{,} \PY{n}{ec}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clwvi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{C}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.6}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clwvi (column liquid)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{d}\PY{p}{,} \PY{n}{ec}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clivi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{C}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{calibrated}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.6}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clivi (column ice)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{axvspan}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gold}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.25}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day\PYZhy{}2 calibration window}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{glac\PYZus{}h} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{ec}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{dim}\PY{o}{=}\PY{n}{ec\PYZus{}lev}\PY{p}{)}\PY{o}{.}\PY{n}{values} \PY{o}{\PYZgt{}} \PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{glac\PYZus{}h} \PY{o}{/} \PY{l+m+mi}{24}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{liquid collapses hour }\PY{l+s+si}{\PYZob{}}\PY{n}{glac\PYZus{}h}\PY{l+s+si}{\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{(early day 3)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{(}\PY{n}{glac\PYZus{}h} \PY{o}{/} \PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mf}{0.030}\PY{p}{)}\PY{p}{,}
+            \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{n}{glac\PYZus{}h} \PY{o}{/} \PY{l+m+mi}{24} \PY{o}{+} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.036}\PY{p}{)}\PY{p}{,}
+            \PY{n}{arrowprops}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{arrowstyle}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{9}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.25}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kg m\PYZdl{}\PYZca{}}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{\PYZhy{}2\PYZcb{}\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+       \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth, full 20\PYZhy{}day Larcform1 record: the reference cloud itself glaciates on day 3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{fig}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{n}{FIGDIR} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fig1\PYZus{}ecearth\PYZus{}20day\PYZus{}record.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{150}\PY{p}{,} \PY{n}{bbox\PYZus{}inches}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{lf1e-progress-report-1_files/lf1e-progress-report-1_3_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{\texorpdfstring{2. Root cause: unbounded WBF in
+\texttt{ConstantTimescale} ice
+deposition}{2. Root cause: unbounded WBF in ConstantTimescale ice deposition}}\label{root-cause-unbounded-wbf-in-constanttimescale-ice-deposition}
+
+\textbf{The sensitivity screen}
+(\texttt{experiments/clw\ sensitivity\ experiments/}, 12 single-change
+variations, 2-day runs) localized the liquid killer by elimination and
+then confirmed the mechanism in the CloudMicrophysics source:
+
+{\def\LTcaptype{table} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+variation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+change vs base
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+max clw (kg/kg)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+outcome
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+v1\_base & none & \textbf{0.0 exactly} & fail --- clw identically zero
+all run \\
+v2\_0M & 0M microphysics & 1.4e-4 & marginal --- equilibrium partition,
+no kinetic WBF \\
+v3\_2M & 2M microphysics & --- & setup crash (2M + SGS quadrature
+unimplemented) \\
+v4\_cloudonly & all precip processes off & 0.0 & fail → precipitation
+exonerated; cli piles up unbounded → deposition is the killer \\
+v5--v7 & τ\_subl 10→1000 & 0.0 & fail \\
+v8 & τ\_subl = 10 000 & 4.8e-4 & transient burst, then killed by the
+separate snow-deposition vapor sink \\
+v9 & τ\_cond = 10 & 0.0 & fail --- the liquid gate never opens, faster
+condensation can't help \\
+\textbf{v10} & \texttt{cloud\_ice\_formation:\ "TemperatureDependent"} &
+\textbf{5.1e-4} & \textbf{pass --- the fix}; liquid + ice + snow at
+EC-Earth magnitudes \\
+v11 & ice deposition deleted & 5.1e-4 & pass for liquid but clivi ≡ 0 →
+deposition is the \emph{only} ice-initiation path here \\
+v12 & τ\_subl = 10⁹ (constant) & 5.1e-4 & liquid ≈ v10 but ice
+\textasciitilde200× low → no constant τ can emulate the INP-limited
+scheme \\
+\end{longtable}
+}
+
+\textbf{Mechanism.} In the 1M scheme, liquid condenses only when vapor
+exceeds \emph{liquid} saturation, but the default ice scheme deposits
+vapor toward \emph{ice} saturation on a fixed 100 s timescale with no
+dependence on existing ice mass or INP availability. Below freezing, ice
+saturation \textless{} liquid saturation always, so vapor is pinned
+below the liquid gate: WBF with the physical brake (finite ice surface
+area) removed → clw ≡ 0. The \texttt{TemperatureDependent} alternative
+computes the deposition timescale from diffusional growth onto
+INP-nucleated crystals (Frostenberg 2023 Arctic INP climatology). At
+this cloud's −10 °C there are \textasciitilde1 INP m⁻³ --- deposition
+starts \textasciitilde10⁷× slower, liquid wins the vapor competition,
+and ice then bootstraps as crystals grow (v11/v12 confirm the
+\emph{feedback}, not the timescale value, is what matters).
+
+This finding was later hardened by the speed-test control \textbf{s13}:
+v1 physics on a converged 10 m grid still gives clw = 0.0 at every level
+and hour --- no amount of vertical resolution rescues the liquid. (The
+literature counterpoint is instructive: Pithan 2016's WRF-200l lost its
+liquid at \emph{high} resolution via 1.2 m-level frost drying --- a
+different mechanism our 10 m grids don't exhibit.)
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{11}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{runs} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v1\PYZus{}base}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v1 base (ConstantTimescale)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{C}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{other}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,}
+        \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v2\PYZus{}0M}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v2 0M equilibrium}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}66a61e}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,}
+        \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v8\PYZus{}subltime10000}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v8 \PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{tau\PYZus{}}\PY{l+s+si}{\PYZob{}subl\PYZcb{}}\PY{l+s+s2}{\PYZdl{}=10\PYZdl{}\PYZca{}4\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}e6ab02}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,}
+        \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v12\PYZus{}subltime1e9}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v12 \PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{tau\PYZus{}}\PY{l+s+si}{\PYZob{}subl\PYZcb{}}\PY{l+s+s2}{\PYZdl{}=10\PYZdl{}\PYZca{}9\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}a6761d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,}
+        \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v10\PYZus{}tdepice}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v10 TemperatureDependent (the fix)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{C}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v10}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]}
+
+\PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{a1}\PY{p}{,} \PY{n}{a2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{gridspec\PYZus{}kw}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{width\PYZus{}ratios}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{1.5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+\PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{lab}\PY{p}{,} \PY{n}{col}\PY{p}{,} \PY{n}{ls} \PY{o+ow}{in} \PY{n}{runs}\PY{p}{:}
+    \PY{n}{ds} \PY{o}{=} \PY{n}{load\PYZus{}pithan}\PY{p}{(}\PY{n}{name}\PY{p}{)}
+    \PY{n}{a1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{ds}\PY{o}{.}\PY{n}{sizes}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{ds}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clwvi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{col}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{n}{ls}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.7}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{lab}\PY{p}{)}
+\PY{n}{a1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ec\PYZus{}h}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{48}\PY{p}{]}\PY{p}{,} \PY{n}{ec}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clwvi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{48}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{C}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{2.4}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{a1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hour}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clwvi (kg m\PYZdl{}\PYZca{}}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{\PYZhy{}2\PYZcb{}\PYZdl{})}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(a) column liquid, 2\PYZhy{}day sensitivity screen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{a1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}
+
+\PY{n}{v10} \PY{o}{=} \PY{n}{load\PYZus{}pithan}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v10\PYZus{}tdepice}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{p10} \PY{o}{=} \PY{n}{v10}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isel}\PY{p}{(}\PY{n}{time}\PY{o}{=}\PY{n+nb}{slice}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{values} \PY{o}{/} \PY{l+m+mi}{100}
+\PY{n}{ecp} \PY{o}{=} \PY{n}{ec}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isel}\PY{p}{(}\PY{n}{time}\PY{o}{=}\PY{n+nb}{slice}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{values} \PY{o}{/} \PY{l+m+mi}{100}
+\PY{k}{for} \PY{n}{var}\PY{p}{,} \PY{n}{ls} \PY{o+ow}{in} \PY{p}{[}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cli}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]}\PY{p}{:}
+    \PY{n}{a2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{v10}\PY{p}{[}\PY{n}{var}\PY{p}{]}\PY{o}{.}\PY{n}{isel}\PY{p}{(}\PY{n}{time}\PY{o}{=}\PY{n+nb}{slice}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{values} \PY{o}{*} \PY{l+m+mf}{1e3}\PY{p}{,} \PY{n}{p10}\PY{p}{,}
+            \PY{n}{color}\PY{o}{=}\PY{n}{C}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v10}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{n}{ls}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.7}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v10 }\PY{l+s+si}{\PYZob{}}\PY{n}{var}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+    \PY{n}{a2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ec}\PY{p}{[}\PY{n}{var}\PY{p}{]}\PY{o}{.}\PY{n}{isel}\PY{p}{(}\PY{n}{time}\PY{o}{=}\PY{n+nb}{slice}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{values} \PY{o}{*} \PY{l+m+mf}{1e3}\PY{p}{,} \PY{n}{ecp}\PY{p}{,}
+            \PY{n}{color}\PY{o}{=}\PY{n}{C}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{n}{ls}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.7}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth }\PY{l+s+si}{\PYZob{}}\PY{n}{var}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{a2}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{ylim}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1015}\PY{p}{,} \PY{l+m+mi}{880}\PY{p}{)}\PY{p}{,} \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{g kg\PYZdl{}\PYZca{}}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{\PYZhy{}1\PYZcb{}\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pressure (hPa)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+       \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(b) day\PYZhy{}2 mean profiles: v10 vs EC\PYZhy{}Earth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{a2}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}
+\PY{n}{fig}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{n}{FIGDIR} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fig2\PYZus{}sensitivity\PYZus{}screen.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{150}\PY{p}{,} \PY{n}{bbox\PYZus{}inches}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v10 restores the supercooled layer at the right height; remaining gaps are amount\PYZhy{}type }\PY{l+s+s2}{\PYZdq{}}
+      \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(too much column liquid, too little ice) — i.e. calibration targets.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{lf1e-progress-report-1_files/lf1e-progress-report-1_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+v10 restores the supercooled layer at the right height; remaining gaps are
+amount-type (too much column liquid, too little ice) — i.e. calibration targets.
+    \end{Verbatim}
+
+    \subsection{3. A forward model fast enough to calibrate (SCM speed
+tests)}\label{a-forward-model-fast-enough-to-calibrate-scm-speed-tests}
+
+Calibration needs \textasciitilde80+ forward runs; the original config
+took \textasciitilde11--12 min each. The speed-test experiment
+(\texttt{experiments/scm\ speed\ tests/}, runs s1--s13) found:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Diagnostics, not physics, dominated runtime.} The 54-variable,
+  10-minute-cadence EDMF/microphysics-tendency groups (accumulated
+  averages, computed every timestep) consumed \textasciitilde90\% of the
+  original runtime. Trimming to the 20-variable converter set alone
+  brought a full-grid run to 26.5 s.
+\item
+  \textbf{The stretched grid is the converged answer, not a landmine.} A
+  uniform-resolution ladder (167 m → 100 → 50 → 25 → 10 m) marches
+  monotonically toward the tanh-stretched grid's behavior (onset h5→h0,
+  persistence 40→48 of 48 h). The 100-stretched-level grid (s10) matches
+  the 500-level uniform 10 m anchor (s9) at ⅓ its cost. The config's
+  z-banding warning did not materialize under v10 physics;
+  onset/persistence gaps vs EC-Earth were a resolution artifact, not
+  microphysics.
+\item
+  \textbf{dt\_rad 30 min is safe} (polar night, LW only): rlds shifts
+  −0.4 W/m²; 1 h was marginal and rejected.
+\item
+  \textbf{s13 control:} the light grid preserves the v1-physics
+  discriminator (clw exactly 0.0) --- see §2.
+\end{itemize}
+
+\textbf{Adopted calibration config ``s11'':} 5 km top, 100 stretched
+levels (10 m at the surface), dt 30 s, dt\_rad 30 min, minimal
+diagnostics --- \textbf{42 s solve} for 2 simulated days
+(\textasciitilde16× vs original; \textasciitilde40× for the
+pre-convergence candidate). The validated diagnostics/dt\_rad trims were
+applied to the base ClimaAtmos config (branch \texttt{jy/coldslab}).
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{12}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{times} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{original (full diagnostics)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{660}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.55}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s2  90 lev, minimal diag, rad 30min}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{26.5}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.55}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,}
+         \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s5  50 lev uniform + rad 30min}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{16.5}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.55}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s3  30 lev uniform (167 m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{15.2}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.55}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,}
+         \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s9  500 lev uniform 10 m (anchor)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{130}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.55}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s10 100 lev stretched, rad 5min}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{43}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.55}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,}
+         \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s11 100 lev stretched, rad 30min  ← adopted}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{42}\PY{p}{,} \PY{n}{C}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v10}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s13 s11 grid, v1 physics (control)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{27}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.55}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]}
+\PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mf}{3.4}\PY{p}{)}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{barh}\PY{p}{(}\PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{times}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{times}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+        \PY{n}{color}\PY{o}{=}\PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{times}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;} \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{solve! walltime (s, log scale) — 2 simulated days}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Forward\PYZhy{}model cost: 11 min → 42 s with converged grid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{p}{(}\PY{n}{lab}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{c}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{times}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+    \PY{n}{ax}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{n}{t} \PY{o}{*} \PY{l+m+mf}{1.08}\PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{t}\PY{l+s+si}{:}\PY{l+s+s2}{.0f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{ s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{va}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{margins}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mf}{0.12}\PY{p}{)}\PY{p}{;} \PY{n}{ax}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\PY{n}{fig}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{n}{FIGDIR} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fig3\PYZus{}speedtest\PYZus{}walltime.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{150}\PY{p}{,} \PY{n}{bbox\PYZus{}inches}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+
+\PY{n}{ladder} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{run}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s3 167 m}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v10 100 m}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s7 50 m}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s8 25 m}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s9 10 m}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s4 stretch/30}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s10 stretch/100}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{onset (h)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hrs clw\PYZgt{}1e\PYZhy{}4 (of 48)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{40}\PY{p}{,} \PY{l+m+mi}{43}\PY{p}{,} \PY{l+m+mi}{45}\PY{p}{,} \PY{l+m+mi}{47}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{,} \PY{l+m+mi}{47}\PY{p}{]}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{max clw (1e\PYZhy{}4 kg/kg)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{4.84}\PY{p}{,} \PY{l+m+mf}{5.11}\PY{p}{,} \PY{l+m+mf}{5.37}\PY{p}{,} \PY{l+m+mf}{5.01}\PY{p}{,} \PY{l+m+mf}{3.98}\PY{p}{,} \PY{l+m+mf}{4.53}\PY{p}{,} \PY{l+m+mf}{3.97}\PY{p}{,} \PY{l+m+mf}{6.81}\PY{p}{]}\PY{p}{,}
+\PY{p}{\PYZcb{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Convergence ladder (uniform grids march toward the stretched answer):}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{ladder}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{lf1e-progress-report-1_files/lf1e-progress-report-1_7_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Convergence ladder (uniform grids march toward the stretched answer):
+    \end{Verbatim}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{12}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+               run  onset (h)  hrs clw>1e-4 (of 48)  max clw (1e-4 kg/kg)
+0         s3 167 m          5                    40                  4.84
+1        v10 100 m          3                    43                  5.11
+2          s7 50 m          2                    45                  5.37
+3          s8 25 m          1                    47                  5.01
+4          s9 10 m          0                    48                  3.98
+5    s4 stretch/30          0                    48                  4.53
+6  s10 stretch/100          0                    48                  3.97
+7         EC-Earth          1                    47                  6.81
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \subsection{4. Calibration: 6-parameter UKI against EC-Earth day-2
+profiles}\label{calibration-6-parameter-uki-against-ec-earth-day-2-profiles}
+
+\textbf{Setup} (\texttt{experiments/clw\ calibration/}): ClimaCalibrate
++ EnsembleKalmanProcesses \texttt{TransformUnscented} (UKI,
+\texttt{impose\_prior=true}) → 13 deterministic sigma-point members per
+iteration, run sequentially in one Julia process (JIT paid once;
+\textasciitilde38 s/member, \textasciitilde8.2 min/iteration, 6
+iterations + fixed cost = \textbf{54 min measured}).
+
+\textbf{Observations:} EC-Earth day-2 (hours 25--48) time-mean clw and
+cli profiles, interpolated to 10 pressure levels (995→905 hPa),
+transformed \texttt{log10(q\ +\ 10⁻⁷)}; 20-dim observation vector,
+diagonal noise σ = 0.3 log₁₀ units (≈ factor-2 per level). Target
+cross-validated against Pithan 2016 Table 5.
+
+\textbf{The dead-knob discovery.} The headline parameters ---
+Frostenberg 2023 INP-curve coefficients \texttt{a}, \texttt{b} ---
+turned out to be \emph{dead} in CloudMicrophysics: ClimaParams defines
+them, the parameter struct stores them, but
+\texttt{INP\_concentration\_mean} hardcodes the curve (registered v0.36
+\textbf{and} upstream main, checked 2026-07-05). Calibrating them would
+have been a silent no-op. Fixed with a one-function vendored patch
+(\texttt{CloudMicrophysics.jl/} at repo root, wired into only the
+calibration environment): the INP concentration becomes
+\texttt{9·log(−b·T\_C/10)\ −\ log(a)} per the paper's Eq. (1), reducing
+exactly to stock at a = b = 1. Verified analytically and via sigma-point
+smoke tests before the full run. \emph{Candidate upstream contribution.}
+
+\textbf{Parameters and result} (final constrained means, adopted):
+
+{\def\LTcaptype{table} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+parameter
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+prior center
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+final
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+physics of the move
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{Frostenberg2023\_a\_coefficient} & 1 & \textbf{0.254} & ≈4× more
+INPs \\
+\texttt{Frostenberg2023\_b\_coefficient} & 1 & \textbf{1.194} & ≈×4.8
+INP concentration, cold-ward tilt \\
+\texttt{snow\_autoconversion\_timescale} & 100 s & \textbf{832 s} &
+cloud ice retained \textasciitilde8× longer (was draining to snow in
+\textasciitilde100 s → clivi 7× low) \\
+\texttt{clw\ autoconversion\ threshold} & 5e-4 & \textbf{3.77e-4} & rain
+drain now active (model clw peaks \textasciitilde4.2e-4 --- the default
+threshold meant rain \emph{never} formed → clwvi 3.5× high) \\
+\texttt{sublimation\_deposition\_timescale} & 100 s & 66.6 s & minor \\
+\texttt{condensation\_evaporation\_timescale} & 100 s & 101.1 s &
+untouched \\
+\end{longtable}
+}
+
+The moves are physically coherent: more ice production \textbf{and}
+slower ice-to-snow drain attack the ice deficit; the opened rain drain
+bleeds the liquid excess.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{13}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{PARAMS} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frostenberg2023\PYZus{}a\PYZus{}coefficient}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frostenberg2023\PYZus{}b\PYZus{}coefficient}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{snow\PYZus{}autoconversion\PYZus{}timescale}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cloud\PYZus{}liquid\PYZus{}water\PYZus{}specific\PYZus{}humidity\PYZus{}autoconversion\PYZus{}threshold}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sublimation\PYZus{}deposition\PYZus{}timescale}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{condensation\PYZus{}evaporation\PYZus{}timescale}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\PY{n}{SHORT} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frostenberg a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frostenberg b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{snow acnv τ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clw acnv threshold}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{subl/dep τ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cond/evap τ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+
+\PY{n}{traj} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{:}
+    \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{CAL} \PY{o}{/} \PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{output/uki\PYZus{}1/iteration\PYZus{}}\PY{l+s+si}{\PYZob{}}\PY{n}{i}\PY{l+s+si}{:}\PY{l+s+s2}{03d}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{/member\PYZus{}001/parameters.toml}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{fh}\PY{p}{:}
+        \PY{n}{t} \PY{o}{=} \PY{n}{tomllib}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{fh}\PY{p}{)}
+    \PY{n}{traj}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{PARAMS}\PY{p}{]}\PY{p}{)}
+\PY{n}{traj} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{traj}\PY{p}{)}                      \PY{c+c1}{\PYZsh{} (7 iters, 6 params); iter 1 = prior central point}
+
+\PY{n}{misfit} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{12.77}\PY{p}{,} \PY{l+m+mf}{6.20}\PY{p}{,} \PY{l+m+mf}{5.70}\PY{p}{,} \PY{l+m+mf}{4.76}\PY{p}{,} \PY{l+m+mf}{3.62}\PY{p}{,} \PY{l+m+mf}{2.29}\PY{p}{]}   \PY{c+c1}{\PYZsh{} chi2/dim, central member per iteration (see md)}
+\PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{a1}\PY{p}{,} \PY{n}{a2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{,} \PY{l+m+mf}{3.8}\PY{p}{)}\PY{p}{)}
+\PY{n}{a1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{misfit}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{C}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{calibrated}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.8}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{central member, per iteration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{a1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mf}{1.73}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{*}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ms}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{C}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{v10}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{final mean, standalone (1.73)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{a1}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;} \PY{n}{a1}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{1.08}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{noise floor (\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{chi\PYZca{}2\PYZdl{}/dim = 1)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{a1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UKI iteration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day\PYZhy{}2 misfit  \PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{chi\PYZca{}2\PYZdl{}/dim  (\PYZdl{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{sigma\PYZdl{}=0.3 log\PYZdl{}\PYZus{}}\PY{l+s+si}{\PYZob{}10\PYZcb{}}\PY{l+s+s2}{\PYZdl{})}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+       \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(a) misfit trajectory: 12.8 → 1.73}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{yscale}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{a1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}
+
+\PY{k}{for} \PY{n}{j}\PY{p}{,} \PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{s}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{PARAMS}\PY{p}{,} \PY{n}{SHORT}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+    \PY{n}{a2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{,} \PY{n}{traj}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{j}\PY{p}{]} \PY{o}{/} \PY{n}{traj}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ms}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.5}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{s}\PY{p}{)}
+\PY{n}{a2}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{)}
+\PY{n}{a2}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UKI iteration (0 = prior center)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{value / prior central value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{yscale}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+       \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(b) parameter evolution (central sigma point)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{a2}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\PY{n}{fig}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{n}{FIGDIR} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fig4\PYZus{}uki\PYZus{}misfit\PYZus{}trajectory.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{150}\PY{p}{,} \PY{n}{bbox\PYZus{}inches}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Misfit still descending at iteration 6 → more iterations (or a revisited noise model) could tighten further.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{lf1e-progress-report-1_files/lf1e-progress-report-1_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Misfit still descending at iteration 6 → more iterations (or a revisited noise
+model) could tighten further.
+    \end{Verbatim}
+
+    \subsection{5. The decisive test: 5-day out-of-sample
+verification}\label{the-decisive-test-5-day-out-of-sample-verification}
+
+The calibration only ever saw a day-2 snapshot --- and it boosted ice
+production \textasciitilde4--5×, raising an obvious worry: does the
+calibrated model now glaciate \emph{too readily} after day 2? Three
+standalone 5-day runs answer this (final mean = ``calibrated'';
+iteration-6 mean; stock-v10 ``baseline'').
+
+\textbf{The calibrated model reproduces EC-Earth's full cloud life
+cycle}: liquid buildup at the right magnitude on day 1, glaciation on
+day 3 within 3 hours of EC-Earth's, ice-only aftermath. The glaciation
+timing was never in the objective --- it \emph{emerged} from the
+calibrated ice physics, which is strong evidence the parameters capture
+mechanism rather than curve-fit. The baseline, by contrast, carries 5×
+too much liquid through day 2 and glaciates a day late. (A corollary:
+stock v10's celebrated ``48/48-hour persistence'' in the 2-day screen
+was a record-length illusion --- it also glaciates, on day 4.)
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{14}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{runs} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{calibrated}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{load\PYZus{}raw}\PY{p}{(}\PY{n}{V5D} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{calibrated}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{baseline}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{load\PYZus{}raw}\PY{p}{(}\PY{n}{V5D} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{baseline}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{iter6mean}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{load\PYZus{}raw}\PY{p}{(}\PY{n}{V5D} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{iter6mean}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{\PYZcb{}}
+
+\PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{12.5}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{gridspec\PYZus{}kw}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{width\PYZus{}ratios}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{1.4}\PY{p}{,} \PY{l+m+mf}{1.4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+\PY{n}{a1}\PY{p}{,} \PY{n}{a2}\PY{p}{,} \PY{n}{a3} \PY{o}{=} \PY{n}{axes}
+\PY{n}{h5} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{120}\PY{p}{)}
+\PY{n}{a1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{h5} \PY{o}{/} \PY{l+m+mi}{24}\PY{p}{,} \PY{n}{ec}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clwvi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{120}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{C}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{2.2}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{a2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{h5} \PY{o}{/} \PY{l+m+mi}{24}\PY{p}{,} \PY{n}{ec}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clivi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{120}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{C}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{2.2}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{k}{for} \PY{n}{name} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{calibrated}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{baseline}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+    \PY{n}{r} \PY{o}{=} \PY{n}{runs}\PY{p}{[}\PY{n}{name}\PY{p}{]}
+    \PY{n}{a1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{h5} \PY{o}{/} \PY{l+m+mi}{24}\PY{p}{,} \PY{n}{r}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lwp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{120}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{C}\PY{p}{[}\PY{n}{name}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.8}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{name}\PY{p}{)}
+    \PY{n}{a2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{h5} \PY{o}{/} \PY{l+m+mi}{24}\PY{p}{,} \PY{n}{r}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clivi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{120}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{C}\PY{p}{[}\PY{n}{name}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.8}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{name}\PY{p}{)}
+\PY{k}{for} \PY{n}{ax} \PY{o+ow}{in} \PY{p}{(}\PY{n}{a1}\PY{p}{,} \PY{n}{a2}\PY{p}{)}\PY{p}{:}
+    \PY{n}{ax}\PY{o}{.}\PY{n}{axvspan}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gold}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+    \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{a1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{ylabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kg m\PYZdl{}\PYZca{}}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{\PYZhy{}2\PYZcb{}\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(a) column liquid — glaciation timing emerges}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{a2}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(b) column ice}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{a1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{;} \PY{n}{a1}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{l+m+mf}{1.5}\PY{p}{,} \PY{n}{a1}\PY{o}{.}\PY{n}{get\PYZus{}ylim}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{l+m+mf}{0.93}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{training}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{window}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.35}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+
+\PY{n}{ecp} \PY{o}{=} \PY{n}{ec}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isel}\PY{p}{(}\PY{n}{time}\PY{o}{=}\PY{n+nb}{slice}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{values} \PY{o}{/} \PY{l+m+mi}{100}
+\PY{k}{for} \PY{n}{var}\PY{p}{,} \PY{n}{ls} \PY{o+ow}{in} \PY{p}{[}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cli}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]}\PY{p}{:}
+    \PY{n}{a3}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{ec}\PY{p}{[}\PY{n}{var}\PY{p}{]}\PY{o}{.}\PY{n}{isel}\PY{p}{(}\PY{n}{time}\PY{o}{=}\PY{n+nb}{slice}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}7}\PY{p}{)}\PY{p}{,} \PY{n}{ecp}\PY{p}{,}
+            \PY{n}{color}\PY{o}{=}\PY{n}{C}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{n}{ls}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.8}\PY{p}{)}
+    \PY{k}{for} \PY{n}{name} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{calibrated}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{baseline}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+        \PY{n}{r} \PY{o}{=} \PY{n}{runs}\PY{p}{[}\PY{n}{name}\PY{p}{]}
+        \PY{n}{p} \PY{o}{=} \PY{n}{r}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pfull}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isel}\PY{p}{(}\PY{n}{time}\PY{o}{=}\PY{n+nb}{slice}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{values} \PY{o}{/} \PY{l+m+mi}{100}
+        \PY{n}{a3}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{r}\PY{p}{[}\PY{n}{var}\PY{p}{]}\PY{o}{.}\PY{n}{isel}\PY{p}{(}\PY{n}{time}\PY{o}{=}\PY{n+nb}{slice}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}7}\PY{p}{)}\PY{p}{,} \PY{n}{p}\PY{p}{,}
+                \PY{n}{color}\PY{o}{=}\PY{n}{C}\PY{p}{[}\PY{n}{name}\PY{p}{]}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{n}{ls}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{1.5}\PY{p}{)}
+\PY{k}{for} \PY{n}{lev} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{995.0}\PY{p}{,} \PY{l+m+mf}{904.9}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{10.0}\PY{p}{)}\PY{p}{:}
+    \PY{n}{a3}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{n}{lev}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.85}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\PY{n}{a3}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{ylim}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1015}\PY{p}{,} \PY{l+m+mi}{880}\PY{p}{)}\PY{p}{,} \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log\PYZdl{}\PYZus{}}\PY{l+s+si}{\PYZob{}10\PYZcb{}}\PY{l+s+s2}{\PYZdl{}(q + 10\PYZdl{}\PYZca{}}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{\PYZhy{}7\PYZcb{}\PYZdl{})}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pressure (hPa)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+       \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(c) day\PYZhy{}2 profiles in obs space}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{(solid clw, dashed cli; grey = obs levels)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{fig}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{n}{FIGDIR} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fig5\PYZus{}5day\PYZus{}verification.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{150}\PY{p}{,} \PY{n}{bbox\PYZus{}inches}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{lf1e-progress-report-1_files/lf1e-progress-report-1_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{15}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Verification scorecard — computed live with the same transform as the Julia observation map.}
+\PY{c+c1}{\PYZsh{} (Recorded pitfall: an earlier ad\PYZhy{}hoc rescoring used positional slicing + clamping interp and got}
+\PY{c+c1}{\PYZsh{}  bogus chi2; this cell replicates the verified scorer, which matches the authoritative Julia}
+\PY{c+c1}{\PYZsh{}  g\PYZus{}vector path bit\PYZhy{}for\PYZhy{}bit on these runs.)}
+\PY{n}{P} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{995.0}\PY{p}{,} \PY{l+m+mf}{904.9}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{10.0}\PY{p}{)}
+\PY{k}{def}\PY{+w}{ }\PY{n+nf}{gvec}\PY{p}{(}\PY{n}{clw}\PY{p}{,} \PY{n}{cli}\PY{p}{,} \PY{n}{p}\PY{p}{)}\PY{p}{:}
+    \PY{n}{o} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{p}\PY{p}{)}
+    \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{interp}\PY{p}{(}\PY{n}{P}\PY{p}{,} \PY{n}{p}\PY{p}{[}\PY{n}{o}\PY{p}{]}\PY{p}{,} \PY{n}{clw}\PY{p}{[}\PY{n}{o}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}7}\PY{p}{)}\PY{p}{,}
+                           \PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{interp}\PY{p}{(}\PY{n}{P}\PY{p}{,} \PY{n}{p}\PY{p}{[}\PY{n}{o}\PY{p}{]}\PY{p}{,} \PY{n}{cli}\PY{p}{[}\PY{n}{o}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}7}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\PY{n}{y} \PY{o}{=} \PY{n}{gvec}\PY{p}{(}\PY{n}{ec}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isel}\PY{p}{(}\PY{n}{time}\PY{o}{=}\PY{n+nb}{slice}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+         \PY{n}{ec}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cli}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isel}\PY{p}{(}\PY{n}{time}\PY{o}{=}\PY{n+nb}{slice}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{ecp}\PY{p}{)}
+
+\PY{n}{rows} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+\PY{n}{ec\PYZus{}maxclw} \PY{o}{=} \PY{n}{ec}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{dim}\PY{o}{=}\PY{n}{ec\PYZus{}lev}\PY{p}{)}\PY{o}{.}\PY{n}{values}
+\PY{n}{rows}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{run}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EC\PYZhy{}Earth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day\PYZhy{}2 chi2/dim}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mf}{0.0}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day\PYZhy{}2 clwvi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{ec}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clwvi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{24}\PY{p}{:}\PY{l+m+mi}{48}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{last liquid hour}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n+nb}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{ec\PYZus{}maxclw} \PY{o}{\PYZgt{}} \PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day\PYZhy{}4/5 clivi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{ec}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clivi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{72}\PY{p}{:}\PY{l+m+mi}{120}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+\PY{k}{for} \PY{n}{name} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{calibrated}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{iter6mean}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{baseline}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+    \PY{n}{r} \PY{o}{=} \PY{n}{runs}\PY{p}{[}\PY{n}{name}\PY{p}{]}
+    \PY{n}{lev} \PY{o}{=} \PY{p}{[}\PY{n}{d} \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{r}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dims} \PY{k}{if} \PY{n}{d} \PY{o}{!=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+    \PY{n}{p} \PY{o}{=} \PY{n}{r}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pfull}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isel}\PY{p}{(}\PY{n}{time}\PY{o}{=}\PY{n+nb}{slice}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{values} \PY{o}{/} \PY{l+m+mi}{100}
+    \PY{n}{g} \PY{o}{=} \PY{n}{gvec}\PY{p}{(}\PY{n}{r}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isel}\PY{p}{(}\PY{n}{time}\PY{o}{=}\PY{n+nb}{slice}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+             \PY{n}{r}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cli}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isel}\PY{p}{(}\PY{n}{time}\PY{o}{=}\PY{n+nb}{slice}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{p}\PY{p}{)}
+    \PY{n}{mx} \PY{o}{=} \PY{n}{r}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{dim}\PY{o}{=}\PY{n}{lev}\PY{p}{)}\PY{o}{.}\PY{n}{values}
+    \PY{n}{rows}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{run}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{name}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day\PYZhy{}2 chi2/dim}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{g} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{)} \PY{o}{/} \PY{l+m+mf}{0.3}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}
+                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day\PYZhy{}2 clwvi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{r}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lwp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{24}\PY{p}{:}\PY{l+m+mi}{48}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{last liquid hour}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n+nb}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{mx} \PY{o}{\PYZgt{}} \PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day\PYZhy{}4/5 clivi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{r}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clivi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{72}\PY{p}{:}\PY{l+m+mi}{120}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{rows}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{15}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+          run  day-2 chi2/dim  day-2 clwvi  last liquid hour  day-4/5 clivi
+0    EC-Earth          0.0000       0.0424                51         0.0307
+1  calibrated          1.7265       0.0795                54         0.0102
+2   iter6mean          2.2870       0.0847                54         0.0088
+3    baseline         14.3279       0.2036                74         0.0060
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \textbf{Verdict: calibration validated; final mean adopted.} Residual
+biases, honestly stated:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Day-2 clwvi ≈ 1.9× high} (0.080 vs 0.042) --- the profile peak
+  is slightly hot near 975 hPa; the in-cloud mixing ratios are close
+  (χ²/dim 1.73 vs the σ = 0.3 noise floor of 1).
+\item
+  \textbf{Post-glaciation clivi ≈ 3× low} (day-4/5 mean
+  \textasciitilde0.010 vs EC-Earth 0.028--0.034) --- entirely outside
+  the calibration window; the ice-decay phase was never fit.
+\end{itemize}
+
+    \subsection{6. Open questions and next
+steps}\label{open-questions-and-next-steps}
+
+\textbf{Candidate follow-ups} (recorded in the calibration write-up, not
+yet started):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{More UKI iterations} --- the misfit was still descending at
+  iteration 6 (χ²/dim 1.73 \textgreater{} 1 means we're not yet inside
+  the assumed noise).
+\item
+  \textbf{Add day-3+ clivi to the observation vector} --- now that the
+  20-day record is understood, the ice life cycle (peak + decay) is
+  fittable and directly targets the largest residual bias.
+\item
+  \textbf{Revisit the noise model} --- σ = 0.3 uniform in log₁₀ was a
+  first guess; per-variable σ would let the ice phase pull harder.
+\item
+  \textbf{Upstream contributions to CliMA}: (a) the CloudMicrophysics
+  Frostenberg \texttt{a}/\texttt{b} dead-knob patch; (b) the finding
+  that default \texttt{ConstantTimescale} deposition makes sustained
+  mixed-phase Arctic clouds impossible in 1M runs (plus a known wrong
+  \texttt{clivi} docstring).
+\item
+  \textbf{The physics question beyond tuning}: neither EC-Earth nor the
+  calibrated model sustains supercooled liquid past day 3, but
+  \emph{observed} Arctic mixed-phase clouds famously persist. Whether
+  ClimaAtmos can be configured to do so (INP recycling? entrainment of
+  INP-depleted air?) is a genuinely open --- and interesting ---
+  question this tuned baseline is now well-positioned to explore.
+\end{enumerate}
+
+\textbf{Reproducibility state} (all committed 2026-07-05): experiment
+folders \texttt{clw\ sensitivity\ experiments},
+\texttt{scm\ speed\ tests}, \texttt{clw\ calibration} (protocols +
+outputs); vendored \texttt{CloudMicrophysics.jl} patch; ClimaAtmos fork
+branch \texttt{jy/coldslab} pushed (trimmed diagnostics + dt\_rad).
+Calibrated parameter values live in
+\texttt{experiments/clw\ calibration/output/verify5d/calibrated\_params.toml}.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+\end{document}

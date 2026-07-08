@@ -1,0 +1,82 @@
+# lf1e 20-day run — calibrated Larcform1, full Pithan record length
+#
+# Standalone (NOT an overlay). Contents = the validated calibration forward
+# model ("experiments/clw calibration/configs/forward_model.yml": s11 grid —
+# z_max 5 km, 100 stretched levels, dt_rad 30 min, TemperatureDependent ice
+# formation) extended to t_end 20days (= 481 hourly steps, the Pithan 2016
+# intercomparison record length) with the full diagnostic set consumed by
+# scripts/convert_to_pithan.py.
+#
+# The `toml:` entry is replaced at runtime by run_20day.jl with absolute paths
+# to the calibration base toml plus configs/toml/calibrated_params.toml (the
+# uki_1 final-mean parameters, validated in the 5-day verification pair —
+# see "experiments/clw calibration/lf1e-clw-calibration-1.md").
+
+job_id: lf1e_20day_calibrated
+reference_job_id: larcform1
+
+# Atmosphere / surface
+initial_condition: Larcform1
+rayleigh_sponge: false
+prognostic_surface: SlabOceanSST
+surface_setup: DefaultMoninObukhov
+disable_surface_flux_tendency: false
+
+# Temporal
+FLOAT_TYPE: Float32
+t_end: 20days
+dt: 30secs
+dt_rad: 30mins
+dt_save_state_to_disk: Inf
+
+# Spatial (validated s11 grid)
+config: "column"
+z_max: 9000.0
+z_elem: 100
+z_stretch: true
+dz_bottom: 10.0
+
+# Solver
+approximate_linear_solve_iters: 2
+ode_algo: ARS222
+
+# Parameters (replaced with absolute paths at runtime; see header)
+toml: [configs/toml/calibrated_params.toml]
+
+# Radiation
+rad: allskywithclear
+insolation: larcform1
+
+# Turbulence and EDMF
+turbconv: prognostic_edmfx
+implicit_diffusion: true
+edmfx_entr_model: "Generalized"
+edmfx_detr_model: "Generalized"
+edmfx_sgs_mass_flux: true
+edmfx_sgs_diffusive_flux: true
+edmfx_nh_pressure: true
+edmfx_vertical_diffusion: true
+edmfx_filter: true
+prognostic_tke: true
+hyperdiff: ~
+
+# Clouds / microphysics
+cloud_model: quadrature
+microphysics_model: 1M
+cloud_ice_formation: "TemperatureDependent"
+
+# Logging and diagnostics
+log_to_file: true
+check_conservation: false
+netcdf_output_at_levels: true
+output_default_diagnostics: false
+
+# Full Pithan set: everything scripts/convert_to_pithan.py consumes, hourly
+# to match the intercomparison records (use --suffix 1h_average).
+diagnostics:
+  - short_name: [ta, pfull, rhoa, hus, hur, ua, va, cl, clw, cli, lwp, clivi]
+    period: 1hours
+    reduction_time: average
+  - short_name: [ts, rlds, rlus, rlut, pr, prsn, hfss, hfls]
+    period: 1hours
+    reduction_time: average

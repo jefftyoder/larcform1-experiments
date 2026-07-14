@@ -1,0 +1,30 @@
+# uki_1 final constrained parameter means (iteration-7 state), promoted from
+# output/verify5d/calibrated_params.toml (gitignored) on 2026-07-09.
+# Provenance + verification: ../../lf1e-clw-calibration-1.md (Results — uki_1).
+# Use together with larcform1_calibration_base.toml (stock toml minus the two
+# timescale entries, which this file supplies — duplicate-entry workaround).
+
+[sublimation_deposition_timescale]
+value = 66.59059810650213
+type = "float"
+
+[condensation_evaporation_timescale]
+value = 101.06770430080576
+type = "float"
+
+[cloud_liquid_water_specific_humidity_autoconversion_threshold]
+value = 0.00037722882484855704
+type = "float"
+
+[snow_autoconversion_timescale]
+value = 831.8650004878158
+type = "float"
+
+[Frostenberg2023_a_coefficient]
+value = 0.2537186881084236
+type = "float"
+
+[Frostenberg2023_b_coefficient]
+value = 1.1944319667046315
+type = "float"
+

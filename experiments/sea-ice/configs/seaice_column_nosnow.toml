@@ -1,0 +1,12 @@
+# Disable the snow layer on the clima_seaice_column component (bare 1 m ice).
+#
+# NOTE (2026-07-09): unusable as a `coupler_toml` entry under ClimaCoupler
+# v0.2.2 — `coupler_toml` replaces the atmos `toml` list and its entries trip
+# the atmos strict unused-parameter check before the ice component reads them
+# (see components/clima_seaice_column.jl). Use the registered component name
+# `ice_model: "clima_seaice_column_nosnow"` instead. Kept for standalone
+# component tests (pass as `override_file` to `CP.create_toml_dict`).
+
+[seaice_column_enable_snow]
+value = false
+type = "bool"

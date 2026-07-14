@@ -1,0 +1,34 @@
+# Phase 0 coupler overlay for the Larcform1 SCM over prescribed slab sea ice.
+#
+# This file contains ONLY coupler-specific keys plus atmos keys that must differ
+# from the standalone run. It is merged on top of
+# ClimaAtmos.jl/config/model_configs/larcform1_1M_prognostic_edmfx.yml
+# by run_prescribed_ice.jl (overlay wins), which also validates every key
+# against the coupler + atmos defaults so nothing is silently ignored.
+#
+# Known Phase 0 physics compromises (fixed in Phase 1 by a custom component):
+#   - PrescribedIceSimulation hardcodes h = 2 m (Pithan: 1 m), z0m = z0b = 1e-4 m
+#     (Pithan modal: 1e-3 m), T_base = 271.2 K, albedo 0.65 (irrelevant: no insolation).
+
+job_id: "lf1_prescribed_ice"
+
+# --- Coupler wiring ---
+domain_type: "column"
+column_latlon: [80.0, 0.0]        # Pithan 2016: 80°N
+scm_surface_type: "sea_ice"       # column mode: nulls ocean+land, forces ice fraction = 1
+mode_name: "amip"                 # mode dict entry; ice_model passes through in column mode
+ice_model: "prescribed"           # PrescribedIceSimulation (slab, conductive)
+dt_cpl: "30secs"                  # = atmos dt; every component steps at 30 s
+coupler_output_dir: "output/lf1_prescribed_ice"
+
+# --- Atmos keys that must differ from the standalone config ---
+# Coupler owns surface fluxes; atmos must not evolve its own slab surface.
+# PrescribedSurface → flux_scheme = nothing (coupler handoff; requires the
+# local ClimaAtmos fix making PrescribedSurface override setup flux pieces).
+# PrescribedSST + Larcform1 setup → initial T_sfc = 250 K (Pithan), then the
+# coupler overwrites T_sfc every coupling step.
+surface_setup: "PrescribedSurface"
+prognostic_surface: "PrescribedSST"
+t_end: "2days"
+start_date: "20010101"            # polar winter
+checkpoint_dt: "90days"           # > t_end: no checkpoints during smoke test

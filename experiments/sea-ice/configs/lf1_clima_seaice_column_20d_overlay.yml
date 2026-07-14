@@ -1,0 +1,41 @@
+# 20-day Pithan production overlay: Larcform1 SCM over ClimaSeaIce ice + snow
+# (`clima_seaice_column`), calibrated microphysics, on the atmosphere numerics
+# of the calibrated slab-ocean reference run ("experiments/20day run/", s11
+# grid) so that differences against that run are attributable to the surface
+# model. Snow-off twin: lf1_clima_seaice_column_nosnow_20d_overlay.yml.
+#
+# Merged on top of ClimaAtmos.jl/config/model_configs/larcform1_1M_prognostic_edmfx.yml
+# by run_20day_suite.jl (overlay wins).
+
+job_id: "lf1_clima_seaice_column_20d"
+
+# --- Coupler wiring ---
+domain_type: "column"
+column_latlon: [80.0, 0.0]
+scm_surface_type: "sea_ice"
+mode_name: "amip"
+ice_model: "clima_seaice_column"
+dt_cpl: "30secs"
+coupler_output_dir: "output/lf1_clima_seaice_column_20d"
+
+# --- Calibrated microphysics (lf1e-clw-calibration-1, uki_1 final means) ---
+# Requires the vendored CloudMicrophysics.jl dev'd in the root env.
+# NOTE: must be `coupler_toml`, not atmos `toml` — ClimaCoupler v0.2.2 silently
+# reverts atmos-toml values to ClimaParams defaults (ClimaCouplerClimaAtmosExt.jl:668).
+cloud_ice_formation: "TemperatureDependent"
+coupler_toml:
+  - "experiments/clw calibration/configs/toml/larcform1_calibration_base.toml"
+  - "experiments/clw calibration/configs/toml/calibrated_uki1_final.toml"
+
+# --- Reference-run atmosphere numerics (s11 grid, as actually used by the
+# calibrated slab-ocean 20-day run: output/calibrated/output_0000) ---
+z_max: 5000.0
+z_elem: 100
+z_stretch: true
+
+# --- Atmos keys that must differ from the standalone config ---
+surface_setup: "PrescribedSurface"
+prognostic_surface: "PrescribedSST"
+t_end: "20days"
+start_date: "20010101"
+checkpoint_dt: "90days"

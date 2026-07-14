@@ -1,0 +1,15 @@
+run                            glac_d stab_glac stab_d3-10 stab_d10
+--------------------------------------------------------------------
+Slab ocean (SST~250K) [CAL]      2.29      7.15      -1.60    -6.61
+Slab ocean (SST~250K) [UNCAL]    3.17     -1.12      -4.11    -7.29
+
+Slab ice (Holloway-Manabe) [CAL]   2.29     -0.01      -0.98    -2.07
+Slab ice (Holloway-Manabe) [UNCAL]   3.08     -9.29      -3.27    -1.38
+
+ClimaSeaIce, bare [CAL]          2.50     -4.36       2.24     1.32
+ClimaSeaIce, bare [UNCAL]        3.46     -8.90       1.23     2.51
+
+ClimaSeaIce + snow [CAL]         2.46      0.39      11.12    12.29
+ClimaSeaIce + snow [UNCAL]       3.25     -5.44      10.70    14.10
+
+EC-Earth                         2.21     -0.54      -6.01    -8.57

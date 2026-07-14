@@ -1,0 +1,15 @@
+run                            glac_d dtheta_glac dtheta_d3-10 dtheta_d10
+--------------------------------------------------------------------------
+Slab ocean (SST~250K) [CAL]      2.29       18.90         8.43       2.35
+Slab ocean (SST~250K) [UNCAL]    3.17        9.81         5.74       1.58
+
+Slab ice (Holloway-Manabe) [CAL]   2.29       11.82         9.16       6.90
+Slab ice (Holloway-Manabe) [UNCAL]   3.08        1.75         6.75       7.64
+
+ClimaSeaIce, bare [CAL]          2.50        7.60        12.54      10.42
+ClimaSeaIce, bare [UNCAL]        3.46        2.37        11.46      11.63
+
+ClimaSeaIce + snow [CAL]         2.46       12.27        21.14      20.94
+ClimaSeaIce + snow [UNCAL]       3.25        5.73        20.67      22.87
+
+EC-Earth                         2.21       12.66         6.64       3.76

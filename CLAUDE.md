@@ -77,8 +77,10 @@ Parameters: p₀ = 1013 hPa, lapse rate γ = 8 × 10⁻³ K m⁻¹, R = 287 J kg
 
 ### Open TODOs
 
-- **Coupler z₀ₘ defaults don't match standalone run.** `src/setups/Larcform1.jl:surface_condition` sets z₀ₘ = 1e-3 m correctly for the standalone ClimaAtmos path. But `PrescribedIceSimulation` defaults to z₀ₘ = 1e-4 m and `ClimaSeaIceSimulation` hardcodes 5.8e-5 m. When moving to coupled ClimaCoupler runs, update those defaults or override via config/TOML so z₀ₘ = 1e-3 m is consistent.
+- **Uncommitted ClimaAtmos fix that every coupled run depends on.** `ClimaAtmos.jl/src/config/model_getters.jl` is patched so `surface_setup: PrescribedSurface` overrides a setup-provided flux scheme — otherwise atmos *and* the coupler both compute surface fluxes and nothing errors. It exists only in the pinned submodule's working tree. Don't `git submodule update` it away; it still needs a branch and an upstream PR.
+- **Three upstream ClimaCoupler bugs found, none reported yet:** column-mode SIC callback (belongs on [#1860](https://github.com/CliMA/ClimaCoupler.jl/issues/1860)), the `coupler_toml` clobber (see section below), and `postprocess` failing on column output. All are worked around in `experiments/sea-ice/`.
 - **`prognostic_tke` field in `Larcform1` struct is dead code.** `Larcform1.prognostic_tke::Bool` is accepted by the constructor but never used — TKE is always initialized to zero regardless. Either wire it up (non-zero TKE warm-start) or remove the field.
+- ~~Coupler z₀ₘ defaults don't match standalone run.~~ **Resolved** for our own components: `larcform1_ice` and `clima_seaice_column` both set z₀ₘ = z₀ᵦ = 1e-3 m (Pithan modal). Still true of *upstream's* `PrescribedIceSimulation` (1e-4 m) and `ClimaSeaIceSimulation` (5.8e-5 m), so it applies to any run built on those.
 
 ## Architecture
 
@@ -195,7 +197,14 @@ configs/              # YAML configuration files
   larcform1_minimal.yml   # main config: column, sea_ice, 10-day run
 experiments/
   larcform1_driver.jl     # entrypoint: CoupledSimulation → run! → make_plots
-ClimaAtmos.jl/        # submodule (dev'd into the root env)
+  sea-ice/                # coupled sea-ice surfaces (PLAN.md = status + findings)
+    components/           # custom Interfacer sims: larcform1_ice, clima_seaice_column
+    run_*.jl              # per-phase drivers (--dry-run validates config only)
+    analysis/converted/   # 20-day suite in Pithan NetCDF form (*_cal.nc = calibrated)
+  pithan-reproduction/    # our runs analyzed in the paper's own framework (Figs 1/4/5/6, Table 5)
+  clw calibration/        # UKI calibration of the microphysics (configs/toml/ = final means)
+ClimaAtmos.jl/        # submodule (dev'd into the root env) — carries an uncommitted
+                      #   surface-flux-ownership fix; see Open TODOs
 CloudMicrophysics.jl/ # vendored (registered 0.36 + Frostenberg a/b wired in; dev'd into the root env)
 output/               # simulation output (gitignored)
   larcform1_minimal/

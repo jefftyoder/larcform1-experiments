@@ -1,0 +1,40 @@
+# 20-day Pithan production overlay: snow-OFF twin of
+# lf1_clima_seaice_column_20d_overlay.yml (bare 1 m ClimaSeaIce ice, no snow
+# layer, via the `clima_seaice_column_nosnow` component registration — a
+# `coupler_toml` switch is unusable for surface-only parameters under
+# ClimaCoupler v0.2.2 — atmos's strict unused-parameter check aborts on them —
+# see the note in components/clima_seaice_column.jl; atmos-consumed parameters
+# like the calibrated microphysics below are fine and in fact REQUIRE
+# coupler_toml). See the snow overlay for the rationale
+# of every other key.
+
+job_id: "lf1_clima_seaice_column_nosnow_20d"
+
+# --- Coupler wiring ---
+domain_type: "column"
+column_latlon: [80.0, 0.0]
+scm_surface_type: "sea_ice"
+mode_name: "amip"
+ice_model: "clima_seaice_column_nosnow"
+dt_cpl: "30secs"
+coupler_output_dir: "output/lf1_clima_seaice_column_nosnow_20d"
+
+# --- Calibrated microphysics (lf1e-clw-calibration-1, uki_1 final means) ---
+# NOTE: must be `coupler_toml`, not atmos `toml` — ClimaCoupler v0.2.2 silently
+# reverts atmos-toml values to ClimaParams defaults (ClimaCouplerClimaAtmosExt.jl:668).
+cloud_ice_formation: "TemperatureDependent"
+coupler_toml:
+  - "experiments/clw calibration/configs/toml/larcform1_calibration_base.toml"
+  - "experiments/clw calibration/configs/toml/calibrated_uki1_final.toml"
+
+# --- Reference-run atmosphere numerics (s11 grid) ---
+z_max: 5000.0
+z_elem: 100
+z_stretch: true
+
+# --- Atmos keys that must differ from the standalone config ---
+surface_setup: "PrescribedSurface"
+prognostic_surface: "PrescribedSST"
+t_end: "20days"
+start_date: "20010101"
+checkpoint_dt: "90days"

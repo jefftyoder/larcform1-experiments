@@ -106,13 +106,40 @@ microphysics via `coupler_toml`, ClimaSeaIce ice + snow, s11 grid: z_max 5000,
 z_elem 100, stretched, Float32, dt 30 s), with only `device`, `t_end`, and
 `job_id` overridden. Distinct `job_id` per label ⇒ no output-dir collisions.
 
-Reported per run: **TOTAL** (external wall clock, the headline), `setup`
-(construction, which is where most JIT/CUDA compilation lands), `solve` (pure
-time-stepping), and **ms/step** (the device's true throughput, independent of
-compilation).
+Reported per run: **TOTAL** (external wall clock, the headline) and the coupler's
+own **ms/step**.
 
-`ms/step` is the number to compare devices on; `TOTAL` is the number that decides
-what we actually run.
+### Measure per-step cost with the coupler's timer, NOT solve/nsteps
+
+The obvious metric — wrap `run!(cs)` in a timer and divide by step count — is
+**wrong, by ~7×**, and this benchmark got it wrong first time round.
+
+`run!` compiles the entire tendency on its first evaluation. That JIT lands
+*inside* the timed region (~140 s on Stratus), so `solve/nsteps` amortises a
+**one-time** cost across **every** step:
+
+```
+Stratus CPU×1, 1 day:  solve = 164 s / 2880 steps  = 57 ms/step   <- WRONG
+                       of which ~141 s is tendency JIT
+                       real stepping = 2880 x 6.8 ms = 23 s
+```
+
+The tell was in the data: a 10-step smoke run had a *longer* solve (347 s) than a
+2880-step run (276 s) on the same machine — impossible unless a fixed compile cost
+dominates. Extrapolating the bad number predicted ~52 min for a 20-day run; the
+real answer is **13.9 min**.
+
+ClimaCoupler already reports the right thing. `SimCoordinator.jl:70-80` wraps
+**only the coupling loop** in `ClimaComms.@elapsed` and prints:
+
+```
+[ Info: Simulation took 481.67 seconds
+[ Info: Walltime per coupling step: 0.00836
+```
+
+That is the JIT-free per-step cost, and it is what the tables below quote. Use it
+(and `ClimaComms.@elapsed`, which synchronises the GPU — a bare CPU-side timer
+would under-report CUDA work).
 
 ### Requirements on a GPU host
 
@@ -184,63 +211,77 @@ attempting a GPU run will hit all three.
 
 ## Results
 
-All runs: the production `lf1_clima_seaice_column_20d` configuration (calibrated
-microphysics, ClimaSeaIce ice + snow), **1 simulated day** ⇒ ~2,880 steps at
-dt = 30 s. `TOTAL` is external wall clock around the whole process.
+Production `lf1_clima_seaice_column_20d` configuration (calibrated microphysics,
+ClimaSeaIce ice + snow, s11 grid, Float32, dt = 30 s). **ms/step is the coupler's
+JIT-free coupling-loop timer**, not solve/nsteps — see the methodology note above.
 
-### Device sweep (fresh start, no restart)
+### CPU: threads make it *slower*
 
-| host | device | threads | TOTAL | setup (incl. JIT) | solve | ms/step |
-|---|---|---|---|---|---|---|
-| MacBook M1 | CPUSingleThreaded | 1 | 566 s | 272.6 s | 276.2 s | 95.9 |
-| MacBook M1 | CPUMultiThreaded | 8 | 511 s | 262.7 s | 235.6 s | 81.8 |
-| stratus | CPUSingleThreaded | 1 | **421 s** | 245.8 s | 164.1 s | **57.0** |
-| stratus | CPUMultiThreaded | 24 | **385 s** | 232.9 s | 143.1 s | **49.7** |
-| MacBook GPU | — | — | *impossible* | — | — | — |
+1 simulated day (2,880 steps), fresh start.
 
-### GPU vs CPU — matched pair (same host, same restart, same settings)
-
-The GPU cannot fresh-start (blocker 2), so its honest comparison is against a CPU
-run restarted from the *same* checkpoint with the *same* shim. 2,870 steps each.
-
-| device | TOTAL | setup (incl. compilation) | solve | ms/step |
+| host | threads | coupling loop | ms/step | SYPD |
 |---|---|---|---|---|
-| stratus CPUSingleThreaded | **419 s** | 247.0 s | 160.3 s | **55.9** |
-| stratus RTX A6000 (CUDA) | **539 s** | 311.1 s | 212.8 s | **74.2** |
-| | **GPU 1.29× slower** | +64 s (CUDA compile) | | **GPU 1.33× slower** |
+| stratus (i7-13700) | 1 | 19.6 s | **6.79** | 12.09 |
+| stratus | 24 | 20.5 s | 7.13 | 11.51 |
+| MacBook M1 | 1 | 24.8 s | **8.62** | 9.53 |
+| MacBook M1 | 8 | 29.9 s | 10.39 | 7.90 |
 
-Cross-check: CPU-1 measures 55.9 ms/step restarted vs 57.0 fresh — within 2%, so
-the restart does not perturb timing and the two tables are directly comparable.
+Threads cost **5% on Stratus (24t) and 20% on the Mac (8t)**.
+
+### GPU vs CPU: matched pair (same host, same restart, same settings)
+
+The GPU cannot fresh-start (blocker 2 below), so it is compared against a CPU run
+restarted from the *same* checkpoint with the *same* shim. 2,870 steps each.
+
+| device | ms/step | SYPD |
+|---|---|---|
+| stratus CPUSingleThreaded | **11.0** | 7.47 |
+| stratus RTX A6000 (CUDA) | **41.5** | 1.98 |
+| | **GPU 3.8x slower** | |
+
+(Both legs are inflated by ~4 ms/step of in-loop JIT that a restart defers into the
+first `step!`; it hits both equally, so the *ratio* is the trustworthy quantity.)
+
+### Real total run time, 20 simulated days (57,590 steps)
+
+| host | device | TOTAL wall | of which coupling loop | ms/step |
+|---|---|---|---|---|
+| stratus | CPU x24 | **835 s (13.9 min)** | 482 s | 8.36 |
+
+~350 s of the 835 s is process start + package load + JIT; the physics is ~482 s.
+A single-threaded CPU run would be slightly *faster* still (see above). The GPU
+20-day leg was cancelled once the per-step verdict was unambiguous — at 41.5 ms/step
+it was tracking ~45 min, ~3x the CPU.
 
 ## Conclusions
 
-**1. The GPU is slower than the CPU for this model, and always will be.**
-Not marginally-not-worth-it — actually slower, 1.33× per step, on a 49 GB A6000
-against a *single* CPU core. The reason is structural, not a tuning problem: the
-SCM has **Nh = 1**, so the only parallelism available to the GPU is ~100 vertical
-levels, on a device with 10,752 cores. Every one of the 57,600 sequential timesteps
-is a burst of tiny kernel launches whose latency cannot be amortised over 100 lanes
-of work, and the steps cannot be batched because they are sequentially dependent.
-The GPU then loses *again* on total time by paying +64 s of CUDA compilation. No
-amount of optimisation changes the shape of this: there is nothing to parallelise.
+**1. Do not run this SCM on the GPU. It is ~4x slower than one CPU core.**
+Not "not worth the effort" — actually slower, on a 49 GB A6000 against a single
+core. The reason is structural and untunable: the SCM has **Nh = 1**, so the only
+parallelism a 10,752-core card can exploit is ~100 vertical levels, across 57,600
+*sequentially dependent* timesteps whose kernel-launch latency cannot be amortised
+over 100 lanes of work. It then loses again on ~60 s of extra CUDA compilation.
+There is nothing here to parallelise.
 
-**2. Multithreading gives a modest, real, but sub-linear gain: ~13%.**
-(57.0 → 49.7 ms/step on Stratus with 24 threads; 95.9 → 81.8 on the Mac with 8.)
-This is *less* than a naive reading would suggest and more than my own prediction of
-zero. It is not coming from the dycore: every `Threads.@threads` in ClimaCore loops
-`for h in 1:Nh`, and Nh = 1, so those loops have exactly one iteration to hand out.
-The ~13% is incidental — most plausibly Julia's parallel GC, which does have work to
-do. **Take it (it is free — just pass `-t auto`), but do not expect it to scale**:
-24 threads buys 13%, and a 25th would buy nothing.
+**2. Do not use `-t auto` either. Threads also make stepping slower** (5-20%).
+Same root cause: every `Threads.@threads` in ClimaCore loops `for h in 1:Nh`
+(`Fields/indices.jl:60,92,...`; `Operators/finitedifference.jl:3898`), and Nh = 1 —
+one iteration to hand out, threads 2..N idle, pure synchronisation overhead.
 
-**3. The MacBook is ~1.7× slower per step than Stratus's CPU** (95.9 vs 57.0 ms/step)
-— worth knowing, but both are usable for single runs.
+> Threads *do* speed up JIT (Julia compiles in parallel), which is why they look
+> like a ~13% win if you measure total wall clock on a short run. That is a
+> compilation effect, not a physics one. It was what misled the first draft of this
+> experiment.
 
-**4. The real win is not here.** For one column, the hardware is nearly irrelevant:
-the spread across every backend tested is under 2×. The parallelism that matters is
-**across ensemble members**, and it is currently unexploited. The UKI calibration
-loop runs 35+ independent SCMs sequentially. Running them as N concurrent
-single-threaded *processes* on the 24-core Stratus CPU is a ~10–20× speed-up of the
-calibration — an order of magnitude more than anything in this table, using hardware
-we already own, with no model changes. That, not GPU-porting, is where the next
-effort should go. (Recommended default for a *single* run: Stratus, `-t auto`.)
+**3. The MacBook GPU is impossible, not merely slow.** No Metal backend exists in
+the CLIMA stack (see above). The MacBook CPU is ~1.3x slower per step than Stratus.
+
+**4. The hardware is nearly irrelevant here; the parallelism worth having is across
+ensemble members.** Every backend tested spans well under 2x on per-step cost, and a
+20-day run is ~14 min regardless. The UKI calibration loop runs 35+ *independent*
+SCMs sequentially — running those as N concurrent single-threaded **processes** on
+24 Stratus cores is a ~10-20x speed-up of the thing that actually costs time, with
+no model changes. That, not GPU porting, is where effort should go.
+
+**Recommended: Stratus, single-threaded, one process per ensemble member.**
+

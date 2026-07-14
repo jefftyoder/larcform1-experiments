@@ -1,0 +1,6 @@
+host=M1-Satellite  t_end=1days  started=2026-07-14T19:02:58Z
+--- mac_cpu1  device=CPUSingleThreaded  threads=1 ---
+  TOTAL(wall)=566s  setup(incl. JIT)=272.6s  solve=276.2s  95.89 ms/step
+--- mac_cpu8  device=CPUMultiThreaded  threads=8 ---
+  TOTAL(wall)=511s  setup(incl. JIT)=262.7s  solve=235.6s  81.81 ms/step
+finished=2026-07-14T19:20:56Z

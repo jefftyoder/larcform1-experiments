@@ -1,0 +1,27 @@
+--- a/experiments/sea-ice/components/clima_seaice_column.jl	2026-07-09 22:19:09
++++ b/experiments/sea-ice/components/clima_seaice_column.jl	2026-07-14 11:46:47
+@@ -29,6 +29,7 @@
+ # ClimaSeaIce works in Celsius internally; all coupler-facing temperatures are
+ # Kelvin, converted with C_to_K = `temperature_water_freeze`.
+ 
++import ClimaComms
+ import ClimaCore as CC
+ import Oceananigans as OC
+ import ClimaUtilities.TimeManager: ITime
+@@ -251,8 +252,14 @@
+ # Point-value accessors (single-point grid ⇒ every field has one interior value)
+ _point(f) = first(OC.interior(f))
+ _point(x::Number) = x
+-# Exchange-space (PointSpace) fields and their broadcasts also hold one value
+-_point(f::CC.Fields.Field) = first(parent(f))
++# Exchange-space (PointSpace) fields and their broadcasts also hold one value.
++# On a CUDA device `parent(f)` is a CuArray and `first` is a scalar index, which
++# CUDA.jl disallows by default — so route the read through ClimaComms.allowscalar,
++# which is a plain call (no wrapper, no cost) on any CPU device. The ice model
++# itself stays on the host: it is a single point, so only scalars cross the
++# device boundary and there is nothing to gain from putting it on the GPU.
++_point(f::CC.Fields.Field) =
++    ClimaComms.allowscalar(first, ClimaComms.device(f), parent(f))
+ 
+ _T_sfc_K(sim) = _point(_top_thermodynamics(sim.model).top_surface_temperature) + sim.params.C_to_K
+ 

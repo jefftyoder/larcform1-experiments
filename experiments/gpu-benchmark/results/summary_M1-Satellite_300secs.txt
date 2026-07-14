@@ -1,0 +1,14 @@
+host=M1-Satellite  t_end=300secs  started=2026-07-14T18:47:51Z
+--- smoke_cpu1  device=CPUSingleThreaded  threads=1 ---
+  FAILED (rc=1) after 1s — see experiments/gpu-benchmark/results/smoke_cpu1_300secs.log
+  [91m[1mERROR: [22m[39mLoadError: ArgumentError: Package YAML not found in current path.
+finished=2026-07-14T18:47:52Z
+host=M1-Satellite  t_end=300secs  started=2026-07-14T18:49:26Z
+--- smoke_cpu1  device=CPUSingleThreaded  threads=1 ---
+  FAILED (rc=1) after 38s — see experiments/gpu-benchmark/results/smoke_cpu1_300secs.log
+  
+finished=2026-07-14T18:50:04Z
+host=M1-Satellite  t_end=300secs  started=2026-07-14T18:50:51Z
+--- smoke_cpu1  device=CPUSingleThreaded  threads=1 ---
+  TOTAL(wall)=687s  setup(incl. JIT)=324.2s  solve=347.4s  34743.24 ms/step
+finished=2026-07-14T19:02:18Z

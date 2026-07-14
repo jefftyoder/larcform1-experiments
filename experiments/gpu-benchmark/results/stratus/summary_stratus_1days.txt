@@ -1,0 +1,14 @@
+host=stratus  t_end=1days  started=2026-07-14T19:02:52Z
+--- stratus_cpu1  device=CPUSingleThreaded  threads=1 ---
+  TOTAL(wall)=421s  setup(incl. JIT)=245.8s  solve=164.1s  56.97 ms/step
+--- stratus_cpu24  device=CPUMultiThreaded  threads=24 ---
+  TOTAL(wall)=385s  setup(incl. JIT)=232.9s  solve=143.1s  49.69 ms/step
+--- stratus_a6000  device=CUDADevice  threads=1 ---
+  FAILED (rc=1) after 43s — see experiments/gpu-benchmark/results/stratus_a6000_1days.log
+  ERROR: LoadError: MethodError: no method matching array_type(::ClimaComms.CUDADevice)
+finished=2026-07-14T19:17:01Z
+host=stratus  t_end=1days  started=2026-07-14T19:18:31Z
+--- stratus_a6000  device=CUDADevice  threads=1 ---
+  FAILED (rc=1) after 61s — see experiments/gpu-benchmark/results/stratus_a6000_1days.log
+  ERROR: LoadError: GPU compilation of MethodInstance for ClimaCoreCUDAExt.knl_copyto!(::ClimaCore.DataLayouts.VF{@NamedTuple{ρ::Float32, uₕ::ClimaCore.Geometr
+finished=2026-07-14T19:19:32Z

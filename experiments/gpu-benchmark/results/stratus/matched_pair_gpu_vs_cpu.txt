@@ -1,0 +1,14 @@
+=== gpu (CUDADevice) ===
+│   device_in_use = ClimaComms.CUDADevice
+│   nsteps = 2870
+│   t_setup_s = 311.1
+│   t_solve_s = 212.8
+└   ms_per_step = 74.16
+TOTAL_WALL_gpu=539s
+=== cpu (CPUSingleThreaded) ===
+│   device_in_use = ClimaComms.CPUSingleThreaded
+│   nsteps = 2870
+│   t_setup_s = 247.0
+│   t_solve_s = 160.3
+└   ms_per_step = 55.86
+TOTAL_WALL_cpu=419s

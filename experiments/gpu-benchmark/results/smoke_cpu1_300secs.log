@@ -1,0 +1,205 @@
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mDevice benchmark starting
+[36m[1m│ [22m[39m  LABEL = "smoke_cpu1"
+[36m[1m│ [22m[39m  DEVICE = "CPUSingleThreaded"
+[36m[1m│ [22m[39m  T_END = "300secs"
+[36m[1m│ [22m[39m  nthreads = 1
+[36m[1m└ [22m[39m  JOB_ID = "lf1_gpubench_smoke_cpu1"
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mUsing Atmos default configuration
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mDict{Any, Any}("sleve_eta" => 0.7, "use_coupler_diagnostics" => true, "era5_diurnal_warming" => nothing, "ocean_progress_interval" => nothing, "dt" => "30secs", "prognostic_tke" => true, "use_newton_rtol" => false, "netcdf_output_at_levels" => true, "microphysics_model" => "1M", "output_dir_style" => "ActiveLink", "external_forcing" => nothing, "device" => "CPUSingleThreaded", "t_end" => "300secs", "c_amd" => 0.29, "scm_surface_type" => "sea_ice", "y_elem" => 6, "z_stretch" => true, "extra_atmos_diagnostics" => Dict{Any, Any}[], "h_elem_coupler" => 32, "edmfx_nh_pressure" => true, "era5_initial_condition_dir" => nothing, "cloud_liquid_rain_accretion" => "CloudLiquidRainAccretion", "conservation_softfail" => false, "check_steady_state" => false, "restart_cache" => true, "update_jacobian_every" => "solve", "test_dycore_consistency" => false, "add_isothermal_boundary_layer" => true, "use_itime" => true, "rad" => "allskywithclear", "share_surface_space" => true, "binary_area_fraction" => true, "cloud_model" => "quadrature", "initial_condition" => "Larcform1", "krylov_rtol" => 0.1, "eisenstat_walker_forcing_alpha" => 2.0, "surface_setup" => "PrescribedSurface", "cloud_ice_snow_accretion" => "CloudIceSnowAccretion", "jvp_step_adjustment" => 1.0, "microphysics_n_substeps" => 3, "insolation" => "larcform1", "ocean_diagnostic_mode" => "average", "snow_melt" => "SnowMelt", "log_progress" => true, "site_latitude" => 17.0, "h_elem" => 16, "coupler_toml" => ["experiments/clw calibration/configs/toml/larcform1_calibration_base.toml", "experiments/clw calibration/configs/toml/calibrated_uki1_final.toml"], "netcdf_interpolation_num_points" => nothing, "coupler_output_dir" => "output/gpu-benchmark/lf1_gpubench_smoke_cpu1", "z_max" => 5000.0, "atmos_log_progress" => false, "diagnostics" => Dict{Any, Any}[Dict("reduction_time" => "average", "short_name" => ["ta", "pfull", "rhoa", "hus", "hur", "ua", "va", "cl", "clw", "cli", "lwp", "clivi"], "period" => "1hours"), Dict("reduction_time" => "average", "short_name" => ["ts", "rlds", "rlus", "rlut", "pr", "prsn", "hfss", "hfls"], "period" => "1hours")], "edmfx_filter" => true, "debug_jacobian" => false, "job_id" => "lf1_gpubench_smoke_cpu1", "sst_adjustment" => 0.0, "log_to_file" => true, "orographic_gravity_wave" => nothing, "dt_rad" => "30mins", "simple_ocean" => false, "tracer_upwinding" => "vanleer_limiter", "nh_poly" => 3, "edmfx_sgs_diffusive_flux" => true, "y_max" => 300000.0, "non_orographic_gravity_wave" => false, "chemistry_model" => nothing, "print_config_dict" => true, "save_cache" => true, "microphysics_n_substeps_quadrature" => 2, "topography_damping_factor" => 5, "cloud_ice_rain_accretion" => "CloudIceRainAccretion", "config" => "column", "hyperdiffusion_prandtl_number" => 0.2, "reproducibility_test" => false, "component_dt_dict" => Dict("dt_atmos" => 30.0, "dt_land" => 30.0, "dt_seaice" => 30.0, "dt_ocean" => 30.0), "cloud_liquid_snow_accretion" => "CloudLiquidSnowAccretion", "check_conservation" => false, "rmse_check" => false, "land_spun_up_ic" => false, "vertical_water_borrowing_species" => nothing, "auto_jacobian_padding_bands" => nothing, "sgs_distribution" => "gaussian", "implicit_diffusion" => true, "z_elem" => 100, "snow_autoconversion" => "NoSupersaturation", "ocean_model" => "prescribed", "use_auto_jacobian" => false, "disable_surface_flux_tendency" => false, "cfsite_number" => "site23", "dt_ogw" => "1800secs", "fixed_terminal_velocity" => true, "turbconv" => "prognostic_edmfx", "x_elem" => 6, "idealized_clouds" => false, "edmfx_mse_q_tot_upwinding" => "first_order", "check_nan_every" => 1024, "ice_model" => "clima_seaice_column", "use_dynamic_krylov_rtol" => false, "lai_source" => "modis_monthly", "reproducible_restart" => false, "strict_config" => false, "toml" => ["toml/larcform1_1M_prognostic_edmfx.toml"], "mesh_warp_type" => "SLEVE", "edmfx_detr_model" => "Generalized", "cloud_ice_formation" => "TemperatureDependent", "external_forcing_file" => nothing, "cloud_nn_architecture" => "arch_2layers_8nodes.jld2", "topo_smoothing" => false, "hyperdiff" => nothing, "output_dir" => nothing, "rain_condensation_evaporation" => "RainEvaporation", "constant_horizontal_diffusion" => false, "apply_sem_quasimonotone_limiter" => false, "bubble" => false, "cloud_ice_melt" => "CloudIceMelt", "ode_algo" => "ARS222", "max_newton_iters_ode" => 1, "start_date" => "20010101", "time_varying_trace_gases" => Any[], "ocean_diagnostic_interval" => "1days", "use_dense_jacobian" => false, "snow_deposition_sublimation" => "DepositionAndSublimation", "detect_restart_file" => false, "prognostic_surface" => "PrescribedSST", "edmfx_vertical_diffusion" => true, "restart_file" => nothing, "nh_poly_coupler" => 2, "unique_seed" => false, "rayleigh_sponge" => false, "edmfx_tracer_upwinding" => "first_order", "divergence_damping_factor" => 5.0, "edmfx_entr_model" => "Generalized", "energy_check" => false, "land_model" => "bucket", "use_land_diagnostics" => true, "idealized_h2o" => false, "perturb_initstate" => true, "rain_autoconversion" => "Kessler1M", "edmfx_scale_blending" => "SmoothMinimum", "seaice_diagnostic_mode" => "average", "t_start" => "0secs", "land_fraction_source" => "etopo", "dz_bottom" => 10.0, "dt_save_state_to_disk" => "Inf", "restart_t" => nothing, "advection_test" => false, "dt_cpl" => "30secs", "checkpoint_dt" => "90days", "topography" => "NoWarp", "aerosol_radiation" => false, "reference_job_id" => "larcform1", "vorticity_hyperdiffusion_coefficient" => 0.1857, "viscous_sponge" => false, "strict_params" => true, "config_file" => "/Users/jeff/.julia/packages/ClimaCoupler/bJH7j/config/ci_configs/amip_default.yml", "bucket_initial_condition" => "", "domain_type" => "column", "approximate_linear_solve_iters" => 2, "land_diagnostics_reduction" => "average", "smagorinsky_lilly" => nothing, "rain_snow_accretion" => "RainSnowAccretion", "enable_diagnostics" => true, "tracer_nonnegativity_method" => nothing, "site_longitude" => -149.0, "evolving_ocean" => true, "cloud_liquid_formation" => "CloudLiquidFormation", "prescribe_clouds_in_radiation" => false, "albedo_model" => "CouplerAlbedo", "quadrature_order" => 3, "coupler_diagnostics_period" => nothing, "FLOAT_TYPE" => "Float32", "deep_atmosphere" => true, "updraft_number" => 1, "amd_les" => false, "restart_dir" => nothing, "detect_restart_files" => false, "column_latlon" => [80.0, 0.0], "energy_q_tot_upwinding" => "vanleer_limiter", "prescribed_aerosols" => Any[], "dt_nogw" => "1800secs", "output_default_diagnostics" => false, "edmfx_sgs_mass_flux" => true, "x_max" => 300000.0, "radiation_reset_rng_seed" => false, "land_diagnostics_period" => "1months", "newton_rtol" => 1.0e-5, "atmos_config_file" => nothing, "edmfx_sgsflux_upwinding" => "none", "mode_name" => "amip", "land_temperature_anomaly" => "aquaplanet", "use_sgs_quadrature" => true, "bucket_albedo_type" => "map_static", "vert_diff" => nothing, "use_krylov_method" => false, "sleve_s" => 10.0, "implicit_microphysics" => true, "seaice_diagnostic_interval" => "1days", "prescribed_flow" => nothing, "coupler_diagnostics_reduction" => "average")
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSCM surface type: scm_surface_type=sea_ice → land_model=Val{:nothing}(), ocean_model=Val{:nothing}(), ice_model=Val{:clima_seaice_column}()
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSetting up single-process ClimaCoupler run on device: CPUSingleThreaded.
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mDict{Any, Any}("sleve_eta" => 0.7, "use_coupler_diagnostics" => true, "era5_diurnal_warming" => nothing, "ocean_progress_interval" => nothing, "dt" => "30secs", "prognostic_tke" => true, "use_newton_rtol" => false, "netcdf_output_at_levels" => true, "microphysics_model" => "1M", "output_dir_style" => "ActiveLink", "external_forcing" => nothing, "device" => "CPUSingleThreaded", "t_end" => "300secs", "c_amd" => 0.29, "scm_surface_type" => "sea_ice", "y_elem" => 6, "z_stretch" => true, "extra_atmos_diagnostics" => Dict{Any, Any}[], "h_elem_coupler" => 32, "edmfx_nh_pressure" => true, "era5_initial_condition_dir" => nothing, "cloud_liquid_rain_accretion" => "CloudLiquidRainAccretion", "conservation_softfail" => false, "check_steady_state" => false, "restart_cache" => true, "update_jacobian_every" => "solve", "test_dycore_consistency" => false, "add_isothermal_boundary_layer" => true, "use_itime" => true, "rad" => "allskywithclear", "share_surface_space" => true, "binary_area_fraction" => true, "cloud_model" => "quadrature", "initial_condition" => "Larcform1", "krylov_rtol" => 0.1, "eisenstat_walker_forcing_alpha" => 2.0, "surface_setup" => "PrescribedSurface", "cloud_ice_snow_accretion" => "CloudIceSnowAccretion", "jvp_step_adjustment" => 1.0, "microphysics_n_substeps" => 3, "insolation" => "larcform1", "ocean_diagnostic_mode" => "average", "snow_melt" => "SnowMelt", "log_progress" => true, "site_latitude" => 17.0, "h_elem" => 16, "coupler_toml" => ["experiments/clw calibration/configs/toml/larcform1_calibration_base.toml", "experiments/clw calibration/configs/toml/calibrated_uki1_final.toml"], "netcdf_interpolation_num_points" => nothing, "coupler_output_dir" => "output/gpu-benchmark/lf1_gpubench_smoke_cpu1", "z_max" => 5000.0, "atmos_log_progress" => false, "diagnostics" => Dict{Any, Any}[Dict("reduction_time" => "average", "short_name" => ["ta", "pfull", "rhoa", "hus", "hur", "ua", "va", "cl", "clw", "cli", "lwp", "clivi"], "period" => "1hours"), Dict("reduction_time" => "average", "short_name" => ["ts", "rlds", "rlus", "rlut", "pr", "prsn", "hfss", "hfls"], "period" => "1hours")], "edmfx_filter" => true, "debug_jacobian" => false, "job_id" => "lf1_gpubench_smoke_cpu1", "sst_adjustment" => 0.0, "log_to_file" => true, "orographic_gravity_wave" => nothing, "dt_rad" => "30mins", "simple_ocean" => false, "tracer_upwinding" => "vanleer_limiter", "nh_poly" => 3, "edmfx_sgs_diffusive_flux" => true, "y_max" => 300000.0, "non_orographic_gravity_wave" => false, "chemistry_model" => nothing, "print_config_dict" => true, "save_cache" => true, "microphysics_n_substeps_quadrature" => 2, "topography_damping_factor" => 5, "cloud_ice_rain_accretion" => "CloudIceRainAccretion", "config" => "column", "hyperdiffusion_prandtl_number" => 0.2, "reproducibility_test" => false, "component_dt_dict" => Dict("dt_atmos" => 30.0, "dt_land" => 30.0, "dt_seaice" => 30.0, "dt_ocean" => 30.0), "cloud_liquid_snow_accretion" => "CloudLiquidSnowAccretion", "check_conservation" => false, "rmse_check" => false, "land_spun_up_ic" => false, "vertical_water_borrowing_species" => nothing, "auto_jacobian_padding_bands" => nothing, "sgs_distribution" => "gaussian", "implicit_diffusion" => true, "z_elem" => 100, "snow_autoconversion" => "NoSupersaturation", "ocean_model" => "prescribed", "use_auto_jacobian" => false, "disable_surface_flux_tendency" => false, "cfsite_number" => "site23", "dt_ogw" => "1800secs", "fixed_terminal_velocity" => true, "turbconv" => "prognostic_edmfx", "x_elem" => 6, "idealized_clouds" => false, "edmfx_mse_q_tot_upwinding" => "first_order", "check_nan_every" => 1024, "ice_model" => "clima_seaice_column", "use_dynamic_krylov_rtol" => false, "lai_source" => "modis_monthly", "reproducible_restart" => false, "strict_config" => false, "toml" => ["toml/larcform1_1M_prognostic_edmfx.toml"], "mesh_warp_type" => "SLEVE", "edmfx_detr_model" => "Generalized", "cloud_ice_formation" => "TemperatureDependent", "external_forcing_file" => nothing, "cloud_nn_architecture" => "arch_2layers_8nodes.jld2", "topo_smoothing" => false, "hyperdiff" => nothing, "output_dir" => nothing, "rain_condensation_evaporation" => "RainEvaporation", "constant_horizontal_diffusion" => false, "apply_sem_quasimonotone_limiter" => false, "bubble" => false, "cloud_ice_melt" => "CloudIceMelt", "ode_algo" => "ARS222", "max_newton_iters_ode" => 1, "start_date" => "20010101", "time_varying_trace_gases" => Any[], "ocean_diagnostic_interval" => "1days", "use_dense_jacobian" => false, "snow_deposition_sublimation" => "DepositionAndSublimation", "detect_restart_file" => false, "prognostic_surface" => "PrescribedSST", "edmfx_vertical_diffusion" => true, "restart_file" => nothing, "nh_poly_coupler" => 2, "unique_seed" => false, "rayleigh_sponge" => false, "edmfx_tracer_upwinding" => "first_order", "divergence_damping_factor" => 5.0, "edmfx_entr_model" => "Generalized", "energy_check" => false, "land_model" => "bucket", "use_land_diagnostics" => true, "idealized_h2o" => false, "perturb_initstate" => true, "rain_autoconversion" => "Kessler1M", "edmfx_scale_blending" => "SmoothMinimum", "seaice_diagnostic_mode" => "average", "t_start" => "0secs", "land_fraction_source" => "etopo", "dz_bottom" => 10.0, "dt_save_state_to_disk" => "Inf", "restart_t" => nothing, "advection_test" => false, "dt_cpl" => "30secs", "checkpoint_dt" => "90days", "topography" => "NoWarp", "aerosol_radiation" => false, "reference_job_id" => "larcform1", "vorticity_hyperdiffusion_coefficient" => 0.1857, "viscous_sponge" => false, "strict_params" => true, "config_file" => "/Users/jeff/.julia/packages/ClimaCoupler/bJH7j/config/ci_configs/amip_default.yml", "bucket_initial_condition" => "", "domain_type" => "column", "approximate_linear_solve_iters" => 2, "land_diagnostics_reduction" => "average", "smagorinsky_lilly" => nothing, "rain_snow_accretion" => "RainSnowAccretion", "enable_diagnostics" => true, "tracer_nonnegativity_method" => nothing, "site_longitude" => -149.0, "evolving_ocean" => true, "cloud_liquid_formation" => "CloudLiquidFormation", "prescribe_clouds_in_radiation" => false, "albedo_model" => "CouplerAlbedo", "quadrature_order" => 3, "coupler_diagnostics_period" => nothing, "FLOAT_TYPE" => "Float32", "deep_atmosphere" => true, "updraft_number" => 1, "amd_les" => false, "restart_dir" => nothing, "detect_restart_files" => false, "column_latlon" => [80.0, 0.0], "energy_q_tot_upwinding" => "vanleer_limiter", "prescribed_aerosols" => Any[], "dt_nogw" => "1800secs", "output_default_diagnostics" => false, "edmfx_sgs_mass_flux" => true, "x_max" => 300000.0, "radiation_reset_rng_seed" => false, "land_diagnostics_period" => "1months", "newton_rtol" => 1.0e-5, "atmos_config_file" => nothing, "edmfx_sgsflux_upwinding" => "none", "mode_name" => "amip", "land_temperature_anomaly" => "aquaplanet", "use_sgs_quadrature" => true, "bucket_albedo_type" => "map_static", "vert_diff" => nothing, "use_krylov_method" => false, "sleve_s" => 10.0, "implicit_microphysics" => true, "seaice_diagnostic_interval" => "1days", "prescribed_flow" => nothing, "coupler_diagnostics_reduction" => "average")
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSCM surface type: scm_surface_type=sea_ice → land_model=Val{:nothing}(), ocean_model=Val{:nothing}(), ice_model=Val{:clima_seaice_column}()
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mOutput directories output/gpu-benchmark/lf1_gpubench_smoke_cpu1/lf1_gpubench_smoke_cpu1/output_0000
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mCoupler artifacts directory output/gpu-benchmark/lf1_gpubench_smoke_cpu1/lf1_gpubench_smoke_cpu1/artifacts
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mCoupler checkpoint directory output/gpu-benchmark/lf1_gpubench_smoke_cpu1/lf1_gpubench_smoke_cpu1/checkpoints
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mRandom seed set to 1234
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mStarting from t_start 0.0 seconds (2001-01-01T00:00:00) [counter = 0, period = 1 second, epoch = 2001-01-01T00:00:00]
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mOverwriting Atmos parameters from input TOML file(s): ["experiments/clw calibration/configs/toml/larcform1_calibration_base.toml", "experiments/clw calibration/configs/toml/calibrated_uki1_final.toml"]
+[33m[1m┌ [22m[39m[33m[1mWarning: [22m[39mThe configuration passed to ClimaAtmos contains unused keys: use_coupler_diagnostics, ocean_progress_interval, scm_surface_type, extra_atmos_diagnostics, h_elem_coupler, ocean_diagnostic_interval, conservation_softfail, restart_cache, nh_poly_coupler, use_itime, unique_seed, share_surface_space, binary_area_fraction, energy_check, use_land_diagnostics, land_model, seaice_diagnostic_mode, ocean_diagnostic_mode, land_fraction_source, coupler_toml, restart_t, coupler_output_dir, dt_cpl, checkpoint_dt, atmos_log_progress, config_file, sst_adjustment, bucket_initial_condition, domain_type, simple_ocean, land_diagnostics_reduction, evolving_ocean, save_cache, print_config_dict, coupler_diagnostics_period, component_dt_dict, restart_dir, detect_restart_files, rmse_check, column_latlon, land_spun_up_ic, land_diagnostics_period, atmos_config_file, ocean_model, mode_name, land_temperature_anomaly, bucket_albedo_type, ice_model, lai_source, seaice_diagnostic_interval, coupler_diagnostics_reduction
+[33m[1m└ [22m[39m[90m@ ClimaAtmos ~/clima/larcform1-experiments/.claude/worktrees/gpu-benchmark/ClimaAtmos.jl/src/config/yaml_helper.jl:145[39m
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mnumerics 
+[36m[1m│ [22m[39m       `energy_q_tot_upwinding`::`Val{:vanleer_limiter}`
+[36m[1m│ [22m[39m             `tracer_upwinding`::`Val{:vanleer_limiter}`
+[36m[1m│ [22m[39m    `edmfx_mse_q_tot_upwinding`::`Val{:first_order}`
+[36m[1m│ [22m[39m      `edmfx_sgsflux_upwinding`::`Val{:none}`
+[36m[1m│ [22m[39m       `edmfx_tracer_upwinding`::`Val{:first_order}`
+[36m[1m│ [22m[39m      `test_dycore_consistency`::`Nothing`
+[36m[1m│ [22m[39m         `reproducible_restart`::`Nothing`
+[36m[1m│ [22m[39m                      `limiter`::`Nothing`
+[36m[1m│ [22m[39m                    `diff_mode`::`ClimaAtmos.Implicit`
+[36m[1m└ [22m[39m                    `hyperdiff`::`Nothing`
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mAtmosModel: 
+[36m[1m│ [22m[39m
+[36m[1m│ [22m[39m                            `water`::`ClimaAtmos.AtmosWater{ClimaAtmos.NonEquilibriumMicrophysics1M, ClimaAtmos.QuadratureCloud, ClimaAtmos.Implicit, Nothing, ClimaAtmos.SGSQuadrature{3, StaticArraysCore.SVector{3, Float32}, StaticArraysCore.SVector{3, Float32}, ClimaAtmos.GaussianSGS, Float32}, ClimaAtmos.FixedTerminalVelocity{Float32}}`
+[36m[1m│ [22m[39m                        `scm_setup`::`ClimaAtmos.SCMSetup{Nothing, Nothing, Nothing, Bool, @NamedTuple{prof_ug::AtmosphericProfilesLibrary.ZProfile{AtmosphericProfilesLibrary.var"#Larcform1_geostrophic_u##0#Larcform1_geostrophic_u##1"{Float32}}, prof_vg::AtmosphericProfilesLibrary.ZProfile{Returns{Float32}}, coriolis_param::Float32}}`
+[36m[1m│ [22m[39m                        `radiation`::`ClimaAtmos.AtmosRadiation{ClimaAtmos.RRTMGPInterface.AllSkyRadiationWithClearSkyDiagnostics{ClimaAtmos.InteractiveCloudInRadiation}, ClimaAtmos.Larcform1Insolation}`
+[36m[1m│ [22m[39m                         `turbconv`::`ClimaAtmos.AtmosTurbconv{ClimaAtmos.EDMFXModel{ClimaAtmos.InvZEntrainment, ClimaAtmos.BuoyancyVelocityDetrainment, Val{true}, Val{true}, Val{true}, Val{true}, Val{true}, ClimaAtmos.SmoothMinimumBlending}, ClimaAtmos.PrognosticEDMFX{1, true, Float32}, Nothing, Nothing, Nothing}`
+[36m[1m│ [22m[39m                  `prescribed_flow`::`Nothing`
+[36m[1m│ [22m[39m                     `gravity_wave`::`ClimaAtmos.AtmosGravityWave{Nothing, Nothing}`
+[36m[1m│ [22m[39m               `vertical_diffusion`::`Nothing`
+[36m[1m│ [22m[39m                           `sponge`::`ClimaAtmos.AtmosSponge{Nothing, Nothing}`
+[36m[1m│ [22m[39m                          `surface`::`ClimaAtmos.AtmosSurface{Nothing, ClimaAtmos.SurfaceConditions.AnalyticTemperature{Returns{Float32}}, ClimaAtmos.SurfaceConditions.SurfaceBoundaryOverrides{Float32, Float32, Nothing, Nothing, Nothing, Nothing}, ClimaAtmos.CouplerAlbedo}`
+[36m[1m│ [22m[39m                         `numerics`::`ClimaAtmos.AtmosNumerics{Val{:vanleer_limiter}, Val{:vanleer_limiter}, Val{:first_order}, Val{:none}, Val{:first_order}, Nothing, Nothing, Nothing, ClimaAtmos.Implicit, Nothing}`
+[36m[1m└ [22m[39m                        `chemistry`::`ClimaAtmos.AtmosChem{Nothing}`
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mMicrophysics settings: 
+[36m[1m│ [22m[39m                       `n_substeps`::`3`
+[36m[1m│ [22m[39m                  `n_substeps_quad`::`2`
+[36m[1m│ [22m[39m           `cloud_liquid_formation`::`CloudLiquidFormation`
+[36m[1m│ [22m[39m              `cloud_ice_formation`::`TemperatureDependent`
+[36m[1m│ [22m[39m                   `cloud_ice_melt`::`CloudIceMelt`
+[36m[1m│ [22m[39m              `rain_autoconversion`::`Kessler1M`
+[36m[1m│ [22m[39m              `snow_autoconversion`::`NoSupersaturation`
+[36m[1m│ [22m[39m    `rain_condensation_evaporation`::`RainEvaporation`
+[36m[1m│ [22m[39m      `snow_deposition_sublimation`::`DepositionAndSublimation`
+[36m[1m│ [22m[39m                        `snow_melt`::`SnowMelt`
+[36m[1m│ [22m[39m      `cloud_liquid_rain_accretion`::`CloudLiquidRainAccretion`
+[36m[1m│ [22m[39m      `cloud_liquid_snow_accretion`::`CloudLiquidSnowAccretion`
+[36m[1m│ [22m[39m         `cloud_ice_rain_accretion`::`CloudIceRainAccretion`
+[36m[1m│ [22m[39m         `cloud_ice_snow_accretion`::`CloudIceSnowAccretion`
+[36m[1m└ [22m[39m              `rain_snow_accretion`::`RainSnowAccretion`
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSingle-process ClimaAtmos run on CPUSingleThreaded
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mUsing ODE config: `ClimaTimeSteppers.ARS222`
+[33m[1m┌ [22m[39m[33m[1mWarning: [22m[39mRemoving output/gpu-benchmark/lf1_gpubench_smoke_cpu1/lf1_gpubench_smoke_cpu1/output_0000/clima_atmos
+[33m[1m└ [22m[39m[90m@ ClimaUtilities.OutputPathGenerator ~/.julia/packages/ClimaUtilities/Rd5Ys/src/OutputPathGenerator.jl:157[39m
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mInitialized state (44.209 μs, 8.0 KiB)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mBuilt cache (29.316 s, 10.75 GiB)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mAssembled callbacks (138.208 ms, 32.5 MiB)
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mJacobian algorithm: ManualSparseJacobian(
+[36m[1m│ [22m[39m  approximate_solve_iters = 2,
+[36m[1m└ [22m[39m)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mJacobian derivative flags: topography_flag = IgnoreDerivative, diffusion_flag = UseDerivative
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mBuilt tendency function (2.483 s, 78.31 MiB)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mInitialized integrator (34.747 s, 5.31 GiB)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mAdded 20 user-provided YAML-style diagnostics
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSaving accumulated diagnostics to disk with frequency: 1 hour
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSet up diagnostics (7.58 s, 455.2 MiB)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mInitialized 20 total diagnostics
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mSimulation info
+[36m[1m│ [22m[39m  job_id = "lf1_gpubench_smoke_cpu1"
+[36m[1m└ [22m[39m  output_dir = "output/gpu-benchmark/lf1_gpubench_smoke_cpu1/lf1_gpubench_smoke_cpu1/output_0000/clima_atmos"
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mClimaCoupler.Interfacer.AMIPMode
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mClimaSeaIceColumnSimulation initialized
+[36m[1m│ [22m[39m  enable_snow = true
+[36m[1m│ [22m[39m  h_ice_init = 1.0
+[36m[1m│ [22m[39m  hs_init = 0.30303030303030304
+[36m[1m│ [22m[39m  T_sfc_init_C = -23.149993896484375
+[36m[1m│ [22m[39m  T_bottom_C = -1.7999938964843523
+[36m[1m└ [22m[39m  Q_ocean = 0.0
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mComponent models initialized: (:atmos_sim, :ice_sim)
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mComponent model types: ("ClimaAtmosSimulation", "ClimaSeaIceColumnSimulation")
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mUsing default coupler diagnostics
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mMemory in use: 3.996 GiB
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mConstructed
+[36m[1m│ [22m[39m  device_in_use = ClimaComms.CPUSingleThreaded
+[36m[1m└ [22m[39m  t_setup = 324.2343440055847
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mStarting coupling loop
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "1 minute, 30 seconds"
+[36m[1m│ [22m[39m  n_steps_completed = 3
+[36m[1m│ [22m[39m  wall_time_per_step = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_total = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "0 seconds"
+[36m[1m│ [22m[39m  percent_complete = "30.0%"
+[36m[1m│ [22m[39m  estimated_sypd = "Inf"
+[36m[1m│ [22m[39m  instantaneous_sypd = "0.0 (sdpd_estimate = 0.0)"
+[36m[1m│ [22m[39m  date_now = 2026-07-14T12:02:15.210
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-14T12:02:15.209
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "2 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 4
+[36m[1m│ [22m[39m  wall_time_per_step = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_total = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "0 seconds"
+[36m[1m│ [22m[39m  percent_complete = "40.0%"
+[36m[1m│ [22m[39m  estimated_sypd = "Inf"
+[36m[1m│ [22m[39m  instantaneous_sypd = "0.353"
+[36m[1m│ [22m[39m  date_now = 2026-07-14T12:02:15.397
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-14T12:02:15.397
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "2 minutes, 30 seconds"
+[36m[1m│ [22m[39m  n_steps_completed = 5
+[36m[1m│ [22m[39m  wall_time_per_step = "5 milliseconds, 486 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "54 milliseconds, 869 microseconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "27 milliseconds, 434 microseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "27 milliseconds, 434 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "50.0%"
+[36m[1m│ [22m[39m  estimated_sypd = "14.969"
+[36m[1m│ [22m[39m  instantaneous_sypd = "14.969"
+[36m[1m│ [22m[39m  date_now = 2026-07-14T12:02:15.448
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-14T12:02:16.448
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "3 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 6
+[36m[1m│ [22m[39m  wall_time_per_step = "13 milliseconds, 369 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "133 milliseconds, 697 microseconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "53 milliseconds, 479 microseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "80 milliseconds, 218 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "60.0%"
+[36m[1m│ [22m[39m  estimated_sypd = "6.143"
+[36m[1m│ [22m[39m  instantaneous_sypd = "1.556"
+[36m[1m│ [22m[39m  date_now = 2026-07-14T12:02:15.455
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-14T12:02:16.455
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "3 minutes, 30 seconds"
+[36m[1m│ [22m[39m  n_steps_completed = 7
+[36m[1m│ [22m[39m  wall_time_per_step = "12 milliseconds, 246 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "122 milliseconds, 464 microseconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "36 milliseconds, 739 microseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "85 milliseconds, 724 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "70.0%"
+[36m[1m│ [22m[39m  estimated_sypd = "6.707"
+[36m[1m│ [22m[39m  instantaneous_sypd = "14.917"
+[36m[1m│ [22m[39m  date_now = 2026-07-14T12:02:15.460
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-14T12:02:16.460
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "4 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 8
+[36m[1m│ [22m[39m  wall_time_per_step = "11 milliseconds, 482 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "114 milliseconds, 820 microseconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "22 milliseconds, 964 microseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "91 milliseconds, 856 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "80.0%"
+[36m[1m│ [22m[39m  estimated_sypd = "7.153"
+[36m[1m│ [22m[39m  instantaneous_sypd = "13.395"
+[36m[1m│ [22m[39m  date_now = 2026-07-14T12:02:15.467
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-14T12:02:16.467
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "4 minutes, 30 seconds"
+[36m[1m│ [22m[39m  n_steps_completed = 9
+[36m[1m│ [22m[39m  wall_time_per_step = "10 milliseconds, 957 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "109 milliseconds, 579 microseconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "10 milliseconds, 957 microseconds"
+[36m[1m│ [22m[39m  wall_time_spent = "98 milliseconds, 621 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "90.0%"
+[36m[1m│ [22m[39m  estimated_sypd = "7.495"
+[36m[1m│ [22m[39m  instantaneous_sypd = "12.141"
+[36m[1m│ [22m[39m  date_now = 2026-07-14T12:02:15.473
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-14T12:02:16.473
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39mProgress
+[36m[1m│ [22m[39m  simulation_time = "5 minutes"
+[36m[1m│ [22m[39m  n_steps_completed = 10
+[36m[1m│ [22m[39m  wall_time_per_step = "10 milliseconds, 408 microseconds"
+[36m[1m│ [22m[39m  wall_time_total = "104 milliseconds, 86 microseconds"
+[36m[1m│ [22m[39m  wall_time_remaining = "0 seconds"
+[36m[1m│ [22m[39m  wall_time_spent = "104 milliseconds, 86 microseconds"
+[36m[1m│ [22m[39m  percent_complete = "100.0%"
+[36m[1m│ [22m[39m  estimated_sypd = "7.891"
+[36m[1m│ [22m[39m  instantaneous_sypd = "15.029"
+[36m[1m│ [22m[39m  date_now = 2026-07-14T12:02:15.479
+[36m[1m└ [22m[39m  estimated_finish_date = 2026-07-14T12:02:15.479
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSimulation took 0.330203917 seconds
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSYPD: 2.487418209940951
+[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mWalltime per coupling step: 0.0330203917
+[36m[1m┌ [22m[39m[36m[1mInfo: [22m[39m=== BENCHMARK RESULT ===
+[36m[1m│ [22m[39m  label = "smoke_cpu1"
+[36m[1m│ [22m[39m  device = "CPUSingleThreaded"
+[36m[1m│ [22m[39m  threads = 1
+[36m[1m│ [22m[39m  t_end = "300secs"
+[36m[1m│ [22m[39m  nsteps = 10
+[36m[1m│ [22m[39m  t_setup_s = 324.2
+[36m[1m│ [22m[39m  t_solve_s = 347.4
+[36m[1m│ [22m[39m  t_total_internal_s = 684.2
+[36m[1m└ [22m[39m  ms_per_step = 34743.24

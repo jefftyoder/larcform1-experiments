@@ -14,12 +14,14 @@ with and without snow, via ClimaCoupler.*
 | — | Analysis in the paper's framework | ✅ → `experiments/pithan-reproduction/` |
 | 3 | (optional) Eisenman port | not started |
 
-**Depends on an uncommitted-upstream fix:** every coupled run here needs the
+**Depends on a local-only ClimaAtmos fix:** every coupled run here needs the
 `PrescribedSurface`-wins-over-setup-flux-scheme fix in
-`ClimaAtmos.jl/src/config/model_getters.jl` (Phase 0 finding 1). It lives in the
-pinned submodule's working tree, not on any branch — without it atmos and the
-coupler both compute surface fluxes and nothing errors. Do not `git submodule
-update` the submodule out from under these results.
+`ClimaAtmos.jl/src/config/model_getters.jl` (Phase 0 finding 1) — without it
+atmos and the coupler both compute surface fluxes and nothing errors. It is
+committed as `e4651309d` on the submodule's `jy/coldslab` branch and pinned by
+the parent repo, but **that branch has not been pushed**, so these results are
+not reproducible from a fresh clone until it is. Owed: push `jy/coldslab`, then
+upstream the `model_getters.jl` hunk to CliMA/ClimaAtmos.jl.
 
 ### Known open items
 

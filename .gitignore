@@ -1,8 +1,14 @@
+# MacOS Finder metadata
 .DS_Store
-.claude/
-output/*
-.vscode/
-figures/
+
+# Third Party Programs
 larcform1-experiments.code-workspace
-scripts/__pycache__/
+.claude/
+.vscode/
 .ipynb_checkpoints/
+scripts/__pycache__/
+
+# Project specific
+figures/
+output/*
+*Manifest.toml

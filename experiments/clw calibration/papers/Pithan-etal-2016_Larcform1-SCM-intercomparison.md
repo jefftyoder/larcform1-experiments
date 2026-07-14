@@ -1,137 +1,346 @@
 # Select strengths and biases of models in representing the Arctic winter boundary layer over sea ice: the Larcform 1 single column model intercomparison
 
-
-# Journal of Advances in Modeling Earth Systems
-
-
-# Select strengths and biases of models in representing the
-
-
-# Arctic winter boundary layer over sea ice: the Larcform 1 single
-
-1Department of Meteorology, University of Reading, Reading, UK, 2NASA Goddard Institute for Space Studies, New York, New York, USA, 3CIRES, University of Colorado, and NOAA Earth System Research Laboratory, Boulder, Colorado, USA, 4Department of Meteorology, Stockholm University, Stockholm, Sweden, 5Institute for Atmosphere and Climate, ETHZ, Zurich, Switzerland, 6NCAR, Boulder, Colorado, USA, 7ECMWF, Reading, UK, 8Meteorology and Air Quality Section, Wageningen University, Wageningen, Netherlands, 9Recherche en Prevision Numerique Atmospherique, Environment
-
-
-## Abstract Weather and climate models struggle to represent lower tropospheric temperature and mois-
-
-ture profiles and surface fluxes in Arctic winter, partly because they lack or misrepresent physical processes that are specific to high latitudes. Observations have revealed two preferred states of the Arctic winter boundary layer. In the cloudy state, cloud liquid water limits surface radiative cooling, and temperature inversions are weak and elevated. In the radiatively clear state, strong surface radiative cooling leads to the build-up of surface-based temperature inversions. Many large-scale models lack the cloudy state, and some substantially underestimate inversion strength in the clear state. Here, the transformation from a moist to a cold dry air mass is modeled using an idealized Lagrangian perspective. The trajectory includes both boundary layer states, and the single-column experiment is the first Lagrangian Arctic air formation experiment (Larcform 1) organized within GEWEX GASS (Global atmospheric system studies). The intercomparison reproduces the typical biases of large-scale models: some models lack the cloudy state of the boundary layer due to the representation of mixed-phase microphysics or to the interaction between microand macrophysics. In some models, high emissivities of ice clouds or the lack of an insulating snow layer prevent the build-up of surface-based inversions in the radiatively clear state. Models substantially disagree on the amount of cloud liquid water in the cloudy state and on turbulent heat fluxes under clear skies. Observations of air mass transformations including both boundary layer states would allow for a tighter constraint The Arctic receives very little solar radiation in winter, but continues to emit longwave radiation to space. This radiative deficit at the surface is counteracted by the release of sensible heat and latent heat of sea-ice formation from the ocean as well as advection of heat from lower latitudes. The dominance of low-level and surface radiative cooling leads to the formation of the Arctic temperature inversion, i.e., an atmospheric temperature structure where temperatures increase with height in the lower troposphere [e.g., Zhang et al., 2011]. This strongly stable stratification suppresses vertical mixing and gives rise to a positive lapse-rate feedback in a warming climate, which is a major contributor to the Arctic amplification of climate change [Manabe and Wetherald, 1975; Pithan and Mauritsen, 2014]. However, observations show that in Arctic winter, the surface at any given location is not always cooling radiatively, nor is the boundary layer always stably stratified [e.g., Sedlar et al., 2012]. Indeed, the Arctic winter boundary layer can be in either a cloudy or a radiatively clear state, with distinct surface fluxes and atmospheric profiles typical for each state [Stramler While the widespread existence of temperature inversions in the Arctic boundary layer and a relationship between cloud cover and near-surface temperature profiles were already reported by Sverdrup [1933], the
-
-
-# PUBLICATIONS
-
-
-## RESEARCH ARTICLE
-
-10.1002/2016MS000630
-
-
-# column model intercomparison
-
-Key Points:  A Lagrangian-style single column model experiment can reproduce Arctic air mass formation  Model deficiencies are caused by Gunilla Svensson4, Paul A. Vaillancourt9, and Ayrton Zadra9 mixed-phase microphysics, process interaction, and surface representation  Lagrangian, i.e., air mass-following observations would allow for a tighter constraint on model behavior Correspondence to: F. Pithan, Canada, Dorval, Quebec, Canada felix.pithan@awi.de Citation: Pithan, F., et al. (2016), Select strengths and biases of models in representing the Arctic winter boundary layer over sea ice: the Larcform 1 single column model intercomparison, J. Adv. Model. Earth Syst., 8, 1345–1357, doi:10.1002/ 2016MS000630. Received 13 JAN 2016 Accepted 29 JUL 2016 Accepted article online 3 AUG 2016 Published online 27 AUG 2016 of model behavior. 1. Introduction C 2016. The Authors. V This is an open access article under the terms of the Creative Commons Attribution-NonCommercial-NoDerivs License, which permits use and distribution in any medium, provided et al., 2011; Tjernstr€om, 2012]. the original work is properly cited, the use is non-commercial and no modifications or adaptations are made. PITHAN ET AL. Felix Pithan1, Andrew Ackerman2, Wayne M. Angevine3, Kerstin Hartung4, Luisa Ickes5, Maxwell Kelley2, Brian Medeiros6, Irina Sandu7, Gert-Jan Steeneveld8, H. A. M. Sterk8, FIRST ARCTIC AIR MASS INTERCOMPARISON 1345 Figure 1. Bivariate pdf of low-level stability (defined as 850 hPa minus surface temperatures) and surface net longwave radiation defined positive downward, NDJF 1997/1998 for SHEBA and NDJF 1990–1999 for the ARM site. Low-level stability is computed from individual existence of two discrete states of the Arctic wintertime boundary layer [Persson et al., 1999] was only recognized through observations made during the SHEBA campaign 1997/1998 [Persson et al., 2002]. Station measurements on an ice floe and regular balloon soundings revealed that Arctic wintertime boundary-layer states cluster around two typical situations [Stramler et al., 2011]: A cloudy state, during which the presence of liquid-containing, often mixed-phase low-level clouds inhibits surface radiative cooling, and a radiatively clear state, during which the surface cools radiatively under clear skies or pure ice clouds, which generally To alleviate the substantial biases climate models display in the Arctic surface energy budget [Svensson and Karlsson, 2011] and low-level stability [Medeiros et al., 2011; Pithan et al., 2014], it is crucial to understand to what extent such biases are related to the representation of either of the typical boundary layer states or their frequency of occurrence, and which processes or parametrizations in models have the greatest weight in causing these biases. Improving weather forecasts in polar regions equally requires understanding which physical processes cause present model deficiencies [Jung et al., 2016]. The present single-column model intercomparion uses a highly idealized framework to understand to what extent the participating climate, weather prediction, and research models are able to reproduce the typical boundary layer states, and why When relatively warm and moist air masses are advected over Arctic land or sea ice in winter (Figure 2a), radiative cooling triggers the formation of liquid-containing clouds, which force the boundary layer into its cloudy state (Figure 2b) [Curry, 1983; Stramler et al., 2011; Pithan et al., 2014]. Due to their high infrared emissivity, which is close to unity, liquid-containing clouds are associated with much larger rates of downwelling longwave radiation at the surface than clear skies or ice clouds [Morrison et al., 2012]. During the cloudy state, cloud-top radiative cooling keeps the boundary layer well-mixed or only weakly stable. Temperature and humidity inversions usually occur near the top of the cloud layer, with clouds frequently extending into the temperature inversion over the central Arctic Ocean [Sedlar et al., 2012]. Surface sensible heat fluxes in the cloudy state are weak, and may be directed upward, as the ocean below the sea ice remains much warmer than the near-surface atmosphere. The air mass loses heat through cloud-top radiative cooling and
-
-
-# Journal of Advances in Modeling Earth Systems
-
-have a much lower emissivity than liquid-containing clouds (Figure 1). PITHAN ET AL. 19422466, 2016, 3, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2016MS000630 by University Of Nevada Reno, Wiley Online Library on [16/09/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License 10.1002/2016MS000630 cloudy state cloudy state clear state clear state
-
-
-## Low-level stability (K)
-
-
-## Low-level stability (K)
-
-soundings and surface radiation from the corresponding 6 h average. Figure Source: Pithan et al. [2014]. they may fail to reproduce observed features of the Arctic winter boundary layer. FIRST ARCTIC AIR MASS INTERCOMPARISON 1346 Figure 2. Sketch of Arctic air mass formation. Curved arrows represent radiative cooling, red lines are temperature profiles, which are driven toward the dashed lines by radiative cooling in the respective state. Full boxes mark quasi-steady states and dashed boxes unstable moisture through precipitation, ultimately making the environment too dry and cold for the mixed-phase cloud to persist, such that the boundary layer transitions to its radiatively clear state. In the clear state, surface radiative cooling on the order of 40 W m22 [Stramler et al., 2011] leads to the build-up of surface-based temperature inversions (Figure 2d). The boundary layer is thus strongly stable and sensible heat fluxes are directed toward the surface. This air mass transformation has been described as the formation of continental polar air masses [Wexler, 1936; Curry, 1983]. It often originates near the downstream ends of the Atlantic Comparing climate model output to satellite [Cesana et al., 2012] and in situ observations [Pithan et al., 2014] reveals that many climate models lack the cloudy state of the Arctic winter boundary layer, and some models do not reproduce the strong low-level stability observed in the clear state. Examples for these biases are shown in Figure 3. Models in the rightmost column lack the cloudy state of the boundary layer, i.e., a second maximum in the pdf at low stability and weakly negative surface net longwave radiation. The CNRM-CM5 model at the bottom additionally has the radiatively clear state shifted to weaker stabilities at The maintenance of the cloudy state at the low temperatures observed [Shupe et al., 2006; Morrison et al., 2012] poses a challenge to models, partly because theory predicts rapid freezing of supercooled water in the presence of ice particles. For a given temperature, the saturation vapor pressure over ice is lower than that over water surfaces, which can cause evaporation from water droplets and deposition of water molecules on ice particles [Wegener, 1911; Bergeron, 1935; Findeisen, 1938]. Observations show that layers of supercooled liquid often exist above the ice cloud such that supercooled droplets may not actually experience the presence of ice particles in the same air volume [Morrison et al., 2012]. However, large-scale models typically do not resolve this vertical structure. Much higher-resolution large-eddy simulations (LES) have successfully been employed to study Arctic mixed-phase clouds, but show considerable intermodel spread with a strong sensitivity of model results to both ice number concentration and particle-size distribution [Ovchinnikov et al., 2014]. The important role of cloud microphysics for the maintenance of Arctic mixedphase stratocumulus clouds was also emphasized by Fridlind et al. [2012], who showed that consumption of Past studies on the model representation of clear-sky Arctic boundary layers have largely focused on turbulent heat fluxes under stable stratification [e.g., Cuxart et al., 2006; Beare et al., 2006], but model results were also shown to be sensitive to radiation and surface coupling, especially at lower wind speeds [Sterk et al., The present intercomparison aims to understand the main reasons for the two types of model biases found in the CMIP5 ensemble[Pithan et al., 2014, exemplified in Figure 3]: The lack of a cloudy state and weak lowlevel stability despite strong surface radiative cooling. The experimental setup is based on earlier work by Wexler [1936]; Curry [1983], and Pithan et al. [2014]. It follows the formation of an Arctic air mass from an idealized Lagrangian perspective. Initial temperature and humidity profiles represent an air mass originating over open ocean, the lower boundary condition is a snow-covered sea-ice surface, and models are run
-
-
-# Journal of Advances in Modeling Earth Systems
-
-
-## (a)
-
-transition states Source: Pithan et al. [2014]. and Pacific storm tracks [Woods et al., 2013]. stronger longwave cooling rates than seen in observations (Figure 1). ice nuclei by cloud processes can limit ice formation. 2013]. PITHAN ET AL. 19422466, 2016, 3, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2016MS000630 by University Of Nevada Reno, Wiley Online Library on [16/09/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License 10.1002/2016MS000630
-
-
-## (b)
-
-
-## (c)
-
-
-## (d)
-
-FIRST ARCTIC AIR MASS INTERCOMPARISON 1347 Figure 3. Bivariate PDFs as in Figure 1 using CMIP5 model output from the ocean domain north of 648N. The models shown serve as examples for the three groups of models determined in Pithan et al. [2014]. White lines are included as visual reference indicating the observed under polar night conditions, such that no solar radiation reaches the modeled column. In this setup, the atmospheric column cools radiatively. Clouds are formed, that precipitate and eventually glaciate, such that the column is transformed to a cold, dry state. The challenges to models are (1) to initially reach and maintain a radiatively opaque cloudy state with temperature profiles and surface fluxes resembling those observed in Arctic winter and (2) to qualitatively reproduce the observed fluxes and profiles of the radiaBoundary-layer observations are generally taken in an Eulerian framework, which means that the observatory is fixed on the ground (or slowly moving in the case of ship or ice-based observations such as SHEBA). Measured quantities can thus change because of external influences such as the diurnal or seasonal cycle, diabatic processes such as rain or radiation and because of advection, as synoptic weather patterns advect air from different sources past the measurement site. Single-column models can be run in an Eulerian As explained in the introduction, the state of the Arctic winter boundary layer strongly depends on the transformation of warm and moist air masses that are advected over sea ice or Arctic land. In a Eulerian modeling framework, this means that advective tendencies, i.e., the amount of heat and moisture being advected into the column, would largely dictate the boundary-layer state, giving a single-column model relWe therefore choose a Lagrangian or air-mass following framework [Wexler, 1936; Curry, 1983; Pithan et al., 2014], assuming that our model column follows a homogeneous air mass advected over a homogeneous
-
-
-# Journal of Advances in Modeling Earth Systems
-
-
-## strong stability in
-
-
-## clear state
-
-
-## weak stability in
-
-
-## clear state
-
-relationship between stronger inversions and weaker surface cooling within the clear state. tively clear boundary layer. framework by including advective tendencies in the model forcing. PITHAN ET AL. 19422466, 2016, 3, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2016MS000630 by University Of Nevada Reno, Wiley Online Library on [16/09/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License 10.1002/2016MS000630
-
-
-## clear and cloudy state
-
-
-## clear state only
-
-cloudy state clear state clear state clear state
-
-
-## Low-level stability (K)
-
-2. Experimental Strategy, Setup, and Participating Models 2.1. Lagrangian Versus Eulerian Frameworks in Observations and Modeling atively little freedom to develop the biases that occur in free-running models. FIRST ARCTIC AIR MASS INTERCOMPARISON 1348 moisture as the modeled column is advected into an area that was previously dominated by cooler and Models are initialized with analytical temperature and humidity profiles (Table 1) which represent typical air masses entering the Arctic in winter in an idealized way. A geostrophic wind of 5 m s21 is prescribed throughout the troposphere to drive turbulent mixing. Surface conditions are initialized to a surface temperature of 250 K, a 1 m thick sea-ice layer and 0.1 m water equivalent of snow on top of the sea ice. The ocean underneath the sea ice is assumed to be at the freezing point of sea water. As the model column is supposed to follow the same air mass on its trajectory, advective tendencies are set to zero. The use of interactive surface temperatures does not follow the Lagrangian approach, but is justified by observations showing that the surface-atmosphere interaction has a much shorter timescale than that of air mass advection and transformation [Persson et al., 1999]. The run length was set to 20 days, which is beyond the typical residence time of air masses over Arctic sea ice [Woods and Caballero, 2016]. We therefore limit most analyses to the first 10 days, which also have temperatures that are more representative of Arctic Ocean conditions. The model location is set to 808 N and the experiment is started on the 1 January, such that insolation is zero throughout the run. Greenhouse gas concentrations are prescribed In response to a call endorsed by the GASS steering group, the Larcform 1 experiment as described above was run using the single-column versions of climate and weather prediction models as well as research models. Some of the participating models use fixed rather than thermodynamically interactive sea ice thickThe WRF 3.5.1 single-column model here uses the Mellor-Yamada-Janjic boundary-layer scheme [Janjic, 1994], the NOAH land surface model, the eta-similarity surface layer scheme, the RRTMG radiation package [Iacono et al., 2008], and the WRF single-moment five-class microphysics scheme [Hong et al., 2004]. The CAM-single column model constrains wind speeds to the prescribed geostrophic values. Sensitivity experiments with other models (not shown) suggest that such differences in wind speeds do not qualitatively Following the evaluation of these initial standard model runs (denoted std throughout the paper), additional sensitivity experiments were performed with individual models to discern causes for specific biases or model behaviors. These runs usually employ the same setup described here but use slight modifications of the respective models, which will be explained in context where such results are
-
-
-# Journal of Advances in Modeling Earth Systems
-
-Table 1. Initial Profiles of Temperature, Humidity, and Geostrophic Zonal Wind ugeo (m s21)a Pressure (hPa) Temperature (K) T0 5 273 rh wrt water: 80% 1013  Rcg21 p 1013–600 T5T0 p0 600 rh wrt water: 20%  Rcg21 p rh wrt water: 20% 600–300 T5T0 p0 300 model top T 5 T300hPa aThe meridional geostrophic wind component is zero. p0 5 1013 hPa, assumed lapse rate c58  1023 K m21, gas constant for air R 5 287 J kg21K21, gravitational acceleration g 5 9.81 m s22. Temperature profile based on Curry [1983]. dryer air. 2.2. Boundary and Initial Conditions as in Table 2. 2.3. Models Participating in the Intercomparison ness and two models do not represent snow on sea ice (see Table 3). presented. Table 2. Greenhouse Gas Concentrations GHG CO2 360 1026 Volume-mixing ratio PITHAN ET AL. 19422466, 2016, 3, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2016MS000630 by University Of Nevada Reno, Wiley Online Library on [16/09/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License 10.1002/2016MS000630 Arctic sea ice surface. This setup allows models to freely develop their own state and biases over several days while retainugeo (m s21) Humidity ing the simplicity of a single-column setup 5 and has successfully been used in other Linear interpolation of rh 5 5 intercomparison studies [Bretherton et al., 5 1999; van der Dussen et al., 2013]. As our q5 3  1026kg kg21 0 frame of reference follows the moving air mass, advective tendencies are set to zero even though an observer at a ground station (i.e., in a Eulerian framework) would report substantial advection of heat and alter the thermodynamical representation of both boundary-layer states. N2O CH4 CFC-11 CFC-12 309.5 1029 1693.6 1029 252.8 10212 466.2 10212 FIRST ARCTIC AIR MASS INTERCOMPARISON 1349 aPhysics schemes used in WRF are described in the text. Prognostic: models with separate prognostic variables for cloud ice and liquid and parametrization of freezing rates; f(T): phase partitioning as a function of temperature, p(T): temperature-dependent probability for total freezing of condensate at each time step, ice: this model assumes all condensate to be ice for the present case, fixed ice: models with fixed ice thickness, no snow: models that do not represent snow on sea ice. z0m is the momentum roughness length. As the present intercomparison is not based on an observational data set nor includes an LES reference run, model results cannot be evaluated by directly comparing model output at a given time to the observational or high-resolution modeling ‘‘truth.’’ We instead use our understanding of the modeled air-mass transformation and its relation to the observed states of the Arctic winter boundary layer and focus our evaluation on whether or not, and why, models qualitatively reproduce the typical surface fluxes and atmospheric profiles of both boundary layer states. We mostly use the SHEBA data set explained in the introduction as observational reference for the boundary-layer states. Since we compare a single air-mass following model experiment with analytical initial profiles to point observations of a whole season, models can at most be expected to qualitatively reproduce the typical observed boundary layer states. We therefore do not quantitatively interpret the lifetime of clouds, heat fluxes, or other variables. We here give a brief overview of the results before focusing on the physical mechanisms that cause typical model Most participating models generate a bimodal distribution of surface net longwave radiation in the experiment (Figure 4, all fluxes are positive downward), indicating that they do represent the clear and cloudy state of the boundary layer (Table 4). Models tend to have slightly less surface radiative cooling than observations in the clear state, and slightly more cooling in the cloudy state. CAM 5.3 and GISS std lack the cloudy state of the boundary layer and therefore have a unimodal distribution of surface net longwave radiation. The WUR-D91 model only displays the cloudy state of the boundary layer with weak rates Not all models that represent both states in terms of net longwave radiation also reproduce the observed temperature profiles. Two days into the run, elevated inversions dominate the temperature profile in mod-
-
-
-# Journal of Advances in Modeling Earth Systems
-
-Table 3. Models Participating in the Intercomparisona Model Documentation CAM 5.3 Neale et al. [2010] Belair et al. [2009] CMC-GDPS CMC-HRDPS Mailhot et al. [2006] CMC-RDPS Mailhot et al. [2006] EC-Earth V3 (IFS 36r4) ECMWF [2010] ECHAM 6.2 Stevens et al. [2013] ECHAM6.1.0-HAM2.2 Stevens et al. [2013] Lohmann et al. [2007] ECMWF-IFS ECMWF [2010] GISS E2 Schmidt et al. [2014] WRF 3.5.1 Skamarock et al. [2008] WUR-D91 Duynkerke [1991] 3. Results and Discussion biases. of surface radiative cooling. Table 4. Groups of Models According to Their Representation of BL States With Cloudy State ECHAM6.2 ECHAM-HAM Strong stability WRF std in clear state CAM5.3 (process split) GISS vmp CMC-GDPS (modified microphysics) ECMWF-IFS Weak stability EC-Earth in clear state CMC-GDPS (standard) PITHAN ET AL. 19422466, 2016, 3, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2016MS000630 by University Of Nevada Reno, Wiley Online Library on [16/09/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License 10.1002/2016MS000630 Phase of Condensate Snow and Ice z0m(m) Contributor Prognostic Interactive 5e-3 FP and BM f(T) Interactive 1.6e-4 AZ Prognostic Interactive 1.6e-4 AZ f(T) Interactive 1.6e-4 AZ Prognostic No snow, fixed ice 1e-3 KH Prognostic Interactive 1e-3 FP Prognostic Interactive 1e-3 LI Prognostic No snow, fixed ice 1e-3 IS 10:018 u2 mm  AA p(T) Fixed ice u g Prognostic Fixed ice 1e-3 HAMS and WA Ice Fixed ice 1e-1 GJS els that represent the cloudy state of the boundary layer (Figure 5), consistent with observations [Stramler et al., 2011]. The models lacking the cloudy Lacking a state (CAM5.3 and GISS std) generate Cloudy State surface-based temperature inversions. A surface-based inversion has started WRF-200l to develop in WRF-std, while an eleCAM5.3 (std) vated temperature inversion persists. GISS std The elevated inversion was generated by a mixed-phase cloud during the first day of the experiment and persists even though the cloud has vanished. This transition occurs at a later FIRST ARCTIC AIR MASS INTERCOMPARISON 1350 but only CMC-GDPS is shown here), EC-Earth, and ECMWF-IFS do not form a surface-based temperature inverWe here investigate in more detail why some models (CAM5.3, GISS std, and a high vertical resolution version of WRF called WRF-200l) do not represent the cloudy state of the boundary layer and have virtually no cloud liquid water throughout the experiment. Pithan et al. [2014] showed that for most of the climate models investigated in that study, the lack of a cloudy state could be explained by mixed-phase cloud microphysics not allowing for cloud liquid water to exist at cold enough temperatures. However, this explanation did not hold up for CAM4, the predecessor of CAM5.3, which allowed cloud liquid water to exist down to 2408C but still did not generate a cloudy state of the boundary layer. Caldwell [2012] reports that CAM5 underestimates cloud liquid water because of an issue in the coupling between cloud macro and microphysics.
-
-
-# Journal of Advances in Modeling Earth Systems
-
-two boundary-layer lack of mixed-phase clouds states CAM5.3 GISS std WRF std ECHAM-HAM ECHAM6.2 EC-Earth ECMWF-IFS CMC-GDPS Figure 4. PDF of hourly means of surface net longwave radiation in participating models for 3.1. Existence or Lack of the Cloudy State CMC-GDPS PITHAN ET AL. 19422466, 2016, 3, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2016MS000630 by University Of Nevada Reno, Wiley Online Library on [16/09/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License 10.1002/2016MS000630 stage in other models. We lack of radiatively clear sky do not focus on the transition in the present paper WUR-D91 because observed transitions in a Eulerian framework can be caused by the advection of a different air mass rather than a state transition within the air mass, which makes it difficult to identify observational analogues. After 10 SHEBA obs days (Figure 6), surface-based inversions dominate the temperature profile in ECHAM6.2, ECHAM-HAM, GISS std, WRF std, and CAM5.3 in line with observations of the radiadays 1–10 and NDJF SHEBA observations. Each tickmark corresponds to the center of one bin. tively clear boundary layer. WUR-D91, CMC (all versions, sion but maintain a well-mixed or at least near-neutral profile near the surface. Different physical processes that are handled by individual parameterizations can be coupled in ‘‘time split’’ or ‘‘process split’’ mode in a general circulation model [Williamson, 2002]. In the time split mode, elevated temperature each process acts on the modEC-Earth el state separately, and the inversions ECMWF-IFS model state is updated after ECHAM6.2 the call to each individual ECHAM-HAM parameterization. A parameWUR-D91 terization therefore sees the atmospheric state as it was left by the preceding parameteriWRF std zation. In process-split mode, in contrast, all parameterizasurface-based CAM 5.3 GISS std inversion tions are given the same initial state from the last time step, their tendencies are accumulated and the model state is updated once per time step using the sum of all individual Figure 5. Temperature profiles averaged over 1 h after 2 days. FIRST ARCTIC AIR MASS INTERCOMPARISON 1351 Caldwell [2012] addressed this by implementing a substepping procedure into the cloud schemes, i.e., retaining the time-split coupling but shortening the coupling time step. Since that code was not available to us when running the intercomparison, we simply change the coupling of different processes in the CAM5.3 code such that cloud microphysics and macrophysics are process-split, i.e., they act on the same model state and their physical tendencies are summed up before updating the model. This leads to cloud liquid water persisting for several days at the beginning of the experiment, substantially reducing radiative cooling and preventing the build-up of a surface-based temperature inversion at this stage (not shown). The emergence of a cloudy state of the boundary layer in the modified model can also be seen in the PDF of surface net longwave radiation, which now includes a second peak (Figure 7). In our experiment, the lack of cloud liquid water and a cloudy state of the Arctic winter boundary layer in CAM (see also English et al. [2014]) is thus caused by the time-split coupling of different processes that does not allow the cloud liquid to adequately interact with radiation without the additional substepping suggested by Caldwell [2012].
-
-
-# Journal of Advances in Modeling Earth Systems
-
-WUR-D91 surface-based CAM 5.3 inversion GISS std ECHAM6.2 ECHAM-HAM WRF std lack of mixed-phase clouds WRF-200l CAM 5.3 std (time split) GISS std Figure 7. PDF of surface net longwave radiation in selected models (up to day 10) and NDJF SHEBA observations. Each tickmark corresponds to the center of one bin. PITHAN ET AL. 19422466, 2016, 3, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2016MS000630 by University Of Nevada Reno, Wiley Online Library on [16/09/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License 10.1002/2016MS000630 tendencies. CAM uses the time-split mode to couple cloud macrophysics, cloud microphysics, and radiation, called in this order [Neale et al., 2010]. In the CAM5.3 run for Larcform1, the cloud macrophysics generate considerable amounts of liquid water. However, all liquid water is converted into cloud ice by the following call to cloud microno surface-based physics. When radiation is EC-Earth called, it thus sees an atmoinversion ECMWF-IFS spheric column that contains CMC_GDPS no liquid water, and radiative cooling occurs at the surface rather than at cloud top. The lack of radiative cooling at the cloud level also reduces Figure 6. Temperature profiles averaged over 1 h after 10 days. the generation of cloud liquid water in the next time step. In GISS, cloud condensate can only be either liquid or ice at a two boundary-layer states given time and location, and a likelihood for supercooled CAM 5.3 (process split) water to freeze instantaneousGISS vmp ly is dependent on temperaWRF std ture [Schmidt et al., 2014]. This leads to a growing chance of entirely freezing a supercooled layer with time, and does not allow a persistent mixed phase cloud to form in SHEBA obs our experiment. When running GISS with a virtual mixed-phase scheme that is designed to represent the effect of mixed-phase clouds (GISS vmp), liquid water appears in the column after FIRST ARCTIC AIR MASS INTERCOMPARISON 1352
-
-
-# Journal of Advances in Modeling Earth Systems
-
-a) b) CMC-GDPS (modified microphysics) c) CMC-GDPS (modified microphysics) Figure 8. (a) Vertically integrated ice water paths for the CMC-GDPS standard and modified versions and other models (gray). (b) PDF of surface net longwave radiation for the CMC-GDPS standard and modified versions, and NDJF SHEBA observations. (c) Vertical profiles of temperature after 10 days, CMC-GDPS standard and modified versions and other models (gray). PITHAN ET AL. 19422466, 2016, 3, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2016MS000630 by University Of Nevada Reno, Wiley Online Library on [16/09/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License 10.1002/2016MS000630 about a day and leads to reduced surface radiative cooling consistent with observations of the cloudy Arctic boundary layer (Figure 7) as well as the establishment of an elevated temperature inversion during the cloudy state of CMC-GDPS the boundary layer (not shown). The GISS vmp scheme was only being developed during the intercomparison, but these results suggest it has the potential to substantially alleviate weaknesses CMC-GDPS (modified microphysics) of the GISS CMIP5 model reported by Pithan et al. [2014]. An unexpected resolution dependency occurs in WRF, which is run at different vertical resolutions (90 and 200 levels) to investigate the sensitivity of results to vertical resolution. The 90 level CMC-GDPS version is representative of an operational model, whereas 200 levels is a very high vertical resoSHEBA obs lution used for research purposes [Sterk et al., 2013]. While high vertical resolution is usually thought of as beneficial for the representation of mixed-phase clouds [Barrett, 2012], the high vertical resolution version WRF-200l lacks cloud liquid water and the corresponding cloudy state of the boundary layer, which lower vertical resolution version WRF-90l does generate (Figure 7). In the high vertical resolution version, the lowest model level, which is only 1.2 m thick, dries to the surface through frost deposition or negative water vapor flux before a cloud can be formed. As the air cools further, it becomes saturated with respect to ice, but does CMC-GDPS not reach saturation with respect to water, which prevents the generation of cloud liquid water. The deposition of water vapor at the surface is similar in the lowerresolution versions, but hardly has an effect on the much thicker surface layers containing substantially more water vapor in total (not shown). Very high FIRST ARCTIC AIR MASS INTERCOMPARISON 1353 vertical model resolutions can violate implicit assumptions in the design of parametrizations and thus be detrimental to model performance. In this case, we suggest that the very high vertical resolution would require a faster coupling between different atmospheric layers, such that surface fluxes could tap into a larger moisture reservoir than that of the first model level alone. This hypothesis could be tested by substantially decreasing ECHAM6.2, ECHAM-HAM, WRF-90l, and CAM5.3 do represent the growing surface-based inversions observed under clear skies once strong surface radiative cooling is sustained for many hours and days. However, the CMC models sustain well-mixed layers even with little or no cloud liquid water being present, preventing the generation of strong stability and surface-based temperature inversions. EC-Earth and ECMWFIFS also do not generate surface-based inversions despite substantial surface radiative cooling. The sustained well-mixed layers in CMC models are likely caused by an exaggerated emissivity of ice clouds, caused by a combination of too small an effective radius for ice particles and an overestimated ice water path. In a sensitivity experiment with enhanced precipitation efficiency of ice clouds in the microphysics scheme (see Appendix A for details), CMC-GDPS does develop a surface-based inversion by day 10 (Figure 8). While the standard model version has one of the highest ice water paths of the intercomparison, the modified microphysics lead to an almost complete removal of cloud ice by day 10, which corresponds to the lower end of the intermodel spread (Figure 8a). The reduced ice water path leads to stronger surface radiative cooling in the clear state (Figure 8b) and the development of a surface-based temperature inverWUR-D91 is an even more extreme example of high ice cloud emissivities, since it maintains a single wellmixed layer and surface heat fluxes corresponding to the cloudy state of the boundary layer throughout Temperature profiles and surface fluxes similar to those in models lacking a representation of snow on sea ice (ECMWF-IFS and EC-Earth) were obtained in a sensitivity experiment with no snow on sea ice in ECHAM6.2 (not shown). Snow has a much lower conductivity than ice and strongly reduces the upward heat flux from the ocean to the surface. We conclude that the lack of an insulating snowpack causes the absence of surface-based inversions in ECMWF-IFS and EC-Earth. This is consistent with Tjernstr€om and Graversen [2009] reporting that the ERA-Interim reanalysis derived using the ECMWF model was lacking surface-based inversions in early winter at the SHEBA site despite the assimilation of local observations. In the radiatively clear boundary layer, observed downward sensible heat fluxes are typically on the order of 10 W m22 [Stramler et al., 2011]. In the models lacking snow on sea ice in Larcform1, sensible heat fluxes in the clear state of the boundary layer (surface radiative cooling greater than 20 W m22) are much smaller. Sensible heat fluxes still vary by a factor of five among the remaining models (Table 5). Larger downward
-
-
-# Journal of Advances in Modeling Earth Systems
-
-sion as expected for the radiatively clear state (Figure 8c). 3.3. Turbulent Heat Flux, Cloud Liquid Water, and Energy Budget Table 5. Overview of Turbulent Heat Fluxes (Defined Positive Downward) in the Clear State, Cloud Liquid Water in the Cloudy State and Net Surface Energy Loss Over the First 10 Daysa hs (clear) (Wm22) Model EC-Earth 0.23 ECMWF-IFS 1.65 ECHAM6.2 5.12 ECHAM-HAM 8.02 CMC-GDPS 3.09 GISS std 5.79 WRF-90l 12.05 WUR-D91 CAM5.3 9.57 GISS vmp 3.97 CAM5.3 (process split) 9.70 aClear and cloudy state are partitioned at a surface net longwave radiation of 220 Wm22. PITHAN ET AL. 19422466, 2016, 3, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2016MS000630 by University Of Nevada Reno, Wiley Online Library on [16/09/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License 10.1002/2016MS000630 the time step, but further investigation of the issue is beyond the scope of the present paper. 3.2. Build-Up of Surface-Based Inversions Under Radiatively Clear Skies the experiment despite assuming by construction that all cloud condensate is frozen. heat fluxes under clear skies observed at SHEBA [Stramler et al., 2011, Figure 8] may be due to larger wind speeds at the SHEBA site [Persson et al., 2002] sustaining more mixing than in our experiment. The clwvi (cloudy) Net sfc Energy Loss 103 (kJm22) (kgm22) friction velocity varies much more 0.037 27.3 between different models than between 0.029 24.1 the clear and cloudy state in individual 0.16 17.5 models (not shown). 0.39 15.5 0.01 12.9 Vertically integrated cloud liquid water in 18.3 0.05 13.0 the cloudy state varies by an order of 0 6.3 magnitude among models, which con16.5 firms that small amounts of liquid water 0.04 8.2 0.02 13.0 are sufficient to sustain the cloudy state. Liquid water is absent in WUR-D91, where all condensate is assumed to be ice, and FIRST ARCTIC AIR MASS INTERCOMPARISON 1354 the cloudy state is maintained because of a high emissivity of ice clouds. Median observed liquid water paths for the SHEBA winter are at the lower end of model results, and the high end of model results exceeds the 95th percentile of observations [Shupe et al., 2006]. However, a more realistic setup where clouds are constrained to a realistic height, e.g., by subsidence, is required to determine if these models actually tend The greatest accumulated surface energy deficit (defined as the sum of sensible, latent, and radiative fluxes at the surface accumulated over time) over the first 10 days of the experiment occurs in the models without an insulating snow layer. As before, we consider the first half of the experiment to obtain a roughly realistic weight between the clear and cloudy states. Leaving aside the WUR-D91 model, which lacks a radiatively clear boundary-layer state, accumulated energy loss varies by about 50% among the remaining models. Changes to the GISS cloud and snow schemes roughly halve the accumulated surface energy loss, and making mixed-phase clouds appear in CAM5.3 reduces the energy loss by about 20%. Note that the accumulatRunning an idealized Lagrangian single-column experiment of Arctic air mass formation in a set of climate, operational forecast, and research models, we reproduce and investigate the two main types of biases global models display in the Arctic wintertime boundary layer: (1) A lack of mixed-phase clouds and thereby of the cloudy state of the boundary layer and (2) weak low-level stability and a lack of surface-based tempera1. Pithan et al. [2014] report that in many models, the lack of a cloudy state is related to a temperaturedependent diagnostic phase partitioning of cloud condensate, which causes total freezing at relatively warm temperatures. Sensitivity experiments with an improved representation of mixed-phase cloud properties in GISS for the present study confirm the crucial role of representing mixed-phase microphysics. All physics schemes using separate prognostic variables for cloud ice and cloud liquid water with explicitly computed freezing rates were able to qualitatively represent the cloudy state of the boundary layer in our study. The global and regional versions of the CMC model do reproduce the cloudy state with a temperature-dependent diagnostic phase partitioning. CAM5.3 lacks the cloudy state of the boundary layer despite a sophisticated treatment of cloud microphysics because of the sequential/time-split coupling of cloud microphysics, cloud macrophysics, and radiation [Williamson, 2002; Caldwell, 2012]. When cloud macro and microphysics are called in parallel/process-split, the same physical schemes do reproduce mixed2. Weak low-level stability and a lack of surface-based temperature inversions occur in models that do not represent snow on sea ice or have high atmospheric emissivities and thereby maintain stronger downwelling longwave fluxes in the absence of cloud liquid water. The precipitation efficiency of ice clouds can control the development of surface-based temperature inversions in one model. Intermodel differences in turbulent fluxes in stably stratified conditions [Cuxart et al., 2006] are confirmed, but are of secondary importance for this air mass transformation case including cloud processes and surface coupling. While our results suggest that models using a separate prognostic variable for cloud ice are generally able to represent mixed-phase clouds in Arctic winter and the associated boundary-layer state, the idealized experiment does not permit us to quantitatively constrain the occurrence of such clouds, the magnitude of turbulent heat fluxes or the liquid water path, which all vary considerably among models in the intercomparison. As a next step, we are going to develop a more realistic, observationally based setup that allows to evaluate and improve the model representation of cloud lifetime, cloud properties, and surface fluxes. Lagrangian observations of individual air masses undergoing the transition to Arctic air over sea ice are not available yet, but the upcoming Year of Polar Prediction [WWRP, 2014] may provide an opportunity to obtain such data. The CMC-GDPS model uses the microphysics scheme of Sundqvist [1978], in which the generation of precip-
-
-
-# Journal of Advances in Modeling Earth Systems
-
-4. Conclusions PITHAN ET AL. 19422466, 2016, 3, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2016MS000630 by University Of Nevada Reno, Wiley Online Library on [16/09/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License 10.1002/2016MS000630 to overestimate LWP in Arctic mixed-phase clouds given realistic moisture advection. ed energy loss is largely balanced by latent heat release, i.e., sea ice growth, in winter. ture inversions despite strong surface radiative cooling in the radiatively clear state. phase clouds and the corresponding atmospheric profiles and surface fluxes. Appendix A: Sensitivity Experiment for CMC Microphysics itation (equation (3.1a) in Sundqvist [1978]) is a function of a conversion timescale (c21 0f ) and a threshold FIRST ARCTIC AIR MASS INTERCOMPARISON 1355 value (mrf) of cloud water above which precipitation formation becomes more efficient. In CMC-GDPS, this cussed in section 3.1, precipitation formation is accelerated by reducing both the conversion timescale and Barrett, A. (2012), Why can’t models simulate mixed-phase clouds correctly?, PhD thesis, Univ. of Reading, Reading, U. K. Beare, R. J., et al. (2006), An intercomparison of large-eddy simulations of the stable boundary layer, Boundary Layer Meteorol., 118(2), 247– Belair, S., M. Roch, A.-M. Leduc, P. A. Vaillancourt, S. Laroche, and J. Mailhot (2009), Medium-range quantitative precipitation forecasts from Bergeron, T. (1935), On the physics of clouds and precipitation, in Proceedings of 5th Assembly, pp. 156–178, International Union of Geodesy Bretherton, C. S., S. K. Krueger, M. C. Wyant, P. Bechtold, E. van Meijgaard, B. Stevens, and J. Teixeira (1999), A GCSS boundary layer model Caldwell, P. (2012), The case of disappearing condensate, paper presented at the 17th Annual CESM Workshop, 18–21 June 2012, BreckenCesana, G., J. Kay, H. Chepfer, J. English, and G. de Boer (2012), Ubiquitous low-level liquid-containing Arctic clouds: New observations and Cuxart, J., et al. (2006), Single-column model intercomparison for a stably stratified atmospheric boundary layer, Boundary Layer Meteorol., Duynkerke, P. G. (1991), Radiation fog: A comparison of model simulation with detailed observations, Mon. Weather Rev., 119(2), European Centre for Medium-Range Weather Forecasts (ECMWF) (2010), Ifs documentation cy36r1: Part iv physical processes, Reading, U. K. English, J. M., J. E. Kay, A. Gettelman, X. Liu, Y. Wang, Y. Zhang, and H. Chepfer (2014), Contributions of clouds, surface albedos, and mixedFridlind, A. M., B. Van Diedenhoven, A. S. Ackerman, A. Avramov, A. Mrowiec, H. Morrison, P. Zuidema, and M. D. Shupe (2012), A fire-ace/ sheba case study of mixed-phase arctic boundary layer clouds: Entrainment rate limitations on rapid primary ice nucleation processes, Hong S-Y., J. Dudhia, and S.-H. Chen (2004), A revised approach to ice microphysical processes for the bulk parameterization of clouds — Iacono M. J., J. S. Delamere, E. J. Mlawer, M. W. Shephard, S. A. Clough, and W. D. Collins (2008), Radiative forcing by long-lived greenhouse Janjic, Z. I. (1994), The step-mountain eta coordinate model: Further Developments of the convection, viscous sublayer, and turbulence Jung, T., et al. (2016), Advancing polar prediction capabilities on daily to seasonal time scales, Bull. Am. Meteorol. Soc., doi:10.1175/BAMS-DLohmann, U., P. Stier, C. Hoose, S. Ferrachat, S. Kloster, E. Roeckner, and J. Zhang (2007), Cloud microphysics and aerosol indirect effects in Mailhot, J., S. Belair, R. Benoit, B. Bilodeau, Y. Delage, L. Fillion, L. Garand, C. Girard, and A. Tremblay (1998), Scientific Description of RPN Physics Library: Version 3.6, Rech. Prevision Numer., Atmos. Environ. Serv., Dorval, Quebec, Canada. [Available at http://collaboration. Manabe, S., and R. Wetherald (1975), The effects of doubling the CO2 concentration on the climate of a general circulation model, J. Atmos. Morrison, H., G. de Boer, G. Feingold, J. Harrington, M. Shupe, and K. Sulia (2012), Resilience of persistent Arctic mixed-phase clouds, Nat. Neale, R., et al. (2010), Description of the NCAR community atmosphere model (cam 5.0 description of the NCAR community atmosphere Ovchinnikov, M., et al. (2014), Intercomparison of large-eddy simulations of arctic mixed-phase clouds: Importance of ice size distribution Persson, P., T. Uttal, J. Intrieri, C. Fairall, E. Andreas, and P. Guest (1999), Observations of large thermal transitions during the arctic night
-
-
-# Journal of Advances in Modeling Earth Systems
-
-relationship is described by a freezing function [Mailhot et al., 1998]  fmrðTÞ5 where y5x 11x 111:333x ð Þ ð threshold value. The modified freezing function reads fmrðTÞ5 References Acknowledgments We gratefully acknowledge support from the GASS (Global atmospheric system studies) steering group. We 272. thank the researchers involved in the collection of SHEBA and ARM data for making their data sets available, and the modeling groups, the Program for and Geophysics (UGGI), Lisbon. Climate Model Diagnosis and Intercomparison and the World Climate Research Program’s Working Group on Coupled Modeling for making available the CMIP5 multimodel data set. F.P. was funded by the ERC under Marie-Curie grant Curry, J. (1983), On the formation of continental polar air, J. Atmos. Sci., 40, 2278–2292. UACSURF (GAP-654492) for parts of this study. AA and MK were funded by 118(2), 273–303. the NASA MAP program. GJS acknowledges funding from NWO 324–341. contract 863.10.010. M.S. acknowledges the support from NWO (The Dutch Science Foundation) with grant 829.09.005 (‘‘Quantifying contributions of surface climate feedbacks to the Arctic amplification of greenhouse warming’’ in the J. Atmos. Sci., 69(1), 365–389. Sustainable Earth program). B.M. was supported by the Regional and Global and precipitation, Mon. Weather Rev., 132, 103–120. Climate Modeling Program of the U.S. Department of Energy’s Office of Science, Cooperative Agreement DEFC02-97ER62402. NCAR is sponsored closure schemes, Mon. Weather Rev., 122, 927–945. by the National Science Foundation. K.H. was supported by the Swedish e14-00246.1, in press. Science Research Centre SeRC. Thanks to Bert Holtslag for comments on an the global climate model echam5-ham, Atmos. Chem. Phys., 7(13), 3425–3446. earlier version of this manuscript, and to Thorsten Mauritsen for advice and support in the development of the cmc.ec.gc.ca/science/rpn/physics/physic98.pdf.] case. We gratefully acknowledge the input and advice of two anonymous reviewers. Model results are available Sci., 32, 3–15. at https://doi.org/10.1594/PANGAEA. 856770. Geosci., 4, 11–17, doi:10.1038/ngeo1332. model (cam 5.0), NCAR Tech. Note TN-4861STR, NCAR, Boulder, Colo. assumptions, J. Adv. Model. Earth Syst., 6(1), 223–248, doi:10.1002/2013MS000282. PITHAN ET AL. 19422466, 2016, 3, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2016MS000630 by University Of Nevada Reno, Wiley Online Library on [16/09/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License 10.1002/2016MS000630   min 1:; 1:33e20:066ðT2T0Þ2 for 250 K  T  T0    (A1) y max 0:03; 0:75 1:071 for T  250 K; 11y Þ; x5jT2232j=18; 5sign T2232 Þ; T05273:15 K. For the sensitivity test disð   min 1:; 1:33e20:066ðT2T0Þ2 for 230 K  T  T0 (A2) 0:001 for T  230 K: Canada’s new 33-km deterministic global operational system, Weather Forecast., 24(3), 690–708. intercomparison study of the first ASTEX Lagrangian experiment, Boundary Layer Meteorol., 93, 341–380. ridge, Colo. [Available at http://www.cesm.ucar.edu/working_groups/Atmosphere/Presentations/2012/caldwell.pdf.] climate model constraints from CALIPSO-GOCCP, Geophys. Res. Letters, 39, L20804, doi:10.1029/2012GL053385. phase ice nucleation schemes to arctic radiation biases in cam5, J. Clim., 27(13), 5174–5197. Findeisen, W. (1938), Die kolloidmeteorologischen vorg€ange bei der niederschlagsbildung, Meteorol. Z, 55, 121–133. gases: Calculations with the AER radiative transfer models, J. Geophys. Res.,113, D13103, doi:10.1029/2008JD009944. Mailhot, J., et al. (2006), The 15-km version of the Canadian regional forecast system, Atmos. Ocean, 44(2), 133–149. Medeiros, B., C. Deser, R. Tomas, and J. Kay (2011), Arctic inversion strength in climate models, J. Clim., 24, 4733–4740. from a suite of sensors at sheba, in Third Symposium on Integrated Observing Systems, Am. Meteorol. Soc., Dallas, Tex. FIRST ARCTIC AIR MASS INTERCOMPARISON 1356 Persson, P., C. Fairall, E. Andreas, P. Guest, and D. Perovich (2002), Measurements near the Atmospheric Surface Flux Group tower at SHEBA: Pithan, F., and T. Mauritsen (2014), Arctic amplification dominated by temperature feedbacks in contemporary climate models, Nat. Geosci., Pithan, F., B. Medeiros, and T. Mauritsen (2014), Mixed-phase clouds cause climate model biases in arctic wintertime temperature inverSchmidt, G. A., et al. (2014), Configuration and assessment of the GISS modele2 contributions to the cmip5 archive, J. Adv. Model. Earth Sedlar, J., M. D. Shupe, and M. Tjernstr€om (2012), On the relationship between thermodynamic structure and cloud top, and its climate sigShupe, M. D., S. Y. Matrosov, and T. Uttal (2006), Arctic mixed-phase cloud properties derived from surface-based sensors at sheba, J. Skamarock, W., J. Klemp, J. Dudhia, D. Gill, D. Barker, M. Duda, X. Huang, W. Wang, and J. Powers (2008), A description of the advanced Sterk, H., G. Steeneveld, and A. Holtslag (2013), The role of snow-surface coupling, radiation, and turbulent mixing in modeling a stable Stevens, B., et al. (2013), The atmospheric component of the MPI-M earth system model: ECHAM6, J. Adv. Model. Earth Syst., 5, 146–172, Sundqvist, H. (1978) A parameterization scheme for non-convective condensation including prediction of cloud water content, Q. J. R. Svensson, G., and J. Karlsson (2011), On the Arctic wintertime climate in global climate models, J. Clim., 24(22), 5757–5771. Sverdrup, H. (1933), Meteorology, The Norwegian North Polar expedition with the ’Maud’ 1918-1925, Scientific Results, vol. II, Geophys. Inst., Tjernstr€om, M. (2012), The Arctic Ocean boundary layer: Interactions with the sea-ice surface and clouds, in ECMWF GABLS Workshop on Diurnal Cycles and the Stable Boundary Layer, 7-10 November 2011, Eur. Cent. for Medium-Range Weather Forecasts, Reading, U. K. Tjernstr€om, M., and R. Graversen (2009), The vertical structure of the lower Arctic troposphere analysed from observations and the ERA-40 van der Dussen, J. J., S. R. de Roode, A. S. Ackerman, P. N. Blossey, C. S. Bretherton, M. J. Kurowski, A. P. Lock, R. A. J. Neggers, I. Sandu, and A. P. Siebesma (2013), The GASS/EUCLIPSE Model Intercomparison of the Stratocumulus Transition as Observed During ASTEX: LES Wexler, H. (1936), Cooling in the lower atmosphere and the structure of polar continental air, Mon. Weather Rev., 64, 122–136. Williamson, D. L. (2002), Time-split versus process-split coupling of parameterizations and dynamical core, Mon. Weather Rev., 130(8), Woods, C., and R. Caballero (2016), The role of moist intrusions in winter Arctic warming and sea ice decline, J. Clim., 29, 4473–4485. Woods, C., R. Caballero, and G. Svensson (2013), Large-scale circulation associated with moisture intrusions into the arctic during winter, WWRP (2014), WWRP Polar Prediction Project Year of Polar Prediction (YOPP) Implementation Plan. [Available at http://polarprediction.net/ Zhang, Y., D. Seidel, J. Golaz, C. Deser, and R. Tomas (2011), Climatological characteristics of Arctic and Antarctic surface-based inversions,
-
-
-# Journal of Advances in Modeling Earth Systems
-
-7, 181–184, doi:10.1038/ngeo2071. sions, Clim. Dyn., 43(1–2), 289–303. Syst., 6(1), 141–184. nificance in the arctic, J. Clim., 25(7), 2374–2393, doi:0.1175/JCLI-D-11-00186.1. Atmos. Sci., 63(2), 697–711, doi:10.1175/JAS3659.1. doi:10.1002/jame.20015. Meteorol. Soc., 104, 677–690. Bergen, Norway. reanalysis, Q. J. Roy. Meteorol. Soc., 135(639), 431–443. results, J. Adv. Model. Earth Syst., 5, 483–499, doi:10.1002/jame.20033. Wegener, A. (1911), Thermodynamik der Atmosph€are, J.A. Barth, Leipzig, Germany. 2024–2041, doi:10.1175/1520-0493. Geophys. Res. Lett., 40, 4717–4721, doi:10.1002/grl.50912. en/documents/, last accessed 20 February 2014.] J. Clim., 24(19), 5167–5186. PITHAN ET AL. 19422466, 2016, 3, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2016MS000630 by University Of Nevada Reno, Wiley Online Library on [16/09/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License 10.1002/2016MS000630 Near-surface conditions and surface energy budget, J. Geophys. Res, 107, 101029, doi:10.1029/2000JC000705. research WRF version 3, Mesoscale and Microscale Meteorol. Div., Natl. Cent. for Atmos. Res., Boulder, Colo. boundary layer over arctic sea ice, J. Geophys. Res. Atmos., 118, 1199–1217, doi:10.1002/jgrd.50158. Stramler, K., A. Del Genio, and W. Rossow (2011), Synoptically driven Arctic winter states, J. Clim., 24(6), 1747–1762. FIRST ARCTIC AIR MASS INTERCOMPARISON 1357
+Pithan, F., A. Ackerman, W. M. Angevine, K. Hartung, L. Ickes, M. Kelley, B. Medeiros,
+I. Sandu, G.-J. Steeneveld, H. A. M. Sterk, G. Svensson, P. A. Vaillancourt, and A. Zadra (2016),
+*J. Adv. Model. Earth Syst.*, 8, 1345–1357, doi:10.1002/2016MS000630.
+Received 13 Jan 2016; accepted 29 Jul 2016; published 27 Aug 2016. Open access (CC BY-NC-ND).
+Model results archive: https://doi.org/10.1594/PANGAEA.856770
+
+> **Note on this file:** re-transcribed 2026-07-13 from the source PDF
+> (`~/Zotero/storage/X3JQ637K/`), replacing an earlier column-scrambled OCR dump
+> (recoverable at git 387fc42). Tables, equations, and figure captions are
+> verbatim; running prose is a faithful condensed rendering, not a word-for-word
+> copy — consult the PDF for exact wording.
+
+**Key points**
+- A Lagrangian-style single column model experiment can reproduce Arctic air mass formation
+- Model deficiencies are caused by mixed-phase microphysics, process interaction, and surface representation
+- Lagrangian (air mass-following) observations would allow for a tighter constraint on model behavior
+
+## Abstract (condensed)
+
+Models struggle with lower-tropospheric temperature/moisture profiles and surface fluxes
+in Arctic winter. Observations reveal two preferred boundary-layer states: a **cloudy state**
+(cloud liquid water limits surface radiative cooling; inversions weak and elevated) and a
+**radiatively clear state** (strong surface radiative cooling builds surface-based inversions).
+Many large-scale models lack the cloudy state; some substantially underestimate clear-state
+inversion strength. Larcform 1 — the first Lagrangian Arctic air formation experiment,
+organized within GEWEX GASS — models the moist→cold-dry air-mass transformation in an
+idealized Lagrangian SCM framework spanning both states. The intercomparison reproduces
+the typical biases: some models lack the cloudy state due to mixed-phase microphysics or
+micro–macrophysics interaction; in others, high ice-cloud emissivities or a missing
+insulating snow layer prevent surface-based inversions in the clear state. Models disagree
+substantially on cloudy-state liquid water and clear-sky turbulent heat fluxes.
+
+## 1. Introduction
+
+- Arctic winter: no insolation, continued LW emission → surface radiative deficit balanced
+  by sensible heat, latent heat of sea-ice formation, and heat advection from lower
+  latitudes. Dominance of low-level/surface radiative cooling forms the Arctic temperature
+  inversion → strongly stable stratification → positive lapse-rate feedback, a major
+  contributor to Arctic amplification (Manabe & Wetherald 1975; Pithan & Mauritsen 2014).
+- SHEBA (1997/98) revealed the two-state structure (Persson et al. 1999, 2002; Stramler
+  et al. 2011): **cloudy state** — liquid-containing, often mixed-phase low clouds with
+  emissivity near 1 inhibit surface cooling; cloud-top radiative cooling keeps the BL
+  well-mixed or weakly stable; inversions elevated near cloud top (clouds often extend into
+  the inversion, Sedlar et al. 2012); surface sensible heat fluxes weak, possibly upward.
+  **Clear state** — surface radiative cooling ~40 W m⁻² (Stramler et al. 2011) builds
+  surface-based inversions; strongly stable; sensible heat flux directed downward.
+- Air-mass transformation = formation of continental polar air (Wexler 1936; Curry 1983),
+  often originating near the downstream ends of the Atlantic/Pacific storm tracks
+  (Woods et al. 2013).
+- CMIP5 biases (Pithan et al. 2014; Cesana et al. 2012): many models lack the cloudy state;
+  some lack strong clear-state stability (Figure 3 groups). CNRM-CM5 additionally shifts the
+  clear state to weaker stability at stronger LW cooling than observed.
+- Maintaining supercooled liquid is hard for models (WBF: Wegener 1911; Bergeron 1935;
+  Findeisen 1938). Observed liquid often sits *above* the ice cloud (Morrison et al. 2012) —
+  vertical structure GCMs do not resolve. LES intercomparisons show strong sensitivity to ice
+  number and size distribution (Ovchinnikov et al. 2014); ice-nuclei consumption can limit
+  ice formation (Fridlind et al. 2012).
+- Aim: understand the two CMIP5 bias types via an idealized Lagrangian SCM experiment
+  (setup after Wexler 1936; Curry 1983; Pithan et al. 2014).
+
+## 2. Experimental Strategy, Setup, and Participating Models
+
+### 2.1 Lagrangian vs Eulerian frameworks
+
+Eulerian SCMs would be dominated by prescribed advective tendencies, leaving little freedom
+to develop model-specific biases. Larcform 1 instead follows a homogeneous air mass advected
+over a homogeneous Arctic sea-ice surface: advective tendencies are set to zero. Models
+freely develop their own state/biases over several days. The approach was used successfully
+in earlier intercomparisons (Bretherton et al. 1999; van der Dussen et al. 2013).
+
+### 2.2 Boundary and initial conditions
+
+- Analytical initial T/q profiles (Table 1) — a typical air mass entering the Arctic.
+- Geostrophic wind 5 m s⁻¹ throughout the troposphere (drives turbulent mixing).
+- Initial surface temperature 250 K; 1 m sea ice; 0.1 m w.e. snow on the ice; ocean beneath
+  at the freezing point of sea water. Interactive surface temperature is used (justified:
+  surface–atmosphere interaction timescale ≪ advection timescale, Persson et al. 1999).
+- Run length 20 days; most analyses limited to the first 10 days (beyond typical air-mass
+  residence over Arctic sea ice, Woods & Caballero 2016; later temperatures less
+  representative).
+- Location 80°N, start 1 January → insolation = 0 throughout. GHGs per Table 2.
+
+**Table 1. Initial profiles of temperature, humidity, and geostrophic zonal wind**
+
+| Pressure (hPa) | Temperature (K) | Humidity | u_geo (m s⁻¹) |
+|---|---|---|---|
+| 1013 | T₀ = 273 | rh wrt water: 80% | 5 |
+| 1013–600 | T = T₀ (p/p₀)^(Rγ/g) | linear interpolation of rh | 5 |
+| 600 | T = T₀ (p/p₀)^(Rγ/g) | rh wrt water: 20% | 5 |
+| 600–300 | T = T₀ (p/p₀)^(Rγ/g) | rh wrt water: 20% | 5 |
+| 300–model top | T = T₃₀₀ₕₚₐ | q = 3 × 10⁻⁶ kg kg⁻¹ | 0 |
+
+Meridional geostrophic wind = 0. p₀ = 1013 hPa, lapse rate γ = 8 × 10⁻³ K m⁻¹,
+R = 287 J kg⁻¹ K⁻¹, g = 9.81 m s⁻². Temperature profile based on Curry [1983].
+
+**Table 2. Greenhouse gas concentrations (volume-mixing ratio)**
+
+| CO₂ | N₂O | CH₄ | CFC-11 | CFC-12 |
+|---|---|---|---|---|
+| 360 × 10⁻⁶ | 309.5 × 10⁻⁹ | 1693.6 × 10⁻⁹ | 252.8 × 10⁻¹² | 466.2 × 10⁻¹² |
+
+### 2.3 Participating models
+
+WRF 3.5.1 SCM uses Mellor-Yamada-Janjic BL scheme, NOAH land surface, eta-similarity
+surface layer, RRTMG radiation, WRF single-moment 5-class microphysics. CAM SCM constrains
+winds to geostrophic values (sensitivity tests suggest wind differences do not qualitatively
+alter either BL state). Standard runs denoted *std*; model-specific sensitivity runs are
+introduced in context.
+
+**Table 3. Models participating in the intercomparison**
+
+| Model | Documentation | Phase of condensate | Snow and ice | z₀ₘ (m) | Contributor |
+|---|---|---|---|---|---|
+| CAM 5.3 | Neale et al. [2010] | Prognostic | Interactive | 5e-3 | FP and BM |
+| CMC-GDPS | Bélair et al. [2009] | f(T) | Interactive | 1.6e-4 | AZ |
+| CMC-HRDPS | Mailhot et al. [2006] | Prognostic | Interactive | 1.6e-4 | AZ |
+| CMC-RDPS | Mailhot et al. [2006] | f(T) | Interactive | 1.6e-4 | AZ |
+| EC-Earth V3 (IFS 36r4) | ECMWF [2010] | Prognostic | No snow, fixed ice | 1e-3 | KH |
+| ECHAM 6.2 | Stevens et al. [2013] | Prognostic | Interactive | 1e-3 | FP |
+| ECHAM6.1.0-HAM2.2 | Stevens et al. [2013]; Lohmann et al. [2007] | Prognostic | Interactive | 1e-3 | LI |
+| ECMWF-IFS | ECMWF [2010] | Prognostic | No snow, fixed ice | 1e-3 | IS |
+| GISS E2 | Schmidt et al. [2014] | p(T) | Fixed ice | νₘ/u∗ + 0.018 u∗²/g | AA |
+| WRF 3.5.1 | Skamarock et al. [2008] | Prognostic | Fixed ice | 1e-3 | HAMS and WA |
+| WUR-D91 | Duynkerke [1991] | Ice | Fixed ice | 1e-1 | GJS |
+
+Legend: *Prognostic* — separate prognostic variables for cloud ice and liquid with
+parametrized freezing rates; *f(T)* — phase partitioning as a function of temperature;
+*p(T)* — temperature-dependent probability for total freezing of condensate at each time
+step; *ice* — all condensate assumed ice; *fixed ice* — fixed ice thickness; *no snow* —
+no snow on sea ice. z₀ₘ = momentum roughness length.
+
+## 3. Results and Discussion
+
+No observational or LES "truth" exists for this idealized case; evaluation is qualitative —
+whether and why models reproduce the typical fluxes/profiles of both BL states, with SHEBA
+as observational reference. Cloud lifetime, heat fluxes etc. are not interpreted
+quantitatively.
+
+Overview: most models generate a **bimodal distribution of surface net LW radiation**
+(Figure 4; fluxes positive downward), i.e. both states are represented (Table 4). Models
+tend to have slightly less surface radiative cooling than observed in the clear state and
+slightly more in the cloudy state. **CAM 5.3 and GISS std lack the cloudy state**
+(unimodal PDF). **WUR-D91 only displays the cloudy state** (weak surface cooling
+throughout). At day 2 (Figure 5), elevated inversions dominate in models with a cloudy
+state; CAM5.3/GISS std already show surface-based inversions; WRF std is transitioning
+(its day-1 cloud vanished but the elevated inversion persists). By day 10 (Figure 6),
+surface-based inversions dominate in ECHAM6.2, ECHAM-HAM, GISS std, WRF std, CAM5.3;
+WUR-D91, CMC (all versions), EC-Earth, and ECMWF-IFS remain well-mixed/near-neutral near
+the surface. (State transitions are deliberately not analyzed — Eulerian observations
+confound them with air-mass changes.)
+
+**Table 4. Groups of models according to their representation of BL states**
+
+| | With cloudy state | Lacking a cloudy state |
+|---|---|---|
+| **Strong stability in clear state** | ECHAM6.2, ECHAM-HAM, WRF std, CAM5.3 (process split), GISS vmp, CMC-GDPS (modified microphysics) | WRF-200l, CAM5.3 (std), GISS std |
+| **Weak stability in clear state** | ECMWF-IFS, EC-Earth, CMC-GDPS (standard) | |
+
+### 3.1 Existence or lack of the cloudy state
+
+- **CAM5.3**: lacks cloud liquid despite sophisticated microphysics. Cause: *time-split*
+  coupling of macrophysics → microphysics → radiation (Williamson 2002). Macrophysics makes
+  liquid; the following microphysics call converts it all to ice; radiation then sees no
+  liquid → cooling at the surface, not cloud top, further suppressing liquid formation
+  (cf. Caldwell 2012 "disappearing condensate"; English et al. 2014). Fix tested here:
+  call micro- and macrophysics *process-split* (parallel, summed tendencies) → liquid
+  persists for several days, radiative cooling reduced, surface inversion delayed; a second
+  (cloudy) peak appears in the net-LW PDF (Figure 7).
+- **GISS std**: condensate all-liquid or all-ice at a given time/place, with a
+  temperature-dependent probability of instantaneous total freezing → no persistent
+  mixed-phase cloud. With the *virtual mixed-phase* scheme (GISS vmp), liquid appears after
+  ~1 day, surface cooling drops to observed cloudy-state levels, and an elevated inversion
+  forms.
+- **WRF resolution dependency**: WRF-90l produces the cloudy state; very-high-resolution
+  WRF-200l does not. Its 1.2 m-thick lowest level dries to the surface via frost deposition
+  before cloud formation; air saturates wrt ice but never wrt water → no liquid. Very high
+  vertical resolution can violate implicit parametrization assumptions (would need faster
+  interlayer coupling / shorter time step).
+
+### 3.2 Build-up of surface-based inversions under radiatively clear skies
+
+- ECHAM6.2, ECHAM-HAM, WRF-90l, CAM5.3 build the observed surface-based inversions under
+  sustained clear-sky cooling.
+- **CMC models** stay well-mixed even without liquid: exaggerated **ice-cloud emissivity**
+  (too-small ice effective radius + overestimated IWP). With enhanced ice precipitation
+  efficiency (Appendix A), CMC-GDPS removes nearly all cloud ice by day 10 (Figure 8a; std
+  version has among the highest IWP), gets stronger clear-state cooling (Figure 8b), and
+  develops a surface-based inversion (Figure 8c).
+- **WUR-D91**: extreme ice-emissivity case — maintains a single well-mixed layer and
+  cloudy-state fluxes throughout despite all-ice condensate.
+- **EC-Earth & ECMWF-IFS**: no surface-based inversions despite substantial cooling —
+  cause is the **missing snow layer**. An ECHAM6.2 no-snow sensitivity run reproduces their
+  profiles/fluxes. Snow's low conductivity strongly reduces ocean→surface heat flux.
+  Consistent with ERA-Interim lacking early-winter surface inversions at SHEBA
+  (Tjernström & Graversen 2009).
+
+### 3.3 Turbulent heat flux, cloud liquid water, and energy budget
+
+- Observed clear-state downward sensible heat flux ~10 W m⁻² (Stramler et al. 2011).
+  No-snow models produce much smaller clear-state fluxes; remaining models still vary by a
+  factor of ~5 (Table 5). Larger SHEBA fluxes may reflect higher wind speeds there. Friction
+  velocity varies more between models than between states within a model.
+- Cloudy-state LWP varies by an order of magnitude across models — small amounts of liquid
+  suffice to sustain the cloudy state. SHEBA median winter LWP is at the low end of model
+  results; the model high end exceeds the observed 95th percentile (Shupe et al. 2006) —
+  though a more realistic setup (e.g. subsidence-constrained cloud height) would be needed
+  to call this an overestimate.
+- Greatest accumulated 10-day surface energy deficit occurs in the no-snow models.
+  Excluding WUR-D91, accumulated loss varies ~50% across models. GISS cloud+snow changes
+  roughly halve it; making mixed-phase clouds appear in CAM5.3 reduces it ~20%. The loss is
+  largely balanced by latent heat of sea-ice growth.
+
+**Table 5. Turbulent heat fluxes (positive downward) in the clear state, cloud liquid
+water in the cloudy state, and net surface energy loss over the first 10 days**
+
+| Model | hs (clear) (W m⁻²) | clwvi (cloudy) (kg m⁻²) | Net sfc energy loss 10³ (kJ m⁻²) |
+|---|---|---|---|
+| EC-Earth | 0.23 | 0.037 | 27.3 |
+| ECMWF-IFS | 1.65 | 0.029 | 24.1 |
+| ECHAM6.2 | 5.12 | 0.16 | 17.5 |
+| ECHAM-HAM | 8.02 | 0.39 | 15.5 |
+| CMC-GDPS | 3.09 | 0.01 | 12.9 |
+| GISS std | 5.79 | — | 18.3 |
+| WRF-90l | 12.05 | 0.05 | 13.0 |
+| WUR-D91 | — | 0 | 6.3 |
+| CAM5.3 | 9.57 | — | 16.5 |
+| GISS vmp | 3.97 | 0.04 | 8.2 |
+| CAM5.3 (process split) | 9.70 | 0.02 | 13.0 |
+
+Clear and cloudy state are partitioned at a surface net longwave radiation of −20 W m⁻².
+
+## 4. Conclusions
+
+Two bias types reproduced and diagnosed:
+
+1. **Lack of mixed-phase clouds / cloudy state.** All schemes with separate prognostic
+   ice+liquid variables and explicit freezing rates qualitatively reproduce the cloudy
+   state (CMC also does with diagnostic f(T) partitioning). CAM5.3 fails despite
+   sophisticated microphysics because of time-split micro/macro/radiation coupling; the
+   same physics process-split reproduces mixed-phase clouds. GISS's p(T) total-freezing
+   scheme cannot hold a persistent mixed-phase cloud; GISS vmp can.
+2. **Weak low-level stability / missing surface-based inversions** occur in models without
+   snow on sea ice or with high atmospheric (ice-cloud) emissivities that maintain
+   downwelling LW without liquid. Ice-cloud precipitation efficiency can control inversion
+   development (CMC). Turbulent-flux differences under stable stratification are confirmed
+   but secondary for this case.
+
+The idealized case cannot quantitatively constrain cloud occurrence, turbulent fluxes, or
+LWP (all vary considerably). Next step: a more realistic observationally based setup;
+Lagrangian observations (e.g. Year of Polar Prediction) would allow tighter constraints.
+
+## Appendix A: Sensitivity experiment for CMC microphysics
+
+CMC-GDPS uses Sundqvist [1978] microphysics: precipitation generation (Sundqvist eq. 3.1a)
+depends on a conversion timescale (c₀f⁻¹) and a threshold cloud-water value (m_rf) above
+which precipitation formation becomes more efficient, modulated by a freezing function
+[Mailhot et al., 1998]:
+
+```
+            ⎧ min(1, 1.33·exp(−0.066(T−T₀)²))          for 250 K ≤ T ≤ T₀
+f_mr(T) =   ⎨                                                              (A1)
+            ⎩ max(0.03, 0.75·(1.07 + ε·y/(1+y)))        for T ≤ 250 K
+```
+
+where y = x(1 + x(1 + 1.333x)), x = |T − 232|/18, ε = sign(T − 232), T₀ = 273.15 K.
+For the sensitivity test in section 3.1, precipitation formation is accelerated by reducing
+both the conversion timescale and the threshold value; the modified freezing function reads
+
+```
+            ⎧ min(1, 1.33·exp(−0.066(T−T₀)²))   for 230 K ≤ T ≤ T₀
+f_mr(T) =   ⎨                                                              (A2)
+            ⎩ 0.001                              for T ≤ 230 K
+```
+
+## Figures (captions verbatim; content notes added)
+
+- **Figure 1.** "Bivariate pdf of low-level stability (defined as 850 hPa minus surface
+  temperatures) and surface net longwave radiation defined positive downward, NDJF
+  1997/1998 for SHEBA and NDJF 1990–1999 for the ARM site. Low-level stability is computed
+  from individual soundings and surface radiation from the corresponding 6 h average.
+  Figure source: Pithan et al. [2014]." — Two panels (ARM Barrow, SHEBA); x: stability
+  −20…40 K, y: net LW +30…−90 W m⁻²; cloudy-state blob near (0, 0), clear-state blob near
+  (10–20, −30…−60); white diagonal reference line; PDF levels 0.02–0.5.
+- **Figure 2.** "Sketch of Arctic air mass formation. Curved arrows represent radiative
+  cooling, red lines are temperature profiles, which are driven toward the dashed lines by
+  radiative cooling in the respective state. Full boxes mark quasi-steady states and dashed
+  boxes unstable transition states. Source: Pithan et al. [2014]." — (a) initial moist
+  profile, (b) cloudy state, (c) transition, (d) clear state w/ surface inversion.
+- **Figure 3.** "Bivariate PDFs as in Figure 1 using CMIP5 model output from the ocean
+  domain north of 64°N. The models shown serve as examples for the three groups of models
+  determined in Pithan et al. [2014]. White lines are included as visual reference
+  indicating the observed relationship between stronger inversions and weaker surface
+  cooling within the clear state." — MPI-ESM-LR (both states, strong stability), CCSM4
+  (clear only, strong stability), CNRM-CM5 (weak stability).
+- **Figure 4.** "PDF of hourly means of surface net longwave radiation in participating
+  models for days 1–10 and NDJF SHEBA observations. Each tickmark corresponds to the center
+  of one bin." — x: −77.5…+2.5 W m⁻² (bin width 5); annotated groups: two BL states
+  (WRF std, ECHAM-HAM, ECHAM6.2, EC-Earth, ECMWF-IFS, CMC-GDPS), lack of mixed-phase
+  clouds (CAM5.3, GISS std), lack of radiatively clear sky (WUR-D91); SHEBA obs black.
+- **Figure 5.** "Temperature profiles averaged over 1 h after 2 days." — p 800–1013 hPa,
+  T 252–270 K; elevated inversions: EC-Earth, ECMWF-IFS, ECHAM6.2, ECHAM-HAM, WUR-D91,
+  CMC-GDPS; surface-based: CAM5.3, GISS std; WRF std intermediate.
+- **Figure 6.** "Temperature profiles averaged over 1 h after 10 days." — p 500–1013 hPa,
+  T 220–255 K; surface-based inversion: CAM5.3, GISS std, ECHAM6.2, ECHAM-HAM, WRF std;
+  no surface-based inversion: EC-Earth, ECMWF-IFS, CMC-GDPS; WUR-D91 well-mixed.
+- **Figure 7.** "PDF of surface net longwave radiation in selected models (up to day 10)
+  and NDJF SHEBA observations. Each tickmark corresponds to the center of one bin." —
+  sensitivity runs: CAM5.3 (process split), GISS vmp, WRF std have two states; WRF-200l,
+  CAM5.3 std (time split), GISS std lack mixed-phase clouds.
+- **Figure 8.** "(a) Vertically integrated ice water paths for the CMC-GDPS standard and
+  modified versions and other models (gray). (b) PDF of surface net longwave radiation for
+  the CMC-GDPS standard and modified versions, and NDJF SHEBA observations. (c) Vertical
+  profiles of temperature after 10 days, CMC-GDPS standard and modified versions and other
+  models (gray)." — (a) IWP 0–0.08 kg m⁻² over hours 0–240.
+
+## References
+
+Barrett (2012) PhD thesis, Univ. Reading · Beare et al. (2006) *BLM* 118, 247–272 ·
+Bélair et al. (2009) *Wea. Forecasting* 24, 690–708 · Bergeron (1935) UGGI Lisbon,
+156–178 · Bretherton et al. (1999) *BLM* 93, 341–380 · Caldwell (2012) CESM Workshop ·
+Cesana et al. (2012) *GRL* 39, L20804 · Curry (1983) *JAS* 40, 2278–2292 · Cuxart et al.
+(2006) *BLM* 118, 273–303 · Duynkerke (1991) *MWR* 119, 324–341 · ECMWF (2010) IFS
+cy36r1 Part IV · English et al. (2014) *J. Clim.* 27, 5174–5197 · Findeisen (1938)
+*Meteorol. Z.* 55, 121–133 · Fridlind et al. (2012) *JAS* 69, 365–389 · Hong et al.
+(2004) *MWR* 132, 103–120 · Iacono et al. (2008) *JGR* 113, D13103 · Janjic (1994) *MWR*
+122, 927–945 · Jung et al. (2016) *BAMS* doi:10.1175/BAMS-D-14-00246.1 · Lohmann et al.
+(2007) *ACP* 7, 3425–3446 · Mailhot et al. (1998) RPN Physics Library 3.6 · Mailhot
+et al. (2006) *Atmos. Ocean* 44, 133–149 · Manabe & Wetherald (1975) *JAS* 32, 3–15 ·
+Medeiros et al. (2011) *J. Clim.* 24, 4733–4740 · Morrison et al. (2012) *Nat. Geosci.*
+5, 11–17 · Neale et al. (2010) NCAR TN-486+STR · Ovchinnikov et al. (2014) *JAMES* 6,
+223–248 · Persson et al. (1999) 3rd Symp. Integrated Obs. Sys. · Persson et al. (2002)
+*JGR* 107, doi:10.1029/2000JC000705 · Pithan & Mauritsen (2014) *Nat. Geosci.* 7,
+181–184 · Pithan et al. (2014) *Clim. Dyn.* 43, 289–303 · Schmidt et al. (2014) *JAMES*
+6, 141–184 · Sedlar et al. (2012) *J. Clim.* 25, 2374–2393 · Shupe et al. (2006) *JAS*
+63, 697–711 · Skamarock et al. (2008) NCAR WRF v3 · Sterk et al. (2013) *JGR Atmos.*
+118, 1199–1217 · Stevens et al. (2013) *JAMES* 5, 146–172 · Stramler et al. (2011)
+*J. Clim.* 24, 1747–1762 · Sundqvist (1978) *QJRMS* 104, 677–690 · Svensson & Karlsson
+(2011) *J. Clim.* 24, 5757–5771 · Sverdrup (1933) Maud expedition Sci. Results II ·
+Tjernström (2012) ECMWF GABLS Workshop · Tjernström & Graversen (2009) *QJRMS* 135,
+431–443 · van der Dussen et al. (2013) *JAMES* 5, 483–499 · Wegener (1911)
+*Thermodynamik der Atmosphäre* · Wexler (1936) *MWR* 64, 122–136 · Williamson (2002)
+*MWR* 130, 2024–2041 · Woods & Caballero (2016) *J. Clim.* 29, 4473–4485 · Woods et al.
+(2013) *GRL* 40, 4717–4721 · WWRP (2014) YOPP Implementation Plan · Zhang et al. (2011)
+*J. Clim.* 24, 5167–5186

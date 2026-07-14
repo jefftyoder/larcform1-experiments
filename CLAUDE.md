@@ -124,12 +124,28 @@ julia --project experiments/larcform1_driver.jl --config_file configs/other.yml
 
 ### Running on Stratus
 
-Sync local changes and launch a run in a detached tmux session:
+**Get code onto Stratus with git, not rsync.** Stratus pulls from `origin`, so every
+run is traceable to a commit SHA. Commit and push first, then deploy:
 
 ```bash
-bash scripts/sync_to_remote.sh
+git push                                  # deploy_to_remote.sh refuses unpushed work
+bash scripts/deploy_to_remote.sh          # fetch + reset --hard + submodule update
 ssh stratus 'export PATH=/home/yoder/.juliaup/bin:$PATH && cd ~/clima/larcform1-experiments && tmux new-session -d -s lf1run "julia +1.12 -t auto --project --startup-file=no experiments/larcform1_driver.jl 2>&1 | tee output/lf1_run_$(date +%Y%m%d_%H%M%S).log"'
 ```
+
+`deploy_to_remote.sh` prints the deployed lf1e and ClimaAtmos SHAs — record them with
+the run. It aborts if the working tree is dirty, if local commits are unpushed, or if
+Julia is already running on Stratus.
+
+`scripts/sync_dirty.sh` (the old `sync_to_remote.sh`) rsyncs an **uncommitted** tree for
+scratch iteration only. A run launched after it cannot be traced to a commit, so never
+use it for a result you intend to keep. It leaves Stratus's checkout divergent;
+`deploy_to_remote.sh` resets over it to get back to a known state.
+
+> **The Julia environment lives on Stratus, not in git.** `Manifest.toml` is gitignored
+> and resolved remotely under 1.12 — `git reset --hard` does not touch it, since it is
+> untracked. Same for `output/`. Deploying never re-resolves the environment; run
+> `Pkg.instantiate()` yourself if `Project.toml` changed.
 
 > **Pin `julia +1.12`.** The `Manifest.toml` is resolved under Julia 1.12.6, but
 > juliaup's default channel on Stratus is 1.11.6. Launching with bare `julia`

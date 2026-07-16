@@ -6,7 +6,7 @@ The experiment is an SCM run at 80°N starting 1 January (zero insolation), init
 
 ## Installation
 
-Requires **Julia 1.12** (the Manifest is resolved under 1.12.x; older versions fail to precompile).
+Recommended Julia version: **v1.12** (older versions fail to precompile).
 
 ```bash
 git clone https://github.com/jefftyoder/larcform1-experiments

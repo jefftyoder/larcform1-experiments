@@ -19,7 +19,7 @@ julia +1.12 --project -e 'using Pkg; Pkg.develop(path="ClimaAtmos.jl"); Pkg.inst
 
 ## Running the Larcform1 Case
 
-The standard workflow runs the standalone ClimaAtmos SCM and converts its output to the Pithan (2016) intercomparison format:
+The standard workflow runs the standalone ClimaAtmos SCM and converts its output to the Pithan (2016) intercomparison format (requires `conda` with an environment named `clenv` containing the Python deps used by `scripts/convert_to_pithan.py`, notably `numpy`, `xarray`, and `netcdf4`):
 
 ```bash
 # From the repo root — runs the sim, then convert_to_pithan.py on the latest output

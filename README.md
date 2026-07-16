@@ -15,7 +15,7 @@ git submodule update --init --recursive
 julia +1.12 --project -e 'using Pkg; Pkg.develop(path="ClimaAtmos.jl"); Pkg.instantiate()'
 ```
 
-`ClimaAtmos.jl` is a pinned git submodule (branch `jy/coldslab`), `Pkg.develop`'d into the root environment. Note the submodule's `.buildkite/` environment is a separate Julia project used by the standalone run script below.
+`ClimaAtmos.jl` is a pinned git submodule (branch `jy/coldslab`). Use it in the root environment via `Pkg.develop(path="ClimaAtmos.jl")` (included in the install command above). Note the submodule's `.buildkite/` environment is a separate Julia project used by the standalone run script below.
 
 ## Running the Larcform1 Case
 

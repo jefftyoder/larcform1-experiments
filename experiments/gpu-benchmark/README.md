@@ -219,14 +219,17 @@ JIT-free coupling-loop timer**, not solve/nsteps — see the methodology note ab
 
 1 simulated day (2,880 steps), fresh start.
 
-| host | threads | coupling loop | ms/step | SYPD |
-|---|---|---|---|---|
-| stratus (i7-13700) | 1 | 19.6 s | **6.79** | 12.09 |
-| stratus | 24 | 20.5 s | 7.13 | 11.51 |
-| MacBook M1 | 1 | 24.8 s | **8.62** | 9.53 |
-| MacBook M1 | 8 | 29.9 s | 10.39 | 7.90 |
+| host | launch | setup (JIT) | coupling loop | ms/step | SYPD |
+|---|---|---|---|---|---|
+| stratus (i7-13700) | `-t 1` | 245.8 s | 19.6 s | 6.79 | 12.09 |
+| stratus | `-t 24` | 232.9 s | 20.5 s | 7.13 | 11.51 |
+| stratus | **`-t 1 --gcthreads=8`** | **235.1 s** | **19.4 s** | **6.72** | **12.22** |
+| MacBook M1 | `-t 1` | 272.6 s | 24.8 s | 8.62 | 9.53 |
+| MacBook M1 | `-t 8` | 262.7 s | 29.9 s | 10.39 | 7.90 |
 
-Threads cost **5% on Stratus (24t) and 20% on the Mac (8t)**.
+Compute threads cost **5% per step on Stratus (24t) and 20% on the Mac (8t)**, while
+buying only a faster compile. `--gcthreads` separates the two (see Conclusions #2):
+GC threads deliver the compile speedup, `nthreads() == 1` keeps the fast stepping.
 
 ### GPU vs CPU: matched pair (same host, same restart, same settings)
 
@@ -268,10 +271,21 @@ Same root cause: every `Threads.@threads` in ClimaCore loops `for h in 1:Nh`
 (`Fields/indices.jl:60,92,...`; `Operators/finitedifference.jl:3898`), and Nh = 1 —
 one iteration to hand out, threads 2..N idle, pure synchronisation overhead.
 
-> Threads *do* speed up JIT (Julia compiles in parallel), which is why they look
+Caveat: you cannot opt out via config alone. ClimaAtmos's device selection
+(`type_getters.jl:296`) promotes to `CPUMultiThreaded` whenever
+`Threads.nthreads() > 1`, **silently overriding** an explicit
+`device: CPUSingleThreaded` — so the julia launch line, not the YAML, decides.
+
+> Threads do shrink the compile phase (~246 → ~233 s setup), which is why they look
 > like a ~13% win if you measure total wall clock on a short run. That is a
-> compilation effect, not a physics one. It was what misled the first draft of this
-> experiment.
+> compilation effect, not a physics one, and it misled the first draft of this
+> experiment. The mechanism is **parallel GC, not parallel codegen** — compilation
+> allocates heavily, and `-t N` also grants GC threads. Verified by decoupling the
+> two: `julia -t 1 --gcthreads=8` keeps `nthreads() == 1` (so ClimaCore stays on
+> the fast `CPUSingleThreaded` device) while parallelising GC, and gets **both**
+> wins — setup 235.1 s (matches 24 threads) at 6.72 ms/step (best measured,
+> SYPD 12.22). Strictly better than `-t 1` and `-t 24` on their respective weak
+> axes. **Launch production runs with `julia -t 1 --gcthreads=8`.**
 
 **3. The MacBook GPU is impossible, not merely slow.** No Metal backend exists in
 the CLIMA stack (see above). The MacBook CPU is ~1.3x slower per step than Stratus.
@@ -283,5 +297,8 @@ SCMs sequentially — running those as N concurrent single-threaded **processes*
 24 Stratus cores is a ~10-20x speed-up of the thing that actually costs time, with
 no model changes. That, not GPU porting, is where effort should go.
 
-**Recommended: Stratus, single-threaded, one process per ensemble member.**
+**Recommended: Stratus, `julia -t 1 --gcthreads=8`, one process per ensemble
+member.** (The current calibration uses `ClimaCalibrate.JuliaBackend()`, which runs
+members sequentially; `WorkerBackend` with `Distributed.addprocs(N)` is the
+supported parallel path on a single machine.)
 

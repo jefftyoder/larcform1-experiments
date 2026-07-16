@@ -3,3 +3,4 @@ stratus_cpu24,CPUMultiThreaded,24,1days,2880,232.86,143.1,383.84,49.687,2026-07-
 seed,CPUSingleThreaded,1,300secs,10,245.06,150.12,403.68,15011.562,2026-07-14T12:29:21.810
 rs2_gpu,CUDADevice,1,1days,2870,311.06,212.83,535.63,74.157,2026-07-14T13:01:08.849
 rs2_cpu,CPUSingleThreaded,1,1days,2870,246.98,160.31,416.08,55.858,2026-07-14T13:08:07.965
+gc8_t1,CPUSingleThreaded,1,1days,2880,235.1,143.1,386.1,49.69,2026-07-16 (recovered from /tmp/gc.log; launched with -t 1 --gcthreads=8; coupler loop 19.35 s = 6.72 ms/step)

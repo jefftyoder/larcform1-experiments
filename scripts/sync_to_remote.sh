@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
-# ESCAPE HATCH: rsync a DIRTY working tree to stratus for scratch iteration.
+# rsync the local working tree to stratus. This is the DEFAULT way to get code
+# onto stratus for iterating on runs.
 #
-# Use scripts/deploy_to_remote.sh instead for anything whose output you might
-# keep. This script copies uncommitted work, so a run launched after it cannot
-# be traced to a commit -- the code that produced the numbers exists only on
-# this laptop. Fine for poking at a parameter; not fine for a result.
-#
-# Leaves stratus's git checkout dirty/divergent; deploy_to_remote.sh will
-# reset --hard over it, which is the intended way back to a known state.
+# It copies the working tree as-is, including uncommitted work, so a run
+# launched right after a sync may not correspond to any commit. When you want a
+# result traceable to an exact SHA, commit + push and use
+# scripts/deploy_to_remote.sh (fetch + reset --hard) instead. Note that
+# deploy_to_remote.sh reset --hard's over whatever this script left behind.
 #
 # Requires a 'stratus' Host entry in ~/.ssh/config.
 set -euo pipefail

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Deploy larcform1-experiments to stratus by pulling from git.
 #
-# This is the DEFAULT way to get code onto stratus. Every run is then traceable
-# to an exact commit SHA, which rsync cannot give you. Uncommitted work does not
-# travel -- commit and push first, or use sync_dirty.sh for scratch iteration.
+# Use this when you want a run traceable to an exact commit SHA, which rsync
+# cannot give you. Uncommitted work does not travel -- commit and push first,
+# or use sync_to_remote.sh for scratch iteration.
 #
 # Requires a 'stratus' Host entry in ~/.ssh/config.
 set -euo pipefail
@@ -15,7 +15,7 @@ BRANCH="${1:-main}"
 # so anything uncommitted or unpushed would silently not arrive.
 if [[ -n "$(git status --porcelain --untracked-files=no)" ]]; then
   echo "ERROR: working tree has uncommitted changes to tracked files." >&2
-  echo "       Commit and push, or use scripts/sync_dirty.sh for scratch work." >&2
+  echo "       Commit and push, or use scripts/sync_to_remote.sh for scratch work." >&2
   git status --short --untracked-files=no >&2
   exit 1
 fi

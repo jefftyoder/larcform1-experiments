@@ -124,28 +124,43 @@ julia --project experiments/larcform1_driver.jl --config_file configs/other.yml
 
 ### Running on Stratus
 
-**Get code onto Stratus with git, not rsync.** Stratus pulls from `origin`, so every
-run is traceable to a commit SHA. Commit and push first, then deploy:
+**Move code to Stratus with the sync scripts.** `scripts/sync_to_remote.sh` rsyncs the
+local working tree (including uncommitted work) up to Stratus, and
+`scripts/sync_from_remote.sh` pulls `output/` back down. This is the default workflow
+for iterating on runs:
 
 ```bash
-git push                                  # deploy_to_remote.sh refuses unpushed work
-bash scripts/deploy_to_remote.sh          # fetch + reset --hard + submodule update
+bash scripts/sync_to_remote.sh            # rsync working tree up (refuses while julia is live)
 ssh stratus 'export PATH=/home/yoder/.juliaup/bin:$PATH && cd ~/clima/larcform1-experiments && tmux new-session -d -s lf1run "julia +1.12 -t auto --project --startup-file=no experiments/larcform1_driver.jl 2>&1 | tee output/lf1_run_$(date +%Y%m%d_%H%M%S).log"'
+bash scripts/sync_from_remote.sh          # rsync output/ back down when the run finishes
 ```
 
-`deploy_to_remote.sh` prints the deployed lf1e and ClimaAtmos SHAs — record them with
-the run. It aborts if the working tree is dirty, if local commits are unpushed, or if
-Julia is already running on Stratus.
+`sync_to_remote.sh` refuses to run while julia is live on Stratus (it would swap files
+underneath an in-flight run). It excludes `output/`, `*.nc`, and `*.log` from the upload.
 
-`scripts/sync_dirty.sh` (the old `sync_to_remote.sh`) rsyncs an **uncommitted** tree for
-scratch iteration only. A run launched after it cannot be traced to a commit, so never
-use it for a result you intend to keep. It leaves Stratus's checkout divergent;
-`deploy_to_remote.sh` resets over it to get back to a known state.
+**When you need a result traceable to a commit,** commit + push and use
+`scripts/deploy_to_remote.sh` (fetch + reset --hard + submodule update) instead — it
+prints the deployed lf1e and ClimaAtmos SHAs and aborts if the tree is dirty, commits
+are unpushed, or julia is live. Note it `reset --hard`s over whatever `sync_to_remote.sh`
+left behind, so switching from scratch iteration to a traceable run gets you a clean
+checkout.
 
 > **The Julia environment lives on Stratus, not in git.** `Manifest.toml` is gitignored
 > and resolved remotely under 1.12 — `git reset --hard` does not touch it, since it is
 > untracked. Same for `output/`. Deploying never re-resolves the environment; run
 > `Pkg.instantiate()` yourself if `Project.toml` changed.
+
+> **Claude Code memories are git-tracked via symlink.** Memory files live in the
+> repo at `.claude-memory/` (tracked — `.gitignore` only excludes `.claude/`). On
+> each machine, `~/.claude/projects/<encoded-path>/memory` is a symlink into that
+> dir, so memories ride along with `sync_to_remote.sh` and share the code's
+> provenance. The path encoding differs per machine (`-Users-jeff-…` on Mac,
+> `-home-yoder-…` on Stratus) but both point at the one `.claude-memory/`. Caveat:
+> a memory *written on Stratus* lives in the Stratus working tree and is overwritten
+> by the next `sync_to_remote.sh` (Mac→Stratus) or `deploy_to_remote.sh`
+> (`reset --hard`) unless it is first committed and pulled to Mac — same discipline
+> as any other tracked file. To re-establish the symlink on a fresh machine: `mv`
+> the real `memory` dir aside and `ln -s <repo>/.claude-memory <encoded-path>/memory`.
 
 > **Pin `julia +1.12`.** The `Manifest.toml` is resolved under Julia 1.12.6, but
 > juliaup's default channel on Stratus is 1.11.6. Launching with bare `julia`

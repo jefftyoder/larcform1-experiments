@@ -6,7 +6,7 @@ larcform1-experiments.code-workspace
 .claude/
 .vscode/
 .ipynb_checkpoints/
-scripts/__pycache__/
+__pycache__/
 
 # Project specific
 figures/

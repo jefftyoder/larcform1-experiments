@@ -154,13 +154,18 @@ if ext_members:
             continue
         t = rlds["time"].values / 86400.0
         netlw = rlds.values - rlus.values          # positive = warming the sfc
+        # (time, z) orientation by dim name; level 0 is the bottom.
+        zdim = next(d for d in ta.dims if d != "time")
+        ta_tz = ta.transpose("time", zdim).values
+        pf_tz = pf.transpose("time", zdim).values
         # theta at 850 hPa: interpolate T in pressure per timestep
+        # (np.interp needs ascending xp; pfull decreases with height).
         t850 = np.array([
-            np.interp(85000.0, pf.values[i, ::-1], ta.values[i, ::-1])
-            for i in range(ta.shape[0])
+            np.interp(85000.0, pf_tz[i, ::-1], ta_tz[i, ::-1])
+            for i in range(ta_tz.shape[0])
         ])
         th850 = t850 * (1e5 / 85000.0) ** KAPPA
-        p_sfc = pf.values[:, 0]                    # lowest level pressure
+        p_sfc = pf_tz[:, 0]                        # lowest level pressure
         th_sfc = ts.values * (1e5 / p_sfc) ** KAPPA
         lls = th850 - th_sfc
         color = cmap((x - xmin) / (xmax - xmin))

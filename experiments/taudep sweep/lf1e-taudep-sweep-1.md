@@ -179,6 +179,12 @@ the floor, not 30.
   10^6.5. No first order jump anywhere; second order like in the transient
   sense. The steepest normalized change sits in log10 tau of 3.1 to 3.8,
   where the adaptive and dense stages concentrated 15 members.
+- Quantified (logistic fit of cloud lifetime vs log10 tau): midpoint
+  tau_1/2 = 4.4e4 s (x0 = 4.64 +/- 0.04), width 0.59 +/- 0.03 decades,
+  10 to 90 percent rise spanning 2.6 decades, RMS residual 4.8 h of 120.
+  tau_1/2 is about 12 hours, i.e. the transition is centered where deposition
+  competes with the day scale liquid production, and its multi decade width
+  is the quantitative statement that there is no sharp threshold.
 - Peak liquid intensity saturates much earlier than lifetime: max clw reaches
   its ceiling of about 4.1e-4 kg/kg by 10^4.25 while integrated LWP is still
   30x below its large tau limit. The transition is about persistence, not

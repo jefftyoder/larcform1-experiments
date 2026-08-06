@@ -16,6 +16,7 @@ import subprocess
 import tomllib
 from pathlib import Path
 
+import numpy as np
 import xarray as xr
 import matplotlib.pyplot as plt
 from matplotlib import colormaps
@@ -128,6 +129,68 @@ for ext in ("png", "pdf"):
                 dpi=300 if ext == "png" else None, bbox_inches="tight",
                 facecolor="white")
 
+# ---------------------------------------------------------------- figure 3 --
+# Pithan 2016 analyses on the 20-day extended ladder: net surface longwave,
+# low-level stability (theta_850 - theta_sfc), and the cloudy/clear phase
+# space. Skips quietly until the extended members exist locally.
+KAPPA = 0.286
+ext_members = sorted(
+    (e["log10_tau"], jid)
+    for jid, e in manifest.items()
+    if e.get("ret_code") == "success" and e.get("stage") == "extended"
+)
+have_fig3 = False
+if ext_members:
+    fig, axes = plt.subplots(3, 1, figsize=(6.69, 7.6))
+    for x, jid in ext_members:
+        d = DATA / jid / "output_active"
+        try:
+            rlds = xr.load_dataset(d / "rlds_1h_average.nc", decode_times=False).squeeze()["rlds"]
+            rlus = xr.load_dataset(d / "rlus_1h_average.nc", decode_times=False).squeeze()["rlus"]
+            ta = xr.load_dataset(d / "ta_1h_average.nc", decode_times=False).squeeze()["ta"]
+            pf = xr.load_dataset(d / "pfull_1h_average.nc", decode_times=False).squeeze()["pfull"]
+            ts = xr.load_dataset(d / "ts_1h_average.nc", decode_times=False).squeeze()["ts"]
+        except FileNotFoundError:
+            continue
+        t = rlds["time"].values / 86400.0
+        netlw = rlds.values - rlus.values          # positive = warming the sfc
+        # theta at 850 hPa: interpolate T in pressure per timestep
+        t850 = np.array([
+            np.interp(85000.0, pf.values[i, ::-1], ta.values[i, ::-1])
+            for i in range(ta.shape[0])
+        ])
+        th850 = t850 * (1e5 / 85000.0) ** KAPPA
+        p_sfc = pf.values[:, 0]                    # lowest level pressure
+        th_sfc = ts.values * (1e5 / p_sfc) ** KAPPA
+        lls = th850 - th_sfc
+        color = cmap((x - xmin) / (xmax - xmin))
+        axes[0].plot(t, netlw, lw=0.7, color=color)
+        axes[1].plot(t, lls, lw=0.7, color=color)
+        axes[2].scatter(lls, netlw, s=2.0, color=color, linewidths=0, alpha=0.5)
+        have_fig3 = True
+if have_fig3:
+    axes[0].set_ylabel("net surface LW (W m$^{-2}$)")
+    axes[0].set_xlabel("time (days)")
+    axes[1].set_ylabel(r"LLS, $\theta_{850}-\theta_{sfc}$ (K)")
+    axes[1].set_xlabel("time (days)")
+    axes[2].set_ylabel("net surface LW (W m$^{-2}$)")
+    axes[2].set_xlabel(r"LLS, $\theta_{850}-\theta_{sfc}$ (K)")
+    for i, ax in enumerate(axes):
+        ax.text(0.02, 0.97, f"({chr(97 + i)})", transform=ax.transAxes,
+                fontsize=8, fontweight="bold", va="top")
+        ax.spines[["top", "right"]].set_visible(False)
+    sm = plt.cm.ScalarMappable(cmap=cmap, norm=Normalize(vmin=xmin, vmax=xmax))
+    cb = fig.colorbar(sm, ax=axes, pad=0.01, fraction=0.03)
+    cb.set_label(r"log$_{10}$($\tau_{\mathrm{dep}}$ / s)", fontsize=8)
+    cb.ax.tick_params(labelsize=7)
+    for ext in ("png", "pdf"):
+        fig.savefig(OUTDIR / f"fig3_taudep_pithan_states.{ext}",
+                    dpi=300 if ext == "png" else None, bbox_inches="tight",
+                    facecolor="white")
+    plt.close(fig)
+else:
+    print("fig3 skipped: no extended (20-day) members in local data yet")
+
 # ------------------------------------------------------------- captions --
 # Written alongside the figures so caption text can never drift from the
 # plotted data. AGU forbids captions inside figure files; these are the
@@ -181,6 +244,23 @@ envelope set by the surface-driven moisture supply; increasing tau_dep delays
 the glaciation-driven collapse off that envelope, and above roughly 1e7 s the
 cloud persists through day 5. The transition in fig1 is therefore one of
 persistence (when the collapse happens), not of cloud intensity.
+"""
+if have_fig3:
+    captions += f"""
+## fig3_taudep_pithan_states
+
+Pithan et al. (2016) state-space analyses for the 20-day extended tau ladder
+({len(ext_members)} members at 2 points per decade, same configuration as the
+5-day sweep but t_end 20 days). (a) Net longwave at the surface
+(rlds minus rlus; near zero in the cloudy state, strongly negative once the
+column radiates freely to space). (b) Low-level stability,
+theta at 850 hPa minus surface theta (from ts and the lowest-level pressure);
+large values indicate the surface-based inversion of the clear state.
+(c) Hourly states in the LLS versus net-LW phase plane; the cloudy and
+radiatively clear clusters of Pithan et al. (2016) appear as the two ends of
+the trajectories. Colors give log10 tau_dep. Note the slab surface has no
+snow/ice conductivity model, so the clear-state inversion is expected to be
+weaker than in the full Pithan protocol (see the clw experiment Setup notes).
 """
 (OUTDIR / "CAPTIONS.md").write_text(captions)
 print(f"saved figures and CAPTIONS.md to {OUTDIR}")

@@ -4,29 +4,36 @@
 # baseline — the clw experiments and speed tests all ran here, and this env has
 # ClimaAtmos dev'd from the submodule plus NCDatasets/YAML as direct deps):
 #
-#   julia +1.12 -t 1 --project=ClimaAtmos.jl/.buildkite \
+#   julia +1.12 -t 1 --startup-file=no --project=ClimaAtmos.jl/.buildkite \
 #       "experiments/taudep sweep/run_sweep.jl" pilot
-#   julia +1.12 -t 1 --project=ClimaAtmos.jl/.buildkite \
+#   julia +1.12 -t 1 --startup-file=no --project=ClimaAtmos.jl/.buildkite \
 #       "experiments/taudep sweep/run_sweep.jl" sweep \
-#       --z_elem 100 [--budget 25] [--t_end 5days] [--stageC]
+#       --z_elem 60 [--workers 4] [--budget 25] [--t_end 5days] [--stageC]
 #
-# NOTE: this env has REGISTERED CloudMicrophysics — fine for this sweep
-# (ConstantTimescale needs no vendored patch), but a future Frostenberg a/b
-# sweep must NOT run here; revisit the environment then. The repo-root env is
-# currently not usable for standalone runs on Stratus (ClimaAtmos appears as a
-# registered, undownloaded package there, contradicting CLAUDE.md — flagged to
-# Jeff 2026-08-06).
+# Parallelism: --workers N (default 4) runs members N at a time on Distributed
+# workers; the coordinator alone touches the manifest, and the batched
+# refinement rule (next_taus, top-k intervals) keeps the adaptive stage
+# informed by all completed members. Cap chosen for memory, not cores: each
+# member peaks ~9 GB RSS on Stratus (62 GB), and swap kills performance, so 4
+# leaves safe headroom. --workers 1 recovers the serial behavior.
 #
 # `pilot` answers the grid question (is z_elem 60 or 80 converged vs 100?) and
 # reruns the s13 discriminator on each candidate grid. Review its table before
 # launching `sweep` — the grid choice is a decision point, not automated.
+# Result 2026-08-06: z60 and z80 both pass everything; z60 adopted.
 #
 # `sweep` runs Stage 0 (anchors + signature checks) -> Stage A (coarse log
-# scan) -> Stage B (adaptive bisection, up to --budget members) -> optional
-# Stage C (dense critical window) in one process; JIT is paid once. The
-# manifest (output/lf1e-taudep-1/manifest.toml) is updated after every member,
-# and members already recorded as successful are skipped, so the driver is
-# safe to re-run after an interruption.
+# scan) -> Stage B (batched adaptive bisection, up to --budget members) ->
+# optional Stage C (dense critical window) in one process tree; JIT is paid
+# once per worker. The manifest (output/lf1e-taudep-1/manifest.toml) is
+# updated after every batch, and members already recorded successful are
+# skipped, so the driver is safe to re-run after an interruption.
+#
+# NOTE: this env has REGISTERED CloudMicrophysics — fine for this sweep
+# (ConstantTimescale needs no vendored patch), but a future Frostenberg a/b
+# sweep must NOT run here; revisit the environment then.
+
+using Distributed
 
 import ClimaComms
 ClimaComms.@import_required_backends
@@ -43,6 +50,49 @@ function getarg(flag, default)
 end
 
 const MODE = isempty(ARGS) ? "help" : ARGS[1]
+
+# ---------------------------------------------------------------------------
+# Worker pool and batch runner
+# ---------------------------------------------------------------------------
+
+"""Spawn `n` Distributed workers (n concurrent members; the coordinator only
+orchestrates) and load the sweep tools on each. No-op for n <= 1 (serial)."""
+function setup_workers(n::Int)
+    n <= 1 && return
+    exeflags = ["--startup-file=no", "-t 1", "--project=$(Base.active_project())"]
+    addprocs(n; exeflags)
+    @info "Spawned workers; loading ClimaAtmos on each (JIT paid once per worker)" nworkers()
+    Distributed.remotecall_eval(Main, workers(), quote
+        import ClimaComms
+        ClimaComms.@import_required_backends
+        include($(joinpath(@__DIR__, "sweep_tools.jl")))
+    end)
+end
+
+"""
+    run_batch!(taus; stage, z_elem, t_end) -> n_new
+
+Run the given tau values (members not already successful), k at a time on the
+worker pool. Only the coordinator writes the manifest. Returns how many
+members actually ran.
+"""
+function run_batch!(taus; stage, z_elem, t_end)
+    man = load_manifest()
+    todo = [Float64(t) for t in taus if
+        get(get(man, member_id(t), Dict{String, Any}()), "ret_code", "") != "success"]
+    for t in setdiff(Float64.(taus), todo)
+        @info "Member already successful; skipping" member_id(t)
+    end
+    isempty(todo) && return 0
+    runner = t -> build_and_run(t; stage, z_elem, t_end)
+    results = nworkers() > 1 ? pmap(runner, todo) : map(runner, todo)
+    man = load_manifest()
+    for (job_id, entry) in results
+        man[job_id] = entry
+    end
+    save_manifest(man)
+    return length(todo)
+end
 
 # ---------------------------------------------------------------------------
 # Grid pilot
@@ -114,47 +164,49 @@ end
 # Sweep stages
 # ---------------------------------------------------------------------------
 
-function sweep(; z_elem::Int, t_end::AbstractString, budget::Int, stageC::Bool)
-    runm(tau; stage) = run_member!(tau; z_elem, t_end, stage)
+function sweep(; z_elem::Int, t_end::AbstractString, budget::Int, stageC::Bool,
+    workers_n::Int)
+    setup_workers(workers_n)
 
-    # Stage 0: anchors with signature checks.
-    a1 = runm(100; stage = "anchor")
-    m1 = get(a1, "metrics", nothing)
+    # Stage 0: anchors with signature checks (run as one parallel batch).
+    run_batch!([100.0, 1e9]; stage = "anchor", z_elem, t_end)
+    man = load_manifest()
+    m1 = get(get(man, member_id(100.0), Dict{String, Any}()), "metrics", nothing)
     if m1 === nothing || m1["max_clw"] != 0.0
         error("Anchor tau=100 failed its signature (expect clw == 0 exactly; " *
-              "got $(m1 === nothing ? a1["ret_code"] : m1["max_clw"])). " *
+              "got $(m1 === nothing ? "no metrics" : m1["max_clw"])). " *
               "Pipeline problem — aborting before spending the sweep.")
     end
-    a2 = runm(1e9; stage = "anchor")
-    m2 = get(a2, "metrics", nothing)
+    m2 = get(get(man, member_id(1e9), Dict{String, Any}()), "metrics", nothing)
     if m2 === nothing || m2["cloud_hours"] < m2["n_hours"] ÷ 2 || m2["clivi_end"] > 1e-3
         error("Anchor tau=1e9 failed its signature (expect sustained liquid, " *
               "negligible ice; got $(m2)). Aborting.")
     end
     @info "Stage 0 anchors passed signature checks"
 
-    # Stage A: coarse log scan, 2 points/decade.
-    for x in 1.0:0.5:9.0
-        runm(10.0^x; stage = "coarse")
-    end
+    # Stage A: coarse log scan, 2 points/decade, workers_n at a time.
+    run_batch!([10.0^x for x in 1.0:0.5:9.0]; stage = "coarse", z_elem, t_end)
     @info "Stage A complete"
     summary_table()
 
-    # Stage B: adaptive bisection.
-    for i in 1:budget
-        tau = next_tau(load_manifest())
-        if tau === nothing
-            @info "Refinement converged after $(i - 1) members"
+    # Stage B: batched adaptive bisection — top-k intervals per round, all
+    # completed members inform each round's picks.
+    spent = 0
+    while spent < budget
+        k = min(max(nworkers(), 1), budget - spent)
+        batch = next_taus(load_manifest(); k)
+        if isempty(batch)
+            @info "Refinement converged after $spent adaptive members"
             break
         end
-        runm(tau; stage = "adaptive")
+        n_new = run_batch!(batch; stage = "adaptive", z_elem, t_end)
+        n_new == 0 && break   # everything proposed already exists; done
+        spent += n_new
     end
 
     # Stage C: dense uniform sampling across the sharpest transition.
     if stageC
-        for tau in critical_window(load_manifest())
-            runm(tau; stage = "dense")
-        end
+        run_batch!(critical_window(load_manifest()); stage = "dense", z_elem, t_end)
     end
 
     println("\n=== Final sweep summary ===")
@@ -167,11 +219,12 @@ if MODE == "pilot"
     pilot()
 elseif MODE == "sweep"
     sweep(;
-        z_elem = parse(Int, getarg("--z_elem", "100")),
+        z_elem = parse(Int, getarg("--z_elem", "60")),
         t_end = getarg("--t_end", "5days"),
         budget = parse(Int, getarg("--budget", "25")),
         stageC = "--stageC" in ARGS,
+        workers_n = parse(Int, getarg("--workers", "4")),
     )
 else
-    println("usage: run_sweep.jl pilot | sweep --z_elem N [--budget 25] [--t_end 5days] [--stageC]")
+    println("usage: run_sweep.jl pilot | sweep --z_elem N [--workers 4] [--budget 25] [--t_end 5days] [--stageC]")
 end

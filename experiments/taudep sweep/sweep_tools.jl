@@ -111,20 +111,15 @@ end
 # ---------------------------------------------------------------------------
 
 """
-    run_member!(tau; kwargs...) -> NamedTuple
+    build_and_run(tau; kwargs...) -> (job_id, entry)
 
-Runs one member to completion in-process (run_batch.jl pattern: AtmosConfig
-built directly, so the config dict's job_id is respected). Catches crashes.
-Records the member in the manifest and returns the manifest entry.
+Worker-side member execution: configure, run, compute metrics. Catches crashes.
+Does NOT touch the manifest (safe to call concurrently from Distributed
+workers); the caller records the returned entry.
 """
-function run_member!(tau::Real; stage::AbstractString = "?", kwargs...)
+function build_and_run(tau::Real; stage::AbstractString = "?", kwargs...)
     cfg = member_config(tau; kwargs...)
     job_id = cfg["job_id"]
-    man = load_manifest()
-    if haskey(man, job_id) && get(man[job_id], "ret_code", "") == "success"
-        @info "Member already in manifest with ret_code success; skipping" job_id
-        return man[job_id]
-    end
     @info "Starting member" job_id tau stage
     t0 = time()
     ret_code = :setup_error
@@ -156,9 +151,27 @@ function run_member!(tau::Real; stage::AbstractString = "?", kwargs...)
             entry["metrics_error"] = sprint(showerror, e)
         end
     end
+    @info "Finished member" job_id ret_code walltime = round(walltime, digits = 1)
+    return job_id, entry
+end
+
+"""
+    run_member!(tau; kwargs...) -> entry
+
+Single-member convenience wrapper: skips members already recorded successful,
+otherwise runs via `build_and_run` and records the result in the manifest.
+"""
+function run_member!(tau::Real; stage::AbstractString = "?", kwargs...)
+    job_id = string(get(kwargs, :job_id, member_id(tau)))
+    man = load_manifest()
+    if haskey(man, job_id) && get(man[job_id], "ret_code", "") == "success"
+        @info "Member already in manifest with ret_code success; skipping" job_id
+        return man[job_id]
+    end
+    job_id, entry = build_and_run(tau; stage, kwargs...)
+    man = load_manifest()
     man[job_id] = entry
     save_manifest(man)
-    @info "Finished member" job_id ret_code walltime = round(walltime, digits = 1)
     return entry
 end
 
@@ -280,17 +293,19 @@ function sweep_points(man)
 end
 
 """
-    next_tau(man; min_dx = 0.1, tol = 0.15, dense_dx = 0.05, dense_jump = 0.5)
+    next_taus(man; k = 1, min_dx = 0.1, tol = 0.15, dense_dx = 0.05, dense_jump = 0.5)
 
-Next tau to run, or `nothing` when converged. Considers successful members
-with metrics, sorted in log10 tau. Picks the interval with the largest
-normalized metric jump; refines until every jump < `tol` or the interval is
-narrower than `min_dx` (`dense_dx` where the jump exceeds `dense_jump`,
-i.e. inside the sharpest transition).
+Up to `k` tau values to run next (batched refinement for k parallel workers),
+empty when converged. Considers successful sweep members with metrics, sorted
+in log10 tau. Ranks intervals by their largest range-normalized metric jump
+and midpoints the top k; an interval stops qualifying once every jump < `tol`
+or it is narrower than `min_dx` (`dense_dx` where the jump exceeds
+`dense_jump`, i.e. inside the sharpest transition). Distinct intervals give
+distinct midpoints, so a batch never duplicates itself.
 """
-function next_tau(man; min_dx = 0.1, tol = 0.15, dense_dx = 0.05, dense_jump = 0.5)
+function next_taus(man; k = 1, min_dx = 0.1, tol = 0.15, dense_dx = 0.05, dense_jump = 0.5)
     pts = sweep_points(man)
-    length(pts) < 2 && return nothing
+    length(pts) < 2 && return Float64[]
     xs = first.(pts)
 
     # Range-normalize each refinement metric across current members.
@@ -300,18 +315,22 @@ function next_tau(man; min_dx = 0.1, tol = 0.15, dense_dx = 0.05, dense_jump = 0
         hi - lo < eps() ? zero.(vals) : (vals .- lo) ./ (hi - lo)
     end
 
-    best_x, best_jump = nothing, 0.0
+    candidates = Tuple{Float64, Float64}[]   # (jump, midpoint x)
     for i in 1:(length(pts) - 1)
         dx = xs[i + 1] - xs[i]
         jump = maximum(abs(n[i + 1] - n[i]) for n in norms)
         floor_dx = jump > dense_jump ? dense_dx : min_dx
         dx <= floor_dx && continue
-        if jump > tol && jump > best_jump
-            best_jump = jump
-            best_x = (xs[i] + xs[i + 1]) / 2
-        end
+        jump > tol && push!(candidates, (jump, (xs[i] + xs[i + 1]) / 2))
     end
-    return best_x === nothing ? nothing : 10.0^best_x
+    sort!(candidates, by = first, rev = true)
+    return [10.0^x for (_, x) in candidates[1:min(k, end)]]
+end
+
+"""Single-point refinement (k = 1 batch), `nothing` when converged."""
+function next_tau(man; kwargs...)
+    taus = next_taus(man; k = 1, kwargs...)
+    return isempty(taus) ? nothing : taus[1]
 end
 
 """Stage C helper: uniform dense tau values across the sharpest interval,

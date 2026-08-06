@@ -1,6 +1,10 @@
-# tau_dep transition sweep #1 (lf1e-taudep-1)
+# tau_dep transition sweep #1 (lf1e-taudep-1, subexperiment A)
 ## author: Jeffrey Yoder
 ## date: August 06, 2026
+
+**Subexperiment A**: standalone ClimaAtmos, stock microphysics, slab ocean (SlabOceanSST
+at 250 K). See also **subexperiment B** (`experiments/taudep sweep coupled/`): same sweep
+protocol with UKI-calibrated microphysics and ClimaSeaIce+snow coupled surface.
 
 # Goal
 

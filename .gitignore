@@ -11,5 +11,8 @@ __pycache__/
 
 # Project specific
 figures/
+!paper-writing/figures/
+paper-writing/figures/*.png
+paper-writing/figures/*.pdf
 output/*
 *Manifest.toml

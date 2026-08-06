@@ -62,11 +62,12 @@ function setup_workers(n::Int)
     exeflags = ["--startup-file=no", "-t 1", "--project=$(Base.active_project())"]
     addprocs(n; exeflags)
     @info "Spawned workers; loading ClimaAtmos on each (JIT paid once per worker)" nworkers()
-    Distributed.remotecall_eval(Main, workers(), quote
-        import ClimaComms
-        ClimaComms.@import_required_backends
-        include($(joinpath(@__DIR__, "sweep_tools.jl")))
-    end)
+    # Separate eval calls: a macro from a just-imported module cannot be
+    # expanded in the same expression that imports it.
+    Distributed.remotecall_eval(Main, workers(), :(import ClimaComms))
+    Distributed.remotecall_eval(Main, workers(), :(ClimaComms.@import_required_backends))
+    Distributed.remotecall_eval(Main, workers(),
+        :(include($(joinpath(@__DIR__, "sweep_tools.jl")))))
 end
 
 """

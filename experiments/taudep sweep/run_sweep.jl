@@ -215,6 +215,67 @@ function sweep(; z_elem::Int, t_end::AbstractString, budget::Int, stageC::Bool,
 end
 
 # ---------------------------------------------------------------------------
+# Worker-scaling test
+# ---------------------------------------------------------------------------
+
+# Fixed member list spanning the regimes (cost is roughly tau-independent);
+# rerun at each worker count under distinct job_ids so nothing is skipped.
+const SCAL_TAUS = [10.0^x for x in (1.5, 2.5, 3.25, 3.75, 4.5, 5.5, 7.0, 8.5)]
+
+"""
+    scaling(; z_elem, t_end, counts)
+
+Measure sweep throughput vs worker count: warm every worker's JIT with a short
+member, then run the same `SCAL_TAUS` list through WorkerPool subsets of size
+`counts[i]`, timing each round's makespan. All members land in the manifest
+(stage "scaling"/"scalwarm") for provenance. Watch swap during the largest
+count — the memory ceiling, not cores, is the constraint on Stratus.
+"""
+function scaling(; z_elem::Int, t_end::AbstractString, counts::Vector{Int})
+    nmax = maximum(counts)
+    setup_workers(nmax)
+    ws = workers()
+
+    @info "Warmup: one short member per worker to pay JIT before timing"
+    pmap(WorkerPool(ws), 1:length(ws)) do i
+        build_and_run(10.0^(1.1 + 0.01i); stage = "scalwarm", z_elem,
+            t_end = "12hours", job_id = "lf1e_taudep1_scal_warm_w$i")
+    end
+
+    rows = NamedTuple[]
+    for n in sort(counts)
+        pool = WorkerPool(ws[1:n])
+        t0 = time()
+        results = pmap(pool, collect(enumerate(SCAL_TAUS))) do (i, tau)
+            build_and_run(tau; stage = "scaling", z_elem, t_end,
+                job_id = "lf1e_taudep1_scal_w$(n)_m$i")
+        end
+        makespan = time() - t0
+        man = load_manifest()
+        for (job_id, entry) in results
+            man[job_id] = entry
+        end
+        save_manifest(man)
+        walltimes = [e["walltime_s"] for (_, e) in results]
+        push!(rows, (; n, makespan, mean_member = sum(walltimes) / length(walltimes)))
+        @info "Scaling round done" n makespan = round(makespan, digits = 1)
+    end
+
+    println("\n=== Worker scaling ($(length(SCAL_TAUS)) members, t_end $t_end, z_elem $z_elem) ===")
+    println(rpad("workers", 9), rpad("makespan_s", 12), rpad("members/hr", 12),
+        rpad("speedup", 9), rpad("efficiency", 11), "mean member walltime_s")
+    for r in rows
+        su = rows[1].makespan / r.makespan          # vs smallest measured count
+        eff = su / (r.n / rows[1].n)                # 1.0 = ideal linear scaling
+        println(rpad(r.n, 9), rpad(round(r.makespan, digits = 1), 12),
+            rpad(round(3600 * length(SCAL_TAUS) / r.makespan, digits = 1), 12),
+            rpad(round(su, digits = 2), 9),
+            rpad(round(eff, digits = 2), 11),
+            round(r.mean_member, digits = 1))
+    end
+end
+
+# ---------------------------------------------------------------------------
 
 if MODE == "pilot"
     pilot()
@@ -226,6 +287,12 @@ elseif MODE == "sweep"
         stageC = "--stageC" in ARGS,
         workers_n = parse(Int, getarg("--workers", "4")),
     )
+elseif MODE == "scaling"
+    scaling(;
+        z_elem = parse(Int, getarg("--z_elem", "60")),
+        t_end = getarg("--t_end", "2days"),
+        counts = parse.(Int, split(getarg("--counts", "1,2,4,6"), ",")),
+    )
 else
-    println("usage: run_sweep.jl pilot | sweep --z_elem N [--workers 4] [--budget 25] [--t_end 5days] [--stageC]")
+    println("usage: run_sweep.jl pilot | sweep --z_elem N [--workers 4] [--budget 25] [--t_end 5days] [--stageC] | scaling [--counts 1,2,4,6] [--t_end 2days]")
 end

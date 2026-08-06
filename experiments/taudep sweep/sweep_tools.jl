@@ -80,16 +80,23 @@ function member_config(tau::Real;
     cfg["output_dir_style"] = "ActiveLink"
 
     if physics_variant === :constant
-        # 2-line override TOML kept under the member's output tree (synced back
-        # with results; nothing accumulates in the experiment folder).
-        override_dir = joinpath(OUTPUT_ROOT, job_id)
-        mkpath(override_dir)
-        override_path = joinpath(override_dir, "tau_override.toml")
-        open(override_path, "w") do io
-            println(io, "[sublimation_deposition_timescale]")
-            println(io, "value = ", Float64(tau))
+        # AtmosConfig merges the toml list via ClimaParams.merge_toml_files,
+        # which ERRORS on duplicate keys instead of overriding, and the base
+        # toml already defines sublimation_deposition_timescale (this is why
+        # the clw experiment used full-copy TOMLs). So: parse the base toml,
+        # replace the one value, write the full member toml under the member's
+        # output tree (synced back with results; nothing accumulates in the
+        # experiment folder).
+        member_toml = TOML.parsefile(BASE_TOML)
+        member_toml["sublimation_deposition_timescale"] =
+            Dict("value" => Float64(tau))
+        toml_dir = joinpath(OUTPUT_ROOT, job_id)
+        mkpath(toml_dir)
+        toml_path = joinpath(toml_dir, "member_params.toml")
+        open(toml_path, "w") do io
+            TOML.print(io, member_toml)
         end
-        cfg["toml"] = [BASE_TOML, override_path]
+        cfg["toml"] = [toml_path]
     elseif physics_variant === :tdep
         cfg["toml"] = [BASE_TOML]
         cfg["cloud_ice_formation"] = "TemperatureDependent"

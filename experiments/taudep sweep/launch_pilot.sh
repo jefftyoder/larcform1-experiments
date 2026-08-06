@@ -6,5 +6,5 @@ export PATH=/home/yoder/.juliaup/bin:$PATH
 cd /home/yoder/clima/larcform1-experiments
 mkdir -p output/lf1e-taudep-1
 tmux new-session -d -s lf1pilot \
-  "julia +1.12 -t 1 --project=ClimaAtmos.jl/.buildkite 'experiments/taudep sweep/run_sweep.jl' pilot 2>&1 | tee output/lf1e-taudep-1/pilot_$(date +%Y%m%d_%H%M%S).log"
+  "julia +1.12 -t 1 --startup-file=no --project=ClimaAtmos.jl/.buildkite 'experiments/taudep sweep/run_sweep.jl' pilot 2>&1 | tee output/lf1e-taudep-1/pilot_$(date +%Y%m%d_%H%M%S).log"
 echo "launched tmux session lf1pilot"

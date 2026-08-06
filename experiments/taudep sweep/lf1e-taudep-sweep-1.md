@@ -114,11 +114,15 @@ onward; it can stop at any point past Stage A and still yield a complete curve.
 
 Members are configured in memory: the base yml is loaded as a Dict, sweep keys are
 merged on top, and `CA.AtmosConfig(dict)` is called directly (run_batch.jl pattern,
-which also avoids the ci_driver job_id shadowing bug). The `toml:` list is
-`[base_toml, override]` where the override carries only
-`sublimation_deposition_timescale`; the clw experiment's full copy TOMLs were a
-workaround for YAML overlay merge semantics that do not apply here. The 2 line
-override is written under the member's own output tree and synced back with results.
+which also avoids the ci_driver job_id shadowing bug). Parameter mechanics, learned
+the hard way during the pilot (2026-08-06): a `toml: [base, override]` pair does
+NOT work, because AtmosConfig merges the list via `ClimaParams.merge_toml_files`,
+which errors on duplicate keys instead of overriding
+("Duplicate TOML entry: sublimation_deposition_timescale"); this, not YAML overlay
+merging, is the real reason the clw experiment used full copy TOMLs. Instead the
+full member TOML is generated programmatically (stdlib TOML: parse base, replace
+the one value, print) into the member's own output tree and passed as the single
+`toml:` entry, so it is synced back with results.
 Provenance per member: the run's auto saved `<job_id>_parameters.toml` (grep it to
 confirm the swept value landed, per project convention) plus the manifest entry
 (tau, stage, ret_code, walltime, z_elem, t_end, metrics) in

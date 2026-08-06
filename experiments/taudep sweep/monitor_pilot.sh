@@ -3,8 +3,19 @@
 # Used by the local monitoring loop; safe to delete after the experiment.
 SESSION="${1:-lf1pilot}"
 prev=""
+down=0
 while true; do
-  if ! ssh -o ConnectTimeout=10 -o BatchMode=yes stratus "tmux has-session -t $SESSION 2>/dev/null"; then
+  state=$(ssh -o ConnectTimeout=10 -o BatchMode=yes stratus "tmux has-session -t $SESSION 2>/dev/null && echo alive || echo gone" 2>/dev/null)
+  if [ -z "$state" ]; then
+    # ssh itself failed: VPN/network down, not the run. Stay quiet, keep waiting.
+    down=$((down + 1))
+    [ "$down" -eq 3 ] && echo "stratus unreachable (VPN down?); run continues in tmux, will keep polling quietly"
+    sleep 120
+    continue
+  fi
+  if [ "$down" -ge 3 ]; then echo "stratus reachable again"; fi
+  down=0
+  if [ "$state" = "gone" ]; then
     echo "$SESSION tmux session ended; final log tail:"
     ssh -o BatchMode=yes stratus "tail -60 \"\$(ls -t /home/yoder/clima/larcform1-experiments/output/lf1e-taudep-1/*.log | head -1)\"" 2>/dev/null \
       | grep -E "Finished member|ret_code|===|^z[0-9]+:|Adopt|Error|ERROR|FAIL|PASS|Refinement"

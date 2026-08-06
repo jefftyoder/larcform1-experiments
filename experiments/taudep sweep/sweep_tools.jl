@@ -261,15 +261,6 @@ const REFINEMENT_METRICS = (
     ("clivi_end", x -> log10(x + 1e-8)),
 )
 
-"""
-    next_tau(man; min_dx = 0.1, tol = 0.15, dense_dx = 0.05, dense_jump = 0.5)
-
-Next tau to run, or `nothing` when converged. Considers successful members
-with metrics, sorted in log10 tau. Picks the interval with the largest
-normalized metric jump; refines until every jump < `tol` or the interval is
-narrower than `min_dx` (`dense_dx` where the jump exceeds `dense_jump`,
-i.e. inside the sharpest transition).
-"""
 """Successful sweep members (pilot runs excluded) as (log10_tau, metrics),
 sorted in log10 tau."""
 function sweep_points(man)
@@ -281,6 +272,15 @@ function sweep_points(man)
     return pts
 end
 
+"""
+    next_tau(man; min_dx = 0.1, tol = 0.15, dense_dx = 0.05, dense_jump = 0.5)
+
+Next tau to run, or `nothing` when converged. Considers successful members
+with metrics, sorted in log10 tau. Picks the interval with the largest
+normalized metric jump; refines until every jump < `tol` or the interval is
+narrower than `min_dx` (`dense_dx` where the jump exceeds `dense_jump`,
+i.e. inside the sharpest transition).
+"""
 function next_tau(man; min_dx = 0.1, tol = 0.15, dense_dx = 0.05, dense_jump = 0.5)
     pts = sweep_points(man)
     length(pts) < 2 && return nothing

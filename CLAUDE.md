@@ -6,68 +6,7 @@ Single-column model (SCM) experiments for the LARCFORM1 Arctic radiation study u
 
 ## Pithan 2016 Experiment Protocol
 
-Reference: Pithan et al. (2016), *JGR Atmospheres* — SCM intercomparison for Arctic boundary layer.
-
-### Section 2.2: Boundary and Initial Conditions
-
-- **Location:** 80°N
-- **Start date:** 1 January → insolation = 0 throughout
-- **Initial surface temperature:** 250 K
-- **Sea ice:** 1 m thick
-- **Snow on ice:** 0.1 m water equivalent
-- **Ocean beneath ice:** at the freezing point of sea water
-- **Geostrophic wind:** 5 m s⁻¹ throughout the troposphere; meridional component = 0
-- **Advective tendencies:** set to zero
-- **Run length:** 20 days; analyses limited to first 10 days
-- **Greenhouse gas concentrations:** prescribed as in Table 2 (see below)
-
-### Table 2: Greenhouse Gas Concentrations
-
-| GHG | Volume-mixing ratio |
-|---|---|
-| CO₂ | 360 × 10⁻⁶ |
-| N₂O | 309.5 × 10⁻⁹ |
-| CH₄ | 1693.6 × 10⁻⁹ |
-| CFC-11 | 252.8 × 10⁻¹² |
-| CFC-12 | 466.2 × 10⁻¹² |
-
-### Table 1: Initial Profiles of Temperature, Humidity, and Geostrophic Zonal Wind
-
-| Pressure (hPa) | Temperature (K) | Humidity | u_geo (m s⁻¹) |
-|---|---|---|---|
-| 1013 | T₀ = 273 | rh wrt water: 80% | 5 |
-| 1013–600 | T = T₀ (p/p₀)^(Rγ/g) | Linear interpolation of rh | 5 |
-| 600 | T = T₀ (p/p₀)^(Rγ/g) | rh wrt water: 20% | 5 |
-| 600–300 | T = T₀ (p/p₀)^(Rγ/g) | rh wrt water: 20% | 5 |
-| 300 – model top | T = T₃₀₀hPa | q = 3 × 10⁻⁶ kg kg⁻¹ | 0 |
-
-Parameters: p₀ = 1013 hPa, lapse rate γ = 8 × 10⁻³ K m⁻¹, R = 287 J kg⁻¹ K⁻¹, g = 9.81 m s⁻². Temperature profile based on Curry [1983].
-
-### Table 3: Participating Models
-
-| Model | Phase of Condensate | Snow and Ice | z₀ₘ (m) |
-|---|---|---|---|
-| CAM 5.3 | Prognostic | Interactive | 5e-3 |
-| CMC-GDPS | f(T) | Interactive | 1.6e-4 |
-| CMC-HRDPS | Prognostic | Interactive | 1.6e-4 |
-| CMC-RDPS | f(T) | Interactive | 1.6e-4 |
-| EC-Earth V3 (IFS 36r4) | Prognostic | No snow, fixed ice | 1e-3 |
-| ECHAM 6.2 | Prognostic | Interactive | 1e-3 |
-| ECHAM6.1.0-HAM2.2 | Prognostic | Interactive | 1e-3 |
-| ECMWF-IFS | Prognostic | No snow, fixed ice | 1e-3 (+ Charnock term) |
-| GISS E2 | p(T) | Fixed ice | v_m/u_* + 0.018 u²_*/g |
-| WRF 3.5.1 | Prognostic | Fixed ice | 1e-3 |
-| WUR-D91 | Ice (all condensate = ice) | Fixed ice | 1e-1 |
-
-**z₀ₘ summary:** Modal value is **1e-3 m** (used by 5 of 11 models); range is 1.6e-4 to 1e-1 m (WUR-D91 is an outlier).
-
-**Condensate phase legend:**
-- **Prognostic:** separate prognostic variables for cloud ice and liquid + parametrized freezing rates
-- **f(T):** phase partitioning as a function of temperature
-- **p(T):** temperature-dependent probability for total freezing at each time step
-- **Ice:** all condensate assumed to be ice
-
-**Snow and ice treatment summary:** 6 models interactive, 3 fixed ice, 2 no snow fixed ice.
+Full protocol tables (boundary conditions, GHG concentrations, initial profiles, participating models) available via `/pithan-protocol`.
 
 ### Implications for our configuration
 
@@ -79,34 +18,6 @@ Parameters: p₀ = 1013 hPa, lapse rate γ = 8 × 10⁻³ K m⁻¹, R = 287 J kg
 
 - **Coupler z₀ₘ defaults don't match standalone run.** `src/setups/Larcform1.jl:surface_condition` sets z₀ₘ = 1e-3 m correctly for the standalone ClimaAtmos path. But `PrescribedIceSimulation` defaults to z₀ₘ = 1e-4 m and `ClimaSeaIceSimulation` hardcodes 5.8e-5 m. When moving to coupled ClimaCoupler runs, update those defaults or override via config/TOML so z₀ₘ = 1e-3 m is consistent.
 - **`prognostic_tke` field in `Larcform1` struct is dead code.** `Larcform1.prognostic_tke::Bool` is accepted by the constructor but never used — TKE is always initialized to zero regardless. Either wire it up (non-zero TKE warm-start) or remove the field.
-
-## Architecture
-
-### Larcform1 Profile (`AtmosphericProfilesLibrary.jl`)
-
-Defined in `AtmosphericProfilesLibrary.jl/src/profiles/Larcform1.jl`. Provides:
-- Temperature: linear lapse rate (8 K/km) up to 300 hPa, isothermal above
-- RH: 80% at surface → 20% at 600 hPa
-- Geostrophic wind: u=5 m/s below 600 hPa, 0 above; v=0
-
-### ClimaCoupler SCM Coupling
-
-The coupler orchestrates a sequential stepping loop:
-1. Step atmosphere (`ClimaAtmos` integrator advances by `Δt_cpl`)
-2. Update surface area fractions (ice concentration → ice/ocean fraction)
-3. Exchange non-turbulent fluxes (radiation, precipitation) via `FieldExchanger.jl`
-4. Compute turbulent fluxes (Monin-Obukhov) via `FluxCalculator.jl`
-5. Compute ocean↔sea-ice fluxes
-6. Write diagnostics
-
-The `CoupledSimulation` struct holds all component sims in a `model_sims` NamedTuple.
-SCM-specific handling is via `domain_type: column` and `scm_surface_type: sea_ice`.
-
-### Field Exchange
-
-- Coupler → Atmos: surface temperature, albedo, roughness lengths
-- Atmos → Surface: precipitation, downwelling radiation
-- Turbulent fluxes (sensible heat, latent heat, momentum) computed centrally in the coupler using area-weighted `SurfaceFluxes.jl` calls
 
 ## Running the simulation
 
@@ -234,40 +145,9 @@ output/               # simulation output (gitignored)
 docs/                 # Project level docs for Larcform1 experiments
 ```
 
-## Checkpoints and restarts
+## Checkpoints, restarts, and diagnostics
 
-```yaml
-# Save state periodically
-dt_save_state_to_disk: "1days"
-
-# Auto-detect latest restart in output dir
-detect_restart_file: true
-
-# Or point explicitly
-restart_file: "output/larcform1_minimal/output_0004/clima_atmos/day10.hdf5"
-```
-
-- Restart files are HDF5 containing all prognostic variables
-- Restarting with a different `AtmosModel` will log a warning but proceed
-- `reproducible_restart: true` forces deterministic cloud fractions (not for production)
-- Diagnostic accumulators reset on restart — align `checkpoint_dt` with diagnostic `period`
-
-## Diagnostics
-
-Configured in YAML under the `diagnostics:` key. Format:
-```yaml
-diagnostics:
-  - short_name: [ta, thetaa, pfull]
-    period: 1hours
-    reduction_time: average   # or: min, max, last
-```
-
-Output goes to `output/<job_id>/output_NNNN/clima_atmos/` as NetCDF files.
-`netcdf_output_at_levels: true` skips vertical interpolation (raw model levels).
-
-To add a custom diagnostic variable, create a `DiagnosticVariable` with:
-- `short_name`, `long_name`, `units`, `comments`
-- `compute!(out, state, cache, time)` function
+See `/run-config` for checkpoint YAML options, restart behavior, and diagnostic output configuration.
 
 ## Submodules and vendored packages
 

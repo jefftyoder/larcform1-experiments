@@ -3,7 +3,8 @@
 
 # Third Party Programs
 larcform1-experiments.code-workspace
-.claude/
+.claude/*
+!.claude/skills/
 .vscode/
 .ipynb_checkpoints/
 __pycache__/

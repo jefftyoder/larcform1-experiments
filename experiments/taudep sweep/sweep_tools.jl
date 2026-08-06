@@ -51,6 +51,12 @@ tau_tag(tau::Real) = "x" * replace(string(round(log10(tau), digits = 2)), "." =>
 
 member_id(tau::Real) = "lf1e_taudep1_" * tau_tag(tau)
 
+"""Job id for an extended-length member (e.g. 20-day ladder), tagged with
+t_end so it coexists with the 5-day sweep members in the manifest. Lives here
+(not in run_sweep.jl) so pmap closures referencing it resolve on workers."""
+ext_id(tau::Real, t_end::AbstractString) =
+    "lf1e_taudep1_" * t_end * "_" * tau_tag(tau)
+
 """
     member_config(tau; z_elem, t_end, physics_variant, job_id)
 

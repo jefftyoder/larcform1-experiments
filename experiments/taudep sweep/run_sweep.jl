@@ -219,8 +219,6 @@ end
 # coexist with the 5-day sweep members in the same manifest)
 # ---------------------------------------------------------------------------
 
-ext_id(tau, t_end) = "lf1e_taudep1_" * t_end * "_" * tau_tag(tau)
-
 function extend(; z_elem::Int, t_end::AbstractString, workers_n::Int)
     setup_workers(workers_n)
     taus = [10.0^x for x in 1.0:0.5:9.0]

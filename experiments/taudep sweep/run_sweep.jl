@@ -229,8 +229,7 @@ function extend(; z_elem::Int, t_end::AbstractString, workers_n::Int)
         get(get(man, ext_id(t, t_end), Dict{String, Any}()), "ret_code", "") != "success"]
     @info "Extended runs" t_end n_total = length(taus) n_todo = length(todo)
     isempty(todo) && return
-    results = pmap(WorkerPool(workers()),
-        t -> build_and_run(t; stage = "extended", z_elem, t_end,
+    results = pmap(t -> build_and_run(t; stage = "extended", z_elem, t_end,
             job_id = ext_id(t, t_end)), todo)
     man = load_manifest()
     for (job_id, entry) in results

@@ -215,6 +215,33 @@ function sweep(; z_elem::Int, t_end::AbstractString, budget::Int, stageC::Bool,
 end
 
 # ---------------------------------------------------------------------------
+# Extended runs (longer t_end over a tau ladder; distinct job ids so they
+# coexist with the 5-day sweep members in the same manifest)
+# ---------------------------------------------------------------------------
+
+ext_id(tau, t_end) = "lf1e_taudep1_" * t_end * "_" * tau_tag(tau)
+
+function extend(; z_elem::Int, t_end::AbstractString, workers_n::Int)
+    setup_workers(workers_n)
+    taus = [10.0^x for x in 1.0:0.5:9.0]
+    man = load_manifest()
+    todo = [t for t in taus if
+        get(get(man, ext_id(t, t_end), Dict{String, Any}()), "ret_code", "") != "success"]
+    @info "Extended runs" t_end n_total = length(taus) n_todo = length(todo)
+    isempty(todo) && return
+    results = pmap(WorkerPool(workers()),
+        t -> build_and_run(t; stage = "extended", z_elem, t_end,
+            job_id = ext_id(t, t_end)), todo)
+    man = load_manifest()
+    for (job_id, entry) in results
+        man[job_id] = entry
+    end
+    save_manifest(man)
+    println("\n=== Extended-run summary ===")
+    summary_table()
+end
+
+# ---------------------------------------------------------------------------
 # Worker-scaling test
 # ---------------------------------------------------------------------------
 
@@ -293,6 +320,12 @@ elseif MODE == "scaling"
         t_end = getarg("--t_end", "2days"),
         counts = parse.(Int, split(getarg("--counts", "1,2,4,6"), ",")),
     )
+elseif MODE == "extend"
+    extend(;
+        z_elem = parse(Int, getarg("--z_elem", "60")),
+        t_end = getarg("--t_end", "20days"),
+        workers_n = parse(Int, getarg("--workers", "4")),
+    )
 else
-    println("usage: run_sweep.jl pilot | sweep --z_elem N [--workers 4] [--budget 25] [--t_end 5days] [--stageC] | scaling [--counts 1,2,4,6] [--t_end 2days]")
+    println("usage: run_sweep.jl pilot | sweep --z_elem N [--workers 4] [--budget 25] [--t_end 5days] [--stageC] | scaling [--counts 1,2,4,6] [--t_end 2days] | extend [--t_end 20days] [--workers 4]")
 end

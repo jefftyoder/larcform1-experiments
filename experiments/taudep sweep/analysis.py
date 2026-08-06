@@ -55,24 +55,26 @@ n_hours = members[0][2]["n_hours"]
 # ---------------------------------------------------------------- figure 1 --
 fig, axes = plt.subplots(2, 2, figsize=(6.69, 4.6), sharex=True)
 
+# Condensate in g/kg and g/m^2 so magnitudes read cleanly (per Jeff).
 panels = [
-    ("cloud_hours", f"cloud lifetime (h of {n_hours})", None),
-    ("max_clw", "max clw (kg kg$^{-1}$)", None),
-    ("lwp_int", "time-integrated LWP (kg m$^{-2}$ day)", "symlog"),
-    ("clivi_end", "final column ice (kg m$^{-2}$)", "log"),
+    ("cloud_hours", f"cloud lifetime (h of {n_hours})", None, 1),
+    ("max_clw", "max clw (g kg$^{-1}$)", None, 1e3),
+    ("lwp_int", "time-integrated LWP (g m$^{-2}$ day)", "symlog", 1e3),
+    ("clivi_end", "final column ice (g m$^{-2}$)", "log", 1e3),
 ]
-for i, (ax, (key, ylabel, yscale)) in enumerate(zip(axes.flat, panels)):
+for i, (ax, (key, ylabel, yscale, unit)) in enumerate(zip(axes.flat, panels)):
     for stage, (color, marker, z) in STAGES.items():
         xs = [x for x, s, _, _ in members if s == stage]
-        ys = [m[key] for _, s, m, _ in members if s == stage]
+        ys = [m[key] * unit for _, s, m, _ in members if s == stage]
         ax.scatter(xs, ys, s=14, c=color, marker=marker, zorder=z,
                    linewidths=0, label=stage)
     if key == "max_clw":
-        ax.axhline(CLW_THRESHOLD, color=GRAY, lw=0.8, ls=(0, (4, 2)), zorder=1)
-        ax.annotate("0.1 g kg$^{-1}$ threshold", xy=(6.6, 1.2e-4),
+        ax.axhline(CLW_THRESHOLD * 1e3, color=GRAY, lw=0.8, ls=(0, (4, 2)),
+                   zorder=1)
+        ax.annotate("0.1 g kg$^{-1}$ threshold", xy=(6.6, 0.12),
                     fontsize=6.5, color=GRAY)
     if yscale == "symlog":
-        ax.set_yscale("symlog", linthresh=1e-4)
+        ax.set_yscale("symlog", linthresh=1e-1)
     elif yscale:
         ax.set_yscale(yscale)
     ax.set_ylabel(ylabel)
@@ -102,14 +104,14 @@ for x, stage, m, jid in members:
         continue
     ds = xr.load_dataset(nc, decode_times=False).squeeze()
     t = ds["time"].values / 86400.0
-    ax.plot(t, ds["lwp"].values, lw=0.9,
+    ax.plot(t, ds["lwp"].values * 1e3, lw=0.9,
             color=cmap((x - xmin) / (xmax - xmin)), zorder=2)
 sm = plt.cm.ScalarMappable(cmap=cmap, norm=Normalize(vmin=xmin, vmax=xmax))
 cb = fig.colorbar(sm, ax=ax, pad=0.01)
 cb.set_label(r"log$_{10}$($\tau_{\mathrm{dep}}$ / s)", fontsize=8)
 cb.ax.tick_params(labelsize=7)
 ax.set_xlabel("time (days)")
-ax.set_ylabel("liquid water path (kg m$^{-2}$)")
+ax.set_ylabel("liquid water path (g m$^{-2}$)")
 ax.set_xlim(0, 5)
 ax.spines[["top", "right"]].set_visible(False)
 

@@ -203,8 +203,26 @@ the floor, not 30.
   barriers). Dedicated scaling test (workers 1/2/4/6) run separately.
 - Restart semantics verified in production: the parallel relaunch skipped all
   6 members the killed serial run had completed.
+- Worker scaling test (8 members, 2 days, z60; run_sweep.jl scaling mode):
+  1 worker 231 members/hr; 2 workers 1.94x (0.97 efficiency); 4 workers 3.52x
+  (0.88); 6 workers 3.54x (0.59, an artifact: 8 members make two waves under
+  either 4 or 6 workers, so 6 cannot show gains at this list length). Per
+  member walltime inflation stays mild (12% at 4 wide, 19% at 6 wide); memory
+  never touched swap. 4 workers is the standing default; consider 6 only for
+  long member lists.
+- Configuration audit (from a member's saved yml/parameters.toml + source):
+  z0m = 1e-3 m via the setup flux scheme, which takes precedence over the
+  DefaultMoninObukhov config value of 1e-5 m (model_getters.jl AtmosSurface);
+  albedo 0.38 inert under larcform1 insolation; rayleigh sponge configured on
+  but inert (zd 40 km above the 5 km top, as in every prior config).
 
 # TODO (deferred by decision, 2026-08-06)
+
+- Figure with key Pithan 2016 analyses across sweep members: net LW at the
+  surface (rlds minus rlus), low level stability (LLS, Pithan's theta at
+  850 hPa minus surface temperature analog), and their evolution or their
+  values against tau_dep; supports placing members in the Pithan cloudy vs
+  clear state phase space. (Requested 2026-08-06.)
 
 - IC perturbation ensembles near the critical tau window, to separate parameter
   sensitivity from internal variability. Deferred to keep this experiment simple.

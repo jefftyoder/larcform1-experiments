@@ -153,9 +153,56 @@ and a small multiples panel of lwp(t) traces colored by tau showing the transien
 families. Everything re derivable from manifest.toml plus the synced NetCDF; no
 state trapped in any REPL.
 
-# Findings
+# Findings (2026-08-06, sweep complete: 39 members, all successful)
 
-(to be filled as stages complete)
+## Grid pilot
+
+z80 and z60 both pass every convergence criterion against the same code z100
+reference (z60: max clw +2.9%, onset and persistence identical, hour 24 cloud
+top within 0.4 hPa, clivi within 8%), and the v1 discriminator gives clw
+exactly zero on all three grids. z60 adopted; roughly half the z100 solve cost.
+The z100 reference also matches the published s11 numbers (max clw 4.08e-4 vs
+4.19e-4, rlds 223.4 vs 223.8), so base config drift since the speed tests does
+not affect the science. Note the 30 level grid (s4) remains unconverged; 60 is
+the floor, not 30.
+
+## Transition structure (figures/fig1, fig2)
+
+- Liquid onset is at tau_dep of roughly 1.3e3 s: max_z clw first exceeds the
+  0.1 g/kg threshold between log10 tau 3.0 and 3.12. Below that, clw is not
+  exactly zero from 10^2.5 up (max clw 1.6e-5 at 10^2.5, 7.5e-5 at 10^3), so
+  the liquid gate opens continuously; only tau at or below the 100 s default
+  gives the exact zero.
+- Cloud lifetime (hours above threshold, of 120) grows continuously and
+  monotonically across three and a half decades: 2 h at 10^3.1, 18 h at
+  10^3.5, 32 h at 10^4, 67 h at 10^5, 116 h at 10^6, saturating at 120 by
+  10^6.5. No first order jump anywhere; second order like in the transient
+  sense. The steepest normalized change sits in log10 tau of 3.1 to 3.8,
+  where the adaptive and dense stages concentrated 15 members.
+- Peak liquid intensity saturates much earlier than lifetime: max clw reaches
+  its ceiling of about 4.1e-4 kg/kg by 10^4.25 while integrated LWP is still
+  30x below its large tau limit. The transition is about persistence, not
+  intensity: fig2 shows all cloudy members share one LWP growth envelope and
+  differ almost purely in when they glaciate and collapse off it.
+- Ice is unaffected through the liquid transition: clivi_end holds near
+  6.5e-3 kg/m2 from 10^1 to 10^5, then decays smoothly to 8.9e-5 at 10^9.
+  The 5 day liquid only regime (v12's signature) emerges gradually above
+  10^7 rather than at a sharp boundary.
+- Protocol note: no member reaches a fully clear column in 5 days (ice
+  persists everywhere; clear_hour 119 throughout), so characterizing the full
+  four stage arc to the clear state needs longer runs. Recorded as follow up.
+
+## Execution notes
+
+- 39 members: 2 anchors (signature checks passed: tau 100 gives clw identically
+  zero at 5 days on z60; tau 1e9 sustains liquid with negligible ice), 15
+  coarse, 13 adaptive, 9 dense. Walltime about 36 s per warm member (z60,
+  5 days, Stratus single thread).
+- Serial phase throughput 101 members/hr; 4 worker phase 254 members/hr
+  (2.5x; per member walltime inflation only 1.11x, the rest is adaptive batch
+  barriers). Dedicated scaling test (workers 1/2/4/6) run separately.
+- Restart semantics verified in production: the parallel relaunch skipped all
+  6 members the killed serial run had completed.
 
 # TODO (deferred by decision, 2026-08-06)
 

@@ -108,8 +108,11 @@ for x, stage, m, jid in members:
         continue
     ds = xr.load_dataset(nc, decode_times=False).squeeze()
     t = ds["time"].values / 86400.0
-    ax.plot(t, ds["lwp"].values * 1e3, lw=0.9,
-            color=cmap((x - xmin) / (xmax - xmin)), zorder=2)
+    # Markers at every hourly-mean output point: the evaluation resolution
+    # must be visible, not implied by a smooth line.
+    ax.plot(t, ds["lwp"].values * 1e3, lw=0.7, marker="o", ms=1.3,
+            markeredgewidth=0, color=cmap((x - xmin) / (xmax - xmin)),
+            zorder=2)
 sm = plt.cm.ScalarMappable(cmap=cmap, norm=Normalize(vmin=xmin, vmax=xmax))
 cb = fig.colorbar(sm, ax=ax, pad=0.01)
 cb.set_label(r"log$_{10}$($\tau_{\mathrm{dep}}$ / s)", fontsize=8)
@@ -170,7 +173,10 @@ gradually above about 1e7 s.
 ## fig2_taudep_lwp_traces
 
 Liquid water path versus time for every sweep member, colored by log10
-tau_dep (viridis). {config_sentence} Members share a common LWP growth
+tau_dep (viridis). Dots mark the individual output points: each trace is 120
+hourly means (the diagnostic cadence; the model integrates at dt 30 s with
+radiation every 30 min), so structure narrower than 1 h is averaged out by
+construction. {config_sentence} Members share a common LWP growth
 envelope set by the surface-driven moisture supply; increasing tau_dep delays
 the glaciation-driven collapse off that envelope, and above roughly 1e7 s the
 cloud persists through day 5. The transition in fig1 is therefore one of

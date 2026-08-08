@@ -8,3 +8,5 @@
 - [physical_state.jl GPU latent issue](physical-state-gpu-latent-issue.md) — hydrostatic pressure integral isn't GPU-safe; left for upstream, don't fix here
 - [AGU 2026 abstract advisor feedback](agu2026-abstract-advisor-feedback.md) — Sally Zhang's 10 comments + 4 tracked changes; working through one by one
 - [No dashes in writing](feedback-no-dashes.md) — never use em-dashes or substitutes; use commas, colons, semicolons, periods
+- [Skip dense sweeps by default](feedback-skip-dense-sweeps.md) — no Stage C unless plots show insufficient resolution
+- [Experiment isolation](feedback-experiment-isolation.md) — never overwrite a prior experiment's code; new subexperiments get their own directory

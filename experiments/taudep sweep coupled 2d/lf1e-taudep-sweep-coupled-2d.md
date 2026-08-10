@@ -86,14 +86,82 @@ After JIT (~5 min), each 20-day coupled member runs in ~3 min wall-clock.
 
 # Findings
 
-(Pending: sweep not yet run.)
+## Coarse grid results (8x8, 50 members)
+
+Run completed 2026-08-10 on Stratus (4 workers, ~50 min wall-clock). 50/50
+members successful. The 8x8 grid includes the 7x7 regular grid plus the
+calibrated anchor at (log10_tau_dep=1.82, log10_tau_ce=2.00).
+
+### Cloud survival requires both slow glaciation AND fast condensation
+
+34 of 50 members have zero cloud hours. Cloud liquid persists only when
+tau_dep >= 10^4 (glaciation slow enough to not destroy the cloud) AND
+tau_ce <= 10^4 (condensation fast enough to maintain the cloud). Neither
+condition alone is sufficient: at tau_dep=10^7 with tau_ce=10^7, there are
+zero cloud hours; at tau_dep=10^1 with tau_ce=10^1, there are also zero
+cloud hours (glaciation destroys the cloud before it can accumulate).
+
+The cloud-sustaining region occupies the high-tau_dep, low-tau_ce corner of
+the parameter space, not a diagonal band.
+
+### tau_ce is a sharp threshold near 10^5 s
+
+At tau_dep=10^7 (glaciation effectively off):
+- tau_ce=10^4: 191 cloud hours, ts_end=260 K
+- tau_ce=10^5: 2 cloud hours, ts_end=244 K
+
+This 2-decade drop is nearly a complete shutoff. When condensation is slower
+than ~10^5 s, the vapor-to-liquid pathway cannot sustain the cloud regardless
+of how slow the ice channel is.
+
+### tau_ce modulates the tau_dep transition location
+
+1D slices at fixed tau_ce (fig2b) show the tau_dep transition curve shifting:
+- tau_ce=10^1 s: onset at tau_dep~10^3, rapid rise to ~200h by tau_dep=10^6
+- tau_ce=10^4 s: onset at tau_dep~10^4, slower rise to ~130h by tau_dep=10^7
+- tau_ce=10^7 s: flat zero at all tau_dep values (condensation too slow)
+
+Subexperiment A's 1D transition (stock microphysics, slab surface) falls
+between the tau_ce=10^1 and tau_ce=10^4 slices, consistent with its stock
+tau_ce being in that range (~10^2 s).
+
+### Non-monotonic behavior at very fast condensation
+
+At tau_dep=10^7, the tau_ce=10^1 member (203 cloud hours) has FEWER cloud
+hours than the tau_ce=10^2 member (383 cloud hours). Very fast condensation
+may trigger thicker cloud formation that feeds ice growth or precipitation,
+limiting cloud persistence.
+
+### Surface temperature and cloud radiative feedback (fig3)
+
+Clear-sky members cluster at ts_end~214 K. Cloudy members range from 215 K
+(short-lived clouds) to 260 K (long-lived). The 45 K surface temperature
+range maps monotonically onto mean downwelling LW (fig3b), spanning
+~130 W/m^2 (clear) to ~253 W/m^2 (persistent cloud). This confirms the
+cloud radiative effect as the dominant surface energy budget term: cloud
+insulation keeps the surface 30 to 45 K warmer than the clear-sky
+equilibrium.
+
+### Peak cloud lifetime: 383 of 480 hours
+
+At (tau_dep=10^7, tau_ce=10^2): 383 cloud hours, max_clw=0.36 g/kg,
+ts_end=257.6 K, rlds_mean=247.7 W/m^2. This is the most cloud-sustaining
+point on the coarse grid.
+
+## Figures
+
+See `experiments/taudep sweep coupled 2d/figures/`:
+- fig1_2d_regime_map: cloud metrics as 4-panel heatmap
+- fig2_2d_transition: gradient magnitude + 1D slices (with subexp A overlay)
+- fig3_2d_surface: surface temperature heatmap + ts_end vs rlds scatter
 
 # TODO
 
-- Run the coarse 7x7 grid and review heatmaps.
-- If a transition ridge is visible, add refinement points.
-- Comparative analysis: overlay 1D slices (fixed tau_ce) against
-  subexperiment A's transition curve to see how tau_ce modulates the
-  transition location.
+- ~~Run the coarse 7x7 grid and review heatmaps.~~ Done (2026-08-10).
+- If a transition ridge is visible, add refinement points. The tau_dep=4 to 6
+  band at tau_ce <= 4 shows the sharpest gradient; half-decade refinement there
+  would better resolve the transition boundary.
+- ~~Comparative analysis: overlay 1D slices (fixed tau_ce) against
+  subexperiment A's transition curve.~~ Done (fig2b).
 - Joint LWP/IWP analysis: map (tau_dep, tau_ce) to (LWP, IWP) and
   characterize the geometry of the image.

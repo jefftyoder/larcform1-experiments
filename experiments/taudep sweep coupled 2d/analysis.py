@@ -18,7 +18,6 @@ from pathlib import Path
 
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.ndimage import gaussian_filter
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "output" / "lf1e-taudep-1-coupled-2d"
@@ -38,11 +37,18 @@ plt.rcParams.update({
 with open(DATA / "manifest.toml", "rb") as f:
     manifest = tomllib.load(f)
 
-members = [
-    (e["log10_tau_dep"], e["log10_tau_ce"], e["metrics"], jid)
+all_members = [
+    (e["log10_tau_dep"], e["log10_tau_ce"], e["metrics"], jid, e.get("stage", "?"))
     for jid, e in manifest.items()
     if e.get("ret_code") == "success" and "metrics" in e
 ]
+
+# Separate the anchor (off-grid validation point) from the regular grid.
+# The anchor sits at non-integer log10 values (e.g. 1.82, 2.005) and creates
+# near-zero-width cells in pcolormesh if included in the grid axes.
+grid_members = [(d, c, m, j) for d, c, m, j, s in all_members if s != "anchor"]
+anchor_members = [(d, c, m, j) for d, c, m, j, s in all_members if s == "anchor"]
+members = grid_members
 
 log10_dep_vals = sorted(set(m[0] for m in members))
 log10_ce_vals = sorted(set(m[1] for m in members))
@@ -51,7 +57,8 @@ n_ce = len(log10_ce_vals)
 dep_idx = {v: i for i, v in enumerate(log10_dep_vals)}
 ce_idx = {v: i for i, v in enumerate(log10_ce_vals)}
 
-print(f"Loaded {len(members)} members on a {n_dep}x{n_ce} grid")
+print(f"Loaded {len(members)} grid members on a {n_dep}x{n_ce} grid"
+      f" + {len(anchor_members)} anchor(s)")
 
 
 def build_grid(metric_key, unit=1.0):
@@ -99,6 +106,8 @@ for i, (ax, (Z, label, cmap, vmin, vmax)) in enumerate(zip(axes.flat, panels)):
     im = ax.pcolormesh(dep_edges, ce_edges, Z.T, cmap=cmap,
                        shading="flat", vmin=vmin, vmax=vmax)
     ax.scatter(dep_grid.ravel(), ce_grid.ravel(), s=4, c=INK, zorder=5)
+    for ad, ac, _, _ in anchor_members:
+        ax.scatter(ad, ac, s=30, marker="*", c=INK, zorder=6)
     cb = fig.colorbar(im, ax=ax, orientation="horizontal", pad=0.15,
                       shrink=0.9)
     cb.set_label(label, fontsize=7)
@@ -123,27 +132,24 @@ plt.close(fig)
 # -------------------------------------------------------------- figure 2 --
 fig, axes = plt.subplots(1, 2, figsize=(6.69, 3.4))
 
-# (a) Gradient magnitude of cloud_hours with contour overlay.
-ch_smooth = gaussian_filter(cloud_hours, sigma=0.7)
-grad_dep, grad_ce = np.gradient(ch_smooth,
-                                *[np.diff(log10_dep_vals).mean(),
-                                  np.diff(log10_ce_vals).mean()])
-grad_mag = np.sqrt(grad_dep**2 + grad_ce**2)
-
+# (a) Cloud hours heatmap with contour overlay marking the transition.
 ax = axes[0]
-im = ax.pcolormesh(dep_edges, ce_edges, grad_mag.T, cmap="cividis",
-                   shading="flat")
 n_hours = int(members[0][2]["n_hours"])
+im = ax.pcolormesh(dep_edges, ce_edges, cloud_hours.T, cmap="viridis",
+                   shading="flat")
+ax.scatter(dep_grid.ravel(), ce_grid.ravel(), s=4, c=INK, zorder=5)
+for ad, ac, _, _ in anchor_members:
+    ax.scatter(ad, ac, s=30, marker="*", c=INK, zorder=6)
 levels = [0.1 * n_hours, 0.25 * n_hours, 0.5 * n_hours,
           0.75 * n_hours, 0.9 * n_hours]
 lws = [0.6, 0.8, 1.2, 0.8, 0.6]
 if n_dep >= 3 and n_ce >= 3:
     cs = ax.contour(log10_dep_vals, log10_ce_vals, cloud_hours.T,
-                    levels=levels, colors=INK, linewidths=lws)
+                    levels=levels, colors="white", linewidths=lws)
     ax.clabel(cs, [0.5 * n_hours], fmt=f"{int(0.5 * n_hours)}h",
-              fontsize=6, inline=True)
+              fontsize=6, inline=True, colors="white")
 cb = fig.colorbar(im, ax=ax, pad=0.02)
-cb.set_label(r"|$\nabla$ cloud_hours|", fontsize=7)
+cb.set_label(f"cloud lifetime (h of {n_hours})", fontsize=7)
 cb.ax.tick_params(labelsize=6)
 ax.set_xlabel(DEP_LABEL)
 ax.set_ylabel(CE_LABEL)
@@ -208,6 +214,8 @@ ax = axes[0]
 im = ax.pcolormesh(dep_edges, ce_edges, ts_end.T, cmap="plasma",
                    shading="flat")
 ax.scatter(dep_grid.ravel(), ce_grid.ravel(), s=4, c=INK, zorder=5)
+for ad, ac, _, _ in anchor_members:
+    ax.scatter(ad, ac, s=30, marker="*", c=INK, zorder=6)
 cb = fig.colorbar(im, ax=ax, pad=0.02)
 cb.set_label("final surface T (K)", fontsize=7)
 cb.ax.tick_params(labelsize=6)
@@ -277,14 +285,15 @@ experiments/taudep sweep coupled 2d/lf1e-taudep-sweep-coupled-2d.md.
 Cloud regime map over the (tau_dep, tau_ce) plane. (a) Cloud lifetime: hours
 (of {n_hours}) with column-maximum cloud liquid above 0.1 g/kg. (b) Peak cloud
 liquid mixing ratio. (c) Time-integrated liquid water path. (d) Final column
-ice at day 20. {config_sentence} Small dots mark the simulation grid points.
+ice at day 20. {config_sentence} Small dots mark the simulation grid points;
+stars mark the calibrated anchor.
 
 ## fig2_2d_transition
 
-Transition characterization. (a) Gradient magnitude of the cloud_hours field
-(cividis background) with cloud_hours contour lines overlaid (black; the 50%
-contour at {int(0.5 * n_hours)} h is labeled). The ridge of steepest gradient
-locates the liquid-to-ice transition boundary in the 2D parameter space.
+Transition characterization. (a) Cloud lifetime heatmap with contour lines
+marking the transition boundary (white; the 50% contour at {int(0.5 * n_hours)} h
+is labeled). The transition from cloud-free to cloud-sustaining runs through
+the high-tau_dep, low-tau_ce quadrant.
 (b) Cloud lifetime versus log10(tau_dep) at three fixed tau_ce values (blue
 circles: tau_ce = 10 s; orange triangles: tau_ce = 10^4 s; gray squares:
 tau_ce = 10^7 s), with the 1D subexperiment A curve (stock microphysics,

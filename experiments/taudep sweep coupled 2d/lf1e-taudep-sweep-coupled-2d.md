@@ -30,27 +30,137 @@ evolves interactively?
 
 # Protocol
 
-## Setup
+## Reference
+
+Pithan et al. (2016), *JGR Atmospheres*: SCM intercomparison for Arctic
+boundary layer. Location 80 N, January start (zero insolation throughout),
+20-day run, initial surface temperature 250 K. See CLAUDE.md for the full
+Pithan protocol tables.
+
+## Atmosphere model
 
 Coupled ClimaAtmos + ClimaCoupler + ClimaSeaIce path. Base atmosphere
-configuration: `ClimaAtmos.jl/config/model_configs/larcform1_1M_prognostic_edmfx.yml`
-with the same fast grid validated by subexperiment A's pilot (z_max 5000 m,
-z_elem 60, z_stretch true, dz_bottom 10 m, dt 30 s, dt_rad 30 min).
+configuration: `ClimaAtmos.jl/config/model_configs/larcform1_1M_prognostic_edmfx.yml`.
 
-Surface model: `ClimaSeaIceColumnSimulation` (registered as
-`ice_model: "clima_seaice_column"`), same as subexperiment B.
+| Component | Setting |
+|---|---|
+| Turbulence/convection | Prognostic EDMFx (generalized entrainment/detrainment) |
+| Cloud fraction | Quadrature |
+| Microphysics | 1-moment (1M), ConstantTimescale ice formation |
+| Radiation | AllSkyWithClear (RRTMGP), dt_rad = 30 min |
+| Insolation | Larcform1 (80 N, Jan 1, polar night: zero throughout) |
+| Prognostic TKE | Yes |
+| Time integration | ARS222, dt = 30 s |
+| Precision | Float32 |
+| Sponge | Rayleigh sponge at domain top |
 
-Ice formation: ConstantTimescale (the ClimaAtmos default). No
-`cloud_ice_formation` override in the YAML.
+## Grid
+
+| Parameter | Value |
+|---|---|
+| Domain type | Single column |
+| z_max | 5000 m |
+| z_elem | 60 levels (stretched) |
+| dz_bottom | 10 m |
+
+## Atmospheric initial conditions (Pithan Table 1)
+
+Temperature, humidity, and geostrophic wind profiles follow Pithan et al.
+(2016) Table 1, implemented in `AtmosphericProfilesLibrary/Larcform1.jl`:
+
+- **Temperature**: T(z) = 273 K with lapse rate 8 K/km from the surface
+  (1013 hPa) to 300 hPa; isothermal above 300 hPa.
+- **Humidity**: relative humidity w.r.t. liquid water, linearly interpolated
+  in pressure: 80% at the surface (1013 hPa), 20% at 600 hPa and above.
+  Above 300 hPa: specific humidity fixed at 3e-6 kg/kg.
+- **Geostrophic wind**: u_g = 5 m/s below 300 hPa, 0 above; v_g = 0.
+- **Location**: 80 N, 0 E. Coriolis f = 1.432e-4 s^-1.
+- **Start date**: January 1 (polar night, zero insolation).
+
+## Greenhouse gas concentrations (Pithan Table 2)
+
+| GHG | Volume-mixing ratio |
+|---|---|
+| CO2 | 360e-6 |
+| N2O | 309.5e-9 |
+| CH4 | 1693.6e-9 |
+| CFC-11 | 252.8e-12 |
+| CFC-12 | 466.2e-12 |
+
+## Surface model
+
+ClimaSeaIceColumnSimulation (registered as `ice_model: "clima_seaice_column"`),
+the same coupled sea-ice component used in subexperiment B.
+
+| Parameter | Value |
+|---|---|
+| Initial surface temperature | 250 K |
+| Ice thickness | 1.0 m |
+| Snow on ice | 0.1 m water equivalent |
+| Ice concentration | 1.0 (full cover) |
+| Bottom temperature | 271.35 K (seawater freezing point) |
+| Ocean heat flux | 0 W/m^2 |
+| Surface albedo | 0.65 |
+| Emissivity | 1.0 |
+| Roughness lengths (z0m, z0b) | 1e-3 m |
+| Ice conductivity | 2.0 W/m/K |
+| Snow conductivity | 0.31 W/m/K |
+| Thermodynamics | SlabThermodynamics, MeltingConstrainedFluxBalance (top), PrescribedTemperature (bottom) |
+
+## Coupling
+
+| Parameter | Value |
+|---|---|
+| Coupler | ClimaCoupler v0.2.2 |
+| Mode | AMIP (CoupledSimulation) |
+| Coupling timestep (dt_cpl) | 30 s |
+| Surface type | scm_surface_type: sea_ice |
+| Flux calculation | Monin-Obukhov via SurfaceFluxes.jl |
+
+All parameter TOMLs routed through `coupler_toml:` (not atmos `toml:`) to
+work around the ClimaCoupler v0.2.2 parameter-clobber bug (see CLAUDE.md).
+
+## Ice formation scheme
+
+ConstantTimescale (the ClimaAtmos default). No `cloud_ice_formation` override
+in the YAML. This is the key difference from subexperiment B, which used
+TemperatureDependent (Frostenberg INP pathway). Under ConstantTimescale,
+both tau_dep and tau_ce are physically active: tau_dep controls the
+vapor-to-ice deposition and sublimation rate, tau_ce controls the
+vapor-to-liquid condensation and evaporation rate.
 
 Run length: 20 days.
 
 Environment: `julia +1.12 -t 1 --startup-file=no --project` (root env).
 
+## Diagnostics
+
+Hourly averages: ta, thetaa, pfull, rhoa, hus, hur, ts, tas, ua, va, wa,
+cl, clw, cli, lwp, clivi, rlu, rld, rlut, rlus, rlds, rsdt, rlutcs,
+rldscs, pr, prsn, evspsbl, husra, hussn, hfss, hfls.
+
+10-minute averages: EDMF updraft and environment profiles (arup, waup,
+taup, waen, taen, tke, entr, detr, lmix, bgrad, strain, edt, evu).
+
+10-minute instantaneous: full 1M microphysics tendency decomposition
+(grid-mean, updraft, environment) for all phase-change, autoconversion,
+accretion, and melting processes.
+
+Output: `netcdf_output_at_levels: true` (raw model levels, no vertical
+interpolation). Default diagnostics disabled.
+
 ## Calibrated microphysics baseline
 
-All 6 UKI-calibrated parameters from `calibrated_uki1_final.toml`. The sweep
-varies tau_dep and tau_ce while holding the other 4 fixed:
+Two TOML files are loaded via `coupler_toml:` in order:
+
+1. `experiments/clw calibration/configs/toml/larcform1_calibration_base.toml`:
+   EDMF parameters (entrainment/detrainment coefficients, area limiters,
+   mixing length, pressure normalmode, sponge heights).
+
+2. `experiments/clw calibration/configs/toml/calibrated_uki1_final.toml`:
+   UKI iteration-7 posterior means for 6 microphysics parameters.
+
+The sweep varies tau_dep and tau_ce while holding the other 4 fixed:
 
 | Parameter | Calibrated value | Swept? |
 |---|---|---|

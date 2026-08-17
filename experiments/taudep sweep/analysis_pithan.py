@@ -89,7 +89,6 @@ def netlw_from_outdir(outdir):
 def stability_from_outdir(outdir):
     ta = load_3d(outdir, "ta")
     pf = load_3d(outdir, "pfull")
-    ts = load_1d(outdir, "ts")
     zdim = next(d for d in ta.dims if d != "time")
     ta_tz = ta.transpose("time", zdim).values
     pf_tz = pf.transpose("time", zdim).values
@@ -98,11 +97,8 @@ def stability_from_outdir(outdir):
         for i in range(ta_tz.shape[0])
     ])
     th850 = t850 * (1e5 / 85000.0) ** KAPPA
-    # Use initial surface pressure: the SCM column contracts on its fixed-height
-    # grid, dropping pfull[0] by ~68 hPa over 20 days — a mass-conservation
-    # artifact that inflates theta_sfc and creates spurious instability.
     p_sfc0 = pf_tz[0, 0]
-    th_sfc = ts.values * (1e5 / p_sfc0) ** KAPPA
+    th_sfc = ta_tz[:, 0] * (1e5 / p_sfc0) ** KAPPA
     return th850 - th_sfc
 
 
@@ -128,19 +124,19 @@ def ecearth_stability(ds):
     t = np.asarray(ds["t"])
     pvar = "p" if "p" in ds else ("pf" if "pf" in ds else "ph")
     p = np.asarray(ds[pvar]) / 100.0
-    ts_arr = np.asarray(ds["ts"]).squeeze()
-    ps_arr = np.asarray(ds["ps"]).squeeze() / 100.0 if "ps" in ds else np.full_like(ts_arr, 1013.25)
     if t.ndim > 2:
         t = t.reshape(t.shape[0], -1)
     if p.ndim > 2:
         p = p.reshape(p.shape[0], -1)
+    sfc_idx = np.argmax(p[0])
     t850 = np.full(t.shape[0], np.nan)
     for k in range(t.shape[0]):
         pk, tk = np.squeeze(p[k]), np.squeeze(t[k])
         o = np.argsort(pk)
         t850[k] = np.interp(850.0, pk[o], tk[o], left=np.nan, right=np.nan)
     th850 = t850 * (1000.0 / 850.0) ** KAPPA
-    th_sfc = ts_arr * (1000.0 / ps_arr) ** KAPPA
+    p_sfc = p[:, sfc_idx]
+    th_sfc = t[:, sfc_idx] * (1000.0 / p_sfc) ** KAPPA
     return th850 - th_sfc
 
 

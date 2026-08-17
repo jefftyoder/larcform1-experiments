@@ -7,3 +7,4 @@
 - [physical_state.jl GPU latent issue](physical-state-gpu-latent-issue.md) — hydrostatic pressure integral isn't GPU-safe; left for upstream, don't fix here
 - [AGU 2026 abstract advisor feedback](agu2026-abstract-advisor-feedback.md) — Sally Zhang's 10 comments + 4 tracked changes; working through one by one
 - [No dashes in writing](feedback-no-dashes.md) — never use em-dashes or substitutes; use commas, colons, semicolons, periods
+- [AGU figure guidelines](feedback-agu-figure-guidelines.md) — all plots must follow AGU/JAMES spec; invoke /agu-figures before writing plotting code

@@ -425,3 +425,8 @@ max clw drops to 8e-5) has a forcing we're missing. Calibration-scale, not quali
   CloudMicrophysics.jl): the default `cloud_ice_formation: ConstantTimescale` makes
   sustained mixed-phase Arctic clouds impossible in 1M runs. (Separate known issue: wrong
   `clivi` docstring at `core_diagnostics.jl:760-771`.)
+- (tentative) Systematic τ parameter sweep with sensitivity curves: plot max(clw),
+  max(cli), and liquid-cloud lifetime as functions of constant τ across a dense sampling
+  of the 10–1e9 range. The existing 5-point sweep (v5–v8, v12) shows two regimes but
+  doesn't characterize the transition between them. This would back the abstract's
+  "suggest" with a proper sensitivity analysis.

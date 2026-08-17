@@ -165,8 +165,8 @@ if ext_members:
             for i in range(ta_tz.shape[0])
         ])
         th850 = t850 * (1e5 / 85000.0) ** KAPPA
-        p_sfc = pf_tz[:, 0]                        # lowest level pressure
-        th_sfc = ts.values * (1e5 / p_sfc) ** KAPPA
+        p_sfc0 = pf_tz[0, 0]                       # initial surface pressure
+        th_sfc = ts.values * (1e5 / p_sfc0) ** KAPPA
         lls = th850 - th_sfc
         color = cmap((x - xmin) / (xmax - xmin))
         axes[0].plot(t, netlw, lw=0.7, color=color)

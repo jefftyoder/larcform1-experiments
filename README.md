@@ -1,5 +1,8 @@
 # Larcform1 Experiments
 
+## Deprecation Notice
+This project is now deprecated. The project structure and its experiments are being refactored under [clima-larcform1](https://github.com/jefftyoder/clima-larcform1).
+
 This repository brings together the various parts of the [CliMA](https://clima.caltech.edu/) software stack used to implement the [LARCFORM1 experiment](https://doi.org/10.1002/2016MS000630) — the Pithan et al. (2016) single-column model (SCM) intercomparison of the Arctic wintertime boundary layer — in [ClimaAtmos.jl](https://github.com/CliMA/ClimaAtmos.jl).
 
 The experiment is an SCM run at 80°N starting 1 January (zero insolation), initialized from the Pithan et al. (2016) profiles: 250 K initial surface temperature over 1 m of sea ice with 0.1 m w.e. of snow, 5 m s⁻¹ geostrophic zonal wind below 600 hPa, and prescribed greenhouse-gas concentrations. Runs are 20 days, with analysis focused on the first 10 days. See `CLAUDE.md` for the full experiment protocol (boundary/initial conditions, GHG concentrations, initial profiles, and a summary of the participating models).

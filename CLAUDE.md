@@ -138,7 +138,6 @@ configs/              # YAML configuration files
 experiments/
   larcform1_driver.jl     # entrypoint: CoupledSimulation → run! → make_plots
 ClimaAtmos.jl/        # submodule (dev'd into the root env)
-CloudMicrophysics.jl/ # vendored (registered 0.36 + Frostenberg a/b wired in; dev'd into the root env)
 output/               # simulation output (gitignored)
   larcform1_minimal/
     output_NNNN/      # versioned runs (ActiveLink style)
@@ -149,17 +148,37 @@ docs/                 # Project level docs for Larcform1 experiments
 
 See `/run-config` for checkpoint YAML options, restart behavior, and diagnostic output configuration.
 
-## Submodules and vendored packages
+## Submodules and package pins
 
 ```bash
 git submodule update --init --recursive
 ```
 
-`ClimaAtmos.jl` is a pinned submodule; `CloudMicrophysics.jl` is vendored (both
-`Pkg.develop`'d into the root env). `ClimaCoupler.jl` is NOT a submodule — it comes
-from the registry (v0.2.2, pinned in Manifest.toml).
+`ClimaAtmos.jl` is a pinned submodule, `Pkg.develop`'d into the root env.
+`CloudMicrophysics.jl` is **no longer vendored** — the patched local copy (registered
+0.36 + Frostenberg a/b) was removed; the root env now uses registered
+CloudMicrophysics v0.36.0, so the Frostenberg patch is not present anywhere.
+`ClimaCoupler.jl` is NOT a submodule — it comes from the registry (v0.2.2, pinned in
+Manifest.toml).
 The `.buildkite/` environment inside `ClimaAtmos.jl/` is activated for postprocessing
-plots. Caution: that env has *registered* CloudMicrophysics, so the Frostenberg patch
-is inert there — never run physics in the buildkite env.
+plots only — never run physics in the buildkite env; its Manifest is resolved
+independently of the root env.
+
+### Known resolver conflict: do not `pkg> up` the root env
+
+The dev'd ClimaAtmos submodule at v0.41.3+ requires `ClimaTimeSteppers = "0.10.4"`
+and `CloudMicrophysics = "0.37"` (bumped in ClimaAtmos commit `75e2b22b7`), but every
+registered ClimaCoupler release (≤ 0.2.2) caps `ClimaTimeSteppers = "0.8.11, 0.9"`.
+The intersection is empty, so any full re-resolve (`pkg> up`, `pkg> add`, deleting
+the Manifest) fails with `Unsatisfiable requirements detected for package
+ClimaCoupler` — the resolver blames ClimaCoupler, but the root cause is the
+transitive ClimaTimeSteppers conflict. The existing local Manifest (gitignored;
+resolved when the
+submodule was at ClimaAtmos v0.41.0, ClimaTimeSteppers 0.9.0) still instantiates and
+runs; `pkg> st` reporting `ClimaAtmos v0.41.0` against a 0.41.3 checkout is this
+staleness, not an error. The ⌅ pins on ClimaTimeSteppers 0.9.0 and CloudMicrophysics
+0.36.0 are the same conflict viewed from `st`. Resolution options: roll the submodule
+back before `75e2b22b7`, or wait for a ClimaCoupler release admitting
+ClimaTimeSteppers 0.10.
 
 See ./ClimaAtmos.jl/AGENTS.md for ClimaAtmos.jl specific best practices from the developers.
